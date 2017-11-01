@@ -164,14 +164,13 @@ namespace AgOpenGPS
             totalFixSteps = fixUpdateHz * 4;
             if (!isGPSPositionInitialized) {  InitializeFirstFewGPSPositions();   return;  }
 
-    #region tilt
+            #region tilt
+            double roll = Math.Sin(glm.toRadians((double)mc.roll / 16.0));
+            rollDistance = Math.Abs(roll * vehicle.antennaHeight);
 
-            //roll = Math.Sin(glm.toRadians(rollAngle));
-            rollDistance = Math.Abs((Math.Sin(glm.toRadians((double)mc.roll / 16.0))) * vehicle.antennaHeight);
-
-            rollDistance = 0;
+            //rollDistance = 0;
             //tilt to left is positive 
-            if (rollDistance > 0)
+            if (roll > 0)
             {
                 pn.easting = (Math.Cos(fixHeading) * rollDistance) + pn.easting;
                 pn.northing = (Math.Sin(fixHeading) * -rollDistance) + pn.northing;
@@ -368,7 +367,6 @@ namespace AgOpenGPS
             if (gpsHeading < 0) gpsHeading += glm.twoPI;
             fixHeading = gpsHeading;
 
-
             //determine fix positions and heading
             //in degrees for glRotate opengl methods.
             int camStep = currentStepFix*4;
@@ -401,11 +399,11 @@ namespace AgOpenGPS
                 prevGPSHeading = gpsHeading;
                 turnDelta = Math.Abs(Math.Atan2(Math.Sin(fixHeading - prevPrevGPSHeading), Math.Cos(fixHeading - prevPrevGPSHeading)));
 
-                //Only adjust gyro if going in a straight line where difference isn't more then 3 degrees (0.05 radians)
-                if (turnDelta < 0.003 && Math.Abs(gyroDelta) < 0.05)
+                //Only adjust gyro if going in a straight line where difference isn't more then +-6 degrees (0.05 radians)
+                if (turnDelta < 0.003 )//&& Math.Abs(gyroDelta) < 0.1)
                 {
                     //a bit of delta and add to correction to current gyro
-                    gyroCorrection += (gyroDelta * (0.1 / fixUpdateHz));
+                    gyroCorrection += (gyroDelta * (0.5 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
                     gyroRaw = (glm.toRadians((double)mc.gyroHeading / 16.0));

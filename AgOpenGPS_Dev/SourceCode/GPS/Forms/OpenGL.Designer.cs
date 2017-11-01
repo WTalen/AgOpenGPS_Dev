@@ -186,7 +186,7 @@ namespace AgOpenGPS
                 //screen text for debug
                 //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "TurnH: " + (Math.Round(glm.toDegrees(at.turnHeading), 3)).ToString());
                 gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
-                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Tilt: " + Convert.ToString((double)(mc.roll)/16.0));
+                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Tilt: " + Convert.ToString((int)(rollDistance*100)));
                 //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "GyroD: " + (Math.Round(glm.toDegrees(gyroDelta), 3)).ToString());
                 //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
                 //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Fixed: " + Convert.ToString(Math.Round(glm.toDegrees(gyroCorrected), 2)));

@@ -14,8 +14,6 @@
 * used Roslynator and Resharper to fix about 1000 sloppy coding issues. 
 * Fixed AB line when using offset - it was completely wrong previously
 * Added guides on sides of ABLine
-* Added Gyro in for heading, defaults to GPS
-* Added You Turn and custom recording
 
 
 v2.14 May 15
