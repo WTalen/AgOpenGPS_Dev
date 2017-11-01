@@ -11,7 +11,7 @@ float rads = 0;
 float fAngVel;
 
 //loop time variables in microseconds
-const unsigned int LOOP_TIME = 100; //20hz 
+const unsigned int LOOP_TIME = 100; //10hz 
 unsigned int lastTime = LOOP_TIME;
 unsigned int currentTime = LOOP_TIME;
 unsigned int dT = 50000;
@@ -27,7 +27,7 @@ float Xp = 0.0;
 float Zp = 0.0;
 float Xe = 0;
 const float varRoll = 0.5; // variance
-const float varProcess = .001;
+const float varProcess = 0.2;
 
 //setup
 void setup() {
@@ -67,8 +67,7 @@ void setup() {
 }
 
 void loop() 
-{
-  
+{  
   currentTime = millis();
   unsigned int time = currentTime;
 

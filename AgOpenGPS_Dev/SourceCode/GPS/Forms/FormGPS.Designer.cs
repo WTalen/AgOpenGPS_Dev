@@ -909,13 +909,13 @@
             this.panel1.Controls.Add(this.btnSettings);
             this.panel1.Controls.Add(this.btnComm);
             this.panel1.Controls.Add(this.btnTripOdometer);
-            this.panel1.Controls.Add(this.btnJob);
             this.panel1.Controls.Add(this.btnSnap);
             this.panel1.Controls.Add(this.btnPerimeter);
+            this.panel1.Controls.Add(this.btnJob);
             this.panel1.Controls.Add(this.btnFlag);
-            this.panel1.Location = new System.Drawing.Point(260, 216);
+            this.panel1.Location = new System.Drawing.Point(260, 212);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(514, 378);
+            this.panel1.Size = new System.Drawing.Size(514, 401);
             this.panel1.TabIndex = 136;
             // 
             // btnYouTurnRecord
@@ -966,7 +966,7 @@
             this.btnGPSData.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGPSData.Image = ((System.Drawing.Image)(resources.GetObject("btnGPSData.Image")));
             this.btnGPSData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGPSData.Location = new System.Drawing.Point(272, 253);
+            this.btnGPSData.Location = new System.Drawing.Point(272, 283);
             this.btnGPSData.Name = "btnGPSData";
             this.btnGPSData.Size = new System.Drawing.Size(110, 110);
             this.btnGPSData.TabIndex = 138;
@@ -996,7 +996,7 @@
             this.btnSettings.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSettings.Location = new System.Drawing.Point(6, 253);
+            this.btnSettings.Location = new System.Drawing.Point(6, 283);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(110, 110);
             this.btnSettings.TabIndex = 135;
@@ -1011,7 +1011,7 @@
             this.btnComm.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComm.Image = ((System.Drawing.Image)(resources.GetObject("btnComm.Image")));
             this.btnComm.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnComm.Location = new System.Drawing.Point(129, 253);
+            this.btnComm.Location = new System.Drawing.Point(129, 283);
             this.btnComm.Name = "btnComm";
             this.btnComm.Size = new System.Drawing.Size(110, 110);
             this.btnComm.TabIndex = 136;
@@ -1025,7 +1025,7 @@
             this.btnTripOdometer.ContextMenuStrip = this.contextMenuStripFlag;
             this.btnTripOdometer.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTripOdometer.Image = ((System.Drawing.Image)(resources.GetObject("btnTripOdometer.Image")));
-            this.btnTripOdometer.Location = new System.Drawing.Point(395, 252);
+            this.btnTripOdometer.Location = new System.Drawing.Point(395, 134);
             this.btnTripOdometer.Name = "btnTripOdometer";
             this.btnTripOdometer.Size = new System.Drawing.Size(110, 110);
             this.btnTripOdometer.TabIndex = 134;
@@ -1066,7 +1066,7 @@
             this.btnPerimeter.ContextMenuStrip = this.contextMenuArea;
             this.btnPerimeter.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPerimeter.Image = ((System.Drawing.Image)(resources.GetObject("btnPerimeter.Image")));
-            this.btnPerimeter.Location = new System.Drawing.Point(395, 134);
+            this.btnPerimeter.Location = new System.Drawing.Point(395, 283);
             this.btnPerimeter.Name = "btnPerimeter";
             this.btnPerimeter.Size = new System.Drawing.Size(110, 110);
             this.btnPerimeter.TabIndex = 108;
@@ -1118,7 +1118,7 @@
             this.btnGyro.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGyro.Image = ((System.Drawing.Image)(resources.GetObject("btnGyro.Image")));
             this.btnGyro.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGyro.Location = new System.Drawing.Point(5, 575);
+            this.btnGyro.Location = new System.Drawing.Point(5, 578);
             this.btnGyro.Name = "btnGyro";
             this.btnGyro.Size = new System.Drawing.Size(110, 110);
             this.btnGyro.TabIndex = 142;
