@@ -184,13 +184,14 @@ namespace AgOpenGPS
                 boundary.DrawBoundaryLine();
 
                 //screen text for debug
-                //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "TurnH: " + (Math.Round(glm.toDegrees(at.turnHeading), 3)).ToString());
-                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
-                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Tilt: " + Convert.ToString((int)(rollDistance*100)));
+
+                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "Gyro: " + (Math.Round(((double)mc.gyroHeading/16.0), 1)).ToString());
+                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, " GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
+                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Roll: " + Convert.ToString(Math.Round((double)(mc.rollRaw/16),1)));
                 //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "GyroD: " + (Math.Round(glm.toDegrees(gyroDelta), 3)).ToString());
                 //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
                 //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Fixed: " + Convert.ToString(Math.Round(glm.toDegrees(gyroCorrected), 2)));
-                //gl.DrawText(120, 100, 1, 1, 1, "Courier", 18, "   Rads: " + Convert.ToString());
+                //gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "L/Min: " + Convert.ToString(rc.CalculateRateLitersPerMinute()));
                 //gl.DrawText(120, 130, 1, 1, 1, "Courier", 18, "       Roll: " + Convert.ToString(glm.toDegrees(rollDistance)));
                 //gl.DrawText(120, 160, 1, 1, 1, "Courier", 18, "       Turn: " + Convert.ToString(Math.Round(turnDelta, 4)));
                 //gl.DrawText(40, 120, 1, 0.5, 1, "Courier", 12, " frame msec " + Convert.ToString((int)(frameTime)));
@@ -769,8 +770,8 @@ namespace AgOpenGPS
             ProcessSectionOnOffRequests();
 
             //send the byte out to section relays
-            BuildSectionRelayByte();
-            SectionControlOutToPort();
+            BuildRelayByte();
+            //RelayRateControlOutToPort();
 
             //System.Threading.Thread.Sleep(400);
             //stop the timer and calc how long it took to do calcs and draw

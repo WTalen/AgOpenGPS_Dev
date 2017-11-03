@@ -946,5 +946,29 @@ namespace AgOpenGPS.Properties {
                 this["setAS_youTurnShape"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int setRate_rate1 {
+            get {
+                return ((int)(this["setRate_rate1"]));
+            }
+            set {
+                this["setRate_rate1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int setRate_rate2 {
+            get {
+                return ((int)(this["setRate_rate2"]));
+            }
+            set {
+                this["setRate_rate2"] = value;
+            }
+        }
     }
 }

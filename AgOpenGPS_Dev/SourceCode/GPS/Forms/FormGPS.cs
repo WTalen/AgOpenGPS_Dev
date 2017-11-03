@@ -109,6 +109,11 @@ namespace AgOpenGPS
         /// </summary>
         public CYouTurn yt;
 
+        /// <summary>
+        /// Rate control Object
+        /// </summary>
+        public CRate rc;
+
         //a brand new vehicle
         public CVehicle vehicle;
 
@@ -165,6 +170,9 @@ namespace AgOpenGPS
 
             //boundary object
             boundary = new CBoundary(gl, glBack, this);
+
+            //rate object
+            rc = new CRate(this);
 
             //start the stopwatch
             swFrame.Start();
@@ -378,8 +386,13 @@ namespace AgOpenGPS
                         FileSaveEverythingBeforeClosingField();
 
                         //turn all relays off
-                        mc.relaySectionControl[0] = 0;
-                        SectionControlOutToPort();
+                        mc.relayRateControl[mc.rcHeaderHi] = 127; //32762
+                        mc.relayRateControl[mc.rcHeaderLo] = 250;
+                        mc.relayRateControl[mc.rcSectionControlByte] = 0;
+                        mc.relayRateControl[mc.rcRateSetPointHi] = 0;
+                        mc.relayRateControl[mc.rcRateSetPointLo] = 0;
+                        mc.relayRateControl[mc.rcSpeedXFour] = 0;
+                        RelayRateControlOutToPort();
 
                         mc.autoSteerData[mc.sdHeaderHi] = 127; //32766
                         mc.autoSteerData[mc.sdHeaderLo] = 254;
@@ -1053,6 +1066,22 @@ namespace AgOpenGPS
 
             //update the menu
             fieldToolStripMenuItem.Text = "Start Field";
+
+            //rate control buttons
+            btnRate1Select.Visible = false;
+            btnRate2Select.Visible = false;
+            btnRate.Image = Properties.Resources.RateControlOff;
+            rc.ShutdownRateControl();
+
+            mc.autoSteerData[mc.sdHeaderHi] = 127; //32766
+            mc.autoSteerData[mc.sdHeaderLo] = 254;
+            mc.autoSteerData[mc.sdRelay] = 0;
+            mc.autoSteerData[mc.sdSpeed] = 0;
+            mc.autoSteerData[mc.sdDistanceHi] = 125; //32020
+            mc.autoSteerData[mc.sdDistanceLo] = 20;
+            mc.autoSteerData[mc.sdSteerAngleHi] = 125; //32020
+            mc.autoSteerData[mc.sdSteerAngleLo] = 20; 
+            AutoSteerDataOutToPort();
         }
 
         //bring up field dialog for new/open/resume
@@ -1773,6 +1802,63 @@ namespace AgOpenGPS
             }
         }
 
+       private void btnRate_Click(object sender, EventArgs e)
+        {
+            HideMenu();
+            if (isJobStarted)
+            {
+                var form = new FormRate(this);
+                form.ShowDialog();
+
+                if (rc.isRateControlOn)
+                {
+                    btnRate1Select.Visible = true;
+                    btnRate2Select.Visible = true;
+                    btnRate.Image = Properties.Resources.RateControlOn;
+                    if (rc.isRate1Selected)
+                    {
+                        btnRate1Select.Text = (rc.rate1 * 0.1).ToString();
+                        btnRate2Select.Text = (rc.rate2 * 0.1).ToString();
+                        btnRate2Select.ForeColor = Color.SlateGray;
+                        btnRate1Select.ForeColor = Color.Black;
+                    }
+                    else
+                    {
+                        btnRate1Select.Text = (rc.rate1 * 0.1).ToString();
+                        btnRate2Select.Text = (rc.rate2 * 0.1).ToString();
+                        btnRate1Select.ForeColor = Color.SlateGray;
+                        btnRate2Select.ForeColor = Color.Black;
+                    }
+                }
+                else
+                {
+                    btnRate1Select.Visible = false;
+                    btnRate2Select.Visible = false;
+                    btnRate.Image = Properties.Resources.RateControlOff;
+                    rc.rateSetPoint = 0.0;
+                }
+            }
+            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); } 
+        }
+
+       private void btnRate1Select_Click(object sender, EventArgs e)
+        {
+            rc.isRate1Selected = true;
+            btnRate1Select.Text = (rc.rate1*0.1).ToString();
+            btnRate2Select.Text = (rc.rate2 * 0.1).ToString();
+            btnRate2Select.ForeColor = Color.SlateGray;
+            btnRate1Select.ForeColor = Color.Black;
+        }
+
+        private void btnRate2Select_Click(object sender, EventArgs e)
+        {
+            rc.isRate1Selected = false;
+            btnRate1Select.Text = (rc.rate1 * 0.1).ToString();
+            btnRate2Select.Text = (rc.rate2*0.1).ToString();
+            btnRate1Select.ForeColor = Color.SlateGray;
+            btnRate2Select.ForeColor = Color.Black;
+        }
+
         private void btnLeftYouTurn_Click(object sender, EventArgs e)
         {
             if (yt.isYouTurnOn)
@@ -1785,7 +1871,6 @@ namespace AgOpenGPS
                 yt.BuildYouTurnList(false);
             }
         }
-
         private void btnRightYouTurn_Click(object sender, EventArgs e)
         {
             if (yt.isYouTurnOn)
@@ -1812,12 +1897,10 @@ namespace AgOpenGPS
             }
             FileOpenVehicle();
         }
-
         private void saveVehicleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileSaveVehicle();
         }
-
         private void fieldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JobNewOpenResume();
@@ -1832,7 +1915,6 @@ namespace AgOpenGPS
                 if (result == DialogResult.OK) { }
             }
         }
-
         private void helpToolStripMenuHelpHelp_Click(object sender, EventArgs e)
         {
             //string appPath = Assembly.GetEntryAssembly().Location;
@@ -1861,7 +1943,6 @@ namespace AgOpenGPS
                 }
             }
         }
-
         private void logNMEAMenuItem_Click(object sender, EventArgs e)
         {
             isLogNMEA = !isLogNMEA;
@@ -1869,7 +1950,6 @@ namespace AgOpenGPS
             Settings.Default.setMenu_IsLogNMEA = isLogNMEA;
             Settings.Default.Save();
         }
-
         private void lightbarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLightbarOn = !isLightbarOn;
@@ -1877,13 +1957,11 @@ namespace AgOpenGPS
             Settings.Default.setMenu_IsLightbarOn = isLightbarOn;
             Settings.Default.Save();
         }
-
         private void polygonsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isDrawPolygons = !isDrawPolygons;
             polygonsToolStripMenuItem.Checked = !polygonsToolStripMenuItem.Checked;
         }
-
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isGridOn = !isGridOn;
@@ -1891,7 +1969,6 @@ namespace AgOpenGPS
             Settings.Default.setMenu_IsGridOn = isGridOn;
             Settings.Default.Save();
         }
-
         private void sideGuideLines_Click(object sender, EventArgs e)
         {
             isSideGuideLines = !isSideGuideLines;
@@ -1899,7 +1976,6 @@ namespace AgOpenGPS
             Settings.Default.setMenu_IsSideGuideLines = isSideGuideLines;
             Settings.Default.Save();
         }
-
         private void pursuitLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isPureOn = !isPureOn;
@@ -1907,17 +1983,14 @@ namespace AgOpenGPS
             Settings.Default.setMenu_isPureOn = isPureOn;
             Settings.Default.Save();
         }
-
         private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             SettingsPageOpen(0);
         }
-
         private void communicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsCommunications();
         }
-
         private void metricToolStrip_Click(object sender, EventArgs e)
         {
             metricToolStrip.Checked = true;
@@ -1929,7 +2002,6 @@ namespace AgOpenGPS
             //else lblSpeedUnits.Text = "MPH";
 
         }
-
         private void imperialToolStrip_Click(object sender, EventArgs e)
         {
             metricToolStrip.Checked = false;
@@ -1958,13 +2030,11 @@ namespace AgOpenGPS
                 Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
                             "\\AgOpenGPS\\Fields\\" + currentFieldDirectory);
         }
-
         private void webCamToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Form form = new FormWebCam();
             form.Show();
         }
-
         private void googleEarthToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1981,7 +2051,6 @@ namespace AgOpenGPS
                 form.Show();
             }
         }
-
         private void fieldViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //in the current application directory
@@ -1992,13 +2061,11 @@ namespace AgOpenGPS
                 form.Show();
             }
         }
-
         private void gPSDataToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form form = new FormGPSData(this);
             form.Show();
         }
-
         private void variablesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form form = new FormVariables(this);
@@ -2011,33 +2078,28 @@ namespace AgOpenGPS
             flagColor = 0;
             btnFlag.Image = Properties.Resources.FlagRed;
         }
-
         private void toolStripMenuGrn_Click(object sender, EventArgs e)
         {
             flagColor = 1;
             btnFlag.Image = Properties.Resources.FlagGrn;
         }
-
         private void toolStripMenuYel_Click(object sender, EventArgs e)
         {
             flagColor = 2;
             btnFlag.Image = Properties.Resources.FlagYel;
         }
-
         private void toolStripMenuFlagDelete_Click(object sender, EventArgs e)
         {
             //delete selected flag and set selected to none
             DeleteSelectedFlag();
             FileSaveFlags();
         }
-
         private void toolStripMenuFlagDeleteAll_Click(object sender, EventArgs e)
         {
             flagNumberPicked = 0;
             flagPts.Clear();
             FileSaveFlags();
         }
-
         private void contextMenuStripFlag_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolStripMenuFlagDelete.Enabled = flagNumberPicked != 0;
@@ -2051,13 +2113,11 @@ namespace AgOpenGPS
             //delete selected flag and set selected to none
             DeleteSelectedFlag();
         }
-
         private void contextMenuStripOpenGL_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //dont bring up menu if no flag selected
             if (flagNumberPicked == 0) e.Cancel = true;
         }
-
         private void googleEarthOpenGLContextMenu_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -2096,7 +2156,6 @@ namespace AgOpenGPS
             Settings.Default.setF_SectionColorB = bluSections;
             Settings.Default.Save();
         }
-
         private void fieldToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             //color picker for fields
@@ -2198,6 +2257,8 @@ namespace AgOpenGPS
         public string Acres { get { if (totalSquareMeters < 404645) return Math.Round(totalSquareMeters * 0.00024710499815078974633856493327535, 2).ToString();
                                      else return Math.Round(totalSquareMeters * 0.00024710499815078974633856493327535, 1).ToString();  }  }
 
+ 
+
         public string Hectares { get { if (totalSquareMeters < 999900) return Math.Round(totalSquareMeters * 0.0001, 2).ToString();
                                         else return Math.Round(totalSquareMeters * 0.0001, 1).ToString(); }  }
 
@@ -2269,16 +2330,18 @@ namespace AgOpenGPS
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth * glm.m2ft, 2)).ToString() + " ft";
                     toolStripStatusLabelBoundaryArea.Text = boundary.areaAcre;
                 }
-
+                
                 //lblDelta.Text = guidanceLineHeadingDelta.ToString();
+
+                if (rc.isRateControlOn)
+                btnRate.Text = rc.rateSetPoint.ToString("N1");
+                else btnRate.Text = "Off";
 
                 //non metric or imp fields
                 stripHz.Text = NMEAHz+"Hz "+ (int)(frameTime);
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
                 lblSteerAngle.Text = Convert.ToString((double)(guidanceLineSteerAngle) / 10);
-
-                btnGyro.Text = (Math.Round(glm.toDegrees(gyroDelta), 2)).ToString();
 
                 //stripRoll.Text = avgRoll + "\u00B0";
                 //stripPitch.Text = avgPitch + "\u00B0";

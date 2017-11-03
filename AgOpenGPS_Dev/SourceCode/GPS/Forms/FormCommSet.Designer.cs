@@ -520,7 +520,6 @@
             this.cboxTCP.TabIndex = 67;
             this.cboxTCP.Text = " - TCP Server On (Port 7777)";
             this.cboxTCP.UseVisualStyleBackColor = true;
-            this.cboxTCP.CheckedChanged += new System.EventHandler(this.cboxTCP_CheckedChanged);
             // 
             // cboxUDP
             // 
@@ -532,7 +531,6 @@
             this.cboxUDP.TabIndex = 68;
             this.cboxUDP.Text = " - UDP Server On (Port 9999)";
             this.cboxUDP.UseVisualStyleBackColor = true;
-            this.cboxUDP.CheckedChanged += new System.EventHandler(this.cboxUDP_CheckedChanged);
             // 
             // groupBox4
             // 

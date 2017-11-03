@@ -68,55 +68,55 @@ void BNO055::init() {
 
 void BNO055::setExtCrystalUse(boolean usextal)
 {
-	if (usextal) {
-		writeByte(BNO055_ADDRESS, BNO055_SYS_TRIGGER, 0x80);
-	}
-	else {
-		writeByte(BNO055_ADDRESS, BNO055_SYS_TRIGGER, 0x00);
-	}
-	delay(10);
-	
-	writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, OPRMode); 
-	delay(25);
+  if (usextal) {
+    writeByte(BNO055_ADDRESS, BNO055_SYS_TRIGGER, 0x80);
+  }
+  else {
+    writeByte(BNO055_ADDRESS, BNO055_SYS_TRIGGER, 0x00);
+  }
+  delay(10);
+  
+  writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, OPRMode); 
+  delay(25);
 }
 
 void BNO055::setSensorOffsets(const bno055_offsets_t &offsets_type)
 {
-	writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, CONFIGMODE);
-	delay(25);
+  writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, CONFIGMODE);
+  delay(25);
 
-	// Select page 0 to read sensors
-	writeByte(BNO055_ADDRESS, BNO055_PAGE_ID, 0x00);
+  // Select page 0 to read sensors
+  writeByte(BNO055_ADDRESS, BNO055_PAGE_ID, 0x00);
 
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_X_LSB, (offsets_type.accel_offset_x) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_X_MSB, (offsets_type.accel_offset_x >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Y_LSB, (offsets_type.accel_offset_y) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Y_MSB, (offsets_type.accel_offset_y >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Z_LSB, (offsets_type.accel_offset_z) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Z_MSB, (offsets_type.accel_offset_z >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_X_LSB, (offsets_type.accel_offset_x) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_X_MSB, (offsets_type.accel_offset_x >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Y_LSB, (offsets_type.accel_offset_y) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Y_MSB, (offsets_type.accel_offset_y >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Z_LSB, (offsets_type.accel_offset_z) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_OFFSET_Z_MSB, (offsets_type.accel_offset_z >> 8) & 0x0FF);
 
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_X_LSB, (offsets_type.gyro_offset_x) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_X_MSB, (offsets_type.gyro_offset_x >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Y_LSB, (offsets_type.gyro_offset_y) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Y_MSB, (offsets_type.gyro_offset_y >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Z_LSB, (offsets_type.gyro_offset_z) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Z_MSB, (offsets_type.gyro_offset_z >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_X_LSB, (offsets_type.gyro_offset_x) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_X_MSB, (offsets_type.gyro_offset_x >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Y_LSB, (offsets_type.gyro_offset_y) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Y_MSB, (offsets_type.gyro_offset_y >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Z_LSB, (offsets_type.gyro_offset_z) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_GYR_OFFSET_Z_MSB, (offsets_type.gyro_offset_z >> 8) & 0x0FF);
 
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_X_LSB, (offsets_type.mag_offset_x) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_X_MSB, (offsets_type.mag_offset_x >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Y_LSB, (offsets_type.mag_offset_y) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Y_MSB, (offsets_type.mag_offset_y >> 8) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Z_LSB, (offsets_type.mag_offset_z) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Z_MSB, (offsets_type.mag_offset_z >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_X_LSB, (offsets_type.mag_offset_x) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_X_MSB, (offsets_type.mag_offset_x >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Y_LSB, (offsets_type.mag_offset_y) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Y_MSB, (offsets_type.mag_offset_y >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Z_LSB, (offsets_type.mag_offset_z) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_OFFSET_Z_MSB, (offsets_type.mag_offset_z >> 8) & 0x0FF);
 
-	writeByte(BNO055_ADDRESS, BNO055_ACC_RADIUS_LSB, (offsets_type.accel_radius) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_ACC_RADIUS_MSB, (offsets_type.accel_radius >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_RADIUS_LSB, (offsets_type.accel_radius) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_ACC_RADIUS_MSB, (offsets_type.accel_radius >> 8) & 0x0FF);
 
-	writeByte(BNO055_ADDRESS, BNO055_MAG_RADIUS_LSB, (offsets_type.mag_radius) & 0x0FF);
-	writeByte(BNO055_ADDRESS, BNO055_MAG_RADIUS_MSB, (offsets_type.mag_radius >> 8) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_RADIUS_LSB, (offsets_type.mag_radius) & 0x0FF);
+  writeByte(BNO055_ADDRESS, BNO055_MAG_RADIUS_MSB, (offsets_type.mag_radius >> 8) & 0x0FF);
 
-	writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, OPRMode);
-	delay(25);
+  writeByte(BNO055_ADDRESS, BNO055_OPR_MODE, OPRMode);
+  delay(25);
 
 }
 void BNO055::readIMU(){
@@ -126,9 +126,9 @@ void BNO055::readIMU(){
     euler.roll = ((int16_t)rawData[3] << 8) | rawData[2] ;  
     euler.pitch = ((int16_t)rawData[5] << 8) | rawData[4] ;
 
-	//read the vehicle turning around gyro
-	readBytes(BNO055_ADDRESS, BNO055_GYR_DATA_X_LSB + 4, 6, &rawData[6]);							   
-	euler.angVel = ((int16_t)rawData[7] << 8) | rawData[6];
+  //read the vehicle turning around gyro
+  readBytes(BNO055_ADDRESS, BNO055_GYR_DATA_X_LSB + 4, 6, &rawData[6]);                
+  euler.angVel = ((int16_t)rawData[7] << 8) | rawData[6];
 
 }
 
@@ -167,3 +167,4 @@ void BNO055::readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8
         dest[i++] = Wire.read(); 
     }         
 }
+

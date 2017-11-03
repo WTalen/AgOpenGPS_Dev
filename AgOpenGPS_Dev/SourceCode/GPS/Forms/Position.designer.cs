@@ -75,9 +75,8 @@ namespace AgOpenGPS
         public int ringCounter = 0;  
       
         //IMU 
-        double rollDistance = 0;
+        double rollDistance=0, roll=0;
         public double rollZero = 0, pitchZero = 0;
-        public double rollAngle = 0, pitchAngle = 0;
 
         private int totalFixSteps = 10, currentStepFix = 0;
         private vec3 vHold;
@@ -135,8 +134,13 @@ namespace AgOpenGPS
                 if (!isGPSPositionInitialized)
                 {
                     //relay port
-                    mc.relaySectionControl[0] = (byte)0;
-                    SectionControlOutToPort();
+                    mc.relayRateControl[mc.rcHeaderHi] = 127; //32762
+                    mc.relayRateControl[mc.rcHeaderLo] = 250;
+                    mc.relayRateControl[mc.rcSectionControlByte] = 0;
+                    mc.relayRateControl[mc.rcRateSetPointHi] = 0;
+                    mc.relayRateControl[mc.rcRateSetPointLo] = 0;
+                    mc.relayRateControl[mc.rcSpeedXFour] = 0;
+                    RelayRateControlOutToPort();
 
                     //autosteer port
                     mc.autoSteerData[mc.sdHeaderHi] = (byte)127; //32766
@@ -147,8 +151,6 @@ namespace AgOpenGPS
                     mc.autoSteerData[mc.sdDistanceLo] = (byte)20;
                     mc.autoSteerData[mc.sdSteerAngleHi] = (byte)(125); //32020
                     mc.autoSteerData[mc.sdSteerAngleLo] = (byte)20;
-
-
                     AutoSteerDataOutToPort();
                 }
             }
@@ -164,31 +166,34 @@ namespace AgOpenGPS
             totalFixSteps = fixUpdateHz * 4;
             if (!isGPSPositionInitialized) {  InitializeFirstFewGPSPositions();   return;  }
 
-            #region tilt
-            double roll = Math.Sin(glm.toRadians((double)mc.roll / 16.0));
-            rollDistance = Math.Abs(roll * vehicle.antennaHeight);
+    #region Roll
 
-            //rollDistance = 0;
-            //tilt to left is positive 
-            if (roll > 0)
+            if (mc.rollRaw != 9999)
             {
-                pn.easting = (Math.Cos(fixHeading) * rollDistance) + pn.easting;
-                pn.northing = (Math.Sin(fixHeading) * -rollDistance) + pn.northing;
-            }
+                //calculate how far the antenna moves based on sidehill roll
+                roll = Math.Sin(glm.toRadians((double)mc.rollRaw / 16.0));
+                RollDistance = Math.Abs(roll * vehicle.antennaHeight);
 
-            else
-            {
-                pn.easting = (Math.Cos(fixHeading) * -rollDistance) + pn.easting;
-                pn.northing = (Math.Sin(fixHeading) * rollDistance) + pn.northing;
+                // tilt to left is positive  **** important!!
+                if (roll > 0)
+                {
+                    pn.easting = (Math.Cos(fixHeading) * RollDistance) + pn.easting;
+                    pn.northing = (Math.Sin(fixHeading) * -RollDistance) + pn.northing;
+                }
+                else
+                {
+                    pn.easting = (Math.Cos(fixHeading) * -RollDistance) + pn.easting;
+                    pn.northing = (Math.Sin(fixHeading) * RollDistance) + pn.northing;
+                }
             }
 
             //tiltDistance = (pitch * vehicle.antennaHeight);
             ////pn.easting = (Math.Sin(fixHeading) * tiltDistance) + pn.easting;
             //pn.northing = (Math.Cos(fixHeading) * tiltDistance) + pn.northing;
             
-    #endregion tilt
+    #endregion Roll
 
-            #region Step Fix
+    #region Step Fix
 
             //grab the most current fix and save the distance from the last fix
             distanceCurrentStepFix = pn.Distance(pn.northing, pn.easting, stepFixPts[0].northing, stepFixPts[0].easting);
@@ -281,9 +286,9 @@ namespace AgOpenGPS
                 stepFixPts[0].easting = pn.easting;
                 stepFixPts[0].northing = pn.northing;
             }
-            #endregion
+    #endregion fix
 
-            #region AutoSteer
+    #region AutoSteer
             
             guidanceLineDistanceOff = 32000;    //preset the values
 
@@ -348,6 +353,30 @@ namespace AgOpenGPS
             }
             #endregion
 
+            //do the relayRateControl
+            if (rc.isRateControlOn)
+            {
+                rc.CalculateRateLitersPerMinute();
+                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)((Int16)(rc.rateSetPoint * 10.0) >> 8);
+                mc.relayRateControl[mc.rcRateSetPointLo] = (byte)(rc.rateSetPoint * 10.0);
+
+                mc.relayRateControl[mc.rcSpeedXFour] = (byte)(pn.speed * 4.0);
+                //relay byte is built in SerialComm fx BuildRelayByte()
+
+                //send out the port
+                RelayRateControlOutToPort();
+            }
+            else
+            {
+                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)0;
+                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)0;
+                mc.relayRateControl[mc.rcSpeedXFour] = (byte)(pn.speed * 4.0);
+                //relay byte is built in SerialComm fx BuildRelayByte()
+
+                //send out the port
+                RelayRateControlOutToPort();
+            }
+
         //calculate lookahead at full speed, no sentence misses
         CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
 
@@ -375,7 +404,8 @@ namespace AgOpenGPS
             if (camHeading < 0) camHeading += glm.twoPI;
             camHeading = glm.toDegrees(camHeading);
 
-            if (spRelay.IsOpen)
+            //make sure there is a gyro otherwise 9999 are sent from autosteer
+            if (mc.gyroHeading != 9999)
             {
                 //current gyro angle in radians
                 gyroRaw = (glm.toRadians((double)mc.prevGyroHeading / 16.0));
@@ -399,25 +429,31 @@ namespace AgOpenGPS
                 prevGPSHeading = gpsHeading;
                 turnDelta = Math.Abs(Math.Atan2(Math.Sin(fixHeading - prevPrevGPSHeading), Math.Cos(fixHeading - prevPrevGPSHeading)));
 
-                //Only adjust gyro if going in a straight line where difference isn't more then +-6 degrees (0.05 radians)
-                if (turnDelta < 0.003 )//&& Math.Abs(gyroDelta) < 0.1)
+                //Only adjust gyro if going in a straight line 
+                if (turnDelta < 0.01 && pn.speed > 1)
                 {
                     //a bit of delta and add to correction to current gyro
-                    gyroCorrection += (gyroDelta * (0.5 / fixUpdateHz));
+                    gyroCorrection += (gyroDelta * (0.4 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
                     gyroRaw = (glm.toRadians((double)mc.gyroHeading / 16.0));
-                }            
+                }
 
+                //if the gyro and GPS delta are > 10 degrees speed up filter
+                if (Math.Abs(gyroDelta) > 0.18)
+                {
+                    //a bit of delta and add to correction to current gyro
+                    gyroCorrection += (gyroDelta * (2.0 / fixUpdateHz));
+                    if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
+                    if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
+                    gyroRaw = (glm.toRadians((double)mc.gyroHeading / 16.0));
+                }
                 //determine the Corrected heading based on gyro and GPS
                 gyroCorrected = gyroRaw + gyroCorrection;
                 if (gyroCorrected > glm.twoPI) gyroCorrected -= glm.twoPI;
                 if (gyroCorrected < 0) gyroCorrected += glm.twoPI;
 
                 fixHeading = gyroCorrected;
-
-                //overwrite the heading cam the gyro heading
-                //camHeading = glm.toDegrees(gyroCorrected);
             }
 
             //// kalman process
@@ -824,6 +860,8 @@ namespace AgOpenGPS
         //the result is placed in these two
         public double utmLat = 0;
         public double utmLon = 0;
+
+        public double RollDistance { get => rollDistance; set => rollDistance = value; }
 
         public void UTMToLatLon(double X, double Y)
         {

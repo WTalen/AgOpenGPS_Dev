@@ -295,5 +295,5 @@ C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.exe
 C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.pdb
 C:\Users\Farm\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.FormWizardSteer.resources
 C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.FormYouTurnRecord.resources
-C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.csprojResolveAssemblyReference.cache
 C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.FormYouTurn.resources
+C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Release\AgOpenGPS.FormRate.resources

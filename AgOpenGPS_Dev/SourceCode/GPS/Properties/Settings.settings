@@ -233,5 +233,11 @@
     <Setting Name="setAS_youTurnShape" Type="System.String" Scope="User">
       <Value Profile="(Default)">Keyhole.txt</Value>
     </Setting>
+    <Setting Name="setRate_rate1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="setRate_rate2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

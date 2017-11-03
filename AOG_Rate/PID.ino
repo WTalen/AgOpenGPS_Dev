@@ -1,3 +1,33 @@
+/*  //Kalman variables
+  float rollK = 0;
+  float Pc = 0.0;
+  float G = 0.0;
+  float P = 1.0;
+  float Xp = 0.0;
+  float Zp = 0.0;
+  float XeRoll = 0;
+  const float varRoll = 0.1; // variance, smaller, more filtering
+  const float varProcess = 0.002;
+  //pwm variables
+  int pwmDrive = 0, drive = 0, pwmDisplay = 0;
+  float pValue = 0, iValue = 0, dValue = 0;
+  byte minPWMValue = 10;
+ 
+  //PID variables
+  float Ko = 0.0f;  //overall gain
+  float Kp = 0.0f;  //proportional gain
+  float Ki = 0.0f;//integral gain
+  float Kd = 0.0f;  //derivative gain 
+
+  //integral values - **** change as required *****
+  int   maxIntErr = 200; //anti windup max
+  int maxIntegralValue = 20; //max PWM value for integral PID component 
+
+  //error values
+  float lastError = 0, lastLastError = 0, integrated_error = 0, dError = 0;
+
+ 
+
 void calcSteeringPID(void) {
   
   //Proportional
@@ -51,4 +81,4 @@ void calcSteeringPID(void) {
     analogWrite(PWM_PIN, pwmDrive);
   }
 
-
+*/

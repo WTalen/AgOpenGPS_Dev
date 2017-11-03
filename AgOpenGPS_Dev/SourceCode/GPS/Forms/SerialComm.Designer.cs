@@ -17,7 +17,7 @@ namespace AgOpenGPS
         public static int baudRateRelaySection = 38400;
 
         public static string portNameAutoSteer = "COM AS";
-        public static int baudRateAutoSteer = 19200;
+        public static int baudRateAutoSteer = 38400;
 
         //private string[] words;
 
@@ -76,36 +76,18 @@ namespace AgOpenGPS
             //spit it out no matter what it says
             mc.serialRecvAutoSteerStr = sentence;
 
-            //get the Roll a/d value sent from autosteer
+            //0 - steer angle, 1 - pwm, 2 - heading in degrees * 16, 3 - roll in degrees * 16, 4 - steerSwitch position
+
             string[] words = mc.serialRecvAutoSteerStr.Split(',');
-            if (words.Length == 6)
+            if (words.Length == 5)
             {
-                int.TryParse(words[5], out mc.rollRaw);
-                if (mc.rollRaw > 400 | mc.rollRaw < -400) mc.rollRaw = 0;
-                 rollAngle = Math.Round((double)mc.rollRaw/20.0, 2);
+                //first 2 used for display mainly in autosteer window chart as strings
+                //parse the values
+                mc.prevGyroHeading = mc.gyroHeading;
+                int.TryParse(words[2], out mc.gyroHeading);
+                int.TryParse(words[3], out mc.rollRaw);
+                int.TryParse(words[4], out mc.steerSwitchValue);
             }
-
-            else rollAngle = 0;
-
-
-            //int.TryParse(words[0], out modcom.workSwitchValue);
-
-            //double.TryParse(words[1], out modcom.rollAngle);
-            //modcom.rollAngle *= 0.0625;
-
-            //double.TryParse(words[2], out modcom.pitchAngle);
-            //modcom.pitchAngle *= 0.0625;
-
-            //double.TryParse(words[3], out modcom.angularVelocity);
-
-            //if (modcom.pitchAngle > 10) modcom.pitchAngle = 10;
-            //if (modcom.pitchAngle < -10) modcom.pitchAngle = -10;
-
-            //if (modcom.rollAngle > 12) modcom.rollAngle = 12;
-            //if (modcom.rollAngle < -12) modcom.rollAngle = -12;
-
-            //double.TryParse(words[4], out modcom.imuHeading);
-            //modcom.imuHeading *= 0.0625;
         }
 
         //the delegate for thread
@@ -204,19 +186,21 @@ namespace AgOpenGPS
         #region RelaySerialPort //--------------------------------------------------------------------
 
         //build the byte for individual realy control
-        private void BuildSectionRelayByte()
+        private void BuildRelayByte()
         {
             byte set = 1;
             byte reset = 254;
-            mc.relaySectionControl[0] = (byte)0;
+            mc.relayRateControl[mc.rcSectionControlByte] = (byte)0;
 
+            //check if super section is on
             if (section[vehicle.numOfSections].isSectionOn)
             {
-                mc.relaySectionControl[0] = (byte)0;
+                mc.relayRateControl[mc.rcSectionControlByte] = (byte)0;
                 for (int j = 0; j < vehicle.numOfSections; j++)
                 {
                     //all the sections are on, so set them
-                    mc.relaySectionControl[0] = (byte)(mc.relaySectionControl[0] | set);
+                    mc.relayRateControl[mc.rcSectionControlByte] 
+                        = (byte)(mc.relayRateControl[mc.rcSectionControlByte] | set);
 
                     //move set and reset over 1 bit left
                     set = (byte)(set << 1);
@@ -230,8 +214,9 @@ namespace AgOpenGPS
                 for (int j = 0; j < MAXSECTIONS; j++)
                 {
                     //set if on, reset bit if off
-                    if (section[j].isSectionOn) mc.relaySectionControl[0] = (byte)(mc.relaySectionControl[0] | set);
-                    else mc.relaySectionControl[0] = (byte)(mc.relaySectionControl[0] & reset);
+                    if (section[j].isSectionOn) mc.relayRateControl[mc.rcSectionControlByte] 
+                            = (byte)(mc.relayRateControl[mc.rcSectionControlByte] | set);
+                    else mc.relayRateControl[mc.rcSectionControlByte] = (byte)(mc.relayRateControl[mc.rcSectionControlByte] & reset);
 
                     //move set and reset over 1 bit left
                     set = (byte)(set << 1);
@@ -240,16 +225,16 @@ namespace AgOpenGPS
                 }
             }
 
-            mc.autoSteerData[mc.sdRelay] = (byte)(mc.relaySectionControl[0]);
+            mc.autoSteerData[mc.sdRelay] = (byte)(mc.relayRateControl[mc.rcSectionControlByte]);
         }
 
         //Send relay info out to relay board
-        private void SectionControlOutToPort()
+        public void RelayRateControlOutToPort()
         {
             //Tell Arduino to turn section on or off accordingly
             if (spRelay.IsOpen)
             {
-                try { spRelay.Write(mc.relaySectionControl, 0, CModuleComm.numRelayControls ); }
+                try { spRelay.Write(mc.relayRateControl, 0, CModuleComm.numRelayRateControls ); }
                 catch (Exception e)
                 {
                     WriteErrorLog("Out to Section relays" + e.ToString());
@@ -259,16 +244,12 @@ namespace AgOpenGPS
         }
 
         //Arduino port called by the Relay delegate every time
-        private void SerialLineReceivedRelay(string sentence)
+        private void SerialLineReceivedRelayRate(string sentence)
         {
-            mc.serialRecvRelayStr = sentence;
+            mc.serialRecvRelayRateStr = sentence;
             int end;
-            //spit it out no matter what it says
-            //modcom.serialRecvRelayStr = sentence;
-            //if (sentence.Length < 8 ) return;
 
-
-            // Find end of sentence
+            // Find end of sentence, if not a CR, return
             end = sentence.IndexOf("\r");
             if (end == -1) return;
 
@@ -278,34 +259,13 @@ namespace AgOpenGPS
             string[] words = sentence.Split(',');
             if (words.Length < 2) return;
 
-            //prev is used to determine heading delta since the gyro is so fast, gps so slow
-            mc.prevGyroHeading = mc.gyroHeading;
-            int.TryParse(words[0], out mc.gyroHeading);
-            int.TryParse(words[1], out mc.roll);
-
-            //double.TryParse(words[1], out modcom.rollAngle);
-            //modcom.rollAngle *= 0.0625;
-
-            //double.TryParse(words[2], out modcom.pitchAngle);
-            //modcom.pitchAngle *= 0.0625;
-
-            //double.TryParse(words[3], out modcom.angularVelocity);
-
-            //if (modcom.pitchAngle > 10) modcom.pitchAngle = 10;
-            //if (modcom.pitchAngle < -10) modcom.pitchAngle = -10;
-
-            //if (modcom.rollAngle > 12) modcom.rollAngle = 12;
-            //if (modcom.rollAngle < -12) modcom.rollAngle = -12;
-
-            //double.TryParse(words[4], out modcom.imuHeading);
-            //modcom.imuHeading *= 0.0625;
         }
 
         //the delegate for thread
         private delegate void LineReceivedEventHandlerRelay(string sentence);
 
         //Arduino serial port receive in its own thread
-        private void sp_DataReceivedRelay(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        private void sp_DataReceivedRelayRate(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             if (spRelay.IsOpen)
             {
@@ -313,7 +273,7 @@ namespace AgOpenGPS
                 {
                     System.Threading.Thread.Sleep(25);
                     string sentence = spRelay.ReadLine();
-                    this.BeginInvoke(new LineReceivedEventHandlerRelay(SerialLineReceivedRelay), sentence);                    
+                    this.BeginInvoke(new LineReceivedEventHandlerRelay(SerialLineReceivedRelayRate), sentence);                    
                     if (spRelay.BytesToRead > 8) spRelay.DiscardInBuffer();
                 }
                 //this is bad programming, it just ignores errors until its hooked up again.
@@ -332,7 +292,7 @@ namespace AgOpenGPS
             {
                 spRelay.PortName = portNameRelaySection;
                 spRelay.BaudRate = baudRateRelaySection;
-                spRelay.DataReceived += sp_DataReceivedRelay;
+                spRelay.DataReceived += sp_DataReceivedRelayRate;
             }
 
             try { spRelay.Open(); }
@@ -372,7 +332,7 @@ namespace AgOpenGPS
         {
             if (spRelay.IsOpen)
             {
-                spRelay.DataReceived -= sp_DataReceivedRelay;
+                spRelay.DataReceived -= sp_DataReceivedRelayRate;
                 try { spRelay.Close(); }
                 catch (Exception e)
                 {

@@ -6,29 +6,29 @@ namespace AgOpenGPS
 {
     public class CABLine
     {
-        public double abHeading = 0.0;
-        public double abFixHeadingDelta = 0;
+        public double abHeading;
+        public double abFixHeadingDelta;
 
         public bool isABSameAsFixHeading = true;
         public bool isOnRightSideCurrentLine = true;
 
         public double refLineSide = 1.0;
 
-        public double distanceFromRefLine = 0.0;
-        public double distanceFromCurrentLine = 0.0;
-        public double snapDistance = 0;
+        public double distanceFromRefLine;
+        public double distanceFromCurrentLine;
+        public double snapDistance;
 
-        public bool isABLineSet = false;
-        public bool isABLineBeingSet = false;
+        public bool isABLineSet;
+        public bool isABLineBeingSet;
 
-        public double passNumber = 0.0;
+        public double passNumber;
 
-        public double howManyPathsAway = 0.0;
+        public double howManyPathsAway;
 
         //tramlines
         //Color tramColor = Color.YellowGreen;
-        public int tramPassEvery = 0;
-        public int passBasedOn = 0;
+        public int tramPassEvery;
+        public int passBasedOn;
 
         //pointers to mainform controls
         private readonly FormGPS mf;
@@ -50,10 +50,10 @@ namespace AgOpenGPS
         public vec2 pivotAxlePosAB = new vec2(0, 0);
         public vec2 goalPointAB = new vec2(0, 0);
         public vec2 radiusPointAB = new vec2(0, 0);
-        public double steerAngleAB = 0;
-        public double rEastAB = 0, rNorthAB = 0;
-        public double ppRadiusAB = 0;
-        public double minLookAheadDistance = 5.0;
+        public double steerAngleAB;
+        public double rEastAB, rNorthAB;
+        public double ppRadiusAB;
+        public double minLookAheadDistance = 8.0;
 
         public CABLine(OpenGL _gl, FormGPS _f)
         {
@@ -137,7 +137,7 @@ namespace AgOpenGPS
             refPoint2.northing = refABLineP2.northing;
         }
 
-        public double angVel = 0;
+        public double angVel;
 
         public void GetCurrentABLine()
         {
