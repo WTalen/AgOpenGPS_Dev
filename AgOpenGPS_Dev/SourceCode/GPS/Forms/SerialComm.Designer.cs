@@ -86,7 +86,6 @@ namespace AgOpenGPS
                 mc.prevGyroHeading = mc.gyroHeading;
                 int.TryParse(words[2], out mc.gyroHeading);
                 int.TryParse(words[3], out mc.rollRaw);
-                rollInDegrees = mc.rollRaw / 16.0;
                 int.TryParse(words[4], out mc.steerSwitchValue);
             }
         }

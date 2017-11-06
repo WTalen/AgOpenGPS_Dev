@@ -4,7 +4,7 @@ namespace AgOpenGPS
     public class CModuleComm
     {
         //copy of the mainform address
-        //private FormGPS mf;
+        private readonly FormGPS mf = null;
 
         //Recv string for RateRelay
         public string serialRecvRelayRateStr;
@@ -27,7 +27,7 @@ namespace AgOpenGPS
         public int ssHeaderHi = 0, ssHeaderLo = 1, ssKp = 2, ssKi = 3, ssKd = 4,
                         ssKo = 5, ssSteerOffset = 6, ssMinPWM = 7, ssMaxIntegral = 8,
                         ssCountsPerDegree = 9;
- 
+
         //for the workswitch
         public bool isWorkSwitchOn, isWorkSwitchActiveLow, isWorkSwitchEnabled;
         public int workSwitchValue;
@@ -37,11 +37,22 @@ namespace AgOpenGPS
         public int rollRaw=9999; //inclinometer ?
 
         //constructor
-        public CModuleComm()
+        public CModuleComm(FormGPS _f)
         {
+            mf = _f;
             serialRecvAutoSteerStr = "Oops";
             serialRecvRelayRateStr = "Oops";
 
+            //WorkSwitch logic
+            isWorkSwitchEnabled = false;
+            isWorkSwitchOn = false;
+
+            //does a low, grounded out, mean on
+            isWorkSwitchActiveLow = true;
+        }
+
+        public void ResetAllModuleCommValues()
+        {
             //set up relayRate array
             relayRateControl[rcHeaderHi] = 127; //32762
             relayRateControl[rcHeaderLo] = 250;
@@ -60,17 +71,9 @@ namespace AgOpenGPS
             autoSteerData[sdSteerAngleHi] = (125); //32020
             autoSteerData[sdSteerAngleLo] = 20;
 
-            //WorkSwitch logic
-            isWorkSwitchEnabled = false;
-            isWorkSwitchOn = false;
-
-            //does a low, grounded out, mean on
-            isWorkSwitchActiveLow = true;
-
             //prefill the autosteer settings from settings xml
             autoSteerSettings[ssHeaderHi] = 127;
             autoSteerSettings[ssHeaderLo] = 252; //32764 as header
-
             autoSteerSettings[ssKp] = Properties.Settings.Default.setAS_Kp;
             autoSteerSettings[ssKi] = Properties.Settings.Default.setAS_Ki;
             autoSteerSettings[ssKd] = Properties.Settings.Default.setAS_Kd;
@@ -79,6 +82,12 @@ namespace AgOpenGPS
             autoSteerSettings[ssMinPWM] = Properties.Settings.Default.setAS_minSteerPWM;
             autoSteerSettings[ssMaxIntegral] = Properties.Settings.Default.setAS_maxIntegral;
             autoSteerSettings[ssCountsPerDegree] = Properties.Settings.Default.setAS_countsPerDegree;
+
+            //spit out to rate/relay module
+            mf.RelayRateControlOutToPort();
+
+            //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
+            mf.AutoSteerDataOutToPort();
         }
     }
 }

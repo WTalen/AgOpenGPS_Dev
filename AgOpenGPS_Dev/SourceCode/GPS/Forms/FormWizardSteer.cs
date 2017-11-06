@@ -16,7 +16,7 @@ namespace AgOpenGPS
         private void FormWizardSteer_Load(object sender, EventArgs e)
         {
             //save a copy in case of cancel
-            prevSteerCount = ((mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree])) / 10.0;
+            prevSteerCount = ((mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree])) * 0.1;
             mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree] = 10;
             mf.AutoSteerSettingsOutToPort();
             btnSteerMinus.Text = mf.mc.autoSteerSettings[mf.mc.ssSteerOffset].ToString();

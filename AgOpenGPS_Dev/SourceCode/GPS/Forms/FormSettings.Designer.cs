@@ -110,12 +110,6 @@
             this.lblInchesCm = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bntOK = new System.Windows.Forms.Button();
-            this.tabYouTurn = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnYouTurnKeyHole = new System.Windows.Forms.Button();
-            this.btnYouTurnCustom = new System.Windows.Forms.Button();
-            this.btnYouTurnSemiCircle = new System.Windows.Forms.Button();
-            this.btnYouTurnRecord = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabVehicle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHitchLength)).BeginInit();
@@ -150,7 +144,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinFixStepDistance)).BeginInit();
-            this.tabYouTurn.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -158,7 +151,6 @@
             this.tabControl1.Controls.Add(this.tabVehicle);
             this.tabControl1.Controls.Add(this.tabTool);
             this.tabControl1.Controls.Add(this.tabSections);
-            this.tabControl1.Controls.Add(this.tabYouTurn);
             this.tabControl1.Controls.Add(this.tabWorkSwitch);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabExamples);
@@ -1362,69 +1354,6 @@
             this.bntOK.UseVisualStyleBackColor = true;
             this.bntOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // tabYouTurn
-            // 
-            this.tabYouTurn.Controls.Add(this.btnYouTurnRecord);
-            this.tabYouTurn.Controls.Add(this.btnYouTurnSemiCircle);
-            this.tabYouTurn.Controls.Add(this.btnYouTurnCustom);
-            this.tabYouTurn.Controls.Add(this.btnYouTurnKeyHole);
-            this.tabYouTurn.Controls.Add(this.label9);
-            this.tabYouTurn.Location = new System.Drawing.Point(4, 41);
-            this.tabYouTurn.Name = "tabYouTurn";
-            this.tabYouTurn.Size = new System.Drawing.Size(951, 506);
-            this.tabYouTurn.TabIndex = 11;
-            this.tabYouTurn.Text = "You Turn ";
-            this.tabYouTurn.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(132, 53);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(197, 32);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Built in Shapes";
-            // 
-            // btnYouTurnKeyHole
-            // 
-            this.btnYouTurnKeyHole.Location = new System.Drawing.Point(38, 111);
-            this.btnYouTurnKeyHole.Name = "btnYouTurnKeyHole";
-            this.btnYouTurnKeyHole.Size = new System.Drawing.Size(132, 95);
-            this.btnYouTurnKeyHole.TabIndex = 2;
-            this.btnYouTurnKeyHole.Text = "Key Hole";
-            this.btnYouTurnKeyHole.UseVisualStyleBackColor = true;
-            this.btnYouTurnKeyHole.Click += new System.EventHandler(this.btnYouTurnKeyHole_Click);
-            // 
-            // btnYouTurnCustom
-            // 
-            this.btnYouTurnCustom.Location = new System.Drawing.Point(593, 111);
-            this.btnYouTurnCustom.Name = "btnYouTurnCustom";
-            this.btnYouTurnCustom.Size = new System.Drawing.Size(132, 95);
-            this.btnYouTurnCustom.TabIndex = 3;
-            this.btnYouTurnCustom.Text = "Custom";
-            this.btnYouTurnCustom.UseVisualStyleBackColor = true;
-            this.btnYouTurnCustom.Click += new System.EventHandler(this.btnYouTurnCustom_Click);
-            // 
-            // btnYouTurnSemiCircle
-            // 
-            this.btnYouTurnSemiCircle.Location = new System.Drawing.Point(288, 111);
-            this.btnYouTurnSemiCircle.Name = "btnYouTurnSemiCircle";
-            this.btnYouTurnSemiCircle.Size = new System.Drawing.Size(132, 95);
-            this.btnYouTurnSemiCircle.TabIndex = 4;
-            this.btnYouTurnSemiCircle.Text = "Semi Circle";
-            this.btnYouTurnSemiCircle.UseVisualStyleBackColor = true;
-            this.btnYouTurnSemiCircle.Click += new System.EventHandler(this.btnYouTurnSemiCircle_Click);
-            // 
-            // btnYouTurnRecord
-            // 
-            this.btnYouTurnRecord.Location = new System.Drawing.Point(593, 360);
-            this.btnYouTurnRecord.Name = "btnYouTurnRecord";
-            this.btnYouTurnRecord.Size = new System.Drawing.Size(132, 95);
-            this.btnYouTurnRecord.TabIndex = 5;
-            this.btnYouTurnRecord.Text = "Record";
-            this.btnYouTurnRecord.UseVisualStyleBackColor = true;
-            this.btnYouTurnRecord.Click += new System.EventHandler(this.btnYouTurnRecord_Click);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1490,8 +1419,6 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinFixStepDistance)).EndInit();
-            this.tabYouTurn.ResumeLayout(false);
-            this.tabYouTurn.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1580,11 +1507,5 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.NumericUpDown nudBoundaryDistance;
-        private System.Windows.Forms.TabPage tabYouTurn;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnYouTurnKeyHole;
-        private System.Windows.Forms.Button btnYouTurnSemiCircle;
-        private System.Windows.Forms.Button btnYouTurnCustom;
-        private System.Windows.Forms.Button btnYouTurnRecord;
     }
 }

@@ -85,7 +85,7 @@ namespace AgOpenGPS
         double distanceToStartAutoTurn;
 
         //IMU 
-        double rollCorrectionDistance =0, rollInDegrees=0;
+        double rollCorrectionDistance = 0;
         public double rollZero = 0, pitchZero = 0;
         double gyroDelta, gyroCorrection, gyroRaw, gyroCorrected, turnDelta;
 
@@ -143,28 +143,7 @@ namespace AgOpenGPS
             //must make sure arduinos are kept off
             else
             {
-                if (!isGPSPositionInitialized)
-                {
-                    //relay port
-                    mc.relayRateControl[mc.rcHeaderHi] = 127; //32762
-                    mc.relayRateControl[mc.rcHeaderLo] = 250;
-                    mc.relayRateControl[mc.rcSectionControlByte] = 0;
-                    mc.relayRateControl[mc.rcRateSetPointHi] = 0;
-                    mc.relayRateControl[mc.rcRateSetPointLo] = 0;
-                    mc.relayRateControl[mc.rcSpeedXFour] = 0;
-                    RelayRateControlOutToPort();
-
-                    //autosteer port
-                    mc.autoSteerData[mc.sdHeaderHi] = (byte)127; //32766
-                    mc.autoSteerData[mc.sdHeaderLo] = (byte)(254);
-                    mc.autoSteerData[mc.sdRelay] = (byte)0;
-                    mc.autoSteerData[mc.sdSpeed] = (byte)(0);
-                    mc.autoSteerData[mc.sdDistanceHi] = (byte)(125); //32020
-                    mc.autoSteerData[mc.sdDistanceLo] = (byte)20;
-                    mc.autoSteerData[mc.sdSteerAngleHi] = (byte)(125); //32020
-                    mc.autoSteerData[mc.sdSteerAngleLo] = (byte)20;
-                    AutoSteerDataOutToPort();
-                }
+                if (!isGPSPositionInitialized)  mc.ResetAllModuleCommValues();
             }
 
             //Update the port connecition counter - is reset every time new sentence is valid and ready
@@ -183,7 +162,7 @@ namespace AgOpenGPS
             if (mc.rollRaw != 9999)
             {
                 //calculate how far the antenna moves based on sidehill roll
-                double roll = Math.Sin(glm.toRadians(rollInDegrees));
+                double roll = Math.Sin(glm.toRadians(mc.rollRaw/16.0));
                 RollDistance = Math.Abs(roll * vehicle.antennaHeight);
 
                 // tilt to left is positive  **** important!!
@@ -287,7 +266,7 @@ namespace AgOpenGPS
 
                 //calc distance travelled since last GPS fix
                 distance = pn.Distance(pn.northing, pn.easting, prevFix.northing, prevFix.easting);
-                userDistance += distance;//userDistance can be reset
+                if ((userDistance += distance) > 3000) userDistance = 0; ;//userDistance can be reset
 
                 //most recent fixes are now the prev ones
                 prevFix.easting = pn.easting; prevFix.northing = pn.northing;
@@ -522,7 +501,7 @@ namespace AgOpenGPS
             if (mc.gyroHeading != 9999)
             {
                 //current gyro angle in radians
-                gyroRaw = (glm.toRadians((double)mc.prevGyroHeading / 16.0));
+                gyroRaw = (glm.toRadians((double)mc.prevGyroHeading * 0.0625));
 
                 //Difference between the IMU heading and the GPS heading
                 gyroDelta = (gyroRaw + gyroCorrection) - gpsHeading;
@@ -550,7 +529,7 @@ namespace AgOpenGPS
                     gyroCorrection += (gyroDelta * (0.4 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
-                    gyroRaw = (glm.toRadians((double)mc.gyroHeading / 16.0));
+                    gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
                 }
 
                 //if the gyro and GPS delta are > 10 degrees speed up filter
@@ -560,7 +539,7 @@ namespace AgOpenGPS
                     gyroCorrection += (gyroDelta * (2.0 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
-                    gyroRaw = (glm.toRadians((double)mc.gyroHeading / 16.0));
+                    gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
                 }
                 //determine the Corrected heading based on gyro and GPS
                 gyroCorrected = gyroRaw + gyroCorrection;
@@ -1089,7 +1068,7 @@ namespace AgOpenGPS
                 + (269.0 * Math.Pow(n, 5.0) / 512.0);
 
             /* Precalculate gamma_ (Eq. 10.22) */
-            gamma_ = (21.0 * Math.Pow(n, 2.0) / 16.0)
+            gamma_ = (21.0 * Math.Pow(n, 2.0) * 0.0625)
                 + (-55.0 * Math.Pow(n, 4.0) / 32.0);
 
             /* Precalculate delta_ (Eq. 10.22) */

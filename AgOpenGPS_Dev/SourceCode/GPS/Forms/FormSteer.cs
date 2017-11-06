@@ -40,7 +40,7 @@ namespace AgOpenGPS
             btnMaxAngVelMinus.Text = mf.vehicle.maxAngularVelocity.ToString();
             btnMaxSteerMinus.Text = mf.vehicle.maxSteerAngle.ToString();
             btnMaxIntegralMinus.Text = mf.mc.autoSteerSettings[mf.mc.ssMaxIntegral].ToString();
-            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) / 10).ToString();
+            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) * 0.1).ToString();
 
             //make sure free drive is off
             btnFreeDrive.BackColor = Color.Red;
@@ -266,7 +266,7 @@ namespace AgOpenGPS
         private void btnCountsPerDegreePlus_Click(object sender, EventArgs e)
         {
             mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]++;
-            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) / 10).ToString(CultureInfo.InvariantCulture);
+            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) * 0.1).ToString(CultureInfo.InvariantCulture);
             Properties.Settings.Default.setAS_countsPerDegree = mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree];
             Properties.Settings.Default.Save();
             mf.AutoSteerSettingsOutToPort();
@@ -276,7 +276,7 @@ namespace AgOpenGPS
         {
             mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]--;
             if (mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree] < 1) mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree] = 1;
-            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) / 10).ToString();
+            btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) * 0.1).ToString();
             Properties.Settings.Default.setAS_countsPerDegree = mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree];
             Properties.Settings.Default.Save();
             mf.AutoSteerSettingsOutToPort();
@@ -300,13 +300,13 @@ namespace AgOpenGPS
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) / 10).ToString();
+                    btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) * 0.1).ToString();
                     btnSteerMinus.Text = mf.mc.autoSteerSettings[mf.mc.ssSteerOffset].ToString();
                     mf.AutoSteerSettingsOutToPort();
                 }
                 else
                 {
-                    btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) / 10).ToString();
+                    btnCountsPerDegreeMinus.Text = ((double)(mf.mc.autoSteerSettings[mf.mc.ssCountsPerDegree]) * 0.1).ToString();
                     btnSteerMinus.Text = mf.mc.autoSteerSettings[mf.mc.ssSteerOffset].ToString();
                     mf.AutoSteerSettingsOutToPort();
                 }

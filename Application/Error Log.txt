@@ -6926,3 +6926,159 @@ Object name: 'FormGPS'.
    at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
    at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 05/11/2017 11:10:13 PM
 
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 408 - 06/11/2017 4:39:19 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 4:41:05 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 408 - 06/11/2017 4:42:06 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 4:44:47 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 408 - 06/11/2017 4:53:19 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 4:53:38 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 408 - 06/11/2017 5:35:37 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 5:59:52 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 5:59:58 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:04:37 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:08:10 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:08:18 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:12:27 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:12:44 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:14:06 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:14:13 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:22:01 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:27:54 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:28:46 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:32:03 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:34:30 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:40:37 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:40:46 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:43:09 AM
+
+UDP Recv data System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FormGPS'.
+   at System.Windows.Forms.Control.MarshaledInvoke(Control caller, Delegate method, Object[] args, Boolean synchronous)
+   at System.Windows.Forms.Control.Invoke(Delegate method, Object[] args)
+   at AgOpenGPS.FormGPS.ReceiveData(IAsyncResult asyncResult) in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\UDPComm.Designer.cs:line 82 - 06/11/2017 6:43:43 AM
+
+Open GPS Port System.IO.IOException: The port 'COM12' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 407 - 06/11/2017 6:48:44 AM
+

@@ -153,7 +153,7 @@ namespace AgOpenGPS
             }
 
             //scaling - Drawing is 10m wide so find ratio of tool width
-            double scale = turnOffset / 10.0;
+            double scale = turnOffset * 0.1;
             for (int i = 0; i < pt.Length; i++)
             {
                 pt[i].x *= scale;

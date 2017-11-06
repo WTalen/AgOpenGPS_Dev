@@ -163,7 +163,7 @@ namespace AgOpenGPS
             yt = new CYouTurn(gl, this);
 
             //module communication
-            mc = new CModuleComm();
+            mc = new CModuleComm(this);
 
             //perimeter list object
             periArea = new CPerimeter(gl);
@@ -200,9 +200,9 @@ namespace AgOpenGPS
                 return true;    // indicate that you handled this keystroke
             }
 
-            if (keyData == (Keys.P))
+            if (keyData == (Keys.C))
             {
-                SettingsPageOpen(3);
+                SettingsCommunications();
                 return true;    // indicate that you handled this keystroke
             }
 
@@ -385,26 +385,8 @@ namespace AgOpenGPS
                         Settings.Default.Save();
                         FileSaveEverythingBeforeClosingField();
 
-                        //turn all relays off
-                        mc.relayRateControl[mc.rcHeaderHi] = 127; //32762
-                        mc.relayRateControl[mc.rcHeaderLo] = 250;
-                        mc.relayRateControl[mc.rcSectionControlByte] = 0;
-                        mc.relayRateControl[mc.rcRateSetPointHi] = 0;
-                        mc.relayRateControl[mc.rcRateSetPointLo] = 0;
-                        mc.relayRateControl[mc.rcSpeedXFour] = 0;
-                        RelayRateControlOutToPort();
-
-                        mc.autoSteerData[mc.sdHeaderHi] = 127; //32766
-                        mc.autoSteerData[mc.sdHeaderLo] = 254;
-                        mc.autoSteerData[mc.sdRelay] = 0;
-                        mc.autoSteerData[mc.sdSpeed] = 0;
-                        mc.autoSteerData[mc.sdDistanceHi] = 125; //32020
-                        mc.autoSteerData[mc.sdDistanceLo] = 20;
-                        mc.autoSteerData[mc.sdSteerAngleHi] = 125; //32020
-                        mc.autoSteerData[mc.sdSteerAngleLo] = 20;
-
-                        //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
-                        AutoSteerDataOutToPort();
+                        //shutdown and reset all module data
+                        mc.ResetAllModuleCommValues();
                         break;
 
                     //Ignore and return
@@ -1076,16 +1058,10 @@ namespace AgOpenGPS
             //auto YouTurn shutdown
             yt.isAutoYouTurnEnabled = false;
             yt.CancelYouTurn();
+            autoTurnInProgressBar = 0;
 
-            mc.autoSteerData[mc.sdHeaderHi] = 127; //32766
-            mc.autoSteerData[mc.sdHeaderLo] = 254;
-            mc.autoSteerData[mc.sdRelay] = 0;
-            mc.autoSteerData[mc.sdSpeed] = 0;
-            mc.autoSteerData[mc.sdDistanceHi] = 125; //32020
-            mc.autoSteerData[mc.sdDistanceLo] = 20;
-            mc.autoSteerData[mc.sdSteerAngleHi] = 125; //32020
-            mc.autoSteerData[mc.sdSteerAngleLo] = 20;
-            AutoSteerDataOutToPort();
+            //reset all values
+            mc.ResetAllModuleCommValues();
         }
 
         //bring up field dialog for new/open/resume
@@ -1777,7 +1753,7 @@ namespace AgOpenGPS
             if (spRelay.IsOpen)
             {
                 //current gyro angle in radians
-                gyroRaw = (glm.toRadians((double)mc.prevGyroHeading / 16.0));
+                gyroRaw = (glm.toRadians((double)mc.prevGyroHeading * 0.0625));
 
                 //Difference between the IMU heading and the GPS heading
                 gyroDelta = gyroRaw - gpsHeading;
@@ -1912,8 +1888,6 @@ namespace AgOpenGPS
                     //make it turn the other way
                     yt.isAutoTurnRight = true;
                 }
-
-
             }
             else
             {
@@ -2258,6 +2232,7 @@ namespace AgOpenGPS
         public string NMEAHz { get { return Convert.ToString(fixUpdateHz); } }
         public string PassNumber { get { return Convert.ToString(ABLine.passNumber); } }
         public string Heading { get { return Convert.ToString(Math.Round(glm.toDegrees(fixHeading), 1)) + "\u00B0"; } }
+        public string GPSHeading { get { return (Math.Round(glm.toDegrees(gpsHeading), 1)) + "\u00B0"; } }
         public string Status { get { if (pn.status == "A") return "Active"; else return "Void"; } }
         public string FixQuality { get
         {
@@ -2271,7 +2246,6 @@ namespace AgOpenGPS
             else if (pn.fixQuality == 7) return "Man IP";
             else if (pn.fixQuality == 8) return "Sim";
             else                         return "Unknown";    } }
-
         public string SpeedMPH
         {
             get
@@ -2282,7 +2256,6 @@ namespace AgOpenGPS
                 return Convert.ToString(Math.Round(spd, 1));
             }
         }
-
         public string SpeedKPH
         {
             get
@@ -2294,7 +2267,28 @@ namespace AgOpenGPS
             }
         }
 
-        public string PeriAreaAcres { get { return Math.Round(periArea.area * 0.000247105, 2).ToString();  } }
+        public string GyroInDegrees
+        {
+            get
+            {
+                if (mc.gyroHeading != 9999)
+                    return Math.Round(mc.gyroHeading * 0.0625, 1) + "\u00B0";
+                else return "NA";
+            }
+        }
+        public string RollInDegrees
+        {
+            get
+            {
+                if (mc.rollRaw != 9999)
+                    return Math.Round(mc.rollRaw * 0.0625, 1) + "\u00B0";
+                else return "NA";
+            }
+        }
+
+        public string PureSteerAngle { get { return ((double)(guidanceLineSteerAngle) * 0.1) + "\u00B0"; } }
+
+        public string PeriAreaAcres { get { return Math.Round(periArea.area * 0.000247105, 2).ToString(); } }
         public string PeriAreaHectares { get { return Math.Round(periArea.area * 0.0001, 2).ToString();  } }
 
         public string GridFeet { get { return Math.Round(gridZoom * 3.28084, 0).ToString(); } }
@@ -2351,11 +2345,13 @@ namespace AgOpenGPS
 
                     //status strip values
                     stripDistance.Text = Convert.ToString((UInt16)(userDistance)) + " m";
-                    //stripAreaUser.Text = HectaresUser;
+                    stripAreaUser.Text = HectaresUser;
                     lblSpeed.Text = SpeedKPH;
-                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed / 10, 2)).ToString();
+                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed * 0.1, 2)).ToString();
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth, 2)).ToString() + " m";
                     toolStripStatusLabelBoundaryArea.Text = boundary.areaHectare;
+                    if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(distPt)) + "m";
+                    else strip2BoundaryDistanceAway.Text = "*Out*";
                 }
                 else
                 {
@@ -2365,29 +2361,28 @@ namespace AgOpenGPS
 
                     //status strip values
                     stripDistance.Text = Convert.ToString((UInt16)(userDistance * 3.28084)) + " ft";
-                    //stripAreaUser.Text = AcresUser;
+                    stripAreaUser.Text = AcresUser;
                     lblSpeed.Text = SpeedMPH;
                     //stripGridZoom.Text = "Grid: " + GridFeet + " '";
-                    stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed / 10) * 2.47)).ToString();
+                    stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed * 0.1) * 2.47)).ToString();
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth * glm.m2ft, 2)).ToString() + " ft";
                     toolStripStatusLabelBoundaryArea.Text = boundary.areaAcre;
+                    if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(glm.m2ft*distPt)) + "ft";
+                    else strip2BoundaryDistanceAway.Text = "*Out*";
                 }
 
-                //lblDelta.Text = guidanceLineHeadingDelta.ToString();
-
-                if (rc.isRateControlOn)
-                    btnRate.Text = rc.rateSetPoint.ToString("N1");
+                //not Metric/Standard units sensitive
+                if (rc.isRateControlOn) btnRate.Text = rc.rateSetPoint.ToString("N1");
                 else btnRate.Text = "Off";
-
-                //non metric or imp fields
                 stripHz.Text = NMEAHz + "Hz " + (int)(frameTime);
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
-                strip2PureSteerAngle.Text = ((double)(guidanceLineSteerAngle) / 10) + "\u00B0";
-                strip2Roll.Text = rollInDegrees + "\u00B0";
-                if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(distPt)) + "m";
-                else strip2BoundaryDistanceAway.Text = "*Out*";
 
+                //strip2
+                strip2PureSteerAngle.Text = PureSteerAngle;
+                strip2Roll.Text = RollInDegrees;
+                strip2GyroHeading.Text = GyroInDegrees;
+                strip2GPSHeading.Text=GPSHeading;
                 strip2TurnProgressBar.Value = autoTurnInProgressBar;
 
                 if (boundary.isSet)
@@ -2411,13 +2406,6 @@ namespace AgOpenGPS
                         btnRightYouTurn.BackColor = SystemColors.ButtonFace;
                     }
                 }
-                //stripRoll.Text = avgRoll + "\u00B0";
-                //stripPitch.Text = avgPitch + "\u00B0";
-                //stripAngularVel.Text = avgAngVel.ToString();
-                //lblIMUHeading.Text = Math.Round(modcom.imuHeading, 1) + "\u00B0";
-
-                //lblFix.Text = FixQuality;
-                //lblAgeDiff.Text = AgeDiff;
 
                 //if (Math.Abs(userSquareMetersAlarm) < 0.1)
                 //{
