@@ -142,6 +142,9 @@
   <data name="ManualOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ManualOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RateControlOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\RateControlOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TiltUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\TiltUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,6 +166,9 @@
   <data name="DnArrow64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\DnArrow64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RateSelect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\RateSelect2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SteerBehind" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\SteerBehind.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -174,6 +180,9 @@
   </data>
   <data name="ColorField" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ColorField.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="boundaryPause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\boundaryPause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ZoomOut48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ZoomOut48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -283,6 +292,9 @@
   <data name="ComPorts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\ComPorts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AutoRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\AutoRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="back_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\back-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -304,11 +316,14 @@
   <data name="BoundaryDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\BoundaryDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Display" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\Display.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Rate1Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\Rate1Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TripOdometer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\TripOdometer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Display" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\Display.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PeriDraw" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\PeriDraw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,6 +370,9 @@
   <data name="LetterBBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\LetterBBlue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AutoLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\AutoLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="KeyHole" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\KeyHole.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -391,8 +409,8 @@
   <data name="VehHitched64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\VehHitched64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="boundaryPause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\boundaryPause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RateControlOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\RateControlOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="A2D3D" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\A2D3D.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -406,16 +424,7 @@
   <data name="FileOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\btnImages\FileOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Rate1Select" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\Rate1Select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RateControlOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\RateControlOff.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RateControlOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\RateControlOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RateSelect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\btnImages\RateSelect2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="YouTurn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\btnImages\YouTurn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -12,14 +12,9 @@ namespace AgOpenGPS
         private readonly FormGPS mf;
         private readonly OpenGL gl;
 
-        //constructor
-        public CYouTurn(OpenGL _gl, FormGPS _f)
-        {
-            mf = _f;
-            gl = _gl;
-        }
-
-        public bool isYouTurnOn = false;
+        public bool isYouTurnOn, isAutoTriggered, isAutoPointSet, isAutoTurnRight, isLastAutoTurnRight;
+        public bool isRecordingYouTurn, isAutoYouTurnEnabled;
+        public int startYouTurnAt;
 
         //guidance values
         public double distanceFromCurrentLine;
@@ -28,7 +23,6 @@ namespace AgOpenGPS
         public double abHeading;
         public bool isABSameAsFixHeading = true;
         public bool isOnRightSideCurrentLine = true;
-        public bool isRecordingYouTurn;
 
         //pure pursuit values
         public vec2 pivotAxlePosYT = new vec2(0, 0);
@@ -46,9 +40,23 @@ namespace AgOpenGPS
         //list of points read from file, this is the actual pattern from a bunch of sources possible
         public List<vec2> youFileList = new List<vec2>();
 
+        public vec2 autoYouTurnTriggerPoint = new vec2(0, 0);
+
+        //constructor
+        public CYouTurn(OpenGL _gl, FormGPS _f)
+        {
+            mf = _f;
+            gl = _gl;
+
+            //how far before or after boundary line should turn happen
+            startYouTurnAt = Properties.Settings.Default.setAS_startYouTurnAt;
+        }
+
         public void CancelYouTurn()
         {
             isYouTurnOn = false;
+            isAutoTriggered = false;
+            isAutoPointSet = false;
             if (ytList.Count > 0) ytList.Clear();
             return;
         }
@@ -97,8 +105,10 @@ namespace AgOpenGPS
         }
 
         //build the points and path 
-        public void BuildYouTurnList(bool isTurnRight)
+        public void BuildYouTurnListToRight(bool isTurnRight)
         {
+            isYouTurnOn = true;
+
             //grab the Lookahead that ABLine uses
             minLookAheadDistance = mf.ABLine.minLookAheadDistance;
 
@@ -227,8 +237,7 @@ namespace AgOpenGPS
                 //return and reset if too far away or end of the line
                 if (distanceFromCurrentLine > 5 || B >= ptCount - 3)
                 {
-                    isYouTurnOn = false;
-                    ytList.Clear();
+                    CancelYouTurn();
                     return;
                 }
 
@@ -332,9 +341,7 @@ namespace AgOpenGPS
             }
             else
             {
-                isYouTurnOn = false;
-                if (ytList.Count > 0) ytList.Clear();
-                return;
+                CancelYouTurn();
             }
         }
     }

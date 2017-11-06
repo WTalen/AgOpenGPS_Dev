@@ -80,7 +80,7 @@
             this.lblRate2Value.AutoSize = true;
             this.lblRate2Value.BackColor = System.Drawing.SystemColors.Control;
             this.lblRate2Value.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRate2Value.Location = new System.Drawing.Point(359, 42);
+            this.lblRate2Value.Location = new System.Drawing.Point(346, 45);
             this.lblRate2Value.Name = "lblRate2Value";
             this.lblRate2Value.Size = new System.Drawing.Size(142, 86);
             this.lblRate2Value.TabIndex = 13;

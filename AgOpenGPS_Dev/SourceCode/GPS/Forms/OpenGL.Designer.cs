@@ -8,7 +8,6 @@ namespace AgOpenGPS
 {
     public partial class FormGPS
     {
-
         //extracted Near, Far, Right, Left clipping planes of frustum
         double[] frustum = new double[24];
 
@@ -180,15 +179,14 @@ namespace AgOpenGPS
                 //draw the perimter line, returns if no line to draw
                 periArea.DrawPerimeterLine();
 
-                //draw the boundary line
+                //draw the boundary
                 boundary.DrawBoundaryLine();
 
                 //screen text for debug
-
-                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "Gyro: " + (Math.Round(((double)mc.gyroHeading/16.0), 1)).ToString());
-                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, " GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
-                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Roll: " + Convert.ToString(Math.Round((double)(mc.rollRaw/16),1)));
-                //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "GyroD: " + (Math.Round(glm.toDegrees(gyroDelta), 3)).ToString());
+                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "trig: " + distanceToStartAutoTurn.ToString());
+                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, " dist: " + Convert.ToString(Math.Round(distPt, 2)));
+                //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Roll: " + Convert.ToString(Math.Round((double)(mc.rollRaw/16),1)));
+                //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "InBnd: " + inside.ToString());
                 //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
                 //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Fixed: " + Convert.ToString(Math.Round(glm.toDegrees(gyroCorrected), 2)));
                 //gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "L/Min: " + Convert.ToString(rc.CalculateRateLitersPerMinute()));
@@ -316,15 +314,12 @@ namespace AgOpenGPS
                     if (!ABLine.isABLineSet & !ABLine.isABLineBeingSet & !ct.isContourBtnOn)
                     {
                         txtDistanceOffABLine.Visible = false;
-                        //lblDelta.Visible = false;
                         btnAutoSteer.Text = "-";
                     }
                 }
-
                 else
                 {
                     txtDistanceOffABLine.Visible = false;
-                    //lblDelta.Visible = false;
                     btnAutoSteer.Text = "-";
                 }
 
@@ -477,7 +472,7 @@ namespace AgOpenGPS
             }
 
             //draw boundary line
-            boundary.DrawBoundaryLineOnBackBuffer();
+            //boundary.DrawBoundaryLineOnBackBuffer();
             
             //determine farthest ahead lookahead - is the height of the readpixel line
             double rpHeight = 0;
@@ -528,11 +523,11 @@ namespace AgOpenGPS
                         }
 
                         //check for a boundary line
-                        if (grnPixels[a] > 200)
-                        {
-                            vehicle.isSuperSectionAllowedOn = false;
-                            break;
-                        }
+                        //if (grnPixels[a] > 200)
+                        //    {
+                        //        vehicle.isSuperSectionAllowedOn = false;
+                        //        break;
+                        //    }
                     }
                 }
             }
@@ -576,118 +571,48 @@ namespace AgOpenGPS
                         //If any nowhere applied, send OnRequest, if its all green send an offRequest
                         section[j].isSectionRequiredOn = false;
 
-                        if (boundary.isSet)
+
+                        int start = 0, end = 0, skip = 0;
+                        start = section[j].rpSectionPosition - section[0].rpSectionPosition;
+                        end = section[j].rpSectionWidth - 1 + start;
+                        if (end > vehicle.rpWidth - 1) end = vehicle.rpWidth - 1;
+                        skip = vehicle.rpWidth - (end - start);
+
+                        int tagged = 0;
+                        for (int h = 0; h < (int)section[j].sectionLookAhead; h++)
                         {
-
-                            int start = 0, end = 0, skip = 0;
-                            start = section[j].rpSectionPosition - section[0].rpSectionPosition;
-                            end = section[j].rpSectionWidth - 1 + start;
-                            if (end > vehicle.rpWidth - 1) end = vehicle.rpWidth - 1;
-                            skip = vehicle.rpWidth - (end - start);
-
-
-                            int tagged = 0;
-                            for (int h = 0; h < (int)section[j].sectionLookAhead; h++)
+                            for (int a = start; a < end; a++)
                             {
-                                for (int a = start; a < end; a++)
+                                if (grnPixels[a] == 0)
                                 {
-                                    if (grnPixels[a] == 0)
+                                    if (tagged++ > vehicle.toolMinUnappliedPixels)
                                     {
-                                        if (tagged++ > vehicle.toolMinUnappliedPixels)
-                                        {
-                                            section[j].isSectionRequiredOn = true;
-                                            goto GetMeOutaHere;
-                                        }
+                                        section[j].isSectionRequiredOn = true;
+                                        goto GetMeOutaHere;
                                     }
                                 }
-
-                                start += vehicle.rpWidth;
-                                end += vehicle.rpWidth;
                             }
 
-                            //minimum apllied conditions met
-                        GetMeOutaHere:
-
-                            start = 0; end = 0; skip = 0;
-                            start = section[j].rpSectionPosition - section[0].rpSectionPosition;
-                            end = section[j].rpSectionWidth - 1 + start;
-                            if (end > vehicle.rpWidth - 1) end = vehicle.rpWidth - 1;
-                            skip = vehicle.rpWidth - (end - start);
-
-                            //looking for boundary line color, bright green
-                            for (int h = 0; h < (int)section[j].sectionLookAhead; h++)
-                            {
-                                for (int a = start; a < end; a++)
-                                {
-                                    if (grnPixels[a] > 240) //&& )
-                                    {
-                                        section[j].isSectionRequiredOn = false;
-                                        section[j].sectionOffRequest = true;
-                                        section[j].sectionOnRequest = false;
-                                        section[j].sectionOffTimer = 0;
-                                        section[j].sectionOnTimer = 0;
-
-                                        goto GetMeOutaHereNow;
-                                    }
-                                }
-
-                                start += vehicle.rpWidth;
-                                end += vehicle.rpWidth;
-                            }
-
-                            GetMeOutaHereNow:
-
-                            //if out of boundary, turn it off
-                            if (!section[j].isInsideBoundary)
-                            {
-                                section[j].isSectionRequiredOn = false;
-                                section[j].sectionOffRequest = true;
-                                section[j].sectionOnRequest = false;
-                                section[j].sectionOffTimer = 0;
-                                section[j].sectionOnTimer = 0;
-                            }
+                            start += vehicle.rpWidth;
+                            end += vehicle.rpWidth;
                         }
 
-                        //no boundary set so ignore
-                        else
+                        //minimum apllied conditions met
+                        GetMeOutaHere:
+
+                        //if out of boundary, turn it off
+                        if (!section[j].isInsideBoundary)
                         {
                             section[j].isSectionRequiredOn = false;
-
-                            int start = 0, end = 0, skip = 0;
-                            start = section[j].rpSectionPosition - section[0].rpSectionPosition;
-                            end = section[j].rpSectionWidth - 1 + start;
-                            if (end > vehicle.rpWidth - 1) end = vehicle.rpWidth - 1;
-                            skip = vehicle.rpWidth - (end - start);
-
-
-                            int tagged = 0;
-                            for (int h = 0; h < (int)section[j].sectionLookAhead; h++)
-                            {
-                                for (int a = start; a < end; a++)
-                                {
-                                    if (grnPixels[a] == 0)
-                                    {
-                                        if (tagged++ > vehicle.toolMinUnappliedPixels)
-                                        {
-                                            section[j].isSectionRequiredOn = true;
-                                            goto GetMeOutaHere;
-                                        }
-                                    }
-                                }
-
-                                start += vehicle.rpWidth;
-                                end += vehicle.rpWidth;
-                            }
-
-                            //minimum apllied conditions met
-                        GetMeOutaHere:
-                            start = 0;
+                            section[j].sectionOffRequest = true;
+                            section[j].sectionOnRequest = false;
+                            section[j].sectionOffTimer = 0;
+                            section[j].sectionOnTimer = 0;
                         }
                     }
 
                     //if section going backwards turn it off
                     else section[j].isSectionRequiredOn = false;
-
                 }
 
                 //if the superSection is on, turn it off
@@ -771,14 +696,12 @@ namespace AgOpenGPS
 
             //send the byte out to section relays
             BuildRelayByte();
-            //RelayRateControlOutToPort();
-
-            //System.Threading.Thread.Sleep(400);
+            
             //stop the timer and calc how long it took to do calcs and draw
             frameTime = (double)swFrame.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000;
 
             //if a minute has elapsed save the field in case of crash and to be able to resume            
-            if (saveCounter > 180)       //3 counts per second X 60 seconds = 180 counts per minute.
+            if (saveCounter > 240)       //2 counts per second X 60 seconds = 120 counts per minute.
             {
                 if (isJobStarted && stripOnlineGPS.Value != 1)
                 {
@@ -790,10 +713,8 @@ namespace AgOpenGPS
                     if (isLogNMEA) FileSaveNMEA();
                 }
                 saveCounter = 0;
-            }            
+            }
             //this is the end of the "frame". Now we wait for next NMEA sentence. 
-
-
         }
                 
         //Resize is called upn window creation
@@ -813,7 +734,6 @@ namespace AgOpenGPS
 
             //  Set the modelview matrix.
             gls.MatrixMode(OpenGL.GL_MODELVIEW);
-
         }
 
         //Draw section OpenGL window, not visible
@@ -825,7 +745,6 @@ namespace AgOpenGPS
             gls.CullFace(OpenGL.GL_BACK);
 
             gls.PixelStore(OpenGL.GL_PACK_ALIGNMENT, 1);
-
         }
 
         public void DrawLightBar(double Width, double Height, double offlineDistance)

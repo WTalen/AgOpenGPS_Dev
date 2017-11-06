@@ -404,7 +404,7 @@ namespace AgOpenGPS
                     gl.End();
                 }
 
-                if (mf.isPureOn)
+                if (mf.isPureDisplayOn)
                 {
                     //draw the guidance circle
                     const int numSegments = 100;

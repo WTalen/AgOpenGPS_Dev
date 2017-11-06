@@ -48,7 +48,7 @@ namespace AgOpenGPS
 
         //Is it in 2D or 3D, metric or imperial, display lightbar, display grid
         public bool isIn3D = true, isMetric = true, isLightbarOn = true, isGridOn, isSideGuideLines = true;
-        public bool isPureOn = true;
+        public bool isPureDisplayOn = true;
 
         //bool for whether or not a job is active
         public bool isJobStarted = false, isAreaOnRight = true, isAutoSteerBtnOn = false;
@@ -324,8 +324,8 @@ namespace AgOpenGPS
             isSideGuideLines = Settings.Default.setMenu_IsSideGuideLines;
             sideGuideLines.Checked = isSideGuideLines;
 
-            isPureOn = Settings.Default.setMenu_isPureOn;
-            pursuitLineToolStripMenuItem.Checked = isPureOn;
+            isPureDisplayOn = Settings.Default.setMenu_isPureOn;
+            pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
 
             openGLControlBack.Visible = false;
 
@@ -693,7 +693,7 @@ namespace AgOpenGPS
         //line up section On Off Auto buttons based on how many there are
         public void LineUpManualBtns()
         {
-            const int top = 140;
+            const int top = 160;
 
             btnSection4Man.Top = Height - top;
             btnSection1Man.Top = Height - top;
@@ -1073,6 +1073,10 @@ namespace AgOpenGPS
             btnRate.Image = Properties.Resources.RateControlOff;
             rc.ShutdownRateControl();
 
+            //auto YouTurn shutdown
+            yt.isAutoYouTurnEnabled = false;
+            yt.CancelYouTurn();
+
             mc.autoSteerData[mc.sdHeaderHi] = 127; //32766
             mc.autoSteerData[mc.sdHeaderLo] = 254;
             mc.autoSteerData[mc.sdRelay] = 0;
@@ -1080,7 +1084,7 @@ namespace AgOpenGPS
             mc.autoSteerData[mc.sdDistanceHi] = 125; //32020
             mc.autoSteerData[mc.sdDistanceLo] = 20;
             mc.autoSteerData[mc.sdSteerAngleHi] = 125; //32020
-            mc.autoSteerData[mc.sdSteerAngleLo] = 20; 
+            mc.autoSteerData[mc.sdSteerAngleLo] = 20;
             AutoSteerDataOutToPort();
         }
 
@@ -1719,21 +1723,23 @@ namespace AgOpenGPS
             form.Show();
         }
 
-        private void btnTripOdometer_Click(object sender, EventArgs e)
-        {
-            HideMenu();
-            using (var form = new FormTrip(this))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK) { }
-            }
-        }
+        //private void btnTripOdometer_Click(object sender, EventArgs e)
+        //{
+        //    HideMenu();
+        //    using (var form = new FormTrip(this))
+        //    {
+        //        var result = form.ShowDialog();
+        //        if (result == DialogResult.OK) { }
+        //    }
+        //}
 
         private void btnYouTurnRecord_Click(object sender, EventArgs e)
         {
             HideMenu();
             var form = new FormYouTurn(this);
             form.ShowDialog();
+            if (yt.isAutoYouTurnEnabled) btnYouTurnRecord.Text = "Auto On";
+            else btnYouTurnRecord.Text = "Manual";
         }
 
         private void btnBoundary_Click(object sender, EventArgs e)
@@ -1838,7 +1844,7 @@ namespace AgOpenGPS
                     rc.rateSetPoint = 0.0;
                 }
             }
-            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); } 
+            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); }
         }
 
        private void btnRate1Select_Click(object sender, EventArgs e)
@@ -1861,26 +1867,66 @@ namespace AgOpenGPS
 
         private void btnLeftYouTurn_Click(object sender, EventArgs e)
         {
-            if (yt.isYouTurnOn)
+            if (yt.isAutoPointSet)
             {
-                yt.CancelYouTurn();
+                //is it turning left already?
+                if(!yt.isAutoTurnRight)
+                {
+                    yt.CancelYouTurn();
+                    distanceToStartAutoTurn = -1;
+                    autoTurnInProgressBar = 0;
+                }
+                else
+                {
+                    yt.isAutoTurnRight = false;
+                }
             }
             else
             {
-                yt.isYouTurnOn = true;
-                yt.BuildYouTurnList(false);
+                if (yt.isYouTurnOn)
+                {
+                    yt.CancelYouTurn();
+                    distanceToStartAutoTurn = -1;
+                }
+                else
+                {
+                    yt.isYouTurnOn = true;
+                    yt.BuildYouTurnListToRight(false);
+                }
             }
         }
         private void btnRightYouTurn_Click(object sender, EventArgs e)
         {
-            if (yt.isYouTurnOn)
+            //is it already turning right, then cancel autoturn
+            if (yt.isAutoPointSet)
             {
-                yt.CancelYouTurn();
+                //is it turning right already?
+                if (yt.isAutoTurnRight)
+                {
+                    yt.CancelYouTurn();
+                    distanceToStartAutoTurn = -1;
+                    autoTurnInProgressBar = 0;
+                }
+                else
+                {
+                    //make it turn the other way
+                    yt.isAutoTurnRight = true;
+                }
+
+
             }
             else
             {
-                yt.isYouTurnOn = true;
-                yt.BuildYouTurnList(true);
+                if (yt.isYouTurnOn)
+                {
+                    yt.CancelYouTurn();
+                    distanceToStartAutoTurn = -1;
+                }
+                else
+                {
+                    yt.isYouTurnOn = true;
+                    yt.BuildYouTurnListToRight(true);
+                }
             }
         }
 
@@ -1978,9 +2024,9 @@ namespace AgOpenGPS
         }
         private void pursuitLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            isPureOn = !isPureOn;
-            pursuitLineToolStripMenuItem.Checked = isPureOn;
-            Settings.Default.setMenu_isPureOn = isPureOn;
+            isPureDisplayOn = !isPureDisplayOn;
+            pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
+            Settings.Default.setMenu_isPureOn = isPureDisplayOn;
             Settings.Default.Save();
         }
         private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2256,12 +2302,8 @@ namespace AgOpenGPS
 
         public string Acres { get { if (totalSquareMeters < 404645) return Math.Round(totalSquareMeters * 0.00024710499815078974633856493327535, 2).ToString();
                                      else return Math.Round(totalSquareMeters * 0.00024710499815078974633856493327535, 1).ToString();  }  }
-
- 
-
         public string Hectares { get { if (totalSquareMeters < 999900) return Math.Round(totalSquareMeters * 0.0001, 2).ToString();
                                         else return Math.Round(totalSquareMeters * 0.0001, 1).ToString(); }  }
-
         public string AcresUser { get { return Math.Round(totalUserSquareMeters * 0.00024710499815078974633856493327535, 2).ToString(); } }
         public string HectaresUser { get { return Math.Round(totalUserSquareMeters * 0.0001, 2).ToString(); } }
 
@@ -2292,8 +2334,8 @@ namespace AgOpenGPS
             if (isMenuHid) { if (panel1.Width > 40) panel1.Width -= 40; else panel1.Width = 0; }
             else { if (panel1.Width < 481) panel1.Width += 40; }
 
-           //every third of a second update all status
-            if (statusUpdateCounter > 14)
+            //every third of a second update all status
+            if (statusUpdateCounter > 25)
             {
                 //reset the counter
                 statusUpdateCounter = 0;
@@ -2309,10 +2351,10 @@ namespace AgOpenGPS
 
                     //status strip values
                     stripDistance.Text = Convert.ToString((UInt16)(userDistance)) + " m";
-                    stripAreaUser.Text = HectaresUser;
+                    //stripAreaUser.Text = HectaresUser;
                     lblSpeed.Text = SpeedKPH;
-                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed / 10,2)).ToString();
-                    stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth,2)).ToString() + " m";
+                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed / 10, 2)).ToString();
+                    stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth, 2)).ToString() + " m";
                     toolStripStatusLabelBoundaryArea.Text = boundary.areaHectare;
                 }
                 else
@@ -2323,26 +2365,52 @@ namespace AgOpenGPS
 
                     //status strip values
                     stripDistance.Text = Convert.ToString((UInt16)(userDistance * 3.28084)) + " ft";
-                    stripAreaUser.Text = AcresUser;
+                    //stripAreaUser.Text = AcresUser;
                     lblSpeed.Text = SpeedMPH;
                     //stripGridZoom.Text = "Grid: " + GridFeet + " '";
                     stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed / 10) * 2.47)).ToString();
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth * glm.m2ft, 2)).ToString() + " ft";
                     toolStripStatusLabelBoundaryArea.Text = boundary.areaAcre;
                 }
-                
+
                 //lblDelta.Text = guidanceLineHeadingDelta.ToString();
 
                 if (rc.isRateControlOn)
-                btnRate.Text = rc.rateSetPoint.ToString("N1");
+                    btnRate.Text = rc.rateSetPoint.ToString("N1");
                 else btnRate.Text = "Off";
 
                 //non metric or imp fields
-                stripHz.Text = NMEAHz+"Hz "+ (int)(frameTime);
+                stripHz.Text = NMEAHz + "Hz " + (int)(frameTime);
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
-                lblSteerAngle.Text = Convert.ToString((double)(guidanceLineSteerAngle) / 10);
+                strip2PureSteerAngle.Text = ((double)(guidanceLineSteerAngle) / 10) + "\u00B0";
+                strip2Roll.Text = rollInDegrees + "\u00B0";
+                if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(distPt)) + "m";
+                else strip2BoundaryDistanceAway.Text = "*Out*";
 
+                strip2TurnProgressBar.Value = autoTurnInProgressBar;
+
+                if (boundary.isSet)
+                {
+                    if (yt.isAutoPointSet)
+                    {
+                        if (yt.isAutoTurnRight)
+                        {
+                            btnRightYouTurn.BackColor = Color.Yellow;
+                            btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
+                        }
+                        else
+                        {
+                            btnRightYouTurn.BackColor = SystemColors.ButtonFace;
+                            btnLeftYouTurn.BackColor = Color.Yellow;
+                        }
+                    }
+                    else
+                    {
+                        btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
+                        btnRightYouTurn.BackColor = SystemColors.ButtonFace;
+                    }
+                }
                 //stripRoll.Text = avgRoll + "\u00B0";
                 //stripPitch.Text = avgPitch + "\u00B0";
                 //stripAngularVel.Text = avgAngVel.ToString();
@@ -2351,15 +2419,15 @@ namespace AgOpenGPS
                 //lblFix.Text = FixQuality;
                 //lblAgeDiff.Text = AgeDiff;
 
-                if (Math.Abs(userSquareMetersAlarm) < 0.1)
-                {
-                    stripAreaUser.BackColor = SystemColors.ControlLightLight;
-                }
-                else
-                {
-                    stripAreaUser.BackColor = totalUserSquareMeters < userSquareMetersAlarm ? SystemColors.ControlLightLight
-                                                                                                : Color.OrangeRed;
-                }
+                //if (Math.Abs(userSquareMetersAlarm) < 0.1)
+                //{
+                //    stripAreaUser.BackColor = SystemColors.ControlLightLight;
+                //}
+                //else
+                //{
+                //    stripAreaUser.BackColor = totalUserSquareMeters < userSquareMetersAlarm ? SystemColors.ControlLightLight
+                //                                                                                : Color.OrangeRed;
+                //}
 
                 //up in the menu a few pieces of info
                 if (isJobStarted)

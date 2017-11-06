@@ -592,7 +592,7 @@ namespace AgOpenGPS
             //gl.Vertex(conList[closestRefPoint].x, conList[closestRefPoint].z, 0);
             //gl.End();
             //}
-            if (mf.isPureOn)
+            if (mf.isPureDisplayOn)
             {
                 const int numSegments = 100;
                 {

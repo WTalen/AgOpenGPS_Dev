@@ -133,6 +133,26 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AutoLeft {
+            get {
+                object obj = ResourceManager.GetObject("AutoLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AutoRight {
+            get {
+                object obj = ResourceManager.GetObject("AutoRight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AutoSteerConfig {
             get {
                 object obj = ResourceManager.GetObject("AutoSteerConfig", resourceCulture);
@@ -1026,6 +1046,16 @@ namespace AgOpenGPS.Properties {
         internal static System.Drawing.Bitmap WorkSwitch {
             get {
                 object obj = ResourceManager.GetObject("WorkSwitch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YouTurn {
+            get {
+                object obj = ResourceManager.GetObject("YouTurn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

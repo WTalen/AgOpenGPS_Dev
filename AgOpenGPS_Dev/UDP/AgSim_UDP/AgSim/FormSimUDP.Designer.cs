@@ -507,6 +507,7 @@
             this.Name = "FormSimUDP";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GPS Simulator";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSim_FormClosing);
             this.Load += new System.EventHandler(this.FormSim_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudHz)).EndInit();

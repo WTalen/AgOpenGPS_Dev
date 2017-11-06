@@ -79,7 +79,6 @@
             this.stripHz = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripDistance = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripBtnResetDistance = new System.Windows.Forms.ToolStripSplitButton();
-            this.stripAreaUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripEqWidth = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelBoundaryArea = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripAreaRate = new System.Windows.Forms.ToolStripStatusLabel();
@@ -92,7 +91,6 @@
             this.lblNorthing = new System.Windows.Forms.Label();
             this.lblEasting = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
-            this.lblHeading = new System.Windows.Forms.Label();
             this.contextMenuStripFlag = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemFlagRed = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuFlagGrn = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,26 +104,35 @@
             this.tboxSentence = new System.Windows.Forms.TextBox();
             this.lblZone = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnYouTurnRecord = new System.Windows.Forms.Button();
             this.btnFileExplorer = new System.Windows.Forms.Button();
             this.btnBoundaryMenu = new System.Windows.Forms.Button();
             this.btnGPSData = new System.Windows.Forms.Button();
             this.btnUnits = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnComm = new System.Windows.Forms.Button();
-            this.btnTripOdometer = new System.Windows.Forms.Button();
+            this.btnRate = new System.Windows.Forms.Button();
             this.btnSnap = new System.Windows.Forms.Button();
+            this.btnAutoSteerConfig = new System.Windows.Forms.Button();
             this.btnPerimeter = new System.Windows.Forms.Button();
             this.btnJob = new System.Windows.Forms.Button();
-            this.btnFlag = new System.Windows.Forms.Button();
             this.lblSpeedUnits = new System.Windows.Forms.Label();
-            this.lblSteerAngle = new System.Windows.Forms.Label();
-            this.btnRate1Select = new System.Windows.Forms.Button();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.strip2Roll = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.strip2PureSteerAngle = new System.Windows.Forms.ToolStripStatusLabel();
+            this.strip2Gyro = new System.Windows.Forms.ToolStripStatusLabel();
+            this.strip2TurnProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.strip2BoundaryDistanceAway = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblHeading = new System.Windows.Forms.Label();
+            this.btnYouTurnRecord = new System.Windows.Forms.Button();
             this.btnRate2Select = new System.Windows.Forms.Button();
-            this.btnRate = new System.Windows.Forms.Button();
+            this.btnRate1Select = new System.Windows.Forms.Button();
             this.btnRightYouTurn = new System.Windows.Forms.Button();
             this.btnLeftYouTurn = new System.Windows.Forms.Button();
-            this.btnAutoSteerConfig = new System.Windows.Forms.Button();
+            this.btnFlag = new System.Windows.Forms.Button();
             this.btnTiltDown = new ProXoft.WinForms.RepeatButton();
             this.btnTiltUp = new ProXoft.WinForms.RepeatButton();
             this.btnAutoSteer = new System.Windows.Forms.Button();
@@ -153,6 +160,7 @@
             this.contextMenuStripFlag.SuspendLayout();
             this.contextMenuArea.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // openGLControl
@@ -173,7 +181,7 @@
             this.openGLControl.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControl.RenderContextType = SharpGL.RenderContextType.NativeWindow;
             this.openGLControl.RenderTrigger = SharpGL.RenderTrigger.Manual;
-            this.openGLControl.Size = new System.Drawing.Size(1074, 675);
+            this.openGLControl.Size = new System.Drawing.Size(1095, 641);
             this.openGLControl.TabIndex = 6;
             this.openGLControl.OpenGLInitialized += new System.EventHandler(this.openGLControl_OpenGLInitialized);
             this.openGLControl.OpenGLDraw += new SharpGL.RenderEventHandler(this.openGLControl_OpenGLDraw);
@@ -225,7 +233,7 @@
             this.txtDistanceOffABLine.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDistanceOffABLine.Font = new System.Drawing.Font("Segoe UI Symbol", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDistanceOffABLine.ForeColor = System.Drawing.Color.Green;
-            this.txtDistanceOffABLine.Location = new System.Drawing.Point(489, 0);
+            this.txtDistanceOffABLine.Location = new System.Drawing.Point(499, 0);
             this.txtDistanceOffABLine.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.txtDistanceOffABLine.Name = "txtDistanceOffABLine";
             this.txtDistanceOffABLine.ReadOnly = true;
@@ -476,7 +484,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(1074, 45);
+            this.menuStrip1.Size = new System.Drawing.Size(1095, 45);
             this.menuStrip1.TabIndex = 49;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -568,13 +576,12 @@
             // statusStrip1
             // 
             this.statusStrip1.AutoSize = false;
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.statusStrip1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripHz,
             this.stripDistance,
             this.toolStripBtnResetDistance,
-            this.stripAreaUser,
             this.stripEqWidth,
             this.toolStripStatusLabelBoundaryArea,
             this.stripAreaRate,
@@ -584,9 +591,10 @@
             this.stripOnlineArduino,
             this.stripPortAutoSteer,
             this.stripOnlineAutoSteer});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 722);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 729);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1074, 38);
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(1095, 38);
             this.statusStrip1.TabIndex = 95;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -614,7 +622,7 @@
             this.toolStripBtnResetDistance.AutoSize = false;
             this.toolStripBtnResetDistance.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.toolStripBtnResetDistance.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolStripBtnResetDistance.BackgroundImage")));
-            this.toolStripBtnResetDistance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.toolStripBtnResetDistance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStripBtnResetDistance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtnResetDistance.DropDownButtonWidth = 20;
             this.toolStripBtnResetDistance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -625,24 +633,13 @@
             this.toolStripBtnResetDistance.Size = new System.Drawing.Size(100, 36);
             this.toolStripBtnResetDistance.ButtonClick += new System.EventHandler(this.toolStripBtnResetDistance_ButtonClick);
             // 
-            // stripAreaUser
-            // 
-            this.stripAreaUser.AutoSize = false;
-            this.stripAreaUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.stripAreaUser.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stripAreaUser.Margin = new System.Windows.Forms.Padding(0, -5, 0, 0);
-            this.stripAreaUser.Name = "stripAreaUser";
-            this.stripAreaUser.Size = new System.Drawing.Size(110, 43);
-            this.stripAreaUser.Text = "188.88 Ac";
-            this.stripAreaUser.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            // 
             // stripEqWidth
             // 
             this.stripEqWidth.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.stripEqWidth.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stripEqWidth.Margin = new System.Windows.Forms.Padding(0);
             this.stripEqWidth.Name = "stripEqWidth";
-            this.stripEqWidth.Size = new System.Drawing.Size(390, 38);
+            this.stripEqWidth.Size = new System.Drawing.Size(521, 38);
             this.stripEqWidth.Spring = true;
             this.stripEqWidth.Text = "Width";
             // 
@@ -653,7 +650,7 @@
             this.toolStripStatusLabelBoundaryArea.Margin = new System.Windows.Forms.Padding(0);
             this.toolStripStatusLabelBoundaryArea.Name = "toolStripStatusLabelBoundaryArea";
             this.toolStripStatusLabelBoundaryArea.Size = new System.Drawing.Size(80, 38);
-            this.toolStripStatusLabelBoundaryArea.Text = "Area";
+            this.toolStripStatusLabelBoundaryArea.Text = "Bnd Area";
             this.toolStripStatusLabelBoundaryArea.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolStripStatusLabelBoundaryArea.ToolTipText = "Area Per Hour";
             // 
@@ -725,7 +722,7 @@
             this.lblNorthing.AutoSize = true;
             this.lblNorthing.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lblNorthing.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNorthing.Location = new System.Drawing.Point(943, 2);
+            this.lblNorthing.Location = new System.Drawing.Point(964, 2);
             this.lblNorthing.Name = "lblNorthing";
             this.lblNorthing.Size = new System.Drawing.Size(55, 18);
             this.lblNorthing.TabIndex = 110;
@@ -738,7 +735,7 @@
             this.lblEasting.AutoSize = true;
             this.lblEasting.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lblEasting.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEasting.Location = new System.Drawing.Point(843, 2);
+            this.lblEasting.Location = new System.Drawing.Point(864, 2);
             this.lblEasting.Name = "lblEasting";
             this.lblEasting.Size = new System.Drawing.Size(55, 18);
             this.lblEasting.TabIndex = 111;
@@ -756,18 +753,6 @@
             this.lblSpeed.TabIndex = 116;
             this.lblSpeed.Text = "Spd";
             this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblHeading
-            // 
-            this.lblHeading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblHeading.AutoSize = true;
-            this.lblHeading.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.lblHeading.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeading.Location = new System.Drawing.Point(750, 7);
-            this.lblHeading.Name = "lblHeading";
-            this.lblHeading.Size = new System.Drawing.Size(48, 29);
-            this.lblHeading.TabIndex = 117;
-            this.lblHeading.Text = "Dir";
             // 
             // contextMenuStripFlag
             // 
@@ -882,7 +867,7 @@
             this.tboxSentence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxSentence.BackColor = System.Drawing.SystemColors.MenuBar;
             this.tboxSentence.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tboxSentence.Location = new System.Drawing.Point(839, 23);
+            this.tboxSentence.Location = new System.Drawing.Point(860, 23);
             this.tboxSentence.Name = "tboxSentence";
             this.tboxSentence.Size = new System.Drawing.Size(231, 20);
             this.tboxSentence.TabIndex = 134;
@@ -893,7 +878,7 @@
             this.lblZone.AutoSize = true;
             this.lblZone.BackColor = System.Drawing.SystemColors.MenuBar;
             this.lblZone.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZone.Location = new System.Drawing.Point(1039, 2);
+            this.lblZone.Location = new System.Drawing.Point(1060, 2);
             this.lblZone.Name = "lblZone";
             this.lblZone.Size = new System.Drawing.Size(26, 18);
             this.lblZone.TabIndex = 135;
@@ -903,34 +888,20 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.panel1.Controls.Add(this.btnYouTurnRecord);
             this.panel1.Controls.Add(this.btnFileExplorer);
             this.panel1.Controls.Add(this.btnBoundaryMenu);
             this.panel1.Controls.Add(this.btnGPSData);
             this.panel1.Controls.Add(this.btnUnits);
-            this.panel1.Controls.Add(this.btnSettings);
             this.panel1.Controls.Add(this.btnComm);
-            this.panel1.Controls.Add(this.btnTripOdometer);
+            this.panel1.Controls.Add(this.btnRate);
             this.panel1.Controls.Add(this.btnSnap);
+            this.panel1.Controls.Add(this.btnAutoSteerConfig);
             this.panel1.Controls.Add(this.btnPerimeter);
             this.panel1.Controls.Add(this.btnJob);
-            this.panel1.Controls.Add(this.btnFlag);
-            this.panel1.Location = new System.Drawing.Point(260, 145);
+            this.panel1.Location = new System.Drawing.Point(206, 183);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(514, 419);
+            this.panel1.Size = new System.Drawing.Size(514, 375);
             this.panel1.TabIndex = 136;
-            // 
-            // btnYouTurnRecord
-            // 
-            this.btnYouTurnRecord.ContextMenuStrip = this.contextMenuStripFlag;
-            this.btnYouTurnRecord.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnYouTurnRecord.Location = new System.Drawing.Point(6, 134);
-            this.btnYouTurnRecord.Name = "btnYouTurnRecord";
-            this.btnYouTurnRecord.Size = new System.Drawing.Size(110, 110);
-            this.btnYouTurnRecord.TabIndex = 142;
-            this.btnYouTurnRecord.Text = "You Turn";
-            this.btnYouTurnRecord.UseVisualStyleBackColor = true;
-            this.btnYouTurnRecord.Click += new System.EventHandler(this.btnYouTurnRecord_Click);
             // 
             // btnFileExplorer
             // 
@@ -938,9 +909,9 @@
             this.btnFileExplorer.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFileExplorer.Image = ((System.Drawing.Image)(resources.GetObject("btnFileExplorer.Image")));
             this.btnFileExplorer.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnFileExplorer.Location = new System.Drawing.Point(272, 134);
+            this.btnFileExplorer.Location = new System.Drawing.Point(272, 119);
             this.btnFileExplorer.Name = "btnFileExplorer";
-            this.btnFileExplorer.Size = new System.Drawing.Size(110, 110);
+            this.btnFileExplorer.Size = new System.Drawing.Size(100, 100);
             this.btnFileExplorer.TabIndex = 141;
             this.btnFileExplorer.Text = "Explorer";
             this.btnFileExplorer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -953,11 +924,11 @@
             this.btnBoundaryMenu.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBoundaryMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnBoundaryMenu.Image")));
             this.btnBoundaryMenu.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnBoundaryMenu.Location = new System.Drawing.Point(129, 134);
+            this.btnBoundaryMenu.Location = new System.Drawing.Point(129, 119);
             this.btnBoundaryMenu.Name = "btnBoundaryMenu";
-            this.btnBoundaryMenu.Size = new System.Drawing.Size(110, 110);
+            this.btnBoundaryMenu.Size = new System.Drawing.Size(100, 100);
             this.btnBoundaryMenu.TabIndex = 140;
-            this.btnBoundaryMenu.Text = "Boundary";
+            this.btnBoundaryMenu.Text = "Bounds";
             this.btnBoundaryMenu.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnBoundaryMenu.UseVisualStyleBackColor = true;
             this.btnBoundaryMenu.Click += new System.EventHandler(this.btnBoundary_Click);
@@ -968,9 +939,9 @@
             this.btnGPSData.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGPSData.Image = ((System.Drawing.Image)(resources.GetObject("btnGPSData.Image")));
             this.btnGPSData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGPSData.Location = new System.Drawing.Point(272, 283);
+            this.btnGPSData.Location = new System.Drawing.Point(395, 7);
             this.btnGPSData.Name = "btnGPSData";
-            this.btnGPSData.Size = new System.Drawing.Size(110, 110);
+            this.btnGPSData.Size = new System.Drawing.Size(100, 100);
             this.btnGPSData.TabIndex = 138;
             this.btnGPSData.Text = "GPS Data";
             this.btnGPSData.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -985,7 +956,7 @@
             this.btnUnits.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnUnits.Location = new System.Drawing.Point(272, 7);
             this.btnUnits.Name = "btnUnits";
-            this.btnUnits.Size = new System.Drawing.Size(110, 110);
+            this.btnUnits.Size = new System.Drawing.Size(100, 100);
             this.btnUnits.TabIndex = 137;
             this.btnUnits.Text = "Units";
             this.btnUnits.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -998,9 +969,9 @@
             this.btnSettings.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSettings.Location = new System.Drawing.Point(6, 283);
+            this.btnSettings.Location = new System.Drawing.Point(5, 424);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(110, 110);
+            this.btnSettings.Size = new System.Drawing.Size(100, 100);
             this.btnSettings.TabIndex = 135;
             this.btnSettings.Text = "Settings";
             this.btnSettings.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1013,28 +984,27 @@
             this.btnComm.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnComm.Image = ((System.Drawing.Image)(resources.GetObject("btnComm.Image")));
             this.btnComm.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnComm.Location = new System.Drawing.Point(129, 283);
+            this.btnComm.Location = new System.Drawing.Point(270, 254);
             this.btnComm.Name = "btnComm";
-            this.btnComm.Size = new System.Drawing.Size(110, 110);
+            this.btnComm.Size = new System.Drawing.Size(100, 100);
             this.btnComm.TabIndex = 136;
             this.btnComm.Text = "USB Ports";
             this.btnComm.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnComm.UseVisualStyleBackColor = true;
             this.btnComm.Click += new System.EventHandler(this.btnComm_Click);
             // 
-            // btnTripOdometer
+            // btnRate
             // 
-            this.btnTripOdometer.ContextMenuStrip = this.contextMenuStripFlag;
-            this.btnTripOdometer.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTripOdometer.Image = ((System.Drawing.Image)(resources.GetObject("btnTripOdometer.Image")));
-            this.btnTripOdometer.Location = new System.Drawing.Point(395, 134);
-            this.btnTripOdometer.Name = "btnTripOdometer";
-            this.btnTripOdometer.Size = new System.Drawing.Size(110, 110);
-            this.btnTripOdometer.TabIndex = 134;
-            this.btnTripOdometer.Text = "Trip";
-            this.btnTripOdometer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnTripOdometer.UseVisualStyleBackColor = true;
-            this.btnTripOdometer.Click += new System.EventHandler(this.btnTripOdometer_Click);
+            this.btnRate.ContextMenuStrip = this.contextMenuStripFlag;
+            this.btnRate.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRate.Image = global::AgOpenGPS.Properties.Resources.RateControlOff;
+            this.btnRate.Location = new System.Drawing.Point(395, 120);
+            this.btnRate.Name = "btnRate";
+            this.btnRate.Size = new System.Drawing.Size(100, 100);
+            this.btnRate.TabIndex = 143;
+            this.btnRate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRate.UseVisualStyleBackColor = true;
+            this.btnRate.Click += new System.EventHandler(this.btnRate_Click);
             // 
             // btnSnap
             // 
@@ -1044,20 +1014,34 @@
             this.btnSnap.Image = ((System.Drawing.Image)(resources.GetObject("btnSnap.Image")));
             this.btnSnap.Location = new System.Drawing.Point(6, 7);
             this.btnSnap.Name = "btnSnap";
-            this.btnSnap.Size = new System.Drawing.Size(110, 110);
+            this.btnSnap.Size = new System.Drawing.Size(100, 100);
             this.btnSnap.TabIndex = 133;
             this.btnSnap.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSnap.UseVisualStyleBackColor = true;
             this.btnSnap.Click += new System.EventHandler(this.btnSnap_Click);
+            // 
+            // btnAutoSteerConfig
+            // 
+            this.btnAutoSteerConfig.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAutoSteerConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoSteerConfig.Image")));
+            this.btnAutoSteerConfig.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAutoSteerConfig.Location = new System.Drawing.Point(6, 253);
+            this.btnAutoSteerConfig.Name = "btnAutoSteerConfig";
+            this.btnAutoSteerConfig.Size = new System.Drawing.Size(100, 100);
+            this.btnAutoSteerConfig.TabIndex = 139;
+            this.btnAutoSteerConfig.Text = "AutoSteer Config";
+            this.btnAutoSteerConfig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAutoSteerConfig.UseVisualStyleBackColor = true;
+            this.btnAutoSteerConfig.Click += new System.EventHandler(this.btnAutoSteerConfig_Click);
             // 
             // btnPerimeter
             // 
             this.btnPerimeter.ContextMenuStrip = this.contextMenuArea;
             this.btnPerimeter.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPerimeter.Image = ((System.Drawing.Image)(resources.GetObject("btnPerimeter.Image")));
-            this.btnPerimeter.Location = new System.Drawing.Point(395, 283);
+            this.btnPerimeter.Location = new System.Drawing.Point(393, 253);
             this.btnPerimeter.Name = "btnPerimeter";
-            this.btnPerimeter.Size = new System.Drawing.Size(110, 110);
+            this.btnPerimeter.Size = new System.Drawing.Size(100, 100);
             this.btnPerimeter.TabIndex = 108;
             this.btnPerimeter.Text = "000.00";
             this.btnPerimeter.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1071,24 +1055,11 @@
             this.btnJob.Image = ((System.Drawing.Image)(resources.GetObject("btnJob.Image")));
             this.btnJob.Location = new System.Drawing.Point(129, 7);
             this.btnJob.Name = "btnJob";
-            this.btnJob.Size = new System.Drawing.Size(110, 110);
+            this.btnJob.Size = new System.Drawing.Size(100, 100);
             this.btnJob.TabIndex = 132;
             this.btnJob.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnJob.UseVisualStyleBackColor = true;
             this.btnJob.Click += new System.EventHandler(this.btnJob_Click);
-            // 
-            // btnFlag
-            // 
-            this.btnFlag.ContextMenuStrip = this.contextMenuStripFlag;
-            this.btnFlag.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnFlag.Image")));
-            this.btnFlag.Location = new System.Drawing.Point(395, 7);
-            this.btnFlag.Name = "btnFlag";
-            this.btnFlag.Size = new System.Drawing.Size(110, 110);
-            this.btnFlag.TabIndex = 121;
-            this.btnFlag.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnFlag.UseVisualStyleBackColor = true;
-            this.btnFlag.Click += new System.EventHandler(this.btnFlag_Click);
             // 
             // lblSpeedUnits
             // 
@@ -1102,38 +1073,153 @@
             this.lblSpeedUnits.Text = "kmh";
             this.lblSpeedUnits.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lblSteerAngle
+            // statusStrip2
             // 
-            this.lblSteerAngle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblSteerAngle.AutoSize = true;
-            this.lblSteerAngle.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.lblSteerAngle.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSteerAngle.Location = new System.Drawing.Point(628, 3);
-            this.lblSteerAngle.Name = "lblSteerAngle";
-            this.lblSteerAngle.Size = new System.Drawing.Size(79, 39);
-            this.lblSteerAngle.TabIndex = 140;
-            this.lblSteerAngle.Text = "Ang";
+            this.statusStrip2.AutoSize = false;
+            this.statusStrip2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.statusStrip2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel4,
+            this.strip2Roll,
+            this.toolStripStatusLabel2,
+            this.strip2PureSteerAngle,
+            this.strip2Gyro,
+            this.strip2TurnProgressBar,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel3,
+            this.strip2BoundaryDistanceAway});
+            this.statusStrip2.Location = new System.Drawing.Point(0, 691);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip2.Size = new System.Drawing.Size(1095, 38);
+            this.statusStrip2.TabIndex = 147;
+            this.statusStrip2.Text = "statusStrip2";
             // 
-            // btnRate1Select
+            // toolStripStatusLabel4
             // 
-            this.btnRate1Select.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRate1Select.Image = global::AgOpenGPS.Properties.Resources.Rate1Select;
-            this.btnRate1Select.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRate1Select.Location = new System.Drawing.Point(134, 407);
-            this.btnRate1Select.Name = "btnRate1Select";
-            this.btnRate1Select.Size = new System.Drawing.Size(87, 87);
-            this.btnRate1Select.TabIndex = 145;
-            this.btnRate1Select.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRate1Select.UseVisualStyleBackColor = true;
-            this.btnRate1Select.Visible = false;
-            this.btnRate1Select.Click += new System.EventHandler(this.btnRate1Select_Click);
+            this.toolStripStatusLabel4.AutoSize = false;
+            this.toolStripStatusLabel4.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel4.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel4.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(45, 38);
+            this.toolStripStatusLabel4.Text = "Roll:";
+            this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // strip2Roll
+            // 
+            this.strip2Roll.AutoSize = false;
+            this.strip2Roll.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strip2Roll.Margin = new System.Windows.Forms.Padding(0);
+            this.strip2Roll.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.strip2Roll.Name = "strip2Roll";
+            this.strip2Roll.Size = new System.Drawing.Size(60, 38);
+            this.strip2Roll.Text = "Roll";
+            this.strip2Roll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.AutoSize = false;
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel2.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(25, 38);
+            this.toolStripStatusLabel2.Text = "§:";
+            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // strip2PureSteerAngle
+            // 
+            this.strip2PureSteerAngle.AutoSize = false;
+            this.strip2PureSteerAngle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strip2PureSteerAngle.Margin = new System.Windows.Forms.Padding(0);
+            this.strip2PureSteerAngle.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.strip2PureSteerAngle.Name = "strip2PureSteerAngle";
+            this.strip2PureSteerAngle.Size = new System.Drawing.Size(90, 38);
+            this.strip2PureSteerAngle.Text = "SteerAng";
+            this.strip2PureSteerAngle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // strip2Gyro
+            // 
+            this.strip2Gyro.AutoSize = false;
+            this.strip2Gyro.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strip2Gyro.Margin = new System.Windows.Forms.Padding(0);
+            this.strip2Gyro.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.strip2Gyro.Name = "strip2Gyro";
+            this.strip2Gyro.Size = new System.Drawing.Size(120, 38);
+            this.strip2Gyro.Text = "Gyro";
+            this.strip2Gyro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // strip2TurnProgressBar
+            // 
+            this.strip2TurnProgressBar.Name = "strip2TurnProgressBar";
+            this.strip2TurnProgressBar.Size = new System.Drawing.Size(200, 32);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.toolStripStatusLabel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel1.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(378, 38);
+            this.toolStripStatusLabel1.Spring = true;
+            this.toolStripStatusLabel1.Text = "-";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.AutoSize = false;
+            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel3.Margin = new System.Windows.Forms.Padding(0);
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(80, 38);
+            this.toolStripStatusLabel3.Text = "Bounds";
+            this.toolStripStatusLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // strip2BoundaryDistanceAway
+            // 
+            this.strip2BoundaryDistanceAway.AutoSize = false;
+            this.strip2BoundaryDistanceAway.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.strip2BoundaryDistanceAway.Margin = new System.Windows.Forms.Padding(0);
+            this.strip2BoundaryDistanceAway.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
+            this.strip2BoundaryDistanceAway.Name = "strip2BoundaryDistanceAway";
+            this.strip2BoundaryDistanceAway.Size = new System.Drawing.Size(80, 38);
+            this.strip2BoundaryDistanceAway.Text = "YouT";
+            this.strip2BoundaryDistanceAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHeading
+            // 
+            this.lblHeading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblHeading.AutoSize = true;
+            this.lblHeading.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.lblHeading.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeading.Location = new System.Drawing.Point(771, 7);
+            this.lblHeading.Name = "lblHeading";
+            this.lblHeading.Size = new System.Drawing.Size(48, 29);
+            this.lblHeading.TabIndex = 117;
+            this.lblHeading.Text = "Dir";
+            // 
+            // btnYouTurnRecord
+            // 
+            this.btnYouTurnRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnYouTurnRecord.ContextMenuStrip = this.contextMenuStripFlag;
+            this.btnYouTurnRecord.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnYouTurnRecord.Image = global::AgOpenGPS.Properties.Resources.YouTurn;
+            this.btnYouTurnRecord.Location = new System.Drawing.Point(986, 294);
+            this.btnYouTurnRecord.Name = "btnYouTurnRecord";
+            this.btnYouTurnRecord.Size = new System.Drawing.Size(100, 100);
+            this.btnYouTurnRecord.TabIndex = 142;
+            this.btnYouTurnRecord.Text = "Manual";
+            this.btnYouTurnRecord.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnYouTurnRecord.UseVisualStyleBackColor = true;
+            this.btnYouTurnRecord.Click += new System.EventHandler(this.btnYouTurnRecord_Click);
             // 
             // btnRate2Select
             // 
             this.btnRate2Select.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRate2Select.Image = global::AgOpenGPS.Properties.Resources.RateSelect2;
             this.btnRate2Select.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRate2Select.Location = new System.Drawing.Point(134, 523);
+            this.btnRate2Select.Location = new System.Drawing.Point(120, 483);
             this.btnRate2Select.Name = "btnRate2Select";
             this.btnRate2Select.Size = new System.Drawing.Size(87, 87);
             this.btnRate2Select.TabIndex = 146;
@@ -1142,18 +1228,19 @@
             this.btnRate2Select.Visible = false;
             this.btnRate2Select.Click += new System.EventHandler(this.btnRate2Select_Click);
             // 
-            // btnRate
+            // btnRate1Select
             // 
-            this.btnRate.ContextMenuStrip = this.contextMenuStripFlag;
-            this.btnRate.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRate.Image = global::AgOpenGPS.Properties.Resources.RateControlOff;
-            this.btnRate.Location = new System.Drawing.Point(5, 578);
-            this.btnRate.Name = "btnRate";
-            this.btnRate.Size = new System.Drawing.Size(110, 110);
-            this.btnRate.TabIndex = 143;
-            this.btnRate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnRate.UseVisualStyleBackColor = true;
-            this.btnRate.Click += new System.EventHandler(this.btnRate_Click);
+            this.btnRate1Select.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRate1Select.Image = global::AgOpenGPS.Properties.Resources.Rate1Select;
+            this.btnRate1Select.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRate1Select.Location = new System.Drawing.Point(120, 367);
+            this.btnRate1Select.Name = "btnRate1Select";
+            this.btnRate1Select.Size = new System.Drawing.Size(87, 87);
+            this.btnRate1Select.TabIndex = 145;
+            this.btnRate1Select.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRate1Select.UseVisualStyleBackColor = true;
+            this.btnRate1Select.Visible = false;
+            this.btnRate1Select.Click += new System.EventHandler(this.btnRate1Select_Click);
             // 
             // btnRightYouTurn
             // 
@@ -1161,9 +1248,9 @@
             this.btnRightYouTurn.ContextMenuStrip = this.contextMenuStripFlag;
             this.btnRightYouTurn.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRightYouTurn.Image = ((System.Drawing.Image)(resources.GetObject("btnRightYouTurn.Image")));
-            this.btnRightYouTurn.Location = new System.Drawing.Point(709, 100);
+            this.btnRightYouTurn.Location = new System.Drawing.Point(762, 97);
             this.btnRightYouTurn.Name = "btnRightYouTurn";
-            this.btnRightYouTurn.Size = new System.Drawing.Size(89, 80);
+            this.btnRightYouTurn.Size = new System.Drawing.Size(106, 91);
             this.btnRightYouTurn.TabIndex = 142;
             this.btnRightYouTurn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRightYouTurn.UseVisualStyleBackColor = true;
@@ -1171,39 +1258,39 @@
             // 
             // btnLeftYouTurn
             // 
+            this.btnLeftYouTurn.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnLeftYouTurn.ContextMenuStrip = this.contextMenuStripFlag;
             this.btnLeftYouTurn.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLeftYouTurn.Image = ((System.Drawing.Image)(resources.GetObject("btnLeftYouTurn.Image")));
-            this.btnLeftYouTurn.Location = new System.Drawing.Point(260, 100);
+            this.btnLeftYouTurn.Location = new System.Drawing.Point(229, 97);
             this.btnLeftYouTurn.Name = "btnLeftYouTurn";
-            this.btnLeftYouTurn.Size = new System.Drawing.Size(89, 80);
+            this.btnLeftYouTurn.Size = new System.Drawing.Size(106, 91);
             this.btnLeftYouTurn.TabIndex = 143;
             this.btnLeftYouTurn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnLeftYouTurn.UseVisualStyleBackColor = true;
+            this.btnLeftYouTurn.UseVisualStyleBackColor = false;
             this.btnLeftYouTurn.Click += new System.EventHandler(this.btnLeftYouTurn_Click);
             // 
-            // btnAutoSteerConfig
+            // btnFlag
             // 
-            this.btnAutoSteerConfig.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAutoSteerConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoSteerConfig.Image")));
-            this.btnAutoSteerConfig.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAutoSteerConfig.Location = new System.Drawing.Point(5, 333);
-            this.btnAutoSteerConfig.Name = "btnAutoSteerConfig";
-            this.btnAutoSteerConfig.Size = new System.Drawing.Size(110, 110);
-            this.btnAutoSteerConfig.TabIndex = 139;
-            this.btnAutoSteerConfig.Text = "AutoSteer Config";
-            this.btnAutoSteerConfig.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnAutoSteerConfig.UseVisualStyleBackColor = true;
-            this.btnAutoSteerConfig.Click += new System.EventHandler(this.btnAutoSteerConfig_Click);
+            this.btnFlag.ContextMenuStrip = this.contextMenuStripFlag;
+            this.btnFlag.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFlag.Image = ((System.Drawing.Image)(resources.GetObject("btnFlag.Image")));
+            this.btnFlag.Location = new System.Drawing.Point(5, 544);
+            this.btnFlag.Name = "btnFlag";
+            this.btnFlag.Size = new System.Drawing.Size(100, 100);
+            this.btnFlag.TabIndex = 121;
+            this.btnFlag.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnFlag.UseVisualStyleBackColor = true;
+            this.btnFlag.Click += new System.EventHandler(this.btnFlag_Click);
             // 
             // btnTiltDown
             // 
             this.btnTiltDown.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTiltDown.BackgroundImage")));
             this.btnTiltDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnTiltDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTiltDown.Location = new System.Drawing.Point(134, 100);
+            this.btnTiltDown.Location = new System.Drawing.Point(120, 97);
             this.btnTiltDown.Name = "btnTiltDown";
-            this.btnTiltDown.Size = new System.Drawing.Size(80, 80);
+            this.btnTiltDown.Size = new System.Drawing.Size(69, 67);
             this.btnTiltDown.TabIndex = 122;
             this.btnTiltDown.UseVisualStyleBackColor = true;
             this.btnTiltDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnTiltDown_MouseDown);
@@ -1213,9 +1300,9 @@
             this.btnTiltUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTiltUp.BackgroundImage")));
             this.btnTiltUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnTiltUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTiltUp.Location = new System.Drawing.Point(134, 210);
+            this.btnTiltUp.Location = new System.Drawing.Point(120, 190);
             this.btnTiltUp.Name = "btnTiltUp";
-            this.btnTiltUp.Size = new System.Drawing.Size(80, 80);
+            this.btnTiltUp.Size = new System.Drawing.Size(69, 67);
             this.btnTiltUp.TabIndex = 123;
             this.btnTiltUp.UseVisualStyleBackColor = true;
             this.btnTiltUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnTiltUp_MouseDown);
@@ -1227,9 +1314,9 @@
             this.btnAutoSteer.Font = new System.Drawing.Font("Segoe UI Symbol", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAutoSteer.Image = ((System.Drawing.Image)(resources.GetObject("btnAutoSteer.Image")));
             this.btnAutoSteer.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnAutoSteer.Location = new System.Drawing.Point(5, 454);
+            this.btnAutoSteer.Location = new System.Drawing.Point(5, 304);
             this.btnAutoSteer.Name = "btnAutoSteer";
-            this.btnAutoSteer.Size = new System.Drawing.Size(110, 110);
+            this.btnAutoSteer.Size = new System.Drawing.Size(100, 100);
             this.btnAutoSteer.TabIndex = 128;
             this.btnAutoSteer.Text = "x";
             this.btnAutoSteer.TextAlign = System.Drawing.ContentAlignment.BottomRight;
@@ -1247,7 +1334,7 @@
             this.btnSection8Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection8Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection8Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection8Man.Image")));
-            this.btnSection8Man.Location = new System.Drawing.Point(829, 654);
+            this.btnSection8Man.Location = new System.Drawing.Point(829, 661);
             this.btnSection8Man.Name = "btnSection8Man";
             this.btnSection8Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection8Man.TabIndex = 125;
@@ -1266,7 +1353,7 @@
             this.btnSection7Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection7Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection7Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection7Man.Image")));
-            this.btnSection7Man.Location = new System.Drawing.Point(819, 642);
+            this.btnSection7Man.Location = new System.Drawing.Point(819, 649);
             this.btnSection7Man.Name = "btnSection7Man";
             this.btnSection7Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection7Man.TabIndex = 126;
@@ -1285,7 +1372,7 @@
             this.btnSection6Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection6Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection6Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection6Man.Image")));
-            this.btnSection6Man.Location = new System.Drawing.Point(809, 629);
+            this.btnSection6Man.Location = new System.Drawing.Point(809, 636);
             this.btnSection6Man.Name = "btnSection6Man";
             this.btnSection6Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection6Man.TabIndex = 127;
@@ -1299,9 +1386,9 @@
             this.btnZoomIn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnZoomIn.BackgroundImage")));
             this.btnZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnZoomIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZoomIn.Location = new System.Drawing.Point(839, 204);
+            this.btnZoomIn.Location = new System.Drawing.Point(904, 190);
             this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(80, 80);
+            this.btnZoomIn.Size = new System.Drawing.Size(69, 67);
             this.btnZoomIn.TabIndex = 120;
             this.btnZoomIn.UseVisualStyleBackColor = true;
             this.btnZoomIn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnZoomIn_MouseDown);
@@ -1312,9 +1399,9 @@
             this.btnZoomOut.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnZoomOut.BackgroundImage")));
             this.btnZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnZoomOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnZoomOut.Location = new System.Drawing.Point(839, 100);
+            this.btnZoomOut.Location = new System.Drawing.Point(904, 97);
             this.btnZoomOut.Name = "btnZoomOut";
-            this.btnZoomOut.Size = new System.Drawing.Size(80, 80);
+            this.btnZoomOut.Size = new System.Drawing.Size(69, 67);
             this.btnZoomOut.TabIndex = 119;
             this.btnZoomOut.UseVisualStyleBackColor = true;
             this.btnZoomOut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnZoomOut_MouseDown);
@@ -1325,10 +1412,10 @@
             this.btnContour.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnContour.Enabled = false;
             this.btnContour.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContour.Image = ((System.Drawing.Image)(resources.GetObject("btnContour.Image")));
-            this.btnContour.Location = new System.Drawing.Point(943, 252);
+            this.btnContour.Image = global::AgOpenGPS.Properties.Resources.ContourOff;
+            this.btnContour.Location = new System.Drawing.Point(987, 179);
             this.btnContour.Name = "btnContour";
-            this.btnContour.Size = new System.Drawing.Size(126, 126);
+            this.btnContour.Size = new System.Drawing.Size(100, 100);
             this.btnContour.TabIndex = 105;
             this.btnContour.Text = "Contour";
             this.btnContour.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1343,9 +1430,9 @@
             this.btnSectionOffAutoOn.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.btnSectionOffAutoOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSectionOffAutoOn.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionOffAutoOn.Image")));
-            this.btnSectionOffAutoOn.Location = new System.Drawing.Point(943, 562);
+            this.btnSectionOffAutoOn.Location = new System.Drawing.Point(967, 524);
             this.btnSectionOffAutoOn.Name = "btnSectionOffAutoOn";
-            this.btnSectionOffAutoOn.Size = new System.Drawing.Size(126, 126);
+            this.btnSectionOffAutoOn.Size = new System.Drawing.Size(120, 120);
             this.btnSectionOffAutoOn.TabIndex = 104;
             this.btnSectionOffAutoOn.Text = "188.8";
             this.btnSectionOffAutoOn.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -1363,7 +1450,7 @@
             this.btnSection5Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection5Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection5Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection5Man.Image")));
-            this.btnSection5Man.Location = new System.Drawing.Point(800, 616);
+            this.btnSection5Man.Location = new System.Drawing.Point(800, 623);
             this.btnSection5Man.Name = "btnSection5Man";
             this.btnSection5Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection5Man.TabIndex = 103;
@@ -1382,7 +1469,7 @@
             this.btnSection4Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection4Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection4Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection4Man.Image")));
-            this.btnSection4Man.Location = new System.Drawing.Point(829, 504);
+            this.btnSection4Man.Location = new System.Drawing.Point(829, 511);
             this.btnSection4Man.Name = "btnSection4Man";
             this.btnSection4Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection4Man.TabIndex = 102;
@@ -1401,7 +1488,7 @@
             this.btnSection3Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection3Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection3Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection3Man.Image")));
-            this.btnSection3Man.Location = new System.Drawing.Point(819, 491);
+            this.btnSection3Man.Location = new System.Drawing.Point(819, 498);
             this.btnSection3Man.Name = "btnSection3Man";
             this.btnSection3Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection3Man.TabIndex = 101;
@@ -1420,7 +1507,7 @@
             this.btnSection2Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection2Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection2Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection2Man.Image")));
-            this.btnSection2Man.Location = new System.Drawing.Point(810, 478);
+            this.btnSection2Man.Location = new System.Drawing.Point(810, 485);
             this.btnSection2Man.Name = "btnSection2Man";
             this.btnSection2Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection2Man.TabIndex = 100;
@@ -1439,7 +1526,7 @@
             this.btnSection1Man.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSection1Man.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSection1Man.Image = ((System.Drawing.Image)(resources.GetObject("btnSection1Man.Image")));
-            this.btnSection1Man.Location = new System.Drawing.Point(799, 465);
+            this.btnSection1Man.Location = new System.Drawing.Point(799, 472);
             this.btnSection1Man.Name = "btnSection1Man";
             this.btnSection1Man.Size = new System.Drawing.Size(69, 45);
             this.btnSection1Man.TabIndex = 99;
@@ -1455,10 +1542,10 @@
             this.btnManualOffOn.Enabled = false;
             this.btnManualOffOn.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
             this.btnManualOffOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManualOffOn.Image = ((System.Drawing.Image)(resources.GetObject("btnManualOffOn.Image")));
-            this.btnManualOffOn.Location = new System.Drawing.Point(944, 407);
+            this.btnManualOffOn.Image = global::AgOpenGPS.Properties.Resources.ManualOff;
+            this.btnManualOffOn.Location = new System.Drawing.Point(986, 409);
             this.btnManualOffOn.Name = "btnManualOffOn";
-            this.btnManualOffOn.Size = new System.Drawing.Size(126, 126);
+            this.btnManualOffOn.Size = new System.Drawing.Size(100, 100);
             this.btnManualOffOn.TabIndex = 98;
             this.btnManualOffOn.UseVisualStyleBackColor = true;
             this.btnManualOffOn.Click += new System.EventHandler(this.btnManualOffOn_Click);
@@ -1467,9 +1554,9 @@
             // 
             this.btnMinMaxZoom.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMinMaxZoom.Image = ((System.Drawing.Image)(resources.GetObject("btnMinMaxZoom.Image")));
-            this.btnMinMaxZoom.Location = new System.Drawing.Point(5, 212);
+            this.btnMinMaxZoom.Location = new System.Drawing.Point(5, 184);
             this.btnMinMaxZoom.Name = "btnMinMaxZoom";
-            this.btnMinMaxZoom.Size = new System.Drawing.Size(110, 110);
+            this.btnMinMaxZoom.Size = new System.Drawing.Size(100, 100);
             this.btnMinMaxZoom.TabIndex = 92;
             this.btnMinMaxZoom.UseVisualStyleBackColor = true;
             this.btnMinMaxZoom.Click += new System.EventHandler(this.btnMinMax_Click);
@@ -1477,13 +1564,13 @@
             // btnABLine
             // 
             this.btnABLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnABLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnABLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnABLine.Enabled = false;
             this.btnABLine.Font = new System.Drawing.Font("Segoe UI Semibold", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnABLine.Image = ((System.Drawing.Image)(resources.GetObject("btnABLine.Image")));
-            this.btnABLine.Location = new System.Drawing.Point(943, 97);
+            this.btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOff;
+            this.btnABLine.Location = new System.Drawing.Point(983, 64);
             this.btnABLine.Name = "btnABLine";
-            this.btnABLine.Size = new System.Drawing.Size(126, 126);
+            this.btnABLine.Size = new System.Drawing.Size(100, 100);
             this.btnABLine.TabIndex = 0;
             this.btnABLine.Text = "0";
             this.btnABLine.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -1495,9 +1582,9 @@
             this.btnMenuDrawer.ContextMenuStrip = this.contextMenuStripFlag;
             this.btnMenuDrawer.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuDrawer.Image = ((System.Drawing.Image)(resources.GetObject("btnMenuDrawer.Image")));
-            this.btnMenuDrawer.Location = new System.Drawing.Point(5, 97);
+            this.btnMenuDrawer.Location = new System.Drawing.Point(5, 64);
             this.btnMenuDrawer.Name = "btnMenuDrawer";
-            this.btnMenuDrawer.Size = new System.Drawing.Size(110, 104);
+            this.btnMenuDrawer.Size = new System.Drawing.Size(100, 100);
             this.btnMenuDrawer.TabIndex = 137;
             this.btnMenuDrawer.Text = "Menu";
             this.btnMenuDrawer.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1509,16 +1596,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1074, 760);
+            this.ClientSize = new System.Drawing.Size(1095, 767);
+            this.Controls.Add(this.statusStrip2);
+            this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.btnYouTurnRecord);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnRate2Select);
             this.Controls.Add(this.btnRate1Select);
-            this.Controls.Add(this.btnRate);
             this.Controls.Add(this.btnRightYouTurn);
             this.Controls.Add(this.btnLeftYouTurn);
-            this.Controls.Add(this.btnAutoSteerConfig);
-            this.Controls.Add(this.lblSteerAngle);
             this.Controls.Add(this.txtDistanceOffABLine);
+            this.Controls.Add(this.btnFlag);
             this.Controls.Add(this.lblSpeedUnits);
             this.Controls.Add(this.lblHeading);
             this.Controls.Add(this.lblSpeed);
@@ -1568,6 +1656,8 @@
             this.contextMenuStripFlag.ResumeLayout(false);
             this.contextMenuArea.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1588,7 +1678,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stripDistance;
         private System.Windows.Forms.ToolStripStatusLabel stripPortGPS;
-        private System.Windows.Forms.ToolStripStatusLabel stripEqWidth;
         private System.Windows.Forms.ToolStripStatusLabel stripAreaRate;
         private System.Windows.Forms.ToolStripStatusLabel stripPortArduino;
         private System.Windows.Forms.ToolStripMenuItem resetALLToolStripMenuItem;
@@ -1615,7 +1704,6 @@
         private System.Windows.Forms.Label lblNorthing;
         private System.Windows.Forms.Label lblEasting;
         private System.Windows.Forms.Label lblSpeed;
-        private System.Windows.Forms.Label lblHeading;
         private System.Windows.Forms.ToolStripMenuItem googleEarthToolStripMenuItem;
         private ProXoft.WinForms.RepeatButton btnZoomOut;
         private ProXoft.WinForms.RepeatButton btnZoomIn;
@@ -1662,7 +1750,6 @@
         private System.Windows.Forms.ToolStripMenuItem skyToolStripMenu;
         private System.Windows.Forms.Button btnJob;
         private System.Windows.Forms.Button btnSnap;
-        private System.Windows.Forms.ToolStripStatusLabel stripAreaUser;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.TextBox tboxSentence;
         private System.Windows.Forms.Label lblZone;
@@ -1672,7 +1759,6 @@
         private System.Windows.Forms.Button btnUnits;
         private System.Windows.Forms.Button btnComm;
         private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Button btnTripOdometer;
         private System.Windows.Forms.Button btnMenuDrawer;
         private System.Windows.Forms.Button btnBoundaryMenu;
         private System.Windows.Forms.Button btnFileExplorer;
@@ -1681,7 +1767,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuHelpAbout;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuHelpHelp;
         private System.Windows.Forms.Label lblSpeedUnits;
-        private System.Windows.Forms.Label lblSteerAngle;
         private System.Windows.Forms.ToolStripMenuItem sideGuideLines;
         private System.Windows.Forms.ToolStripMenuItem pursuitLineToolStripMenuItem;
         private System.Windows.Forms.Button btnRightYouTurn;
@@ -1690,6 +1775,18 @@
         private System.Windows.Forms.Button btnRate;
         private System.Windows.Forms.Button btnRate1Select;
         private System.Windows.Forms.Button btnRate2Select;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel strip2PureSteerAngle;
+        private System.Windows.Forms.Label lblHeading;
+        private System.Windows.Forms.ToolStripStatusLabel strip2Roll;
+        private System.Windows.Forms.ToolStripStatusLabel strip2BoundaryDistanceAway;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel strip2Gyro;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.ToolStripStatusLabel stripEqWidth;
+        private System.Windows.Forms.ToolStripProgressBar strip2TurnProgressBar;
     }
 }
 

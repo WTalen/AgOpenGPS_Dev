@@ -12,7 +12,7 @@ namespace AgOpenGPS
     public partial class FormRate : Form
     {
         private readonly FormGPS mf = null;
- 
+
         public FormRate(Form callingForm)
         {
             mf = callingForm as FormGPS;

@@ -970,5 +970,17 @@ namespace AgOpenGPS.Properties {
                 this["setRate_rate2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int setAS_startYouTurnAt {
+            get {
+                return ((int)(this["setAS_startYouTurnAt"]));
+            }
+            set {
+                this["setAS_startYouTurnAt"] = value;
+            }
+        }
     }
 }
