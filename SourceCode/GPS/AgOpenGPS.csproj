@@ -469,6 +469,11 @@
     <None Include="btnImages\AutoLeft.png" />
     <None Include="btnImages\AutoRight.png" />
     <None Include="btnImages\YouTurn.png" />
+    <None Include="btnImages\SettingsGear64.png" />
+    <None Include="btnImages\RunMan64.png" />
+    <None Include="btnImages\Start64.png" />
+    <None Include="btnImages\Rate64.png" />
+    <None Include="btnImages\Settings64.png" />
     <Content Include="Dependencies\Floor.png" />
     <Content Include="Dependencies\Landscape.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

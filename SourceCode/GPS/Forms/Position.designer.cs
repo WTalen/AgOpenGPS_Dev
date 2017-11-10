@@ -163,18 +163,18 @@ namespace AgOpenGPS
             {
                 //calculate how far the antenna moves based on sidehill roll
                 double roll = Math.Sin(glm.toRadians(mc.rollRaw/16.0));
-                RollDistance = Math.Abs(roll * vehicle.antennaHeight);
+                rollCorrectionDistance = Math.Abs(roll * vehicle.antennaHeight);
 
                 // tilt to left is positive  **** important!!
                 if (roll > 0)
                 {
-                    pn.easting = (Math.Cos(fixHeading) * RollDistance) + pn.easting;
-                    pn.northing = (Math.Sin(fixHeading) * -RollDistance) + pn.northing;
+                    pn.easting = (Math.Cos(fixHeading) * rollCorrectionDistance) + pn.easting;
+                    pn.northing = (Math.Sin(fixHeading) * -rollCorrectionDistance) + pn.northing;
                 }
                 else
                 {
-                    pn.easting = (Math.Cos(fixHeading) * -RollDistance) + pn.easting;
-                    pn.northing = (Math.Sin(fixHeading) * RollDistance) + pn.northing;
+                    pn.easting = (Math.Cos(fixHeading) * -rollCorrectionDistance) + pn.easting;
+                    pn.northing = (Math.Sin(fixHeading) * rollCorrectionDistance) + pn.northing;
                 }
             }
 
@@ -827,7 +827,7 @@ namespace AgOpenGPS
             }//endfor
 
             //set up the super for youturn
-            section[vehicle.numSuperSection].isInsideBoundary = true;
+            section[vehicle.numOfSections].isInsideBoundary = true;
 
             //determine if section is in boundary using the section left/right positions
             for (int j = 0; j < vehicle.numOfSections; j++)
@@ -853,14 +853,14 @@ namespace AgOpenGPS
                         else section[j].isInsideBoundary = false;
                     }
 
-                    section[vehicle.numSuperSection].isInsideBoundary &= section[j].isInsideBoundary;
+                    section[vehicle.numOfSections].isInsideBoundary &= section[j].isInsideBoundary;
                 }
 
                 //no boundary created so always inside
                 else
                 {
                     section[j].isInsideBoundary = true;
-                    section[vehicle.numSuperSection].isInsideBoundary = false;
+                    section[vehicle.numOfSections].isInsideBoundary = false;
                 }
             }
 
@@ -945,7 +945,7 @@ namespace AgOpenGPS
         public double utmLat = 0;
         public double utmLon = 0;
 
-        public double RollDistance { get => rollCorrectionDistance; set => rollCorrectionDistance = value; }
+        //public double RollDistance { get => rollCorrectionDistance; set => rollCorrectionDistance = value; }
 
         public void UTMToLatLon(double X, double Y)
         {

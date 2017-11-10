@@ -183,7 +183,7 @@ namespace AgOpenGPS
                 return true;    // indicate that you handled this keystroke
             }
 
-            if (keyData == (Keys.G))
+            if (keyData == (Keys.NumPad1))
             {
                 Form form = new FormGPSData(this);
                 form.Show();
@@ -354,12 +354,28 @@ namespace AgOpenGPS
             //set up the panel menus
             panelMenu1.Visible = true;
             panelMenu1.Width = 107;
+            panelMenu2.Width = 0;
+            panelMenu3.Width = 0;
+            panelMenu4.Width = 0;
+            panelMenu5.Width = 0;
             panelMenu2.Visible = false;
             panelMenu3.Visible = false;
             panelMenu4.Visible = false;
+            panelMenu5.Visible = false;
+            panelMenu1.Top = 100;
+            panelMenu1.Left = 0;
+            panelMenu2.Top = 100;
+            panelMenu2.Left = 0;
+            panelMenu3.Top = 100;
+            panelMenu3.Left = 0;
+            panelMenu4.Top = 100;
+            panelMenu4.Left = 0;
+            panelMenu5.Top = 100;
+            panelMenu5.Left = 0;
             btnMenu2.BackColor = SystemColors.ButtonShadow;
             btnMenu3.BackColor = SystemColors.ButtonShadow;
             btnMenu4.BackColor = SystemColors.ButtonShadow;
+            btnMenu5.BackColor = SystemColors.ButtonShadow;
 
             totalUserSquareMeters = Settings.Default.setF_UserTotalArea;
             userSquareMetersAlarm = Settings.Default.setF_UserTripAlarm;
@@ -2229,15 +2245,16 @@ namespace AgOpenGPS
             panelMenu2.Visible = false;
             panelMenu3.Visible = false;
             panelMenu4.Visible = false;
+            panelMenu5.Visible = false;
             panelMenu1.Width = 107;
             panelMenu2.Width = 0;
             panelMenu3.Width = 0;
             panelMenu4.Width = 0;
+            panelMenu5.Width = 0;
             btnMenu2.BackColor = SystemColors.ButtonShadow;
             btnMenu3.BackColor = SystemColors.ButtonShadow;
             btnMenu4.BackColor = SystemColors.ButtonShadow;
-
-
+            btnMenu5.BackColor = SystemColors.ButtonShadow;
         }
 
         private void btnMenu2_Click(object sender, EventArgs e)
@@ -2247,12 +2264,15 @@ namespace AgOpenGPS
             panelMenu2.Visible = true;
             panelMenu3.Visible = false;
             panelMenu4.Visible = false;
+            panelMenu5.Visible = false;
             panelMenu1.Width = 0;
             panelMenu2.Width = 107;
             panelMenu3.Width = 0;
             panelMenu4.Width = 0;
+            panelMenu5.Width = 0;
             btnMenu1.BackColor = SystemColors.ButtonShadow;
             btnMenu3.BackColor = SystemColors.ButtonShadow;
+            btnMenu5.BackColor = SystemColors.ButtonShadow;
             btnMenu4.BackColor = SystemColors.ButtonShadow;
         }
 
@@ -2263,13 +2283,16 @@ namespace AgOpenGPS
             panelMenu2.Visible = false;
             panelMenu3.Visible = true;
             panelMenu4.Visible = false;
+            panelMenu5.Visible = false;
             panelMenu1.Width = 0;
             panelMenu2.Width = 0;
             panelMenu3.Width = 107;
             panelMenu4.Width = 0;
+            panelMenu5.Width = 0;
             btnMenu2.BackColor = SystemColors.ButtonShadow;
             btnMenu1.BackColor = SystemColors.ButtonShadow;
             btnMenu4.BackColor = SystemColors.ButtonShadow;
+            btnMenu5.BackColor = SystemColors.ButtonShadow;
         }
 
         private void btnMenu4_Click(object sender, EventArgs e)
@@ -2279,13 +2302,37 @@ namespace AgOpenGPS
             panelMenu2.Visible = false;
             panelMenu3.Visible = false;
             panelMenu4.Visible = true;
+            panelMenu5.Visible = false;
             panelMenu1.Width = 0;
             panelMenu2.Width = 0;
             panelMenu3.Width = 0;
             panelMenu4.Width = 107;
+            panelMenu5.Width = 0;
             btnMenu2.BackColor = SystemColors.ButtonShadow;
             btnMenu3.BackColor = SystemColors.ButtonShadow;
             btnMenu1.BackColor = SystemColors.ButtonShadow;
+            btnMenu5.BackColor = SystemColors.ButtonShadow;
+
+        }
+
+        private void btnMenu5_Click(object sender, EventArgs e)
+        {
+            btnMenu5.BackColor = SystemColors.ButtonFace;
+            panelMenu1.Visible = false;
+            panelMenu2.Visible = false;
+            panelMenu3.Visible = false;
+            panelMenu4.Visible = false;
+            panelMenu5.Visible = true;
+            panelMenu1.Width = 0;
+            panelMenu2.Width = 0;
+            panelMenu3.Width = 0;
+            panelMenu4.Width = 0;
+            panelMenu5.Width = 107;
+            btnMenu2.BackColor = SystemColors.ButtonShadow;
+            btnMenu3.BackColor = SystemColors.ButtonShadow;
+            btnMenu1.BackColor = SystemColors.ButtonShadow;
+            btnMenu4.BackColor = SystemColors.ButtonShadow;
+
         }
 
         public string Hectares { get { if (totalSquareMeters < 999900) return Math.Round(totalSquareMeters * 0.0001, 2).ToString();
@@ -2319,6 +2366,7 @@ namespace AgOpenGPS
 
             //if (isMenuHid) { if (panel1.Width > 40) panel1.Width -= 40; else panel1.Width = 0; }
             //else { if (panel1.Width < 481) panel1.Width += 40; }
+
 
             //every third of a second update all status
             if (statusUpdateCounter > 25)

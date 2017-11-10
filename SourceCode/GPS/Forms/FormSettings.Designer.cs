@@ -285,7 +285,7 @@
             // nudHitchLength
             // 
             this.nudHitchLength.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudHitchLength.Location = new System.Drawing.Point(190, 379);
+            this.nudHitchLength.Location = new System.Drawing.Point(201, 379);
             this.nudHitchLength.Maximum = new decimal(new int[] {
             999,
             0,
@@ -294,6 +294,8 @@
             this.nudHitchLength.Name = "nudHitchLength";
             this.nudHitchLength.Size = new System.Drawing.Size(144, 65);
             this.nudHitchLength.TabIndex = 2;
+            this.nudHitchLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudHitchLength.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudHitchLength.Value = new decimal(new int[] {
             7,
             0,
@@ -305,7 +307,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(188, 353);
+            this.label24.Location = new System.Drawing.Point(199, 353);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(107, 23);
             this.label24.TabIndex = 16;
@@ -347,7 +349,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(188, 138);
+            this.label13.Location = new System.Drawing.Point(199, 138);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(94, 23);
             this.label13.TabIndex = 11;
@@ -357,7 +359,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(188, 245);
+            this.label25.Location = new System.Drawing.Point(199, 245);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(127, 23);
             this.label25.TabIndex = 10;
@@ -385,6 +387,8 @@
             this.nudAntennaPivot.Name = "nudAntennaPivot";
             this.nudAntennaPivot.Size = new System.Drawing.Size(144, 65);
             this.nudAntennaPivot.TabIndex = 3;
+            this.nudAntennaPivot.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudAntennaPivot.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudAntennaPivot.Value = new decimal(new int[] {
             7,
             0,
@@ -395,7 +399,7 @@
             // nudWheelbase
             // 
             this.nudWheelbase.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudWheelbase.Location = new System.Drawing.Point(190, 163);
+            this.nudWheelbase.Location = new System.Drawing.Point(201, 163);
             this.nudWheelbase.Maximum = new decimal(new int[] {
             999,
             0,
@@ -409,6 +413,8 @@
             this.nudWheelbase.Name = "nudWheelbase";
             this.nudWheelbase.Size = new System.Drawing.Size(144, 65);
             this.nudWheelbase.TabIndex = 6;
+            this.nudWheelbase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudWheelbase.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudWheelbase.Value = new decimal(new int[] {
             7,
             0,
@@ -419,7 +425,7 @@
             // nudAntennaHeight
             // 
             this.nudAntennaHeight.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudAntennaHeight.Location = new System.Drawing.Point(190, 271);
+            this.nudAntennaHeight.Location = new System.Drawing.Point(201, 271);
             this.nudAntennaHeight.Maximum = new decimal(new int[] {
             999,
             0,
@@ -433,6 +439,8 @@
             this.nudAntennaHeight.Name = "nudAntennaHeight";
             this.nudAntennaHeight.Size = new System.Drawing.Size(144, 65);
             this.nudAntennaHeight.TabIndex = 5;
+            this.nudAntennaHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudAntennaHeight.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.nudAntennaHeight.Value = new decimal(new int[] {
             7,
             0,
