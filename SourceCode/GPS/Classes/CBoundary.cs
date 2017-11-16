@@ -191,22 +191,22 @@ namespace AgOpenGPS
             gl.Vertex(ptList[0].easting, ptList[0].northing, 0);
             gl.End();
 
-            gl.LineWidth(2);
-            gl.Color(0.98f, 0.2f, 0.60f);
-            gl.Begin(OpenGL.GL_LINE_STRIP);
-            gl.Vertex(boxD.easting, boxD.northing, 0);
-            gl.Vertex(boxA.easting, boxA.northing, 0);
-            gl.Vertex(boxB.easting, boxB.northing, 0);
-            gl.Vertex(boxC.easting, boxC.northing, 0);
-            gl.End();
+            //gl.LineWidth(2);
+            //gl.Color(0.98f, 0.2f, 0.60f);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(boxD.easting, boxD.northing, 0);
+            //gl.Vertex(boxA.easting, boxA.northing, 0);
+            //gl.Vertex(boxB.easting, boxB.northing, 0);
+            //gl.Vertex(boxC.easting, boxC.northing, 0);
+            //gl.End();
 
-            ptCount = bdList.Count;
-            if (ptCount < 1) return;
-            gl.PointSize(4);
-            gl.Color(0.19f, 0.932f, 0.70f);
-            gl.Begin(OpenGL.GL_POINTS);
-            gl.Vertex(closestBoundaryPt.easting, closestBoundaryPt.northing, 0);
-            gl.End();
+            //ptCount = bdList.Count;
+            //if (ptCount < 1) return;
+            //gl.PointSize(4);
+            //gl.Color(0.19f, 0.932f, 0.70f);
+            //gl.Begin(OpenGL.GL_POINTS);
+            //gl.Vertex(closestBoundaryPt.easting, closestBoundaryPt.northing, 0);
+            //gl.End();
         }
 
         //draw a blue line in the back buffer for section control over boundary line

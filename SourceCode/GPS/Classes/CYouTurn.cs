@@ -58,6 +58,7 @@ namespace AgOpenGPS
             isAutoTriggered = false;
             isAutoPointSet = false;
             if (ytList.Count > 0) ytList.Clear();
+            mf.AutoYouTurnButtonsReset();
             return;
         }
 

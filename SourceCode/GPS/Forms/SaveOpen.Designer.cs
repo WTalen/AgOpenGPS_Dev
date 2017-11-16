@@ -768,6 +768,9 @@ namespace AgOpenGPS
                         {
                             //set gui image button on
                             btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOn;
+                            btnRightYouTurn.Visible = true;
+                            btnLeftYouTurn.Visible = true;
+
 
                             //Heading  , ,refPoint2x,z                    
                             line = reader.ReadLine();

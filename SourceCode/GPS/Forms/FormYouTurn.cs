@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+//using Keypad;
 
 namespace AgOpenGPS
 {
@@ -26,9 +27,12 @@ namespace AgOpenGPS
             mf.yt.LoadYouTurnShapeFromFile(@".\YouTurnShapes\KeyHole.txt");
             Properties.Settings.Default.setAS_youTurnShape = "KeyHole.txt";
             Properties.Settings.Default.Save();
+            btnYouTurnKeyHole.BackColor = Color.Yellow;
+            btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
+            btnYouTurnCustom.BackColor = Color.LimeGreen;
 
             //back to FormGPS
-            DialogResult = DialogResult.OK;
+            //DialogResult = DialogResult.OK;
         }
 
         private void btnYouTurnSemiCircle_Click(object sender, EventArgs e)
@@ -36,9 +40,12 @@ namespace AgOpenGPS
             mf.yt.LoadYouTurnShapeFromFile(@".\YouTurnShapes\SemiCircle.txt");
             Properties.Settings.Default.setAS_youTurnShape = "SemiCircle.txt";
             Properties.Settings.Default.Save();
+            btnYouTurnKeyHole.BackColor = Color.LimeGreen;
+            btnYouTurnSemiCircle.BackColor = Color.Yellow;
+            btnYouTurnCustom.BackColor = Color.LimeGreen;
 
             //back to FormGPS
-            DialogResult = DialogResult.OK;
+            //DialogResult = DialogResult.OK;
         }
 
         private void btnYouTurnCustom_Click(object sender, EventArgs e)
@@ -46,9 +53,12 @@ namespace AgOpenGPS
             mf.yt.LoadYouTurnShapeFromFile(@".\YouTurnShapes\Custom.txt");
             Properties.Settings.Default.setAS_youTurnShape = "Custom.txt";
             Properties.Settings.Default.Save();
+            btnYouTurnKeyHole.BackColor = Color.LimeGreen;
+            btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
+            btnYouTurnCustom.BackColor = Color.Yellow;
 
             //back to FormGPS
-            DialogResult = DialogResult.OK;
+            //DialogResult = DialogResult.OK;
         }
 
         private void btnYouTurnRecord_Click(object sender, EventArgs e)
@@ -77,12 +87,34 @@ namespace AgOpenGPS
             }
             else
             {
-                btnEnableAutoYouTurn.BackColor = Color.OrangeRed;
+                btnEnableAutoYouTurn.BackColor = SystemColors.ButtonFace;
                 btnEnableAutoYouTurn.Text = "Auto YouTurn Off";
                 lblDistance.Text = Math.Abs(mf.yt.startYouTurnAt).ToString() + " m";
                 if (mf.yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before boundary line";
                 else lblWhenTrig.Text = "After boundary line";
             }
+
+            if (Properties.Settings.Default.setAS_youTurnShape == "KeyHole.txt")
+            {
+                btnYouTurnKeyHole.BackColor = Color.Yellow;
+                btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
+                btnYouTurnCustom.BackColor = Color.LimeGreen;
+            }
+
+            if (Properties.Settings.Default.setAS_youTurnShape == "SemiCircle.txt")
+            {
+                btnYouTurnKeyHole.BackColor = Color.LimeGreen;
+                btnYouTurnSemiCircle.BackColor = Color.Yellow;
+                btnYouTurnCustom.BackColor = Color.LimeGreen;
+            }
+
+            if (Properties.Settings.Default.setAS_youTurnShape == "Custom.txt")
+            {
+                btnYouTurnKeyHole.BackColor = Color.LimeGreen;
+                btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
+                btnYouTurnCustom.BackColor = Color.Yellow;
+            }
+
         }
 
         private void btnEnableAutoYouTurn_Click(object sender, EventArgs e)
@@ -96,7 +128,7 @@ namespace AgOpenGPS
             else
             {
                 mf.yt.isAutoYouTurnEnabled = false;
-                btnEnableAutoYouTurn.BackColor = Color.OrangeRed;
+                btnEnableAutoYouTurn.BackColor = SystemColors.ButtonFace;
                 btnEnableAutoYouTurn.Text = "Auto YouTurn Off";
             }
         }
@@ -123,5 +155,10 @@ namespace AgOpenGPS
             Properties.Settings.Default.Save();
             Close();
         }
+
+        //private void numKeypad1_ButtonPressed(object sender, KeyPressEventArgs e)
+        //{
+        //    if (e.KeyChar == 'O') bntOK.PerformClick();
+        //}
     }
 }

@@ -1,0 +1,8 @@
+C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.Properties.Resources.resources
+C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csproj.GenerateResource.Cache
+C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.FormSteerSim.resources
+C:\Users\Leno\Desktop\SteerSim\App\SteerSim.exe.config
+C:\Users\Leno\Desktop\SteerSim\App\SteerSim.exe
+C:\Users\Leno\Desktop\SteerSim\App\SteerSim.pdb
+C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.exe
+C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.pdb

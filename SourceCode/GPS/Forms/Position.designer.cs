@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using SharpGL;
+using System.Drawing;
 
 namespace AgOpenGPS
 {
@@ -51,8 +52,8 @@ namespace AgOpenGPS
         double sectionTriggerDistance = 0, sectionTriggerStepDistance = 0; 
         public vec2 prevSectionPos = new vec2(0, 0);
         
-        //step distances and positions for boundary, 6 meters before next point
-        public double boundaryTriggerDistance = 6.0;
+        //step distances and positions for boundary, 4 meters before next point
+        public double boundaryTriggerDistance = 4.0;
         public vec2 prevBoundaryPos = new vec2(0, 0);
 
         //for skipping a few frames while doing calcs
@@ -76,9 +77,6 @@ namespace AgOpenGPS
 
         public double[] avgSpeed = new double[10];//for average speed
         public int ringCounter = 0;
-
-        //***************************
-        private bool isLeftIn = true, isRightIn = true;
 
         //youturn
         double distPt = -2;
@@ -257,12 +255,12 @@ namespace AgOpenGPS
                 sectionTriggerDistance = pn.Distance(pn.northing, pn.easting, prevSectionPos.northing, prevSectionPos.easting);
 
                 //section on off and points, contour points
-                if (sectionTriggerDistance > sectionTriggerStepDistance)
+                if (sectionTriggerDistance > sectionTriggerStepDistance)    
                     AddSectionContourPathPoints();
 
                 //test if travelled far enough for new boundary point
                 double boundaryDistance = pn.Distance(pn.northing, pn.easting, prevBoundaryPos.northing, prevBoundaryPos.easting);
-                if (boundaryDistance > boundaryTriggerDistance) AddBoundaryPoint();
+                if (boundaryDistance > boundaryTriggerDistance) AddBoundaryAndPerimiterPoint();
 
                 //calc distance travelled since last GPS fix
                 distance = pn.Distance(pn.northing, pn.easting, prevFix.northing, prevFix.easting);
@@ -311,6 +309,7 @@ namespace AgOpenGPS
                 guidanceLineDistanceOff = 32020;
             }
 
+            // If Drive button enabled be normal, or just fool the autosteer and fill values
             if (!isInFreeDriveMode)
             {
 
@@ -345,25 +344,23 @@ namespace AgOpenGPS
             if (rc.isRateControlOn)
             {
                 rc.CalculateRateLitersPerMinute();
-                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)((Int16)(rc.rateSetPoint * 10.0) >> 8);
-                mc.relayRateControl[mc.rcRateSetPointLo] = (byte)(rc.rateSetPoint * 10.0);
+                mc.relayRateData[mc.rdRateSetPointHi] = (byte)((Int16)(rc.rateSetPoint * 100.0) >> 8);
+                mc.relayRateData[mc.rdRateSetPointLo] = (byte)(rc.rateSetPoint * 100.0);
 
-                mc.relayRateControl[mc.rcSpeedXFour] = (byte)(pn.speed * 4.0);
+                mc.relayRateData[mc.rdSpeedXFour] = (byte)(pn.speed * 4.0);
                 //relay byte is built in SerialComm function BuildRelayByte()
-
-                //send out the port
-                RateRelayControlOutToPort();
             }
             else
             {
-                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)0;
-                mc.relayRateControl[mc.rcRateSetPointHi] = (byte)0;
-                mc.relayRateControl[mc.rcSpeedXFour] = (byte)(pn.speed * 4.0);
+                mc.relayRateData[mc.rdRateSetPointHi] = (byte)0;
+                mc.relayRateData[mc.rdRateSetPointHi] = (byte)0;
+                mc.relayRateData[mc.rdSpeedXFour] = (byte)(pn.speed * 4.0);
                 //relay byte is built in SerialComm fx BuildRelayByte()
 
-                //send out the port
-                RateRelayControlOutToPort();
             }
+
+            //send out the port
+            RateRelayOutToPort(mc.relayRateData, AgOpenGPS.CModuleComm.numRelayRateDataItems);
 
             //calculate lookahead at full speed, no sentence misses
             CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
@@ -441,6 +438,15 @@ namespace AgOpenGPS
                         yt.isAutoTurnRight = !yt.isLastAutoTurnRight;
                         yt.isLastAutoTurnRight = !yt.isLastAutoTurnRight;
                     }
+
+                    //modify the buttons to show the correct turn direction
+                    if (yt.isAutoTurnRight)
+                    {
+                        AutoYouTurnButtonsRightTurn();                    }
+                    else
+                    {
+                        AutoYouTurnButtonsLeftTurn();
+                    }
                 }
 
                 distanceToStartAutoTurn = -1;
@@ -449,11 +455,12 @@ namespace AgOpenGPS
                 if (yt.isAutoPointSet && yt.isAutoYouTurnEnabled)
                 {
                     //if we are too much off track, pointing wrong way, kill the turn
-                    if ((Math.Abs(guidanceLineSteerAngle) > 40) && (Math.Abs(ABLine.distanceFromCurrentLine) > 300))
+                    if ((Math.Abs(guidanceLineSteerAngle) > 50) && (Math.Abs(ABLine.distanceFromCurrentLine) > 500))
                     {
                         yt.CancelYouTurn();
                         distanceToStartAutoTurn = -1;
                         autoTurnInProgressBar = 0;
+                        AutoYouTurnButtonsReset();
                     }
                     else
                     {
@@ -480,6 +487,7 @@ namespace AgOpenGPS
         //end of UppdateFixPosition
         }
 
+        //the value to fill in you turn progress bar
         int autoTurnInProgressBar = 0;
 
         //all the hitch, pivot, section, trailing hitch, headings and fixes
@@ -667,7 +675,8 @@ namespace AgOpenGPS
             cosSectionHeading = Math.Cos(-fixHeadingSection);
         }
 
-        private void AddBoundaryPoint()
+        //
+        private void AddBoundaryAndPerimiterPoint()
         {
             //save the north & east as previous
             prevBoundaryPos.easting = pn.easting;
@@ -834,6 +843,7 @@ namespace AgOpenGPS
             {
                 if (boundary.isSet)
                 {
+                    bool isLeftIn = true, isRightIn = true;
                     if (j == 0)
                     {
                         //only one first left point, the rest are all rights moved over to left

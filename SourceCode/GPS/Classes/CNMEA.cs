@@ -77,7 +77,6 @@ namespace AgOpenGPS
         public bool updatedGGA, updatedVTG, updatedRMC;
 
         public string rawBuffer = "";
-        public string theSent = "";
         private string[] words;
         private string nextNMEASentence = "";
 
@@ -135,8 +134,6 @@ namespace AgOpenGPS
             cr = rawBuffer.IndexOf("\r\n", StringComparison.Ordinal);
             dollar = rawBuffer.IndexOf("$", StringComparison.Ordinal);
             if (cr == -1 || dollar == -1) return;
-
-            theSent = "";
 
             //now we have a complete sentence or more somewhere in the portData
             while (true)
@@ -238,7 +235,6 @@ namespace AgOpenGPS
                 //age of differential
                 double.TryParse(words[12], NumberStyles.Float, CultureInfo.InvariantCulture, out ageDiff);
 
-                theSent += nextNMEASentence;
                 updatedGGA = true;
                 mf.recvCounter = 0;
             }
@@ -294,7 +290,6 @@ namespace AgOpenGPS
                     }
                 }
 
-                theSent += nextNMEASentence;
                 mf.recvCounter = 0;
                 updatedRMC = true;
 
@@ -316,9 +311,10 @@ namespace AgOpenGPS
                 //True heading
                 double.TryParse(words[1], NumberStyles.Float, CultureInfo.InvariantCulture, out headingTrue);
 
+                //a valid VTG so set the flag
                 updatedVTG = true;
-                theSent += nextNMEASentence;
 
+                //average the speeds for display, not calcs
                 mf.avgSpeed[mf.ringCounter] = speed;
                 if (mf.ringCounter++ > 8) mf.ringCounter = 0;
             }
@@ -384,8 +380,6 @@ namespace AgOpenGPS
                                 longitude * 0.01745329251994329576923690766743);
         }
 
-        //    return (degrees * 0.01745329251994329576923690766743);
-
         private double ArcLengthOfMeridian(double phi)
         {
             const double n = (sm_a - sm_b) / (sm_a + sm_b);
@@ -400,21 +394,14 @@ namespace AgOpenGPS
                     + (epsilon * Math.Sin(8.0 * phi)));
         }
 
-        //private double UTMCentralMeridian(double zone)
-        //{
-        //    return ((-183.0 + (zone * 6.0)) * 0.01745329251994329576923690766743);
-        //}
-
         private double[] MapLatLonToXY(double phi, double lambda, double lambda0)
         {
             double[] xy = new double[2];
-            //double tmp;
             double ep2 = (Math.Pow(sm_a, 2.0) - Math.Pow(sm_b, 2.0)) / Math.Pow(sm_b, 2.0);
             double nu2 = ep2 * Math.Pow(Math.Cos(phi), 2.0);
             double n = Math.Pow(sm_a, 2.0) / (sm_b * Math.Sqrt(1 + nu2));
             double t = Math.Tan(phi);
             double t2 = t * t;
-            //tmp = (t2 * t2 * t2) - Math.Pow(t, 6.0);
             double l = lambda - lambda0;
             double l3Coef = 1.0 - t2 + nu2;
             double l4Coef = 5.0 - t2 + (9 * nu2) + (4.0 * (nu2 * nu2));
@@ -452,6 +439,7 @@ namespace AgOpenGPS
             actualEasting = xy[0];
             actualNorthing = xy[1];
 
+            //if a field is open, the real one is subtracted from the integer
             easting = xy[0] - utmEast;
             northing = xy[1] - utmNorth;
         }
@@ -509,8 +497,5 @@ namespace AgOpenGPS
 //                    mainForm.recvCounter = 0;
 //                    //update that RMC data is newly updated
 //                    updatedRMC = true;
-
-//                    theSent = nextNMEASentence;
-
 //                }//end $GPRMC
 //#endregion $GPRMC
