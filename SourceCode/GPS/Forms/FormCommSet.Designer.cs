@@ -65,14 +65,9 @@
             this.btnOpenSerialAutoSteer = new System.Windows.Forms.Button();
             this.btnCloseSerialAutoSteer = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.cboxTCP = new System.Windows.Forms.CheckBox();
-            this.cboxUDP = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -87,7 +82,7 @@
             this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSerialCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
-            this.btnSerialCancel.Location = new System.Drawing.Point(610, 403);
+            this.btnSerialCancel.Location = new System.Drawing.Point(318, 484);
             this.btnSerialCancel.Name = "btnSerialCancel";
             this.btnSerialCancel.Size = new System.Drawing.Size(88, 72);
             this.btnSerialCancel.TabIndex = 62;
@@ -100,7 +95,7 @@
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnRescan.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRescan.Location = new System.Drawing.Point(679, 47);
+            this.btnRescan.Location = new System.Drawing.Point(72, 501);
             this.btnRescan.Name = "btnRescan";
             this.btnRescan.Size = new System.Drawing.Size(117, 50);
             this.btnRescan.TabIndex = 58;
@@ -115,7 +110,7 @@
             this.btnSerialOK.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = ((System.Drawing.Image)(resources.GetObject("btnSerialOK.Image")));
-            this.btnSerialOK.Location = new System.Drawing.Point(722, 403);
+            this.btnSerialOK.Location = new System.Drawing.Point(427, 484);
             this.btnSerialOK.Name = "btnSerialOK";
             this.btnSerialOK.Size = new System.Drawing.Size(156, 72);
             this.btnSerialOK.TabIndex = 59;
@@ -506,63 +501,18 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(642, 28);
+            this.label5.Location = new System.Drawing.Point(35, 482);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(212, 16);
             this.label5.TabIndex = 51;
             this.label5.Text = "To Refresh Available USB Ports";
             // 
-            // cboxTCP
-            // 
-            this.cboxTCP.AutoSize = true;
-            this.cboxTCP.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxTCP.Location = new System.Drawing.Point(14, 42);
-            this.cboxTCP.Name = "cboxTCP";
-            this.cboxTCP.Size = new System.Drawing.Size(237, 27);
-            this.cboxTCP.TabIndex = 67;
-            this.cboxTCP.Text = " - TCP Server On (Port 7777)";
-            this.cboxTCP.UseVisualStyleBackColor = true;
-            // 
-            // cboxUDP
-            // 
-            this.cboxUDP.AutoSize = true;
-            this.cboxUDP.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxUDP.Location = new System.Drawing.Point(14, 91);
-            this.cboxUDP.Name = "cboxUDP";
-            this.cboxUDP.Size = new System.Drawing.Size(238, 27);
-            this.cboxUDP.TabIndex = 68;
-            this.cboxUDP.Text = " - UDP Server On (Port 9999)";
-            this.cboxUDP.UseVisualStyleBackColor = true;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.cboxUDP);
-            this.groupBox4.Controls.Add(this.cboxTCP);
-            this.groupBox4.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(613, 135);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(265, 201);
-            this.groupBox4.TabIndex = 69;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Ethernet Servers";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 146);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(227, 36);
-            this.label7.TabIndex = 70;
-            this.label7.Text = "** You must Restart App for \r\nServers to Start or Stop\r\n";
-            // 
             // FormCommSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(890, 483);
-            this.Controls.Add(this.groupBox4);
+            this.ClientSize = new System.Drawing.Size(595, 568);
+            this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnSerialCancel);
@@ -570,8 +520,9 @@
             this.Controls.Add(this.btnSerialOK);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormCommSet";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Communication Settings";
             this.Load += new System.EventHandler(this.FormCommSet_Load);
             this.groupBox1.ResumeLayout(false);
@@ -580,8 +531,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -624,9 +573,5 @@
         private System.Windows.Forms.Button btnOpenSerialAutoSteer;
         private System.Windows.Forms.Button btnCloseSerialAutoSteer;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox cboxTCP;
-        private System.Windows.Forms.CheckBox cboxUDP;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label7;
     }
 }

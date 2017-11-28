@@ -59,10 +59,8 @@ namespace AgOpenGPS
 
         private void btnAPoint_Click(object sender, EventArgs e)
         {
-#pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
             mf.ABLine.refPoint1.easting = mf.prevFix.easting;
             mf.ABLine.refPoint1.northing = mf.prevFix.northing;
-#pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
             //Console.WriteLine(mf.ABLine.refPoint1.easting);
             //Console.WriteLine(mf.ABLine.refPoint1.northing);
             btnAPoint.Enabled = false;

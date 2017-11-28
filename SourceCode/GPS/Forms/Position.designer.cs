@@ -324,6 +324,8 @@ namespace AgOpenGPS
 
                 //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
                 AutoSteerDataOutToPort();
+                
+                SendUDPMessage(guidanceLineSteerAngle + "," + guidanceLineDistanceOff);
             }
 
             else
@@ -355,7 +357,7 @@ namespace AgOpenGPS
                 mc.relayRateData[mc.rdRateSetPointHi] = (byte)0;
                 mc.relayRateData[mc.rdRateSetPointHi] = (byte)0;
                 mc.relayRateData[mc.rdSpeedXFour] = (byte)(pn.speed * 4.0);
-                //relay byte is built in SerialComm fx BuildRelayByte()
+                //relay byte is built in SerialComm.cs - function BuildRelayByte()
 
             }
 
@@ -366,21 +368,21 @@ namespace AgOpenGPS
             CalculateSectionLookAhead(toolPos.northing, toolPos.easting, cosSectionHeading, sinSectionHeading);
 
             //do the youturn logic every half second
-            if (boundary.isSet && (youTurnCounter++ > (fixUpdateHz>>2)))
+            if (hl.isSet && (youTurnCounter++ > (fixUpdateHz>>2)))
             {
                 //reset the counter
                 youTurnCounter = 0;
 
                 //are we in boundary? Then calc a distance
-                if (boundary.IsPrePointInPolygon(pivotAxlePos))
+                if (hl.IsPointInsideHeadland(pivotAxlePos))
                 {
-                    bool isVehicleInsideBoundary = boundary.IsPrePointInPolygon(pivotAxlePos);
+                    bool isVehicleInsideBoundary = hl.IsPointInsideHeadland(pivotAxlePos);
                     if (isVehicleInsideBoundary)
                     {
-                        boundary.FindClosestBoundaryPoint(pivotAxlePos);
-                        if ((int)boundary.closestBoundaryPt.easting != -1)
+                        hl.FindClosestHeadlandPoint(pivotAxlePos);
+                        if ((int)hl.closestHeadlandPt.easting != -1)
                         {
-                            distPt = pn.Distance(pivotAxlePos.northing, pivotAxlePos.easting, boundary.closestBoundaryPt.northing, boundary.closestBoundaryPt.easting);
+                            distPt = pn.Distance(pivotAxlePos.northing, pivotAxlePos.easting, hl.closestHeadlandPt.northing, hl.closestHeadlandPt.easting);
                         }
                         else distPt = -2;
                     }
@@ -683,14 +685,14 @@ namespace AgOpenGPS
             prevBoundaryPos.northing = pn.northing;
 
             //build the boundary line
-            if (boundary.isOkToAddPoints)
+            if (boundz.isOkToAddPoints)
             {
-                if (boundary.isDrawRightSide)
+                if (boundz.isDrawRightSide)
                 {
                     //Right side
                     vec2 point = new vec2(cosSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.easting,
                         sinSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.northing);
-                    boundary.ptList.Add(point);
+                    boundz.ptList.Add(point);
                 }
 
                     //draw on left side
@@ -699,7 +701,7 @@ namespace AgOpenGPS
                     //Right side
                     vec2 point = new vec2(cosSectionHeading * (section[0].positionLeft) + toolPos.easting,
                         sinSectionHeading * (section[0].positionLeft) + toolPos.northing);
-                    boundary.ptList.Add(point);
+                    boundz.ptList.Add(point);
                 }
 
             }
@@ -841,14 +843,14 @@ namespace AgOpenGPS
             //determine if section is in boundary using the section left/right positions
             for (int j = 0; j < vehicle.numOfSections; j++)
             {
-                if (boundary.isSet)
+                if (boundz.isSet)
                 {
                     bool isLeftIn = true, isRightIn = true;
                     if (j == 0)
                     {
                         //only one first left point, the rest are all rights moved over to left
-                        isLeftIn = boundary.IsPrePointInPolygon(section[j].leftPoint);
-                        isRightIn = boundary.IsPrePointInPolygon(section[j].rightPoint);
+                        isLeftIn = boundz.IsPointInsideBoundary(section[j].leftPoint);
+                        isRightIn = boundz.IsPointInsideBoundary(section[j].rightPoint);
 
                         if (isLeftIn && isRightIn) section[j].isInsideBoundary = true;
                         else section[j].isInsideBoundary = false;
@@ -858,7 +860,7 @@ namespace AgOpenGPS
                     {
                         //grab the right of previous section, its the left of this section
                         isLeftIn = isRightIn;
-                        isRightIn = boundary.IsPrePointInPolygon(section[j].rightPoint);
+                        isRightIn = boundz.IsPointInsideBoundary(section[j].rightPoint);
                         if (isLeftIn && isRightIn) section[j].isInsideBoundary = true;
                         else section[j].isInsideBoundary = false;
                     }

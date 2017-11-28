@@ -121,9 +121,10 @@
             this.Controls.Add(this.btnSerialCancel);
             this.Controls.Add(this.btnSerialOK);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "FormBoundary";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Start Boundary";
             this.Load += new System.EventHandler(this.FormBoundary_Load);
             this.ResumeLayout(false);

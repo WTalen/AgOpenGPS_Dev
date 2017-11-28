@@ -35,7 +35,7 @@ namespace AgOpenGPS
             mf = callingForm as FormGPS;
             InitializeComponent();
 
-            if (mf?.isMetric == true)
+            if (mf.isMetric)
             {
                 metImp2m = 0.01;
                 m2MetImp = 100.0;

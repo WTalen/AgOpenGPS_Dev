@@ -485,7 +485,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormGPSData";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GPS Data";
             this.TopMost = true;
             this.ResumeLayout(false);

@@ -2,14 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SteerSim.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="setting_portName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM XX</Value>
+    <Setting Name="set_thisPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8888</Value>
     </Setting>
-    <Setting Name="setting_baudRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">38400</Value>
+    <Setting Name="set_IP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.1.255</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="set_port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9999</Value>
     </Setting>
   </Settings>
 </SettingsFile>

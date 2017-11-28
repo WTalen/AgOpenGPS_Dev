@@ -242,6 +242,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormTrip";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Trip Area Settings";
             this.Load += new System.EventHandler(this.FormTrip_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudSetTrip)).EndInit();

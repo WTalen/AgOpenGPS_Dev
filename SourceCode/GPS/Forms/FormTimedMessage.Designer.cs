@@ -65,9 +65,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(985, 133);
+            this.ControlBox = false;
             this.Controls.Add(this.lblMessage2);
             this.Controls.Add(this.lblMessage);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormTimedMessage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -18,12 +18,13 @@ namespace AgOpenGPS
 
         private double rate1, rate2;
 
+
         public FormRate(Form callingForm)
         {
             mf = callingForm as FormGPS;
             InitializeComponent();
 
-            if (mf?.isMetric == true)
+            if (mf.isMetric)
             {
                 //no conversion
                 setting2NUD = 1.0;
@@ -60,7 +61,7 @@ namespace AgOpenGPS
             nudCalFactor.Value = Properties.Settings.Default.setRate_FlowmeterCalNumber;
 
             //Light the button accordingly
-            mf.rc.isRate1Selected = true;
+            //mf.rc.isRate1Selected = true;
             if (mf.rc.isRateControlOn)
             {
                 btnRateOnOff.Text = "On";

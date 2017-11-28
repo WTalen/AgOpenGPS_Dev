@@ -97,6 +97,7 @@
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.webCameraControl1);
             this.Name = "FormWebCam";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "WebCam";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormWebCam_Load);

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
+using System.Drawing;
 
 namespace AgOpenGPS
 {
     
-    public partial class  FormGPS
+    public partial class FormGPS
     {
         //list of the list of patch data individual triangles for field sections
         public List<List<vec2>> patchSaveList = new List<List<vec2>>();
@@ -717,10 +718,10 @@ namespace AgOpenGPS
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
 
-                                lat =   double.Parse(words[0], CultureInfo.InvariantCulture);
+                                lat = double.Parse(words[0], CultureInfo.InvariantCulture);
                                 longi = double.Parse(words[1], CultureInfo.InvariantCulture);
-                                east =  double.Parse(words[2], CultureInfo.InvariantCulture);
-                                nort =  double.Parse(words[3], CultureInfo.InvariantCulture);
+                                east = double.Parse(words[2], CultureInfo.InvariantCulture);
+                                nort = double.Parse(words[3], CultureInfo.InvariantCulture);
                                 color = int.Parse(words[4]);
                                 ID = int.Parse(words[5]);
 
@@ -771,7 +772,6 @@ namespace AgOpenGPS
                             btnRightYouTurn.Visible = true;
                             btnLeftYouTurn.Visible = true;
 
-
                             //Heading  , ,refPoint2x,z                    
                             line = reader.ReadLine();
                             ABLine.abHeading = double.Parse(line, CultureInfo.InvariantCulture);
@@ -801,6 +801,36 @@ namespace AgOpenGPS
                             ABLine.refABLineP2.northing = ABLine.refPoint1.northing + Math.Cos(ABLine.abHeading) * 10000.0;
 
                             ABLine.isABLineSet = true;
+
+                            btnRightYouTurn.Enabled = true;
+                            btnLeftYouTurn.Enabled = true;
+                            btnRightYouTurn.Visible = true;
+                            btnLeftYouTurn.Visible = true;
+
+                            //auto YouTurn shutdown
+                            yt.isAutoYouTurnEnabled = false;
+                            yt.CancelYouTurn();
+                            autoTurnInProgressBar = 0;
+
+                            //turn off youturn...
+                            btnEnableAutoYouTurn.Enabled = true;
+                            btnDistanceUp.Enabled = true;
+                            btnDistanceDn.Enabled = true;
+                            btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
+                        }
+
+                        //if ABLine isn't set, turn off the YouTurn
+                        else
+                        {
+                            btnRightYouTurn.Enabled = false;
+                            btnLeftYouTurn.Enabled = false;
+                            btnRightYouTurn.Visible = false;
+                            btnLeftYouTurn.Visible = false;
+
+                            btnEnableAutoYouTurn.Enabled = false;
+                            btnDistanceUp.Enabled = false;
+                            btnDistanceDn.Enabled = false;
+                            yt.isAutoYouTurnEnabled = false;
                         }
                     }
 
@@ -856,7 +886,7 @@ namespace AgOpenGPS
                             if (numPoints > 0)
                             {
                                 vec2 vecPt = new vec2(0, 0);
-                                boundary.ptList.Clear();
+                                boundz.ptList.Clear();
 
                                 //load the line
                                 for (int i = 0; i < numPoints; i++)
@@ -865,13 +895,13 @@ namespace AgOpenGPS
                                     string[] words = line.Split(',');
                                     vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
                                     vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
-                                    boundary.ptList.Add(vecPt);
+                                    boundz.ptList.Add(vecPt);
                                 }
 
-                                boundary.CalculateBoundaryArea();
-                                boundary.PreCalcBoundaryLines();
-                                if (boundary.area > 0) boundary.isSet = true;
-                                else boundary.isSet = false;
+                                boundz.CalculateBoundaryArea();
+                                boundz.PreCalcBoundaryLines();
+                                if (boundz.area > 0) boundz.isSet = true;
+                                else boundz.isSet = false;
                             }
                         }
 
@@ -883,11 +913,80 @@ namespace AgOpenGPS
 
                         }
                     }
-
-
                 }
             }
 
+            // Headland  -------------------------------------------------------------------------------------------------
+
+            //Either exit or update running save
+            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Headland.txt";
+            if (!File.Exists(fileAndDirectory))
+            {
+                var form = new FormTimedMessage(4000, "Missing Headland File", "But Field is Loaded");
+                form.Show();
+            }
+
+            //2017-June-05 09:48:52 PM
+            //Points in line followed by easting, northing
+            //$HeadlandDir
+            //gtr Jun05
+            //$Offsets
+            //555799,5921092,12
+            //$NumLinePoints
+            //27
+            //-3.1814080592639,-3.1814080592639
+            //-3.16491526875197,-3.16491526875197
+
+            else
+            {
+                using (StreamReader reader = new StreamReader(fileAndDirectory))
+                {
+                    try
+                    {
+                        //read the lines and skip them
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+
+                        line = reader.ReadLine();
+                        int numPoints = int.Parse(line);
+
+                        if (numPoints > 0)
+                        {
+                            vec2 vecPt = new vec2(0, 0);
+                            hl.ptList.Clear();
+
+                            //load the line
+                            for (int i = 0; i < numPoints; i++)
+                            {
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                hl.ptList.Add(vecPt);
+                            }
+
+                            hl.PreCalcHeadlandLines();
+
+                            //quick double check to make sure its a valid loop
+                            double area = hl.CalculateHeadlandArea();
+                            if (area > 0) hl.isSet = true;
+                            else hl.isSet = false;
+                        }
+                    }
+
+                    catch (Exception e)
+                    {
+                        var form = new FormTimedMessage(4000, "Headland File is Corrupt", "But Field is Loaded");
+                        form.Show();
+                        WriteErrorLog("Load Headland Loop" + e.ToString());
+                    }
+                }
+            }
         }//end of open file
 
         //creates the field file when starting new field
@@ -1081,12 +1180,58 @@ namespace AgOpenGPS
 
                 writer.WriteLine("$NumLinePoints");
                 
-                writer.WriteLine(boundary.ptList.Count.ToString(CultureInfo.InvariantCulture));
-                if (boundary.ptList.Count > 0)
+                writer.WriteLine(boundz.ptList.Count.ToString(CultureInfo.InvariantCulture));
+                if (boundz.ptList.Count > 0)
                 {
-                    for (int j = 0; j < boundary.ptList.Count; j++)
-                        writer.WriteLine(boundary.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," + 
-                                            boundary.ptList[j].northing.ToString(CultureInfo.InvariantCulture));
+                    for (int j = 0; j < boundz.ptList.Count; j++)
+                        writer.WriteLine(boundz.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," + 
+                                            boundz.ptList[j].northing.ToString(CultureInfo.InvariantCulture));
+                }
+            }
+        }
+
+        //save the headland
+        public void FileSaveHeadlandYouTurn()
+        {
+            //Saturday, February 11, 2017  -->  7:26:52 AM
+            //12  - points in patch
+            //64.697,0.168,-21.654,0 - east, heading, north, altitude
+            //$ContourDir
+            //Bob_Feb11
+            //$Offsets
+            //533172,5927719,12
+
+            //get the directory and make sure it exists, create if not
+            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter(dirField + "Headland.Txt"))
+            {
+                //Write out the date
+                writer.WriteLine(DateTime.Now.ToString("yyyy-MMMM-dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+                writer.WriteLine("Points in line followed by easting, northing");
+
+                //which field directory
+                writer.WriteLine("$HeadlandDir");
+                writer.WriteLine(currentFieldDirectory);
+
+                //write out the easting and northing Offsets
+                writer.WriteLine("$Offsets");
+                writer.WriteLine(pn.utmEast.ToString(CultureInfo.InvariantCulture) + "," +
+                                    pn.utmNorth.ToString(CultureInfo.InvariantCulture) + "," + pn.zone.ToString(CultureInfo.InvariantCulture));
+
+                writer.WriteLine("$NumLinePoints");
+                writer.WriteLine(hl.ptList.Count.ToString(CultureInfo.InvariantCulture));
+                if (hl.ptList.Count > 0)
+                {
+                    for (int j = 0; j < hl.ptList.Count; j++)
+                        writer.WriteLine(hl.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," +
+                                            hl.ptList[j].northing.ToString(CultureInfo.InvariantCulture));
                 }
             }
         }

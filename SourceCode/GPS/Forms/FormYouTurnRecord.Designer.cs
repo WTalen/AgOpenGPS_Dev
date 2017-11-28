@@ -82,7 +82,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnRecord);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormYouTurnRecord";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "YouTurn Recorder";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormYouTurnRecord_Load);

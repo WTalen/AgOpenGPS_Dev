@@ -12,7 +12,7 @@ namespace SteerSim.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,37 +25,37 @@ namespace SteerSim.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM XX")]
-        public string setting_portName {
+        [global::System.Configuration.DefaultSettingValueAttribute("8888")]
+        public int set_thisPort {
             get {
-                return ((string)(this["setting_portName"]));
+                return ((int)(this["set_thisPort"]));
             }
             set {
-                this["setting_portName"] = value;
+                this["set_thisPort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("38400")]
-        public int setting_baudRate {
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.255")]
+        public string set_IP {
             get {
-                return ((int)(this["setting_baudRate"]));
+                return ((string)(this["set_IP"]));
             }
             set {
-                this["setting_baudRate"] = value;
+                this["set_IP"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("9999")]
+        public int set_port {
             get {
-                return ((string)(this["Setting"]));
+                return ((int)(this["set_port"]));
             }
             set {
-                this["Setting"] = value;
+                this["set_port"] = value;
             }
         }
     }

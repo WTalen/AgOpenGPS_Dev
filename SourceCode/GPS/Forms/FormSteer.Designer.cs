@@ -797,6 +797,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSteer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Auto Steer Configuration";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSteer_FormClosing);
             this.Load += new System.EventHandler(this.FormSteer_Load);

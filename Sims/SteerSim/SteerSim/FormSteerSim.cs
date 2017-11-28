@@ -11,21 +11,18 @@ namespace SteerSim
 {
     public partial class FormSteerSim : Form
     {
-        // Client socket
-        private Socket clientSocket;
+        // Server socket
+        private Socket serverSocket;
 
-        // Client ip
-        private string ipAddress;
-
-        // Server End Point
-        private EndPoint epServer;
-
+        //endpoint of the server
+        IPEndPoint epAgOpenServer;
+        
         // Data buffer
-        private byte[] buffer = new byte[256];
+        private byte[] buffer = new byte[64];
 
-        // Display message delegate
-        private delegate void DisplayMessageDelegate(string message);
-        private DisplayMessageDelegate displayMessageDelegate = null;
+        // Display message delegate  // Status delegate
+        private delegate void UpdateStatusDelegate(string status);
+        private UpdateStatusDelegate updateStatusDelegate = null;
 
         private bool isConnected = false;
 
@@ -46,18 +43,13 @@ namespace SteerSim
         private char NS = 'N';
 
         private double latitude = 53.436026;
-        private double longitude = -110.160047;
+        private double longitude = -111.160047;
         private double latDeg, latMinu, longDeg, longMinu, latNMEA, longNMEA;
         private double speed = 0.6, headingTrue, stepDistance = 0.5, steerAngle;
+        private double degrees;
 
         //The checksum of an NMEA line
         private string sumStr = "";
-
-        public static string portName = "GPS";
-        public static int baudRate = 4800;
-
-        //serial port gps is connected to
-        public SerialPort sp = new SerialPort(portName, baudRate, Parity.None, 8, StopBits.One);
 
         #endregion
 
@@ -73,24 +65,25 @@ namespace SteerSim
             lblSteerAngle.Text = steerAngle.ToString();
         }
 
-        private string sentence;
         // Set by NMEA Hz value. Send out repetitively.
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (sp.IsOpen)
+            if (fromAOGSentence != null)
             {
-                try
+                int off;
+                string[] words = fromAOGSentence.Split(',');
+                int.TryParse(words[0], out quadCount);
+                int.TryParse(words[1], out off);
+
+                if (off == 32020) steerAngle = 0.0;
+                else
                 {
-                    sentence = sp.ReadLine();
-                    sp.ReadExisting();
-                    string[] words = sentence.Split(',');
-                    int.TryParse(words[0], out quadCount);
+                    steerAngle = (double)quadCount / 10.0;
+                    tbarSteerAngle.Value = 0;
                 }
-                catch { { } }
             }
 
-            steerAngle = quadCount / (double)nudCountsPerDegree.Value;
-            steerAngle+= (tbarSteerAngle.Value*0.1);
+            steerAngle+= tbarSteerAngle.Value * 0.1;
             lblSteerAngle.Text = Math.Round(steerAngle,1).ToString();
 
             //steerAngle = 0.31;
@@ -100,8 +93,9 @@ namespace SteerSim
             if (headingTrue > (2.0*Math.PI)) headingTrue -= (2.0 * Math.PI);
             if (headingTrue < (0)) headingTrue += (2.0 * Math.PI);
 
-            double degrees = headingTrue * 57.2958;
-            lblHeading.Text = Math.Round(degrees,1).ToString();
+            degrees = headingTrue * 57.2958;
+            degrees = Math.Round(degrees, 1);
+            lblHeading.Text = degrees.ToString();
 
             //Calculate the next Lat Long based on heading and distance
             calculateNewPostionFromBearingDistance(latitude, longitude, degrees, stepDistance/1000.0);
@@ -136,90 +130,157 @@ namespace SteerSim
         //connect and set up UDP to broadcast
         private void FormSim_Load(object sender, EventArgs e)
         {
-            // Initialise delegate
-            displayMessageDelegate = new DisplayMessageDelegate(DisplayMessage);
+            //// Initialise delegate
+            //displayMessageDelegate = new DisplayMessageDelegate(DisplayMessage);
 
             //calc the speed
             stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / (double)nudHz.Value;
             lblStep.Text = Convert.ToString(Math.Round(((double)(tbarStepDistance.Value)) / 10.0, 1));
             lblSpeed.Text = (Math.Round(1.852 * speed, 1)).ToString();
 
-            //load the port box with valid port names
-            cboxPort.Items.Clear();
-            foreach (String s in SerialPort.GetPortNames())
-            {
-                cboxPort.Items.Add(s);
-            }
+            nudSteerSimPort.Value = Properties.Settings.Default.set_thisPort;
+            tboxAgOpenIP.Text = Properties.Settings.Default.set_IP;
+            nudAgOpenPort.Value = Properties.Settings.Default.set_port;
 
-            //check if GPS port is open or closed and set buttons accordingly
-            if (sp.IsOpen)
-            {
-                cboxBaud.Enabled = false;
-                cboxPort.Enabled = false;
-                btnCloseSerial.Enabled = true;
-                btnOpenSerial.Enabled = false;
-            }
-            else
-            {
-                cboxBaud.Enabled = true;
-                cboxPort.Enabled = true;
-                btnCloseSerial.Enabled = false;
-                btnOpenSerial.Enabled = true;
-            }
-
-            //set baud and port from last time run
-            baudRate = Properties.Settings.Default.setting_baudRate;
-            portName = Properties.Settings.Default.setting_portName;
-
-            SerialPortOpen();
-            cboxPort.Text = sp.PortName;
-            cboxBaud.Text = sp.BaudRate.ToString();
+            //Obviously this connects to server
+            Connect();
         }
 
-        public void SerialPortOpen()
+        private void FormSim_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!sp.IsOpen)
+            isConnected = false;
+            //try
+            //{
+            //    if (clientSocket != null)
+            //    {
+            //        // Get packet as byte array
+            //        byte[] byteData = Encoding.ASCII.GetBytes("GoodBye");
+
+            //        // Send packet to the server
+            //        clientSocket.SendTo(byteData, 0, byteData.Length, SocketFlags.None, epServer);
+
+            //        // Close the socket
+            //        clientSocket.Close();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Closing Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+        }
+
+        //asynchronous send data callback
+        public void SendData(IAsyncResult asyncResult)
+        {
+            try
             {
-                sp.PortName = portName;
-                sp.BaudRate = baudRate;
-                sp.WriteTimeout = 100;
-                sp.ReadTimeout = 100;
+                serverSocket.EndSend(asyncResult);
             }
-
-            try { sp.Open(); }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                MessageBox.Show(exc.Message + "\n\r" + "\n\r" + "Go to Settings -> COM Ports to Fix", "No Serial Port Active");
-
-                //SettingsPageOpen(0);
-            }
-
-            if (sp.IsOpen)
-            {
-                btnOpenSerial.Enabled = false;
-                btnCloseSerial.Enabled = true;
-
-                //discard any stuff in the buffers
-                sp.DiscardOutBuffer();
-                sp.DiscardInBuffer();
-
-                Properties.Settings.Default.setting_portName = portName;
-                Properties.Settings.Default.setting_baudRate = baudRate;
-                Properties.Settings.Default.Save();
+                MessageBox.Show("SendData Error: " + ex.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public void SerialPortClose()
+        //asynchronous receive data callback
+        private void ReceiveData(IAsyncResult asyncResult)
         {
-            if (sp.IsOpen)
+            try
             {
-                try { sp.Close(); }
-                catch (Exception exc) { MessageBox.Show(exc.Message, "Connection already terminated?"); }
+                // Initialise the IPEndPoint for the clients
+                EndPoint epSender = new IPEndPoint(IPAddress.Any, 0);
 
-                btnOpenSerial.Enabled = true;
-                btnCloseSerial.Enabled = false;
+                // Receive all data
+                int msgLen = serverSocket.EndReceiveFrom(asyncResult, ref epSender);
 
-                sp.Dispose();
+                byte[] localMsg = new byte[msgLen];
+                Array.Copy(buffer, localMsg, msgLen);
+
+                // Listen for more connections again...
+                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epSender, 
+                                                new AsyncCallback(ReceiveData), epSender);
+
+                string text = Encoding.ASCII.GetString(localMsg);
+
+                // Update status through a delegate
+                Invoke(updateStatusDelegate, new object[] { text });
+            }
+            catch (ObjectDisposedException)
+            { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Receive Data: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //delegate access to thread
+        string fromAOGSentence;
+        private void UpdateStatus(string status)
+        {
+            //if (rtxtStatus.TextLength > 300) rtxtStatus.Text = "";
+            //rtxtStatus.AppendText(status);
+            rtxtStatus.Text = (status);
+            fromAOGSentence = status;
+        }
+
+        //Send the string out to AgOpenGPS
+        private void SendNMEA()
+        {
+            try
+            {
+                // Get packet as byte array
+                byte[] byteData = Encoding.ASCII.GetBytes(sbSendText.ToString());
+
+                if (byteData.Length != 0)
+                {
+                    // Send packet to the server
+                    serverSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAgOpenServer, new AsyncCallback(SendData), null);
+                }
+
+                //not really necessary but does show what was in buffer that was sent
+                txtNMEA.Text = (Encoding.ASCII.GetString(byteData));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Send Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }            // Check we are connected
+        }
+
+        private void Connect()
+        {
+            try
+            {
+                // Initialise the delegate which updates the status
+                updateStatusDelegate = new UpdateStatusDelegate(UpdateStatus);
+
+                // Initialise the socket
+                serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                // Initialise the IPEndPoint and listen on po 8888
+                IPEndPoint server = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.set_thisPort);
+
+                //IP address and port of AgOpenServer
+                IPAddress agOpenIP = IPAddress.Parse(Properties.Settings.Default.set_IP);
+                epAgOpenServer = new IPEndPoint(agOpenIP, Properties.Settings.Default.set_port);
+
+                // Associate the socket with this IP address and port
+                serverSocket.Bind(server);
+
+                // Initialise the IPEndPoint for the client
+                EndPoint client = new IPEndPoint(IPAddress.Any, 0);
+
+                // Start listening for incoming data
+                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
+                                                ref client, new AsyncCallback(ReceiveData), serverSocket);
+
+                lblStatus.Text = "Listening";
+
+                //start allowing nmea to be sent
+                isConnected = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Connection Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -271,9 +332,9 @@ namespace SteerSim
         }
 
         private void btnReset_Click(object sender, EventArgs e)
-        {
-            latitude = 53.5;
-            longitude = -110.5;
+        {  
+            latitude = 53.436026;
+            longitude = -111.160047;
             tbarStepDistance.Value = 5;
             stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / (double)nudHz.Value;
 
@@ -290,34 +351,19 @@ namespace SteerSim
             lblStep.Text = Convert.ToString(Math.Round(((double)(tbarStepDistance.Value)) / 10.0, 1));
         }
 
-        private void btnOpenSerial_Click_1(object sender, EventArgs e)
+        private void btnSaveRestart_Click(object sender, EventArgs e)
         {
-            SerialPortOpen();
-        }
+            Properties.Settings.Default.set_IP = tboxAgOpenIP.Text;
+            Properties.Settings.Default.set_port = (int)nudAgOpenPort.Value;
+            Properties.Settings.Default.set_thisPort = (int)nudSteerSimPort.Value;
+            Properties.Settings.Default.Save();
 
-        private void btnCloseSerial_Click_1(object sender, EventArgs e)
-        {
-            SerialPortClose();
-        }
-
-        private void cboxBaud_Leave_1(object sender, EventArgs e)
-        {
-            baudRate = Convert.ToInt32(cboxBaud.Text);
-        }
-
-        private void cboxPort_Leave_1(object sender, EventArgs e)
-        {
-            portName = cboxPort.Text;
-        }
+            Close();
+        } 
 
         private void btnTbarReset_Click(object sender, EventArgs e)
         {
             tbarSteerAngle.Value = 0;
-        }
-
-        private void nudCountsPerDegree_ValueChanged(object sender, EventArgs e)
-        {
-
         }
 
         //calculate the NMEA checksum to stuff at the end
@@ -364,7 +410,7 @@ namespace SteerSim
         {
             sbVTG.Clear();
             sbVTG.Append("$GPVTG,");
-            sbVTG.Append((headingTrue).ToString(CultureInfo.InvariantCulture));
+            sbVTG.Append((degrees).ToString(CultureInfo.InvariantCulture));
             sbVTG.Append(",T,034.4,M,");
             sbVTG.Append(speed.ToString(CultureInfo.InvariantCulture));
             sbVTG.Append(",N,");
@@ -399,7 +445,7 @@ namespace SteerSim
             sbRMC.Append(Math.Abs(longNMEA).ToString(CultureInfo.InvariantCulture)).Append(',').Append(EW).Append(',');
 
             //add the speed and date
-            sbRMC.Append(speed.ToString(CultureInfo.InvariantCulture)).Append(',').Append(headingTrue.ToString(CultureInfo.InvariantCulture)).Append(',').Append(DateTime.Now.ToString("ddMMyy", CultureInfo.InvariantCulture)).Append(",0,W*");
+            sbRMC.Append(speed.ToString(CultureInfo.InvariantCulture)).Append(',').Append(degrees.ToString(CultureInfo.InvariantCulture)).Append(',').Append(DateTime.Now.ToString("ddMMyy", CultureInfo.InvariantCulture)).Append(",0,W*");
 
             //sbRMC.Clear();
             //sbRMC.Append("$GPRMC,105506.800,A,4016.1090,N,00730.8665,W,11.00,37.89.010517,,,D*");
@@ -410,157 +456,7 @@ namespace SteerSim
         }
 
         //Form closing so disconnect
-        private void FormSim_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            isConnected = false;
-            try
-            {
-                if (clientSocket != null)
-                {
-                    // Get packet as byte array
-                    byte[] byteData = Encoding.ASCII.GetBytes("GoodBye");
 
-                    // Send packet to the server
-                    clientSocket.SendTo(byteData, 0, byteData.Length, SocketFlags.None, epServer);
-
-                    // Close the socket
-                    clientSocket.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Closing Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //asynchronous send data callback
-        private void SendData(IAsyncResult ar)
-        {
-            try
-            {
-                clientSocket.EndSend(ar);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Send Data: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //asynchronous receive data callback
-        private void ReceiveData(IAsyncResult ar)
-        {
-            try
-            {
-                // Receive all data
-                clientSocket.EndReceive(ar);
-
-                // Receive all data
-                int msgLen = clientSocket.EndReceiveFrom(ar, ref epServer);
-
-                byte[] localMsg = new byte[msgLen];
-                Array.Copy(buffer, localMsg, msgLen);
-
-                // Listen for more connections again...
-                clientSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epServer, new AsyncCallback(ReceiveData), epServer);
-
-                string text = Encoding.ASCII.GetString(localMsg);
-
-                // Update display through a delegate
-                if (text != null)
-                    Invoke(displayMessageDelegate, new object[] { text });
-
-                // Reset data stream
-                buffer = new byte[1024];
-
-                // Continue listening for broadcasts
-                clientSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epServer, new AsyncCallback(ReceiveData), null);
-            }
-            catch (ObjectDisposedException)
-            { }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Receive Data: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //delegate access to thread
-        private void DisplayMessage(string messge)
-        {
-            txtNMEA.AppendText(messge);
-        }
-
-        //Send the string out to server
-        private void SendNMEA()
-        {
-            try
-            {
-                // Get packet as byte array
-                byte[] byteData = Encoding.ASCII.GetBytes(sbSendText.ToString());
-
-                if (byteData.Length != 0)
-                {
-                    // Send packet to the server
-                    clientSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epServer, new AsyncCallback(SendData), null);
-                }
-
-                //not really necessary but does show what was in buffer that was sent
-                txtNMEA.Text = (Encoding.ASCII.GetString(byteData));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Send Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            // Check we are connected
-        }
-
-        private void buttonConnect_Click(object sender, EventArgs e)
-        {
-            if (clientSocket != null)
-            {
-                // Get packet as byte array
-                byte[] byteData = Encoding.ASCII.GetBytes("GoodBye");
-
-                // Send packet to the server
-                clientSocket.SendTo(byteData, 0, byteData.Length, SocketFlags.None, epServer);
-
-                // Close the socket
-                clientSocket.Close();
-            }
-
-            try
-            {
-                ipAddress = tboxIP.Text.Trim();
-
-                // Initialise socket
-                clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-
-                // Initialise server IP
-                IPAddress serverIP = IPAddress.Parse(ipAddress);
-
-                // Initialise the IPEndPoint for the server and use port 30000
-                epServer = new IPEndPoint(serverIP, (int)nudPort.Value);
-
-                // Get packet as byte array
-                byte[] data = Encoding.ASCII.GetBytes("Connecting");
-
-                // Send data to server
-                clientSocket.BeginSendTo(data, 0, data.Length, SocketFlags.None, epServer, new AsyncCallback(SendData), null);
-
-                // Initialise data stream
-                buffer = new byte[1024];
-
-                timer1.Enabled = true;
-
-                // Begin listening for broadcasts
-                clientSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epServer, new AsyncCallback(ReceiveData), null);
-
-                //start allowing nmea to be sent
-                isConnected = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Connection Error: " + ex.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         //$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M ,  ,*47
         //   0     1      2      3    4      5 6  7  8   9    10 11  12 13  14

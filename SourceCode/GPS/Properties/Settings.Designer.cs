@@ -769,30 +769,6 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setPort_isUDPOn {
-            get {
-                return ((bool)(this["setPort_isUDPOn"]));
-            }
-            set {
-                this["setPort_isUDPOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setPort_isTCPOn {
-            get {
-                return ((bool)(this["setPort_isTCPOn"]));
-            }
-            set {
-                this["setPort_isTCPOn"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double setF_UserTripAlarm {
             get {
@@ -1004,6 +980,66 @@ namespace AgOpenGPS.Properties {
             }
             set {
                 this["setRate_AccumulatedVolume"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9999")]
+        public int setIP_thisPort {
+            get {
+                return ((int)(this["setIP_thisPort"]));
+            }
+            set {
+                this["setIP_thisPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string setIP_AutoSteerIP {
+            get {
+                return ((string)(this["setIP_AutoSteerIP"]));
+            }
+            set {
+                this["setIP_AutoSteerIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8888")]
+        public int setIP_AutoSteerPort {
+            get {
+                return ((int)(this["setIP_AutoSteerPort"]));
+            }
+            set {
+                this["setIP_AutoSteerPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string setIP_RateRelayIP {
+            get {
+                return ((string)(this["setIP_RateRelayIP"]));
+            }
+            set {
+                this["setIP_RateRelayIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7777")]
+        public int setIP_RateRelayPort {
+            get {
+                return ((int)(this["setIP_RateRelayPort"]));
+            }
+            set {
+                this["setIP_RateRelayPort"] = value;
             }
         }
     }

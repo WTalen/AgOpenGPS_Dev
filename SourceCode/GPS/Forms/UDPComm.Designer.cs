@@ -13,17 +13,16 @@ namespace AgOpenGPS
     {
         // Server socket
         private Socket serverSocket;
-        public bool isUDPServerOn = false;
 
-        //endpoint of the reply from the zero MKR1000
-        IPEndPoint epZero;
+        //endpoint of the auto steer module
+        IPEndPoint epAutoSteer;
 
         // Data stream
         private byte[] buffer = new byte[1024];
 
         // Status delegate
-        private delegate void UpdateStatusDelegate(string status);
-        private UpdateStatusDelegate updateStatusDelegate = null;
+        private delegate void UpdateRecvMessageDelegate(string recvMessage);
+        private UpdateRecvMessageDelegate updateRecvMessageDelegate = null;
 
         private void SendUDPMessage(string message)
         {
@@ -35,7 +34,7 @@ namespace AgOpenGPS
                 if (byteData.Length != 0)
 
                     // Send packet to the zero
-                    serverSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epZero, new AsyncCallback(SendData), null);
+                    serverSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAutoSteer, new AsyncCallback(SendData), null);
             }
             catch (Exception e)
             {
@@ -44,7 +43,6 @@ namespace AgOpenGPS
                 MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
  
         public void SendData(IAsyncResult asyncResult)
         {
@@ -79,7 +77,7 @@ namespace AgOpenGPS
                 string text = Encoding.ASCII.GetString(localMsg);
 
                 // Update status through a delegate
-                Invoke(updateStatusDelegate, new object[] { text });
+                Invoke(updateRecvMessageDelegate, new object[] { text });
             }
             catch (Exception e)
             {
@@ -90,7 +88,7 @@ namespace AgOpenGPS
         }
 
         
-        private void UpdateStatus(string recvd)
+        private void UpdateRecvMessage(string recvd)
         {
             recvSentenceSettings = recvd;
             pn.rawBuffer += recvd;

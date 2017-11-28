@@ -76,24 +76,6 @@ namespace AgOpenGPS
 
         private void FormYouTurn_Load(object sender, EventArgs e)
         {
-            lblDistance.Text = mf.yt.startYouTurnAt.ToString();
-            if (mf.yt.isAutoYouTurnEnabled)
-            {
-                btnEnableAutoYouTurn.BackColor = Color.LightGreen;
-                btnEnableAutoYouTurn.Text = "Auto YouTurn On";
-                lblDistance.Text = Math.Abs(mf.yt.startYouTurnAt).ToString() + " m";
-                if (mf.yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before boundary line";
-                else lblWhenTrig.Text = "After boundary line";
-            }
-            else
-            {
-                btnEnableAutoYouTurn.BackColor = SystemColors.ButtonFace;
-                btnEnableAutoYouTurn.Text = "Auto YouTurn Off";
-                lblDistance.Text = Math.Abs(mf.yt.startYouTurnAt).ToString() + " m";
-                if (mf.yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before boundary line";
-                else lblWhenTrig.Text = "After boundary line";
-            }
-
             if (Properties.Settings.Default.setAS_youTurnShape == "KeyHole.txt")
             {
                 btnYouTurnKeyHole.BackColor = Color.Yellow;
@@ -114,51 +96,13 @@ namespace AgOpenGPS
                 btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
                 btnYouTurnCustom.BackColor = Color.Yellow;
             }
-
-        }
-
-        private void btnEnableAutoYouTurn_Click(object sender, EventArgs e)
-        {
-            if (!mf.yt.isAutoYouTurnEnabled)
-            {
-                mf.yt.isAutoYouTurnEnabled = true;
-                btnEnableAutoYouTurn.BackColor = Color.LightGreen;
-                btnEnableAutoYouTurn.Text = "Auto YouTurn On";
-            }
-            else
-            {
-                mf.yt.isAutoYouTurnEnabled = false;
-                btnEnableAutoYouTurn.BackColor = SystemColors.ButtonFace;
-                btnEnableAutoYouTurn.Text = "Auto YouTurn Off";
-            }
-        }
-
-        private void btnDistanceDn_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (mf.yt.startYouTurnAt-- < -48) mf.yt.startYouTurnAt = -49;
-            lblDistance.Text = Math.Abs(mf.yt.startYouTurnAt).ToString() + " m";
-            if (mf.yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before boundary line";
-            else lblWhenTrig.Text = "After boundary line";
-        }
-
-        private void btnDistanceUp_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (mf.yt.startYouTurnAt++ > 49) mf.yt.startYouTurnAt = 50;
-            lblDistance.Text = Math.Abs(mf.yt.startYouTurnAt).ToString() + " m";
-            if (mf.yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before boundary line";
-            else lblWhenTrig.Text = "After boundary line";
         }
 
         private void bntOK_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.setAS_startYouTurnAt = mf.yt.startYouTurnAt;
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.setAS_startYouTurnAt = mf.yt.startYouTurnAt;
+            //Properties.Settings.Default.Save();
             Close();
         }
-
-        //private void numKeypad1_ButtonPressed(object sender, KeyPressEventArgs e)
-        //{
-        //    if (e.KeyChar == 'O') bntOK.PerformClick();
-        //}
     }
 }

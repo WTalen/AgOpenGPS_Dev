@@ -361,6 +361,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1021, 661);
+            this.ControlBox = false;
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -386,10 +387,12 @@
             this.Controls.Add(this.btnSaveOK);
             this.Controls.Add(this.btnCalculate);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormWizardSteer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Steering Wizard";
             this.Load += new System.EventHandler(this.FormWizardSteer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudRadius)).EndInit();

@@ -121,7 +121,10 @@ namespace AgOpenGPS
         public CPerimeter periArea;
 
         //boundary instance
-        public CBoundary boundary;
+        public CBoundary boundz;
+
+        //headland path instance
+        public CHeadland hl;
 
         #endregion
 
@@ -166,7 +169,10 @@ namespace AgOpenGPS
             periArea = new CPerimeter(gl);
 
             //boundary object
-            boundary = new CBoundary(gl, glBack, this);
+            boundz = new CBoundary(gl, glBack, this);
+
+            //headland object
+            hl = new CHeadland(gl, this);
 
             //rate object
             rc = new CRate(this);
@@ -255,12 +261,8 @@ namespace AgOpenGPS
             //Calculate total width and each section width
             SectionCalcWidths();
 
-            isTCPServerOn = Settings.Default.setPort_isTCPOn;
-            isUDPServerOn = Settings.Default.setPort_isUDPOn;
-
-            //start servers or not
-            if (isTCPServerOn) StartTCPServer();
-            if (isUDPServerOn) StartUDPServer();
+            //start udp server
+            StartUDPServer();
 
             //set the correct zoom and grid
             camera.camSetDistance = zoomValue * zoomValue * -1;
@@ -440,83 +442,34 @@ namespace AgOpenGPS
         {
             try
             {
-                // Initialise the delegate which updates the status
-                updateStatusDelegate = UpdateStatus;
+                // Initialise the delegate which updates the message received
+                updateRecvMessageDelegate = UpdateRecvMessage;
 
                 // Initialise the socket
                 serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 // Initialise the IPEndPoint for the server and listen on port 9999
-                IPEndPoint server = new IPEndPoint(IPAddress.Any, 9999);
+                IPEndPoint server = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.setIP_thisPort);
 
-                //IP address and port of MKR1000
-                IPAddress zeroIP = IPAddress.Parse("192.168.1.12");
-                epZero = new IPEndPoint(zeroIP, 8888);
+                //IP address and port of Auto Steer server
+                IPAddress epIP = IPAddress.Parse(Properties.Settings.Default.setIP_AutoSteerIP);
+                epAutoSteer = new IPEndPoint(epIP, Properties.Settings.Default.setIP_AutoSteerPort);
 
                 // Associate the socket with this IP address and port
                 serverSocket.Bind(server);
 
-                // Initialise the IPEndPoint for the client
+                // Initialise the IPEndPoint for the client - async listner client only!
                 EndPoint client = new IPEndPoint(IPAddress.Any, 0);
 
                 // Start listening for incoming data
                 serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
                                                 ref client, ReceiveData, serverSocket);
-
-                //lblStatus.Text = "Listening";
             }
             catch (Exception e)
             {
                 WriteErrorLog("UDP Server" + e);
-
-                //lblStatus.Text = "Error";
                 MessageBox.Show("Load Error: " + e.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        //start the TCP Server
-        private void StartTCPServer()
-        {
-                        // Welcome and Start listening
-            //lblWelcome.Text="*** AgOpenGPS Server on Port 7777 Started: "+ DateTime.Now.ToString("G");
-
-            const int nPortListen = 7777;
-
-            // Determine the IPAddress of this machine
-            IPAddress[] localIPAddress = null;
-            //String strHostName = "";
-            try
-            {
-                // NOTE: DNS lookups are nice and all but quite time consuming.
-                //strHostName = Dns.GetHostName();
-                IPHostEntry ipEntry = Dns.GetHostEntry(string.Empty);
-                localIPAddress = ipEntry.AddressList;
-            }
-            catch (Exception e)
-            {
-                WriteErrorLog("TCP Server " + e);
-
-                MessageBox.Show("Error trying to get local address "+ e.Message);
-            }
-
-            // Verify we got an IP address. Tell the user if we did
-            if (localIPAddress == null || localIPAddress.Length < 1)
-            {
-                MessageBox.Show("Unable to get local address");
-                return;
-            }
-
-            //lblListener.Text="Listening on " + strHostName.ToString() + "  " + localIPAddress[1].ToString() + " : " + nPortListen.ToString();
-            // Create the listener socket in this machines IP address
-            //listener.Bind(new IPEndPoint(localIPAddress[1], nPortListen));
-            //listener.Bind(new IPEndPoint(IPAddress.Loopback, nPortListen)); // For use with localhost 127.0.0.1
-            listener.Bind(new IPEndPoint(IPAddress.Any, nPortListen)); // For use with localhost 127.0.0.1
-
-            //limit backlog
-            listener.Listen(10);
-
-            // Setup a callback to be notified of connection requests
-            listener.BeginAccept(OnConnectRequest, listener);
         }
 
         //dialog for requesting user to save or cancel
@@ -546,6 +499,23 @@ namespace AgOpenGPS
             }
 
             AutoSteerSettingsOutToPort();
+        }
+
+        //show the UDP ethernet settings page
+        private void SettingsUDP()
+        {
+            using (var form = new FormUDP(this))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    //Clicked Save
+                }
+                else
+                {
+                    //Clicked X - No Save
+                }
+            }
         }
 
         //function to set section positions
@@ -624,9 +594,9 @@ namespace AgOpenGPS
             btnSnap.Enabled = true;
             ABLine.abHeading = 0.00;
 
-            btnAutoYouTurn.Enabled = true;
-            btnRightYouTurn.Enabled = true;
-            btnLeftYouTurn.Enabled = true;
+            btnRightYouTurn.Enabled = false;
+            btnLeftYouTurn.Enabled = false;
+
 
             btnFlag.Enabled = true;
 
@@ -677,7 +647,7 @@ namespace AgOpenGPS
             {
                 //clean out the lists
                 section[j].patchList.Clear();
-                section[j].triangleList?.Clear();
+                if (section[j].triangleList != null) section[j].triangleList.Clear();
             }
 
             //clear out the contour Lists
@@ -692,10 +662,7 @@ namespace AgOpenGPS
             btnContour.Enabled = false;
             btnAutoSteer.Enabled = false;
             btnSnap.Enabled = false;
-
-            btnAutoYouTurn.Enabled = false;
-            btnRightYouTurn.Enabled = false;
-            btnLeftYouTurn.Enabled = false;
+            isAutoSteerBtnOn = false;
 
             ct.isContourBtnOn = false;
             ct.isContourOn = false;
@@ -724,7 +691,10 @@ namespace AgOpenGPS
             totalSquareMeters = 0;
 
             //reset boundary
-            boundary.ResetBoundary();
+            boundz.ResetBoundary();
+
+            //reset headland
+            hl.ResetHeadland();
 
             //update the menu
             fieldToolStripMenuItem.Text = "Start Field";
@@ -735,11 +705,21 @@ namespace AgOpenGPS
             btnRate.Image = Properties.Resources.RateControlOff;
             rc.ShutdownRateControl();
 
+            //turn off top level buttons
+            btnRightYouTurn.Enabled = false;
+            btnLeftYouTurn.Enabled = false;
+
             //auto YouTurn shutdown
             yt.isAutoYouTurnEnabled = false;
             yt.CancelYouTurn();
             autoTurnInProgressBar = 0;
-            btnAutoYouTurn.Text = "Off";
+
+            //turn off youturn...
+            btnEnableAutoYouTurn.Enabled = false;
+            btnDistanceUp.Enabled = false;
+            btnDistanceDn.Enabled = false;
+            yt.isAutoYouTurnEnabled = false;
+            btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
 
             //reset all Port Module values
             mc.ResetAllModuleCommValues();
@@ -788,14 +768,6 @@ namespace AgOpenGPS
                     //Ignore and return
                     case 1:
                         break;
-
-                    ////Don't Save
-                    //case 2:
-                    //    JobClose();
-                    //    Properties.Settings.Default.setCurrentDir = "";
-                    //    Properties.Settings.Default.Save();
-                    //    currentFieldDirectory = "";
-                    //    break;
                 }
             }
         }
@@ -893,6 +865,7 @@ namespace AgOpenGPS
                 section[j].sectionOffRequest = false;
             }
 
+            FileSaveHeadlandYouTurn();
             FileSaveOuterBoundary();
             FileSaveField();
             FileSaveContour();
@@ -940,8 +913,7 @@ namespace AgOpenGPS
         {
             var form = new FormTimedMessage(timeout, s1, s2);
             form.Show();
-        }         
-        
+        }
    }//class FormGPS
 }//namespace AgOpenGPS
 

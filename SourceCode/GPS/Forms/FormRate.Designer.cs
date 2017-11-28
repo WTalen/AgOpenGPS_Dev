@@ -298,6 +298,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormRate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = " Rate Control Setup";
             this.Load += new System.EventHandler(this.FormRate_Load);
             this.groupBox1.ResumeLayout(false);

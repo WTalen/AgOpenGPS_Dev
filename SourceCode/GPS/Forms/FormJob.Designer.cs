@@ -121,6 +121,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(400, 597);
+            this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblResumeDirectory);
             this.Controls.Add(this.btnDeleteAB);
@@ -128,6 +129,7 @@
             this.Controls.Add(this.btnJobNew);
             this.Controls.Add(this.btnJobOpen);
             this.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
