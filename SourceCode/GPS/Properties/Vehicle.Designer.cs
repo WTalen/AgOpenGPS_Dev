@@ -442,5 +442,77 @@ namespace AgOpenGPS.Properties {
                 this["set_youToolWidths"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_FunctionEnter {
+            get {
+                return ((string)(this["seq_FunctionEnter"]));
+            }
+            set {
+                this["seq_FunctionEnter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_FunctionExit {
+            get {
+                return ((string)(this["seq_FunctionExit"]));
+            }
+            set {
+                this["seq_FunctionExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_ActionEnter {
+            get {
+                return ((string)(this["seq_ActionEnter"]));
+            }
+            set {
+                this["seq_ActionEnter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_ActionExit {
+            get {
+                return ((string)(this["seq_ActionExit"]));
+            }
+            set {
+                this["seq_ActionExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_DistanceEnter {
+            get {
+                return ((string)(this["seq_DistanceEnter"]));
+            }
+            set {
+                this["seq_DistanceEnter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        public string seq_DistanceExit {
+            get {
+                return ((string)(this["seq_DistanceExit"]));
+            }
+            set {
+                this["seq_DistanceExit"] = value;
+            }
+        }
     }
 }

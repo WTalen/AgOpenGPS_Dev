@@ -107,5 +107,23 @@
     <Setting Name="set_youToolWidths" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="seq_FunctionEnter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
+    <Setting Name="seq_FunctionExit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
+    <Setting Name="seq_ActionEnter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
+    <Setting Name="seq_ActionExit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
+    <Setting Name="seq_DistanceEnter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
+    <Setting Name="seq_DistanceExit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,0,0,0,0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

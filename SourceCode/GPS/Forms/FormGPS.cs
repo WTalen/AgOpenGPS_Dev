@@ -18,6 +18,7 @@ namespace AgOpenGPS
         #region // Class Props and instances
         //maximum sections available
         private const int MAXSECTIONS = 9;
+        public const int MAXFUNCTIONS = 5;
 
         //some test variables
         //double testDouble = 0;

@@ -317,17 +317,63 @@ namespace AgOpenGPS
 
         private void bntOK_Click(object sender, EventArgs e)
         {
+            //save all the sequences and events
+            SaveSequences();
+
             Properties.Vehicle.Default.set_youSkipHeight = mf.yt.rowSkipsHeight;
             Properties.Vehicle.Default.set_youSkipWidth = mf.yt.rowSkipsWidth;
 
             Properties.Vehicle.Default.set_youStartYouTurnAt = mf.yt.youTurnStartOffset;
+
+            StringBuilder sbEntry = new StringBuilder();
+            StringBuilder sbExit = new StringBuilder();
+
+            //Sequence functions 0,0,0,0,0
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS-1; i++)
+            {
+                sbEntry.Append(mf.seq.seqEnter[i].function.ToString());
+                sbEntry.Append(",");
+                sbExit.Append(mf.seq.seqExit[i].function.ToString());
+                sbExit.Append(",");
+            }
+            sbEntry.Append(mf.seq.seqEnter[FormGPS.MAXFUNCTIONS - 1].function.ToString());
+            sbExit.Append(mf.seq.seqExit[FormGPS.MAXFUNCTIONS - 1].function.ToString());
+
+            Properties.Vehicle.Default.seq_FunctionEnter = sbEntry.ToString();
+            Properties.Vehicle.Default.seq_FunctionExit = sbExit.ToString();
+            sbEntry.Clear(); sbExit.Clear();
+
+            //Sequence actions
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS-1; i++)
+            {
+                sbEntry.Append(mf.seq.seqEnter[i].action.ToString());
+                sbEntry.Append(",");
+                sbExit.Append(mf.seq.seqExit[i].action.ToString());
+                sbExit.Append(",");
+            }
+            sbEntry.Append(mf.seq.seqEnter[FormGPS.MAXFUNCTIONS - 1].action.ToString());
+            sbExit.Append(mf.seq.seqExit[FormGPS.MAXFUNCTIONS - 1].action.ToString());
+
+            Properties.Vehicle.Default.seq_ActionEnter = sbEntry.ToString();
+            Properties.Vehicle.Default.seq_ActionExit = sbExit.ToString();
+            sbEntry.Clear(); sbExit.Clear();
+
+            //Sequence Distances
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS-1; i++)
+            {
+                sbEntry.Append(mf.seq.seqEnter[i].distance.ToString());
+                sbEntry.Append(",");
+                sbExit.Append(mf.seq.seqExit[i].distance.ToString());
+                sbExit.Append(",");
+            }
+            sbEntry.Append(mf.seq.seqEnter[FormGPS.MAXFUNCTIONS - 1].distance.ToString());
+            sbExit.Append(mf.seq.seqExit[FormGPS.MAXFUNCTIONS - 1].distance.ToString());
+
+            Properties.Vehicle.Default.seq_DistanceEnter = sbEntry.ToString();
+            Properties.Vehicle.Default.seq_DistanceExit = sbExit.ToString();
+
+            //save it all
             Properties.Vehicle.Default.Save();
-
-            Properties.Vehicle.Default.Save();
-
-            //save all the sequences and events
-            SaveSequences();
-
             Close();
         }
 
@@ -505,5 +551,11 @@ namespace AgOpenGPS
         }
 
         #endregion Sequence select
+
+        private void btnResetAll_Click(object sender, EventArgs e)
+        {
+            mf.seq.ResetAllSequences();
+            PopulateSequencePages();
+        }
     }
 }

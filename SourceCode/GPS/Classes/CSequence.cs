@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -33,9 +34,10 @@ namespace AgOpenGPS
         public CSequence(FormGPS _f)
         {
             mf = _f;
+            string sentence;
 
-            seqEnter = new SeqEvent[5];
-            for (int i = 0; i < 5; i++)
+            seqEnter = new SeqEvent[FormGPS.MAXFUNCTIONS];
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
             {
                 seqEnter[i].function = 0;
                 seqEnter[i].action = 0;
@@ -43,14 +45,41 @@ namespace AgOpenGPS
                 seqEnter[i].distance = 0;
             }
 
-            seqExit = new SeqEvent[5];
-            for (int i = 0; i < 5; i++)
+            sentence = Properties.Vehicle.Default.seq_FunctionEnter;
+            string[] words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seqEnter[i].function);
+
+            sentence = Properties.Vehicle.Default.seq_ActionEnter;
+            words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seqEnter[i].action);
+
+            sentence = Properties.Vehicle.Default.seq_DistanceEnter;
+            words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+                double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seqEnter[i].distance);
+
+            seqExit = new SeqEvent[FormGPS.MAXFUNCTIONS];
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
             {
                 seqExit[i].function = 0;
                 seqExit[i].action = 0;
                 seqExit[i].isTrig = true;
                 seqExit[i].distance = 0;
             }
+
+            sentence = Properties.Vehicle.Default.seq_FunctionExit;
+            words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seqExit[i].function);
+
+            sentence = Properties.Vehicle.Default.seq_ActionExit;
+            words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seqExit[i].action);
+
+            sentence = Properties.Vehicle.Default.seq_DistanceExit;
+            words = sentence.Split(',');
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+                double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seqExit[i].distance);
+
         }
 
         public void DisableSeqEvent(int index, bool isEnter)
@@ -68,6 +97,24 @@ namespace AgOpenGPS
                 seqExit[index].action = 0;
                 seqExit[index].isTrig = true;
                 seqExit[index].distance = 0;
+            }
+        }
+
+        public void ResetAllSequences()
+        {
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+            {
+                seqEnter[i].function = 0;
+                seqEnter[i].action = 0;
+                seqEnter[i].isTrig = true;
+                seqEnter[i].distance = 0;
+            }
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+            {
+                seqExit[i].function = 0;
+                seqExit[i].action = 0;
+                seqExit[i].isTrig = true;
+                seqExit[i].distance = 0;
             }
         }
     }

@@ -103,12 +103,13 @@ namespace AgOpenGPS
 
                     writer.WriteLine("SlowSpeedCutoff," + Properties.Vehicle.Default.setVehicle_slowSpeedCutoff.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("ToolMinUnappliedPixels," + Properties.Vehicle.Default.setVehicle_minApplied.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
+
+                    writer.WriteLine("SequenceFunctionEnter;" + Properties.Vehicle.Default.seq_FunctionEnter);
+                    writer.WriteLine("SequenceFunctionExit;" + Properties.Vehicle.Default.seq_FunctionExit);
+                    writer.WriteLine("SequenceActionEnter;" + Properties.Vehicle.Default.seq_ActionEnter);
+                    writer.WriteLine("SequenceActionExit;" + Properties.Vehicle.Default.seq_ActionExit);
+                    writer.WriteLine("SequenceDistanceEnter;" + Properties.Vehicle.Default.seq_DistanceEnter);
+                    writer.WriteLine("SequenceDistanceExit;" + Properties.Vehicle.Default.seq_DistanceExit);
 
                     writer.WriteLine("IMUPitchZero," + Properties.Settings.Default.setIMU_pitchZero.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("IMURollZero," + Properties.Settings.Default.setIMU_rollZero.ToString(CultureInfo.InvariantCulture));
@@ -306,12 +307,18 @@ namespace AgOpenGPS
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Vehicle.Default.setVehicle_minApplied = int.Parse(words[1], CultureInfo.InvariantCulture);
 
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_FunctionEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_FunctionExit = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_ActionEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_ActionExit = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_DistanceEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_DistanceExit = words[1];
 
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setIMU_pitchZero = double.Parse(words[1], CultureInfo.InvariantCulture);
@@ -454,6 +461,32 @@ namespace AgOpenGPS
                         rollZero = Properties.Settings.Default.setIMU_rollZero;
                         isLogNMEA = Properties.Settings.Default.setMenu_IsLogNMEA;
                         minFixStepDist = Properties.Settings.Default.setF_minFixStep;
+
+                        string sentence = Properties.Vehicle.Default.seq_FunctionEnter;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqEnter[i].function);
+
+                        sentence = Properties.Vehicle.Default.seq_ActionEnter;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqEnter[i].action);
+
+                        sentence = Properties.Vehicle.Default.seq_DistanceEnter;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+                            double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seq.seqEnter[i].distance);
+
+                        sentence = Properties.Vehicle.Default.seq_FunctionExit;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqExit[i].function);
+
+                        sentence = Properties.Vehicle.Default.seq_ActionExit;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++) int.TryParse(words[i], out seq.seqExit[i].action);
+
+                        sentence = Properties.Vehicle.Default.seq_DistanceExit;
+                        words = sentence.Split(',');
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+                            double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seq.seqExit[i].distance);
 
                         //Application.Exit();
                     }
