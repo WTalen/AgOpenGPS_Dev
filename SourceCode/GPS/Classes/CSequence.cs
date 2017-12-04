@@ -79,17 +79,16 @@ namespace AgOpenGPS
             words = sentence.Split(',');
             for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
                 double.TryParse(words[i], NumberStyles.Float, CultureInfo.InvariantCulture, out seqExit[i].distance);
-
         }
 
         public void DisableSeqEvent(int index, bool isEnter)
         {
             if (isEnter)
             {
-                seqExit[index].function = 0;
-                seqExit[index].action = 0;
-                seqExit[index].isTrig = true;
-                seqExit[index].distance = 0;
+                seqEnter[index].function = 0;
+                seqEnter[index].action = 0;
+                seqEnter[index].isTrig = true;
+                seqEnter[index].distance = 0;
             }
             else
             {

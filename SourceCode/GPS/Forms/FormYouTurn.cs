@@ -256,7 +256,7 @@ namespace AgOpenGPS
             //save the exit fields
             if (cboxExitFunc0.SelectedIndex == 0)
             {
-                mf.seq.DisableSeqEvent(0, true);
+                mf.seq.DisableSeqEvent(0, false);
             }
             else
             {
@@ -268,7 +268,7 @@ namespace AgOpenGPS
 
             if (cboxExitFunc1.SelectedIndex == 0)
             {
-                mf.seq.DisableSeqEvent(1, true);
+                mf.seq.DisableSeqEvent(1, false);
             }
             else
             {
@@ -280,7 +280,7 @@ namespace AgOpenGPS
 
             if (cboxExitFunc2.SelectedIndex == 0)
             {
-                mf.seq.DisableSeqEvent(2, true);
+                mf.seq.DisableSeqEvent(2, false);
             }
             else
             {
@@ -292,7 +292,7 @@ namespace AgOpenGPS
 
             if (cboxExitFunc3.SelectedIndex == 0)
             {
-                mf.seq.DisableSeqEvent(3, true);
+                mf.seq.DisableSeqEvent(3, false);
             }
             else
             {
@@ -304,7 +304,7 @@ namespace AgOpenGPS
 
             if (cboxExitFunc4.SelectedIndex == 0)
             {
-                mf.seq.DisableSeqEvent(4, true);
+                mf.seq.DisableSeqEvent(4, false);
             }
             else
             {
