@@ -108,7 +108,7 @@
             // 
             this.lblKeepGoing.AutoSize = true;
             this.lblKeepGoing.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKeepGoing.Location = new System.Drawing.Point(239, 103);
+            this.lblKeepGoing.Location = new System.Drawing.Point(248, 103);
             this.lblKeepGoing.Name = "lblKeepGoing";
             this.lblKeepGoing.Size = new System.Drawing.Size(23, 25);
             this.lblKeepGoing.TabIndex = 74;
@@ -232,7 +232,7 @@
             // 
             this.btnBPoint.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBPoint.Image = global::AgOpenGPS.Properties.Resources.LetterBBlue;
-            this.btnBPoint.Location = new System.Drawing.Point(244, 153);
+            this.btnBPoint.Location = new System.Drawing.Point(253, 153);
             this.btnBPoint.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnBPoint.Name = "btnBPoint";
             this.btnBPoint.Size = new System.Drawing.Size(90, 93);
@@ -244,7 +244,7 @@
             // 
             this.btnAPoint.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAPoint.Image = global::AgOpenGPS.Properties.Resources.LetterABlue;
-            this.btnAPoint.Location = new System.Drawing.Point(244, 6);
+            this.btnAPoint.Location = new System.Drawing.Point(253, 6);
             this.btnAPoint.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAPoint.Name = "btnAPoint";
             this.btnAPoint.Size = new System.Drawing.Size(90, 93);
@@ -271,7 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(348, 514);
+            this.ClientSize = new System.Drawing.Size(397, 549);
             this.ControlBox = false;
             this.Controls.Add(this.lblKeepGoing);
             this.Controls.Add(this.btnDnABHeadingBy1);
@@ -295,6 +295,7 @@
             this.MinimizeBox = false;
             this.Name = "FormABLine";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AB Line";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormABLine_Load);

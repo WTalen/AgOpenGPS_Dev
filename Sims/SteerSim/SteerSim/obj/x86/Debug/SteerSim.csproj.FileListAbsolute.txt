@@ -18,3 +18,13 @@ C:\Users\Farm\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.pdb
 C:\Users\Farm\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csprojResolveAssemblyReference.cache
 C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csprojResolveAssemblyReference.cache
 C:\Users\Leno\Desktop\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csproj.CoreCompileInputs.cache
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\App\SteerSim.exe.config
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\App\SteerSim.exe
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\App\SteerSim.pdb
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csprojResolveAssemblyReference.cache
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.FormSteerSim.resources
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.Properties.Resources.resources
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csproj.GenerateResource.Cache
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.csproj.CoreCompileInputs.cache
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.exe
+C:\Users\Farm\Desktop\AgOpenGPS_Dev\Sims\SteerSim\SteerSim\obj\x86\Debug\SteerSim.pdb

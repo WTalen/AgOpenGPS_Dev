@@ -11,8 +11,9 @@ namespace AgOpenGPS
 {
     public partial class FormGPS
     {
-        // Server socket
-        private Socket serverSocket;
+        // Send and Recv socket
+        private Socket sendSocket;
+        private Socket recvSocket;
 
         //endpoint of the auto steer module
         IPEndPoint epAutoSteer;
@@ -34,7 +35,7 @@ namespace AgOpenGPS
                 if (byteData.Length != 0)
 
                     // Send packet to the zero
-                    serverSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAutoSteer, new AsyncCallback(SendData), null);
+                    sendSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAutoSteer, new AsyncCallback(SendData), null);
             }
             catch (Exception e)
             {
@@ -48,7 +49,7 @@ namespace AgOpenGPS
         {
             try
             {
-                serverSocket.EndSend(asyncResult);
+                sendSocket.EndSend(asyncResult);
             }
             catch (Exception e)
             {
@@ -66,13 +67,13 @@ namespace AgOpenGPS
                 EndPoint epSender = new IPEndPoint(IPAddress.Any, 0);
             
                 // Receive all data
-                int msgLen = serverSocket.EndReceiveFrom(asyncResult, ref epSender);
+                int msgLen = recvSocket.EndReceiveFrom(asyncResult, ref epSender);
 
                 byte[] localMsg = new byte[msgLen];
                 Array.Copy(buffer, localMsg, msgLen);
 
                 // Listen for more connections again...
-                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epSender, new AsyncCallback(ReceiveData), epSender);
+                recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epSender, new AsyncCallback(ReceiveData), epSender);
 
                 string text = Encoding.ASCII.GetString(localMsg);
 

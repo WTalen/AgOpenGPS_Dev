@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using SharpGL;
 
-
 namespace AgOpenGPS
 {
     public partial class FormHeadland : Form
@@ -17,6 +16,7 @@ namespace AgOpenGPS
 
         private double maxFieldX, maxFieldY, minFieldX, minFieldY, fieldCenterX, fieldCenterY, maxFieldDistance;
         private double heading, oneSide, distance;
+        private int headWidths;
 
         public FormHeadland(Form callingForm)
         {
@@ -26,6 +26,10 @@ namespace AgOpenGPS
 
         private void FormHeadland_Load(object sender, EventArgs e)
         {
+            nudWidths.ValueChanged -= nudWidths_ValueChanged;
+            headWidths = Properties.Vehicle.Default.set_youToolWidths;
+            nudWidths.Value = headWidths;
+            nudWidths.ValueChanged += nudWidths_ValueChanged;
 
             if (mf.hl.isSet)
             {
@@ -35,7 +39,6 @@ namespace AgOpenGPS
              //create a single tool width headland
                BuildHeadland();
             }
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -43,7 +46,7 @@ namespace AgOpenGPS
             mf.hl.ResetHeadland();
         }
 
-        Point fixPt;
+        private Point fixPt;
 
         private void openGLHead_MouseDown(object sender, MouseEventArgs e)
         {
@@ -123,8 +126,16 @@ namespace AgOpenGPS
             }
         }
 
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void nudWidths_ValueChanged(object sender, EventArgs e)
         {
+            headWidths = (int)nudWidths.Value;
+            Properties.Vehicle.Default.set_youToolWidths = (int)nudWidths.Value;
+            Properties.Vehicle.Default.Save();
             BuildHeadland();
         }
 
@@ -201,19 +212,17 @@ namespace AgOpenGPS
             double area = mf.hl.CalculateHeadlandArea();
             if (mf.isMetric)   lblArea.Text = Math.Round(area * 0.0001, 1) + " Ha";
             else lblArea.Text = Math.Round(area * 0.000247105, 1) + " Ac";
-
         }
 
         private void FixHeadlandList()
         {
-
             //make sure distance isn't too small between points on headland
             int headCount = mf.hl.ptList.Count;
             for (int i = 0; i < headCount - 1; i++)
             {
                 distance = mf.pn.Distance(mf.hl.ptList[i].northing, mf.hl.ptList[i].easting
                                 , mf.hl.ptList[i + 1].northing, mf.hl.ptList[i + 1].easting);
-                if (distance < (5.0))
+                if (distance < 4)
                 {
                     mf.hl.ptList.RemoveAt(i + 1);
                     headCount = mf.hl.ptList.Count;
@@ -229,7 +238,7 @@ namespace AgOpenGPS
                 if (j == headCount) j = 0;
                 distance = mf.pn.Distance(mf.hl.ptList[i].northing, mf.hl.ptList[i].easting
                                 , mf.hl.ptList[j].northing, mf.hl.ptList[j].easting);
-                if (distance > (7.0))
+                if (distance > (4.1))
                 {
                     point.easting = (mf.hl.ptList[i].easting + mf.hl.ptList[j].easting) / 2.0;
                     point.northing = (mf.hl.ptList[i].northing + mf.hl.ptList[j].northing) / 2.0;
@@ -313,13 +322,13 @@ namespace AgOpenGPS
                         for (int i = 0; i < count2; i += 3)
                         {
                             //determine if point is in frustum or not since 2d only 4 planes required
-                            if (mf.frustum[0] * triList[i].easting + mf.frustum[1] * triList[i].northing + mf.frustum[3] <= 0)
+                            if ((mf.frustum[0] * triList[i].easting) + (mf.frustum[1] * triList[i].northing) + mf.frustum[3] <= 0)
                                 continue;//right
-                            if (mf.frustum[4] * triList[i].easting + mf.frustum[5] * triList[i].northing + mf.frustum[7] <= 0)
+                            if ((mf.frustum[4] * triList[i].easting) + (mf.frustum[5] * triList[i].northing) + mf.frustum[7] <= 0)
                                 continue;//left
-                            if (mf.frustum[16] * triList[i].easting + mf.frustum[17] * triList[i].northing + mf.frustum[19] <= 0)
+                            if ((mf.frustum[16] * triList[i].easting) + (mf.frustum[17] * triList[i].northing) + mf.frustum[19] <= 0)
                                 continue;//bottom
-                            if (mf.frustum[20] * triList[i].easting + mf.frustum[21] * triList[i].northing + mf.frustum[23] <= 0)
+                            if ((mf.frustum[20] * triList[i].easting) + (mf.frustum[21] * triList[i].northing) + mf.frustum[23] <= 0)
                                 continue;//top
 
                             //point is in frustum so draw the entire patch
@@ -332,7 +341,7 @@ namespace AgOpenGPS
                             //draw the triangle in each triangle strip
                             glh.Begin(OpenGL.GL_TRIANGLE_STRIP);
                             count2 = triList.Count;
-                            int mipmap = 8;
+                            const int mipmap = 8;
 
                             //if large enough patch and camera zoomed out, fake mipmap the patches, skip triangles
                             if (count2 >= (mipmap + 2))
@@ -347,7 +356,6 @@ namespace AgOpenGPS
                                     if (count2 - i <= (mipmap + 2)) step = 0;
                                 }
                             }
-
                             else { for (int i = 0; i < count2; i++) glh.Vertex(triList[i].easting, triList[i].northing, 0); }
                             glh.End();
                         }
@@ -413,7 +421,6 @@ namespace AgOpenGPS
         //determine mins maxs of patches and whole field.
         private void CalculateMinMax()
         {
-
             minFieldX = 9999999; minFieldY = 9999999;
             maxFieldX = -9999999; maxFieldY = -9999999;
 
@@ -455,7 +462,6 @@ namespace AgOpenGPS
 
                     if (dist > dist2) maxFieldDistance = (dist);
                     else maxFieldDistance = (dist2);
-
 
                     if (maxFieldDistance < 200) maxFieldDistance = 200;
                     if (maxFieldDistance > 19900) maxFieldDistance = 19900;

@@ -210,6 +210,7 @@
             this.btnOK.Text = "Save";
             this.btnOK.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // FormHeadland
             // 
@@ -234,6 +235,8 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormHeadland";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Headland Designer";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormHeadland_Load);
             ((System.ComponentModel.ISupportInitialize)(this.openGLHead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidths)).EndInit();

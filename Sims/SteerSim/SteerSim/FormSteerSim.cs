@@ -12,7 +12,8 @@ namespace SteerSim
     public partial class FormSteerSim : Form
     {
         // Server socket
-        private Socket serverSocket;
+        private Socket sendSocket;
+        private Socket recvSocket;
 
         //endpoint of the server
         IPEndPoint epAgOpenServer;
@@ -174,7 +175,7 @@ namespace SteerSim
         {
             try
             {
-                serverSocket.EndSend(asyncResult);
+                sendSocket.EndSend(asyncResult);
             }
             catch (Exception ex)
             {
@@ -191,13 +192,13 @@ namespace SteerSim
                 EndPoint epSender = new IPEndPoint(IPAddress.Any, 0);
 
                 // Receive all data
-                int msgLen = serverSocket.EndReceiveFrom(asyncResult, ref epSender);
+                int msgLen = recvSocket.EndReceiveFrom(asyncResult, ref epSender);
 
                 byte[] localMsg = new byte[msgLen];
                 Array.Copy(buffer, localMsg, msgLen);
 
                 // Listen for more connections again...
-                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epSender, 
+                recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None, ref epSender, 
                                                 new AsyncCallback(ReceiveData), epSender);
 
                 string text = Encoding.ASCII.GetString(localMsg);
@@ -234,7 +235,7 @@ namespace SteerSim
                 if (byteData.Length != 0)
                 {
                     // Send packet to the server
-                    serverSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAgOpenServer, new AsyncCallback(SendData), null);
+                    sendSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAgOpenServer, new AsyncCallback(SendData), null);
                 }
 
                 //not really necessary but does show what was in buffer that was sent
@@ -253,25 +254,33 @@ namespace SteerSim
                 // Initialise the delegate which updates the status
                 updateStatusDelegate = new UpdateStatusDelegate(UpdateStatus);
 
-                // Initialise the socket
-                serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                // Initialise the send socket
+                sendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                
+                // Initialise the recv socket
+                recvSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                // Initialise the IPEndPoint and listen on po 8888
-                IPEndPoint server = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.set_thisPort);
+                // Initialise the IPEndPoint for the server to send on port 8887
+                IPEndPoint server = new IPEndPoint(IPAddress.Any, 8887);
+                sendSocket.Bind(server);
 
-                //IP address and port of AgOpenServer
+                // Initialise the IPEndPoint for and listen on port 8888
+                IPEndPoint client = new IPEndPoint(IPAddress.Any, 8888);
+                recvSocket.Bind(client);
+
+                //// Initialise the IPEndPoint and listen on po 8888
+                //IPEndPoint server = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.set_thisPort);
+
+                ////IP address and port of AgOpenServer
                 IPAddress agOpenIP = IPAddress.Parse(Properties.Settings.Default.set_IP);
                 epAgOpenServer = new IPEndPoint(agOpenIP, Properties.Settings.Default.set_port);
 
-                // Associate the socket with this IP address and port
-                serverSocket.Bind(server);
-
-                // Initialise the IPEndPoint for the client
-                EndPoint client = new IPEndPoint(IPAddress.Any, 0);
+                // Initialise the IPEndPoint for the listening
+                EndPoint clientEp = new IPEndPoint(IPAddress.Any, 0);
 
                 // Start listening for incoming data
-                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
-                                                ref client, new AsyncCallback(ReceiveData), serverSocket);
+                recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
+                                                ref clientEp, new AsyncCallback(ReceiveData), recvSocket);
 
                 lblStatus.Text = "Listening";
 

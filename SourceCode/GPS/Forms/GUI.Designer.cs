@@ -438,9 +438,7 @@ namespace AgOpenGPS
                     btnLeftYouTurn.Visible = false;
 
                     btnEnableAutoYouTurn.Enabled = false;
-                    btnDistanceUp.Enabled = false;
-                    btnDistanceDn.Enabled = false;
-                    yt.isAutoYouTurnEnabled = false;
+                    yt.isYouTurnBtnOn = false;
                     btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
                 }
 
@@ -452,18 +450,14 @@ namespace AgOpenGPS
                     btnRightYouTurn.Visible = true;
                     btnLeftYouTurn.Visible = true;
 
-                    //auto YouTurn shutdown
-                    yt.isAutoYouTurnEnabled = false;
-                    yt.CancelYouTurn();
-                    autoTurnInProgressBar = 0;
+                    //auto YouTurn disabled
+                    yt.isYouTurnBtnOn = false;
+                    yt.ResetYouTurnAndSequenceEvents();
+                    youTurnProgressBar = 0;
 
                     //turn off youturn...
                     btnEnableAutoYouTurn.Enabled = true;
-                    btnDistanceUp.Enabled = true;
-                    btnDistanceDn.Enabled = true;
                     btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
-
-
                 }
             }
         }
@@ -482,9 +476,7 @@ namespace AgOpenGPS
                 btnLeftYouTurn.Visible = false;
 
                 btnEnableAutoYouTurn.Enabled = false;
-                btnDistanceUp.Enabled = false;
-                btnDistanceDn.Enabled = false;
-                yt.isAutoYouTurnEnabled = false;
+                yt.isYouTurnBtnOn = false;
                 btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
             }
 
@@ -498,14 +490,12 @@ namespace AgOpenGPS
                     btnLeftYouTurn.Visible = true;
 
                     //auto YouTurn shutdown
-                    yt.isAutoYouTurnEnabled = false;
-                    yt.CancelYouTurn();
-                    autoTurnInProgressBar = 0;
+                    yt.isYouTurnBtnOn = false;
+                    yt.ResetYouTurnAndSequenceEvents();
+                    youTurnProgressBar = 0;
 
                     //turn off youturn...
                     btnEnableAutoYouTurn.Enabled = true;
-                    btnDistanceUp.Enabled = true;
-                    btnDistanceDn.Enabled = true;
                     btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
                 }
             }
@@ -861,61 +851,40 @@ namespace AgOpenGPS
             form.ShowDialog();
         }
 
+        private void btnYouTurnReverse_Click(object sender, EventArgs e)
+        {
+            if (!yt.isYouTurnTriggerPointSet)
+            {
+                //is it turning right already?
+                if (yt.isYouTurnRight)
+                {
+                    yt.isYouTurnRight = false;
+                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
+                    AutoYouTurnButtonsReset();
+                }
+                else
+                {
+                    //make it turn the other way
+                    yt.isYouTurnRight = true;
+                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
+                    AutoYouTurnButtonsReset();
+                }
+            }
+        }
+
         //YouTurn in the tab control
         private void btnEnableAutoYouTurn_Click(object sender, EventArgs e)
         {
-            if (!yt.isAutoYouTurnEnabled)
+            if (!yt.isYouTurnBtnOn)
             {
-                yt.isAutoYouTurnEnabled = true;
+                yt.isYouTurnBtnOn = true;
                 btnEnableAutoYouTurn.Image = Properties.Resources.Youturn80;
             }
             else
             {
-                yt.isAutoYouTurnEnabled = false;
+                yt.isYouTurnBtnOn = false;
                 btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
             }
-        }
-
-        private void btnDistanceUp_Click(object sender, EventArgs e)
-        {
-            if (yt.startYouTurnAt++ > 49) yt.startYouTurnAt = 50;
-            lblDistance.Text = Math.Abs(yt.startYouTurnAt).ToString() + " m";
-            if (yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before";
-            else lblWhenTrig.Text = "After";
-        }
-
-        private void btnDistanceDn_Click(object sender, EventArgs e)
-        {
-            if (yt.startYouTurnAt-- < -48) yt.startYouTurnAt = -49;
-            lblDistance.Text = Math.Abs(yt.startYouTurnAt).ToString() + " m";
-            if (yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before";
-            else lblWhenTrig.Text = "After";
-
-        }
-
-        private void tabPage4_Enter(object sender, EventArgs e)
-        {
-            lblDistance.Text = yt.startYouTurnAt.ToString();
-            if (yt.isAutoYouTurnEnabled)
-            {
-                btnEnableAutoYouTurn.Image = Properties.Resources.Youturn80;
-                lblDistance.Text = Math.Abs(yt.startYouTurnAt).ToString() + " m";
-                if (yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before";
-                else lblWhenTrig.Text = "After";
-            }
-            else
-            {
-                btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
-                lblDistance.Text = Math.Abs(yt.startYouTurnAt).ToString() + " m";
-                if (yt.startYouTurnAt < 0) lblWhenTrig.Text = "Before";
-                else lblWhenTrig.Text = "After";
-            }
-        }
-
-        private void tabPage4_Leave(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.setAS_startYouTurnAt = yt.startYouTurnAt;
-            Properties.Settings.Default.Save();
         }
 
         private void btnHeadlandsMenu_Click(object sender, EventArgs e)
@@ -1093,33 +1062,33 @@ namespace AgOpenGPS
 
         private void btnLeftYouTurn_Click(object sender, EventArgs e)
         {
-            if (yt.isAutoPointSet)
+            if (yt.isYouTurnTriggerPointSet)
             {
                 //is it turning left already?
-                if (!yt.isAutoTurnRight)
+                if (!yt.isYouTurnRight)
                 {
-                    yt.CancelYouTurn();
+                    yt.ResetYouTurnAndSequenceEvents();
                     distanceToStartAutoTurn = -1;
                     AutoYouTurnButtonsReset();
-                    autoTurnInProgressBar = 0;
+                    youTurnProgressBar = 0;
                 }
                 else
                 {
-                    yt.isAutoTurnRight = false;
+                    yt.isYouTurnRight = false;
                     AutoYouTurnButtonsLeftTurn();
                 }
             }
             else
             {
-                if (yt.isYouTurnOn)
+                if (yt.isYouTurnShapeDisplayed)
                 {
-                    yt.CancelYouTurn();
+                    yt.ResetYouTurnAndSequenceEvents();
                     distanceToStartAutoTurn = -1;
                     AutoYouTurnButtonsReset();
                 }
                 else
                 {
-                    yt.isYouTurnOn = true;
+                    yt.isYouTurnShapeDisplayed = true;
                     yt.BuildYouTurnListToRight(false);
                     AutoYouTurnButtonsLeftTurn();
                 }
@@ -1128,34 +1097,34 @@ namespace AgOpenGPS
         private void btnRightYouTurn_Click(object sender, EventArgs e)
         {
             //is it already turning right, then cancel autoturn
-            if (yt.isAutoPointSet)
+            if (yt.isYouTurnTriggerPointSet)
             {
                 //is it turning right already?
-                if (yt.isAutoTurnRight)
+                if (yt.isYouTurnRight)
                 {
-                    yt.CancelYouTurn();
+                    yt.ResetYouTurnAndSequenceEvents();
                     distanceToStartAutoTurn = -1;
-                    autoTurnInProgressBar = 0;
+                    youTurnProgressBar = 0;
                     AutoYouTurnButtonsReset();
                 }
                 else
                 {
                     //make it turn the other way
-                    yt.isAutoTurnRight = true;
+                    yt.isYouTurnRight = true;
                     AutoYouTurnButtonsRightTurn();
                 }
             }
             else
             {
-                if (yt.isYouTurnOn)
+                if (yt.isYouTurnShapeDisplayed)
                 {
-                    yt.CancelYouTurn();
+                    yt.ResetYouTurnAndSequenceEvents();
                     distanceToStartAutoTurn = -1;
                     AutoYouTurnButtonsReset();
                 }
                 else
                 {
-                    yt.isYouTurnOn = true;
+                    yt.isYouTurnShapeDisplayed = true;
                     yt.BuildYouTurnListToRight(true);
                     AutoYouTurnButtonsRightTurn();
                 }
@@ -1190,7 +1159,7 @@ namespace AgOpenGPS
             btnRightYouTurn.Width = 80;
 
             // why yes it is backwards, puzzling
-            if (!yt.isAutoTurnRight)
+            if (!yt.isYouTurnRight)
             {
                 btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
                 btnRightYouTurn.BackColor = Color.LightGreen;
@@ -1657,7 +1626,7 @@ namespace AgOpenGPS
 
                     //boundary
                     toolStripStatusLabelBoundaryArea.Text = boundz.areaHectare;
-                    if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(distPt)) + "m";
+                    if (distPivot > 0) strip2BoundaryDistanceAway.Text = ((int)(distPivot)) + "m";
                     else strip2BoundaryDistanceAway.Text = "***";
 
                     //rate
@@ -1683,7 +1652,7 @@ namespace AgOpenGPS
 
                     //Boundary
                     toolStripStatusLabelBoundaryArea.Text = boundz.areaAcre;
-                    if (distPt > 0) strip2BoundaryDistanceAway.Text = ((int)(glm.m2ft * distPt)) + "ft";
+                    if (distPivot > 0) strip2BoundaryDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
                     else strip2BoundaryDistanceAway.Text = "***";
 
                     //rate
@@ -1705,7 +1674,7 @@ namespace AgOpenGPS
                 strip2Roll.Text = RollInDegrees;
                 strip2GyroHeading.Text = GyroInDegrees;
                 strip2GPSHeading.Text = GPSHeading;
-                strip2TurnProgressBar.Value = autoTurnInProgressBar;
+                strip2TurnProgressBar.Value = youTurnProgressBar;
 
                 //up in the menu a few pieces of info
                 if (isJobStarted)

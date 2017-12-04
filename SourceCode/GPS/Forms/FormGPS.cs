@@ -126,6 +126,8 @@ namespace AgOpenGPS
         //headland path instance
         public CHeadland hl;
 
+        public CSequence seq;
+
         #endregion
 
     // Main GPS Form ................................................................................
@@ -176,6 +178,8 @@ namespace AgOpenGPS
 
             //rate object
             rc = new CRate(this);
+
+            seq = new CSequence(this);
 
             //start the stopwatch
             swFrame.Start();
@@ -298,7 +302,7 @@ namespace AgOpenGPS
 
             //set previous job directory
             currentFieldDirectory = Settings.Default.setF_CurrentDir;
-            vehiclefileName = Settings.Default.setVehicle_Name;
+            vehiclefileName = Vehicle.Default.setVehicle_Name;
 
             //clear the flags
             flagPts.Clear();
@@ -446,24 +450,32 @@ namespace AgOpenGPS
                 updateRecvMessageDelegate = UpdateRecvMessage;
 
                 // Initialise the socket
-                serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                sendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                recvSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 // Initialise the IPEndPoint for the server and listen on port 9999
-                IPEndPoint server = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.setIP_thisPort);
+                IPEndPoint recv = new IPEndPoint(IPAddress.Any, Properties.Settings.Default.setIP_thisPort);
+
+                // Associate the socket with this IP address and port
+                recvSocket.Bind(recv);
+
+                // Initialise the send socket
+                sendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                // Initialise the IPEndPoint for the server to send on port 9998
+                IPEndPoint server = new IPEndPoint(IPAddress.Any, 9998);
+                sendSocket.Bind(server);
 
                 //IP address and port of Auto Steer server
                 IPAddress epIP = IPAddress.Parse(Properties.Settings.Default.setIP_AutoSteerIP);
                 epAutoSteer = new IPEndPoint(epIP, Properties.Settings.Default.setIP_AutoSteerPort);
 
-                // Associate the socket with this IP address and port
-                serverSocket.Bind(server);
-
                 // Initialise the IPEndPoint for the client - async listner client only!
                 EndPoint client = new IPEndPoint(IPAddress.Any, 0);
 
                 // Start listening for incoming data
-                serverSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
-                                                ref client, ReceiveData, serverSocket);
+                recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
+                                                ref client, ReceiveData, recvSocket);
             }
             catch (Exception e)
             {
@@ -521,29 +533,29 @@ namespace AgOpenGPS
         //function to set section positions
         public void SectionSetPosition()
         {
-            section[0].positionLeft = (double)Settings.Default.setSection_position1 + Settings.Default.setVehicle_toolOffset;
-            section[0].positionRight = (double)Settings.Default.setSection_position2 + Settings.Default.setVehicle_toolOffset;
+            section[0].positionLeft = (double)Vehicle.Default.setSection_position1 + Vehicle.Default.setVehicle_toolOffset;
+            section[0].positionRight = (double)Vehicle.Default.setSection_position2 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[1].positionLeft = (double)Settings.Default.setSection_position2 + Settings.Default.setVehicle_toolOffset;
-            section[1].positionRight = (double)Settings.Default.setSection_position3 + Settings.Default.setVehicle_toolOffset;
+            section[1].positionLeft = (double)Vehicle.Default.setSection_position2 + Vehicle.Default.setVehicle_toolOffset;
+            section[1].positionRight = (double)Vehicle.Default.setSection_position3 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[2].positionLeft = (double)Settings.Default.setSection_position3 + Settings.Default.setVehicle_toolOffset;
-            section[2].positionRight = (double)Settings.Default.setSection_position4 + Settings.Default.setVehicle_toolOffset;
+            section[2].positionLeft = (double)Vehicle.Default.setSection_position3 + Vehicle.Default.setVehicle_toolOffset;
+            section[2].positionRight = (double)Vehicle.Default.setSection_position4 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[3].positionLeft = (double)Settings.Default.setSection_position4 + Settings.Default.setVehicle_toolOffset;
-            section[3].positionRight = (double)Settings.Default.setSection_position5 + Settings.Default.setVehicle_toolOffset;
+            section[3].positionLeft = (double)Vehicle.Default.setSection_position4 + Vehicle.Default.setVehicle_toolOffset;
+            section[3].positionRight = (double)Vehicle.Default.setSection_position5 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[4].positionLeft = (double)Settings.Default.setSection_position5 + Settings.Default.setVehicle_toolOffset;
-            section[4].positionRight = (double)Settings.Default.setSection_position6 + Settings.Default.setVehicle_toolOffset;
+            section[4].positionLeft = (double)Vehicle.Default.setSection_position5 + Vehicle.Default.setVehicle_toolOffset;
+            section[4].positionRight = (double)Vehicle.Default.setSection_position6 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[5].positionLeft = (double)Settings.Default.setSection_position6 + Settings.Default.setVehicle_toolOffset;
-            section[5].positionRight = (double)Settings.Default.setSection_position7 + Settings.Default.setVehicle_toolOffset;
+            section[5].positionLeft = (double)Vehicle.Default.setSection_position6 + Vehicle.Default.setVehicle_toolOffset;
+            section[5].positionRight = (double)Vehicle.Default.setSection_position7 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[6].positionLeft = (double)Settings.Default.setSection_position7 + Settings.Default.setVehicle_toolOffset;
-            section[6].positionRight = (double)Settings.Default.setSection_position8 + Settings.Default.setVehicle_toolOffset;
+            section[6].positionLeft = (double)Vehicle.Default.setSection_position7 + Vehicle.Default.setVehicle_toolOffset;
+            section[6].positionRight = (double)Vehicle.Default.setSection_position8 + Vehicle.Default.setVehicle_toolOffset;
 
-            section[7].positionLeft = (double)Settings.Default.setSection_position8 + Settings.Default.setVehicle_toolOffset;
-            section[7].positionRight = (double)Settings.Default.setSection_position9 + Settings.Default.setVehicle_toolOffset;
+            section[7].positionLeft = (double)Vehicle.Default.setSection_position8 + Vehicle.Default.setVehicle_toolOffset;
+            section[7].positionRight = (double)Vehicle.Default.setSection_position9 + Vehicle.Default.setVehicle_toolOffset;
         }
 
         //function to calculate the width of each section and update
@@ -596,8 +608,6 @@ namespace AgOpenGPS
 
             btnRightYouTurn.Enabled = false;
             btnLeftYouTurn.Enabled = false;
-
-
             btnFlag.Enabled = true;
 
             LineUpManualBtns();
@@ -647,7 +657,9 @@ namespace AgOpenGPS
             {
                 //clean out the lists
                 section[j].patchList.Clear();
+#pragma warning disable RCS1146 // Use conditional access.
                 if (section[j].triangleList != null) section[j].triangleList.Clear();
+#pragma warning restore RCS1146 // Use conditional access.
             }
 
             //clear out the contour Lists
@@ -710,15 +722,13 @@ namespace AgOpenGPS
             btnLeftYouTurn.Enabled = false;
 
             //auto YouTurn shutdown
-            yt.isAutoYouTurnEnabled = false;
-            yt.CancelYouTurn();
-            autoTurnInProgressBar = 0;
+            yt.isYouTurnBtnOn = false;
+            yt.ResetYouTurnAndSequenceEvents();
+            youTurnProgressBar = 0;
 
             //turn off youturn...
             btnEnableAutoYouTurn.Enabled = false;
-            btnDistanceUp.Enabled = false;
-            btnDistanceDn.Enabled = false;
-            yt.isAutoYouTurnEnabled = false;
+            yt.isYouTurnBtnOn = false;
             btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
 
             //reset all Port Module values
@@ -906,6 +916,87 @@ namespace AgOpenGPS
             catch (Exception ex)
             {
                 MessageBox.Show("Error in WriteErrorLog: " + ex.Message, "Error Logging", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        //called by you turn class to do the actual sequence events
+        public void DoYouTurnSequenceEvent(int function, int action)
+        {
+            switch (function)
+            {
+                case 0: //should not be here - it means no function at all
+                    TimedMessageBox(2000, "ID 0 ??????", "YouTurn fucked up");
+                    break;
+
+                case 1: //Manual button
+                    if (action == 0) //turn auto off
+                    {
+                        if (manualBtnState != btnStates.Off)
+                        {
+                            btnManualOffOn.PerformClick();
+                        }
+                    }
+                    else
+                    {
+                        if (manualBtnState != btnStates.On)
+                        {
+                            btnManualOffOn.PerformClick();
+                        }
+                    }
+                    break;
+
+                case 2: //Auto Button
+                    if (action == 0) //turn auto off
+                    {
+                        if (autoBtnState != btnStates.Off)
+                        {
+                            btnSectionOffAutoOn.PerformClick();
+                        }
+                    }
+                    else
+                    {
+                        if (autoBtnState != btnStates.Auto)
+                        {
+                            btnSectionOffAutoOn.PerformClick();
+                        }
+                    }
+                    break;
+
+                case 3: //Relay 1
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, "Relay 1 ", "Turn Off");
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, "Relay 1 ", "Turn On");
+                    }
+                    break;
+
+                case 4: //Relay 2
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, "Relay 2 ", "Turn Off");
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, "Relay 2 ", "Turn On");
+                    }
+                    break;
+
+                case 5: //thingy
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, "Thingy ", "Turn Off");
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, "Thingy ", "Turn On");
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
 

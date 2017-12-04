@@ -186,10 +186,10 @@ namespace AgOpenGPS
                 hl.DrawHeadlandLine();
 
                 //screen text for debug
-                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "turn: " + yt.isAutoTurnRight.ToString());
-                //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, " cntr: " + Convert.ToString(fiveSecondCounter));
-                //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Roll: " + Convert.ToString(Math.Round((double)(mc.rollRaw/16),1)));
-                //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "InBnd: " + inside.ToString());
+                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "Head: " + distPivot.ToString("N1"));
+                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "Tool: " + distTool.ToString("N1"));
+                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "You: " + yt.isYouTurnTriggered.ToString());
+                gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "Seq: " + yt.isSequenceTriggered.ToString());
                 //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
                 //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Fixed: " + Convert.ToString(Math.Round(glm.toDegrees(gyroCorrected), 2)));
                 //gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "L/Min: " + Convert.ToString(rc.CalculateRateLitersPerMinute()));

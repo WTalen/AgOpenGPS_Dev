@@ -1133,9 +1133,29 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap YouTurnBackground {
+            get {
+                object obj = ResourceManager.GetObject("YouTurnBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap YouTurnNo {
             get {
                 object obj = ResourceManager.GetObject("YouTurnNo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YouTurnReverse {
+            get {
+                object obj = ResourceManager.GetObject("YouTurnReverse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

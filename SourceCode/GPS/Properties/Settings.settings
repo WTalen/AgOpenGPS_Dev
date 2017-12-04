@@ -11,15 +11,6 @@
     <Setting Name="setPort_baudRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4800</Value>
     </Setting>
-    <Setting Name="setVehicle_toolWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="setVehicle_toolOverlap" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.1</Value>
-    </Setting>
-    <Setting Name="setVehicle_toolTrailingHitchLength" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-2</Value>
-    </Setting>
     <Setting Name="setWindow_Location" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">30, 30</Value>
     </Setting>
@@ -32,65 +23,11 @@
     <Setting Name="setWindow_Minimized" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setVehicle_numSections" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
-    </Setting>
-    <Setting Name="setSection_position1" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">-8.0</Value>
-    </Setting>
-    <Setting Name="setSection_position2" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">-3.0</Value>
-    </Setting>
-    <Setting Name="setSection_position3" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">3.0</Value>
-    </Setting>
-    <Setting Name="setSection_position4" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">8.0</Value>
-    </Setting>
-    <Setting Name="setSection_position5" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="setSection_position6" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="setVehicle_antennaHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">3</Value>
-    </Setting>
-    <Setting Name="setVehicle_lookAhead" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">2</Value>
-    </Setting>
     <Setting Name="setPort_portNameRateRelay" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM Section...</Value>
     </Setting>
     <Setting Name="setPort_wasRateRelayConnected" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="setVehicle_isToolTrailing" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="setVehicle_toolOffset" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="setVehicle_isToolBehindPivot" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="setVehicle_antennaPivot" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1.1</Value>
-    </Setting>
-    <Setting Name="setVehicle_wheelbase" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">5</Value>
-    </Setting>
-    <Setting Name="setVehicle_hitchLength" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-0.5</Value>
-    </Setting>
-    <Setting Name="setVehicle_turnOffDelay" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="setVehicle_isPivotBehindAntenna" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="setVehicle_isSteerAxleAhead" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="setCam_isAtanCam" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -137,26 +74,11 @@
     <Setting Name="setF_IsWorkSwitchEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setVehicle_Name" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Default - </Value>
-    </Setting>
-    <Setting Name="setSection_position7" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="setSection_position8" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="setSection_position9" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="setPort_portNameAutoSteer" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM AS</Value>
     </Setting>
     <Setting Name="setPort_wasAutoSteerConnected" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="setVehicle_slowSpeedCutoff" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="setIMU_pitchZero" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -169,9 +91,6 @@
     </Setting>
     <Setting Name="setF_minFixStep" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="setVehicle_tankTrailingHitchLength" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">-1.5</Value>
     </Setting>
     <Setting Name="setAS_Ko" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">5</Value>
@@ -194,23 +113,11 @@
     <Setting Name="setF_UserTotalArea" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setVehicle_minApplied" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">30</Value>
-    </Setting>
     <Setting Name="setAS_minSteerPWM" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="setF_boundaryTriggerDistance" Type="System.Double" Scope="User">
       <Value Profile="(Default)">6</Value>
-    </Setting>
-    <Setting Name="setVehicle_goalPointLookAhead" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">3</Value>
-    </Setting>
-    <Setting Name="setVehicle_maxAngularVelocity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="setVehicle_maxSteerAngle" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="setAS_maxIntegral" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">20</Value>
@@ -232,9 +139,6 @@
     </Setting>
     <Setting Name="setRate_rate2" Type="System.Double" Scope="User">
       <Value Profile="(Default)">80</Value>
-    </Setting>
-    <Setting Name="setAS_startYouTurnAt" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setRate_FlowmeterCalNumber" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">500</Value>
