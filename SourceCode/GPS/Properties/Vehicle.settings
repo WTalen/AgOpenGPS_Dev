@@ -125,5 +125,11 @@
     <Setting Name="seq_DistanceExit" Type="System.String" Scope="User">
       <Value Profile="(Default)">0,0,0,0,0</Value>
     </Setting>
+    <Setting Name="seq_FunctionList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Manual Btn,Auto Button,Relay1,Relay2,Relay3</Value>
+    </Setting>
+    <Setting Name="seq_ActionList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Turn On,Turn Off</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

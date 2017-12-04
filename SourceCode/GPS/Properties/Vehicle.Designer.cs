@@ -514,5 +514,29 @@ namespace AgOpenGPS.Properties {
                 this["seq_DistanceExit"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Manual Btn,Auto Button,Relay1,Relay2,Relay3")]
+        public string seq_FunctionList {
+            get {
+                return ((string)(this["seq_FunctionList"]));
+            }
+            set {
+                this["seq_FunctionList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Turn On,Turn Off")]
+        public string seq_ActionList {
+            get {
+                return ((string)(this["seq_ActionList"]));
+            }
+            set {
+                this["seq_ActionList"] = value;
+            }
+        }
     }
 }

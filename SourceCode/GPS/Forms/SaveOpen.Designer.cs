@@ -104,12 +104,12 @@ namespace AgOpenGPS
                     writer.WriteLine("SlowSpeedCutoff," + Properties.Vehicle.Default.setVehicle_slowSpeedCutoff.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("ToolMinUnappliedPixels," + Properties.Vehicle.Default.setVehicle_minApplied.ToString(CultureInfo.InvariantCulture));
 
-                    writer.WriteLine("SequenceFunctionEnter;" + Properties.Vehicle.Default.seq_FunctionEnter);
-                    writer.WriteLine("SequenceFunctionExit;" + Properties.Vehicle.Default.seq_FunctionExit);
-                    writer.WriteLine("SequenceActionEnter;" + Properties.Vehicle.Default.seq_ActionEnter);
-                    writer.WriteLine("SequenceActionExit;" + Properties.Vehicle.Default.seq_ActionExit);
-                    writer.WriteLine("SequenceDistanceEnter;" + Properties.Vehicle.Default.seq_DistanceEnter);
-                    writer.WriteLine("SequenceDistanceExit;" + Properties.Vehicle.Default.seq_DistanceExit);
+                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("Empty," + "10");
 
                     writer.WriteLine("IMUPitchZero," + Properties.Settings.Default.setIMU_pitchZero.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("IMURollZero," + Properties.Settings.Default.setIMU_rollZero.ToString(CultureInfo.InvariantCulture));
@@ -131,8 +131,16 @@ namespace AgOpenGPS
                     writer.WriteLine("MaxSteerAngle," + Properties.Vehicle.Default.setVehicle_maxSteerAngle.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("MaxAngularVelocity," + Properties.Vehicle.Default.setVehicle_maxAngularVelocity.ToString(CultureInfo.InvariantCulture));
 
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("SequenceFunctionEnter;" + Properties.Vehicle.Default.seq_FunctionEnter);
+                    writer.WriteLine("SequenceFunctionExit;" + Properties.Vehicle.Default.seq_FunctionExit);
+                    writer.WriteLine("SequenceActionEnter;" + Properties.Vehicle.Default.seq_ActionEnter);
+                    writer.WriteLine("SequenceActionExit;" + Properties.Vehicle.Default.seq_ActionExit);
+                    writer.WriteLine("SequenceDistanceEnter;" + Properties.Vehicle.Default.seq_DistanceEnter);
+                    writer.WriteLine("SequenceDistanceExit;" + Properties.Vehicle.Default.seq_DistanceExit);
+
+                    writer.WriteLine("FunctionList;" + Properties.Vehicle.Default.seq_FunctionList);
+                    writer.WriteLine("ActionList;" + Properties.Vehicle.Default.seq_ActionList);
+
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
@@ -307,18 +315,12 @@ namespace AgOpenGPS
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Vehicle.Default.setVehicle_minApplied = int.Parse(words[1], CultureInfo.InvariantCulture);
 
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_FunctionEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_FunctionExit = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_ActionEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_ActionExit = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_DistanceEnter = words[1];
-                        line = reader.ReadLine(); words = line.Split(';');
-                        Properties.Vehicle.Default.seq_DistanceExit = words[1];
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
 
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setIMU_pitchZero = double.Parse(words[1], CultureInfo.InvariantCulture);
@@ -356,6 +358,26 @@ namespace AgOpenGPS
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Vehicle.Default.setVehicle_maxAngularVelocity = double.Parse(words[1], CultureInfo.InvariantCulture);
 
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_FunctionEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_FunctionExit = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_ActionEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_ActionExit = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_DistanceEnter = words[1];
+                        line = reader.ReadLine(); words = line.Split(';');
+                        Properties.Vehicle.Default.seq_DistanceExit = words[1];
+
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
