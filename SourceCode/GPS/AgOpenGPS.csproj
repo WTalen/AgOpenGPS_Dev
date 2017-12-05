@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Classes\CHeadland.cs" />
     <Compile Include="Classes\CRate.cs" />
+    <Compile Include="Classes\CSim.cs" />
     <Compile Include="Classes\CYouTurn.cs" />
     <Compile Include="Classes\CBoundary.cs" />
     <Compile Include="Classes\CFlag.cs" />

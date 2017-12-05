@@ -45,6 +45,14 @@ namespace AgOpenGPS
                 gl.Disable(OpenGL.GL_DEPTH_TEST);
                 gl.Disable(OpenGL.GL_TEXTURE_2D);
 
+
+                gl.Enable(OpenGL.GL_LINE_SMOOTH);
+                gl.Enable(OpenGL.GL_BLEND);
+
+                gl.Hint(OpenGL.GL_LINE_SMOOTH_HINT, OpenGL.GL_FASTEST);
+                gl.Hint(OpenGL.GL_POINT_SMOOTH_HINT, OpenGL.GL_FASTEST);
+                gl.Hint(OpenGL.GL_POLYGON_SMOOTH_HINT, OpenGL.GL_FASTEST);
+
                 ////if grid is on draw it
                 if (isGridOn) worldGrid.DrawWorldGrid(gridZoom);
 

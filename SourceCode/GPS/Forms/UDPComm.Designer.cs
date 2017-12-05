@@ -15,6 +15,8 @@ namespace AgOpenGPS
         private Socket sendSocket;
         private Socket recvSocket;
 
+        private bool isSendConnected;
+
         //endpoint of the auto steer module
         IPEndPoint epAutoSteer;
 
@@ -27,21 +29,24 @@ namespace AgOpenGPS
 
         private void SendUDPMessage(string message)
         {
-            try
+            if (isSendConnected)
             {
-                // Get packet as byte array
-                byte[] byteData = Encoding.ASCII.GetBytes(message);
+                try
+                {
+                    // Get packet as byte array
+                    byte[] byteData = Encoding.ASCII.GetBytes(message);
 
-                if (byteData.Length != 0)
+                    if (byteData.Length != 0)
 
-                    // Send packet to the zero
-                    sendSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAutoSteer, new AsyncCallback(SendData), null);
-            }
-            catch (Exception e)
-            {
-                WriteErrorLog("Sending UDP Message" + e.ToString());
+                        // Send packet to the zero
+                        sendSocket.BeginSendTo(byteData, 0, byteData.Length, SocketFlags.None, epAutoSteer, new AsyncCallback(SendData), null);
+                }
+                catch (Exception e)
+                {
+                    WriteErrorLog("Sending UDP Message" + e.ToString());
 
-                MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Send Error: " + e.Message, "UDP Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
  

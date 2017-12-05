@@ -393,7 +393,7 @@ namespace AgOpenGPS
                 {
                     WriteErrorLog("GPS Data Recv" + e.ToString());
 
-                    MessageBox.Show(ex.Message + "\n\r" + "\n\r" + "Go to Settings -> COM Ports to Fix", "ComPort Failure!");
+                    //MessageBox.Show(ex.Message + "\n\r" + "\n\r" + "Go to Settings -> COM Ports to Fix", "ComPort Failure!");
                 }
 
             }

@@ -44,6 +44,7 @@ namespace AgOpenGPS
                 btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
                 btnYouTurnCustom.BackColor = Color.Yellow;
             }
+
             cboxRowHeight.SelectedIndex = mf.yt.rowSkipsHeight - 1;
             cboxRowWidth.SelectedIndex = mf.yt.rowSkipsWidth - 1;
 

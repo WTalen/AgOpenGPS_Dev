@@ -103,7 +103,7 @@ namespace AgOpenGPS
 
         //Auto Headland Instance
         /// <summary>
-        /// Auto Headland Turn
+        /// Auto Headland YouTurn
         /// </summary>
         public CYouTurn yt;
 
@@ -128,6 +128,8 @@ namespace AgOpenGPS
         public CHeadland hl;
 
         public CSequence seq;
+
+        public CSim sim;
 
         #endregion
 
@@ -181,6 +183,8 @@ namespace AgOpenGPS
             rc = new CRate(this);
 
             seq = new CSequence(this);
+
+            sim = new CSim(this);
 
             //start the stopwatch
             swFrame.Start();
@@ -344,12 +348,19 @@ namespace AgOpenGPS
                 {
                     //OK
                     case 0:
+                        isSendConnected = false;
+                        //sendSocket.Shutdown(SocketShutdown.Both);
+                        //recvSocket.Shutdown(SocketShutdown.Both);
                         Settings.Default.setF_CurrentDir = currentFieldDirectory;
                         Settings.Default.Save();
                         FileSaveEverythingBeforeClosingField();
 
                         //shutdown and reset all module data
                         mc.ResetAllModuleCommValues();
+
+                        //sendSocket.Disconnect(true);
+                        //recvSocket.Disconnect(true);
+
                         break;
 
                     //Ignore and return
@@ -477,6 +488,7 @@ namespace AgOpenGPS
                 // Start listening for incoming data
                 recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
                                                 ref client, ReceiveData, recvSocket);
+                isSendConnected = true;
             }
             catch (Exception e)
             {
@@ -512,6 +524,40 @@ namespace AgOpenGPS
             }
 
             AutoSteerSettingsOutToPort();
+        }
+
+        private void timerSim_Tick(object sender, EventArgs e)
+        {
+            //if a GPS is connected disable sim
+            if (!sp.IsOpen)
+            {
+                if (isAutoSteerBtnOn) sim.DoSimTick(guidanceLineSteerAngle / 10.0);
+                else sim.DoSimTick(sim.steerAngleScrollBar);
+            }
+        }
+
+        private void tbarStepDistance_Scroll(object sender, EventArgs e)
+        {
+            sim.stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / 5.0;
+        }
+
+        private void tbarSteerAngle_Scroll(object sender, EventArgs e)
+        {
+            sim.steerAngleScrollBar = (tbarSteerAngle.Value) * 0.1;
+            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
+        }
+
+        private void btnResetSteerAngle_Click(object sender, EventArgs e)
+        {
+            sim.steerAngleScrollBar = 0;
+            tbarSteerAngle.Value = 0;
+            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
+        }
+
+        private void btnResetSim_Click(object sender, EventArgs e)
+        {
+            sim.latitude = 53.436026;
+            sim.longitude = -111.160047;
         }
 
         //show the UDP ethernet settings page

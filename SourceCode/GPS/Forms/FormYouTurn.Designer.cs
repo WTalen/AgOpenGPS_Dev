@@ -45,6 +45,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabYouTurn = new System.Windows.Forms.TabPage();
             this.tabEnter = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.cboxEnterFunc4 = new System.Windows.Forms.ComboBox();
             this.cboxEnterAction4 = new System.Windows.Forms.ComboBox();
             this.nudEnter4 = new System.Windows.Forms.NumericUpDown();
@@ -61,6 +64,9 @@
             this.cboxEnterAction0 = new System.Windows.Forms.ComboBox();
             this.nudEnter0 = new System.Windows.Forms.NumericUpDown();
             this.tabExit = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.cboxExitFunc4 = new System.Windows.Forms.ComboBox();
             this.cboxExitAction4 = new System.Windows.Forms.ComboBox();
             this.nudExit4 = new System.Windows.Forms.NumericUpDown();
@@ -89,12 +95,16 @@
             this.bntOK = new System.Windows.Forms.Button();
             this.btnDeleteAB = new System.Windows.Forms.Button();
             this.btnResetAll = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabYouTurn.SuspendLayout();
@@ -322,6 +332,11 @@
             // 
             // tabEnter
             // 
+            this.tabEnter.Controls.Add(this.label24);
+            this.tabEnter.Controls.Add(this.label25);
+            this.tabEnter.Controls.Add(this.label26);
+            this.tabEnter.Controls.Add(this.label27);
+            this.tabEnter.Controls.Add(this.label28);
             this.tabEnter.Controls.Add(this.label15);
             this.tabEnter.Controls.Add(this.label14);
             this.tabEnter.Controls.Add(this.label13);
@@ -348,6 +363,36 @@
             this.tabEnter.Text = "Entering";
             this.tabEnter.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(334, 8);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(80, 30);
+            this.label15.TabIndex = 36;
+            this.label15.Text = "Action";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(579, 8);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(102, 30);
+            this.label14.TabIndex = 35;
+            this.label14.Text = "Distance";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(53, 8);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(102, 30);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Function";
+            // 
             // cboxEnterFunc4
             // 
             this.cboxEnterFunc4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -359,7 +404,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxEnterFunc4.Location = new System.Drawing.Point(32, 460);
+            this.cboxEnterFunc4.Location = new System.Drawing.Point(44, 460);
             this.cboxEnterFunc4.Name = "cboxEnterFunc4";
             this.cboxEnterFunc4.Size = new System.Drawing.Size(233, 53);
             this.cboxEnterFunc4.TabIndex = 33;
@@ -372,7 +417,7 @@
             this.cboxEnterAction4.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxEnterAction4.Location = new System.Drawing.Point(313, 460);
+            this.cboxEnterAction4.Location = new System.Drawing.Point(325, 460);
             this.cboxEnterAction4.Name = "cboxEnterAction4";
             this.cboxEnterAction4.Size = new System.Drawing.Size(194, 53);
             this.cboxEnterAction4.TabIndex = 32;
@@ -380,7 +425,7 @@
             // nudEnter4
             // 
             this.nudEnter4.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudEnter4.Location = new System.Drawing.Point(574, 458);
+            this.nudEnter4.Location = new System.Drawing.Point(586, 458);
             this.nudEnter4.Maximum = new decimal(new int[] {
             25,
             0,
@@ -406,7 +451,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxEnterFunc3.Location = new System.Drawing.Point(32, 358);
+            this.cboxEnterFunc3.Location = new System.Drawing.Point(44, 358);
             this.cboxEnterFunc3.Name = "cboxEnterFunc3";
             this.cboxEnterFunc3.Size = new System.Drawing.Size(233, 53);
             this.cboxEnterFunc3.TabIndex = 30;
@@ -419,7 +464,7 @@
             this.cboxEnterAction3.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxEnterAction3.Location = new System.Drawing.Point(313, 358);
+            this.cboxEnterAction3.Location = new System.Drawing.Point(325, 358);
             this.cboxEnterAction3.Name = "cboxEnterAction3";
             this.cboxEnterAction3.Size = new System.Drawing.Size(194, 53);
             this.cboxEnterAction3.TabIndex = 29;
@@ -427,7 +472,7 @@
             // nudEnter3
             // 
             this.nudEnter3.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudEnter3.Location = new System.Drawing.Point(574, 356);
+            this.nudEnter3.Location = new System.Drawing.Point(586, 356);
             this.nudEnter3.Maximum = new decimal(new int[] {
             25,
             0,
@@ -453,7 +498,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxEnterFunc2.Location = new System.Drawing.Point(32, 256);
+            this.cboxEnterFunc2.Location = new System.Drawing.Point(44, 256);
             this.cboxEnterFunc2.Name = "cboxEnterFunc2";
             this.cboxEnterFunc2.Size = new System.Drawing.Size(233, 53);
             this.cboxEnterFunc2.TabIndex = 27;
@@ -466,7 +511,7 @@
             this.cboxEnterAction2.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxEnterAction2.Location = new System.Drawing.Point(313, 256);
+            this.cboxEnterAction2.Location = new System.Drawing.Point(325, 256);
             this.cboxEnterAction2.Name = "cboxEnterAction2";
             this.cboxEnterAction2.Size = new System.Drawing.Size(194, 53);
             this.cboxEnterAction2.TabIndex = 26;
@@ -474,7 +519,7 @@
             // nudEnter2
             // 
             this.nudEnter2.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudEnter2.Location = new System.Drawing.Point(574, 254);
+            this.nudEnter2.Location = new System.Drawing.Point(586, 254);
             this.nudEnter2.Maximum = new decimal(new int[] {
             25,
             0,
@@ -500,7 +545,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxEnterFunc1.Location = new System.Drawing.Point(32, 154);
+            this.cboxEnterFunc1.Location = new System.Drawing.Point(44, 154);
             this.cboxEnterFunc1.Name = "cboxEnterFunc1";
             this.cboxEnterFunc1.Size = new System.Drawing.Size(233, 53);
             this.cboxEnterFunc1.TabIndex = 24;
@@ -513,7 +558,7 @@
             this.cboxEnterAction1.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxEnterAction1.Location = new System.Drawing.Point(313, 154);
+            this.cboxEnterAction1.Location = new System.Drawing.Point(325, 154);
             this.cboxEnterAction1.Name = "cboxEnterAction1";
             this.cboxEnterAction1.Size = new System.Drawing.Size(194, 53);
             this.cboxEnterAction1.TabIndex = 23;
@@ -521,7 +566,7 @@
             // nudEnter1
             // 
             this.nudEnter1.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudEnter1.Location = new System.Drawing.Point(574, 152);
+            this.nudEnter1.Location = new System.Drawing.Point(586, 152);
             this.nudEnter1.Maximum = new decimal(new int[] {
             25,
             0,
@@ -547,7 +592,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxEnterFunc0.Location = new System.Drawing.Point(32, 52);
+            this.cboxEnterFunc0.Location = new System.Drawing.Point(44, 52);
             this.cboxEnterFunc0.Name = "cboxEnterFunc0";
             this.cboxEnterFunc0.Size = new System.Drawing.Size(233, 53);
             this.cboxEnterFunc0.TabIndex = 0;
@@ -561,7 +606,7 @@
             this.cboxEnterAction0.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxEnterAction0.Location = new System.Drawing.Point(313, 52);
+            this.cboxEnterAction0.Location = new System.Drawing.Point(325, 52);
             this.cboxEnterAction0.Name = "cboxEnterAction0";
             this.cboxEnterAction0.Size = new System.Drawing.Size(194, 53);
             this.cboxEnterAction0.TabIndex = 20;
@@ -569,7 +614,7 @@
             // nudEnter0
             // 
             this.nudEnter0.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudEnter0.Location = new System.Drawing.Point(574, 50);
+            this.nudEnter0.Location = new System.Drawing.Point(586, 50);
             this.nudEnter0.Maximum = new decimal(new int[] {
             25,
             0,
@@ -586,6 +631,11 @@
             // 
             // tabExit
             // 
+            this.tabExit.Controls.Add(this.label23);
+            this.tabExit.Controls.Add(this.label22);
+            this.tabExit.Controls.Add(this.label21);
+            this.tabExit.Controls.Add(this.label20);
+            this.tabExit.Controls.Add(this.label19);
             this.tabExit.Controls.Add(this.label16);
             this.tabExit.Controls.Add(this.label17);
             this.tabExit.Controls.Add(this.label18);
@@ -611,6 +661,36 @@
             this.tabExit.Text = "Exiting";
             this.tabExit.UseVisualStyleBackColor = true;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(334, 8);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(80, 30);
+            this.label16.TabIndex = 51;
+            this.label16.Text = "Action";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(578, 8);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(102, 30);
+            this.label17.TabIndex = 50;
+            this.label17.Text = "Distance";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(53, 8);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(102, 30);
+            this.label18.TabIndex = 49;
+            this.label18.Text = "Function";
+            // 
             // cboxExitFunc4
             // 
             this.cboxExitFunc4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -622,7 +702,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxExitFunc4.Location = new System.Drawing.Point(32, 460);
+            this.cboxExitFunc4.Location = new System.Drawing.Point(44, 460);
             this.cboxExitFunc4.Name = "cboxExitFunc4";
             this.cboxExitFunc4.Size = new System.Drawing.Size(233, 53);
             this.cboxExitFunc4.TabIndex = 48;
@@ -635,7 +715,7 @@
             this.cboxExitAction4.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxExitAction4.Location = new System.Drawing.Point(313, 460);
+            this.cboxExitAction4.Location = new System.Drawing.Point(325, 460);
             this.cboxExitAction4.Name = "cboxExitAction4";
             this.cboxExitAction4.Size = new System.Drawing.Size(194, 53);
             this.cboxExitAction4.TabIndex = 47;
@@ -643,7 +723,7 @@
             // nudExit4
             // 
             this.nudExit4.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudExit4.Location = new System.Drawing.Point(574, 458);
+            this.nudExit4.Location = new System.Drawing.Point(586, 458);
             this.nudExit4.Maximum = new decimal(new int[] {
             25,
             0,
@@ -669,7 +749,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxExitFunc3.Location = new System.Drawing.Point(32, 358);
+            this.cboxExitFunc3.Location = new System.Drawing.Point(44, 358);
             this.cboxExitFunc3.Name = "cboxExitFunc3";
             this.cboxExitFunc3.Size = new System.Drawing.Size(233, 53);
             this.cboxExitFunc3.TabIndex = 45;
@@ -682,7 +762,7 @@
             this.cboxExitAction3.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxExitAction3.Location = new System.Drawing.Point(313, 358);
+            this.cboxExitAction3.Location = new System.Drawing.Point(325, 358);
             this.cboxExitAction3.Name = "cboxExitAction3";
             this.cboxExitAction3.Size = new System.Drawing.Size(194, 53);
             this.cboxExitAction3.TabIndex = 44;
@@ -690,7 +770,7 @@
             // nudExit3
             // 
             this.nudExit3.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudExit3.Location = new System.Drawing.Point(574, 356);
+            this.nudExit3.Location = new System.Drawing.Point(586, 356);
             this.nudExit3.Maximum = new decimal(new int[] {
             25,
             0,
@@ -716,7 +796,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxExitFunc2.Location = new System.Drawing.Point(32, 256);
+            this.cboxExitFunc2.Location = new System.Drawing.Point(44, 256);
             this.cboxExitFunc2.Name = "cboxExitFunc2";
             this.cboxExitFunc2.Size = new System.Drawing.Size(233, 53);
             this.cboxExitFunc2.TabIndex = 42;
@@ -729,7 +809,7 @@
             this.cboxExitAction2.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxExitAction2.Location = new System.Drawing.Point(313, 256);
+            this.cboxExitAction2.Location = new System.Drawing.Point(325, 256);
             this.cboxExitAction2.Name = "cboxExitAction2";
             this.cboxExitAction2.Size = new System.Drawing.Size(194, 53);
             this.cboxExitAction2.TabIndex = 41;
@@ -737,7 +817,7 @@
             // nudExit2
             // 
             this.nudExit2.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudExit2.Location = new System.Drawing.Point(574, 254);
+            this.nudExit2.Location = new System.Drawing.Point(586, 254);
             this.nudExit2.Maximum = new decimal(new int[] {
             25,
             0,
@@ -763,7 +843,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxExitFunc1.Location = new System.Drawing.Point(32, 154);
+            this.cboxExitFunc1.Location = new System.Drawing.Point(44, 154);
             this.cboxExitFunc1.Name = "cboxExitFunc1";
             this.cboxExitFunc1.Size = new System.Drawing.Size(233, 53);
             this.cboxExitFunc1.TabIndex = 39;
@@ -776,7 +856,7 @@
             this.cboxExitAction1.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxExitAction1.Location = new System.Drawing.Point(313, 154);
+            this.cboxExitAction1.Location = new System.Drawing.Point(325, 154);
             this.cboxExitAction1.Name = "cboxExitAction1";
             this.cboxExitAction1.Size = new System.Drawing.Size(194, 53);
             this.cboxExitAction1.TabIndex = 38;
@@ -784,7 +864,7 @@
             // nudExit1
             // 
             this.nudExit1.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudExit1.Location = new System.Drawing.Point(574, 152);
+            this.nudExit1.Location = new System.Drawing.Point(586, 152);
             this.nudExit1.Maximum = new decimal(new int[] {
             25,
             0,
@@ -810,7 +890,7 @@
             "Relay 1",
             "Relay 2",
             "Thingy"});
-            this.cboxExitFunc0.Location = new System.Drawing.Point(32, 52);
+            this.cboxExitFunc0.Location = new System.Drawing.Point(44, 52);
             this.cboxExitFunc0.Name = "cboxExitFunc0";
             this.cboxExitFunc0.Size = new System.Drawing.Size(233, 53);
             this.cboxExitFunc0.TabIndex = 36;
@@ -823,7 +903,7 @@
             this.cboxExitAction0.Items.AddRange(new object[] {
             "Turn Off",
             "Turn On"});
-            this.cboxExitAction0.Location = new System.Drawing.Point(313, 52);
+            this.cboxExitAction0.Location = new System.Drawing.Point(325, 52);
             this.cboxExitAction0.Name = "cboxExitAction0";
             this.cboxExitAction0.Size = new System.Drawing.Size(194, 53);
             this.cboxExitAction0.TabIndex = 35;
@@ -831,7 +911,7 @@
             // nudExit0
             // 
             this.nudExit0.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudExit0.Location = new System.Drawing.Point(574, 50);
+            this.nudExit0.Location = new System.Drawing.Point(586, 50);
             this.nudExit0.Maximum = new decimal(new int[] {
             25,
             0,
@@ -978,6 +1058,7 @@
             // 
             // btnDeleteAB
             // 
+            this.btnDeleteAB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteAB.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDeleteAB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteAB.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -1001,65 +1082,105 @@
             this.btnResetAll.Text = "Reset All Sequences";
             this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
             // 
-            // label13
+            // label19
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(38, 8);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(102, 30);
-            this.label13.TabIndex = 34;
-            this.label13.Text = "Function";
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(8, 67);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(32, 30);
+            this.label19.TabIndex = 52;
+            this.label19.Text = "1.";
             // 
-            // label14
+            // label20
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(567, 8);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(102, 30);
-            this.label14.TabIndex = 35;
-            this.label14.Text = "Distance";
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(8, 169);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 30);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "2.";
             // 
-            // label15
+            // label21
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(319, 8);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 30);
-            this.label15.TabIndex = 36;
-            this.label15.Text = "Action";
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 271);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(32, 30);
+            this.label21.TabIndex = 54;
+            this.label21.Text = "3.";
             // 
-            // label16
+            // label22
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(322, 8);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(80, 30);
-            this.label16.TabIndex = 51;
-            this.label16.Text = "Action";
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(8, 373);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 30);
+            this.label22.TabIndex = 55;
+            this.label22.Text = "4.";
             // 
-            // label17
+            // label23
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(566, 8);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(102, 30);
-            this.label17.TabIndex = 50;
-            this.label17.Text = "Distance";
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(8, 475);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(32, 30);
+            this.label23.TabIndex = 56;
+            this.label23.Text = "5.";
             // 
-            // label18
+            // label24
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(41, 8);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(102, 30);
-            this.label18.TabIndex = 49;
-            this.label18.Text = "Function";
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(8, 475);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(32, 30);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "5.";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(8, 373);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(32, 30);
+            this.label25.TabIndex = 60;
+            this.label25.Text = "4.";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(8, 271);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(32, 30);
+            this.label26.TabIndex = 59;
+            this.label26.Text = "3.";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(8, 169);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(32, 30);
+            this.label27.TabIndex = 58;
+            this.label27.Text = "2.";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(8, 67);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(32, 30);
+            this.label28.TabIndex = 57;
+            this.label28.Text = "1.";
             // 
             // FormYouTurn
             // 
@@ -1171,5 +1292,15 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
     }
 }
