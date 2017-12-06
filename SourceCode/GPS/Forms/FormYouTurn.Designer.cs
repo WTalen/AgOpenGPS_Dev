@@ -45,6 +45,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabYouTurn = new System.Windows.Forms.TabPage();
             this.tabEnter = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -64,6 +69,11 @@
             this.cboxEnterAction0 = new System.Windows.Forms.ComboBox();
             this.nudEnter0 = new System.Windows.Forms.NumericUpDown();
             this.tabExit = new System.Windows.Forms.TabPage();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -95,16 +105,7 @@
             this.bntOK = new System.Windows.Forms.Button();
             this.btnDeleteAB = new System.Windows.Forms.Button();
             this.btnResetAll = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
+            this.btnYouTurnWideReturn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabYouTurn.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnYouTurnWideReturn);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.lblDistance);
             this.groupBox1.Controls.Add(this.lblWhenTrig);
@@ -141,7 +143,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(26, 62);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(691, 403);
+            this.groupBox1.Size = new System.Drawing.Size(691, 454);
             this.groupBox1.TabIndex = 133;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Turn Shapes";
@@ -268,7 +270,7 @@
             this.btnYouTurnSemiCircle.BackColor = System.Drawing.Color.LimeGreen;
             this.btnYouTurnSemiCircle.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnYouTurnSemiCircle.Image = global::AgOpenGPS.Properties.Resources.SemiCircle;
-            this.btnYouTurnSemiCircle.Location = new System.Drawing.Point(15, 181);
+            this.btnYouTurnSemiCircle.Location = new System.Drawing.Point(15, 199);
             this.btnYouTurnSemiCircle.Name = "btnYouTurnSemiCircle";
             this.btnYouTurnSemiCircle.Size = new System.Drawing.Size(100, 100);
             this.btnYouTurnSemiCircle.TabIndex = 9;
@@ -362,6 +364,56 @@
             this.tabEnter.TabIndex = 1;
             this.tabEnter.Text = "Entering";
             this.tabEnter.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(8, 475);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(32, 30);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "5.";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(8, 373);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(32, 30);
+            this.label25.TabIndex = 60;
+            this.label25.Text = "4.";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(8, 271);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(32, 30);
+            this.label26.TabIndex = 59;
+            this.label26.Text = "3.";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(8, 169);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(32, 30);
+            this.label27.TabIndex = 58;
+            this.label27.Text = "2.";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(8, 67);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(32, 30);
+            this.label28.TabIndex = 57;
+            this.label28.Text = "1.";
             // 
             // label15
             // 
@@ -660,6 +712,56 @@
             this.tabExit.TabIndex = 2;
             this.tabExit.Text = "Exiting";
             this.tabExit.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(8, 475);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(32, 30);
+            this.label23.TabIndex = 56;
+            this.label23.Text = "5.";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(8, 373);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(32, 30);
+            this.label22.TabIndex = 55;
+            this.label22.Text = "4.";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 271);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(32, 30);
+            this.label21.TabIndex = 54;
+            this.label21.Text = "3.";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(8, 169);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 30);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "2.";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(8, 67);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(32, 30);
+            this.label19.TabIndex = 52;
+            this.label19.Text = "1.";
             // 
             // label16
             // 
@@ -1082,105 +1184,18 @@
             this.btnResetAll.Text = "Reset All Sequences";
             this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
             // 
-            // label19
+            // btnYouTurnWideReturn
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(8, 67);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(32, 30);
-            this.label19.TabIndex = 52;
-            this.label19.Text = "1.";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(8, 169);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(32, 30);
-            this.label20.TabIndex = 53;
-            this.label20.Text = "2.";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(8, 271);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(32, 30);
-            this.label21.TabIndex = 54;
-            this.label21.Text = "3.";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(8, 373);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(32, 30);
-            this.label22.TabIndex = 55;
-            this.label22.Text = "4.";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(8, 475);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(32, 30);
-            this.label23.TabIndex = 56;
-            this.label23.Text = "5.";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(8, 475);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(32, 30);
-            this.label24.TabIndex = 61;
-            this.label24.Text = "5.";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(8, 373);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(32, 30);
-            this.label25.TabIndex = 60;
-            this.label25.Text = "4.";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(8, 271);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(32, 30);
-            this.label26.TabIndex = 59;
-            this.label26.Text = "3.";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(8, 169);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(32, 30);
-            this.label27.TabIndex = 58;
-            this.label27.Text = "2.";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(8, 67);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(32, 30);
-            this.label28.TabIndex = 57;
-            this.label28.Text = "1.";
+            this.btnYouTurnWideReturn.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnYouTurnWideReturn.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnYouTurnWideReturn.Image = global::AgOpenGPS.Properties.Resources.SemiCircle;
+            this.btnYouTurnWideReturn.Location = new System.Drawing.Point(15, 334);
+            this.btnYouTurnWideReturn.Name = "btnYouTurnWideReturn";
+            this.btnYouTurnWideReturn.Size = new System.Drawing.Size(100, 100);
+            this.btnYouTurnWideReturn.TabIndex = 149;
+            this.btnYouTurnWideReturn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnYouTurnWideReturn.UseVisualStyleBackColor = false;
+            this.btnYouTurnWideReturn.Click += new System.EventHandler(this.btnYouTurnWideReturn_Click);
             // 
             // FormYouTurn
             // 
@@ -1302,5 +1317,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnYouTurnWideReturn;
     }
 }

@@ -21,11 +21,11 @@ namespace AgOpenGPS
         {
             Properties.Settings.Default.setIP_thisPort = (int)nudThisPort.Value;
 
-            Properties.Settings.Default.setIP_AutoSteerIP = tboxAutoSteerIP.Text;
-            Properties.Settings.Default.setIP_AutoSteerPort = (int)nudAutoSteerPort.Value;
+            Properties.Settings.Default.setIP_autoSteerIP = tboxAutoSteerIP.Text;
+            Properties.Settings.Default.setIP_autoSteerPort = (int)nudAutoSteerPort.Value;
 
-            Properties.Settings.Default.setIP_RateRelayIP = tboxRateRelayIP.Text;
-            Properties.Settings.Default.setIP_RateRelayPort = (int)nudRateRelayPort.Value;
+            Properties.Settings.Default.setIP_rateRelayIP = tboxRateRelayIP.Text;
+            Properties.Settings.Default.setIP_rateRelayPort = (int)nudRateRelayPort.Value;
 
             Properties.Settings.Default.Save();
 
@@ -42,11 +42,11 @@ namespace AgOpenGPS
 
             nudThisPort.Value = Properties.Settings.Default.setIP_thisPort;
 
-            tboxAutoSteerIP.Text = Properties.Settings.Default.setIP_AutoSteerIP;
-            nudAutoSteerPort.Value = Properties.Settings.Default.setIP_AutoSteerPort;
+            tboxAutoSteerIP.Text = Properties.Settings.Default.setIP_autoSteerIP;
+            nudAutoSteerPort.Value = Properties.Settings.Default.setIP_autoSteerPort;
 
-            tboxRateRelayIP.Text = Properties.Settings.Default.setIP_RateRelayIP;
-            nudRateRelayPort.Value = Properties.Settings.Default.setIP_RateRelayPort;
+            tboxRateRelayIP.Text = Properties.Settings.Default.setIP_rateRelayIP;
+            nudRateRelayPort.Value = Properties.Settings.Default.setIP_rateRelayPort;
         }
 
         public Boolean CheckIPValid(String strIP)

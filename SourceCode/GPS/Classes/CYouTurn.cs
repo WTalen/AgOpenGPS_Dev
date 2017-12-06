@@ -283,6 +283,11 @@ namespace AgOpenGPS
                 pt[i].z = youFileList[i].northing;
             }
 
+            for (int i = 0; i < pt.Length; i++)
+            {
+                if (pt[i].x >= 5.0) pt[i].x += ((rowSkipsWidth-1)*10);
+            }
+
             //start of path on the origin. Mirror the shape if left turn
             if (!isTurnRight)
             {
@@ -293,8 +298,8 @@ namespace AgOpenGPS
             double scale = turnOffset * 0.1;
             for (int i = 0; i < pt.Length; i++)
             {
-                pt[i].x *= scale * rowSkipsWidth;
-                pt[i].z *= scale * rowSkipsHeight;
+                pt[i].x *= scale;
+                pt[i].z *= scale;
             }
 
             //rotate pattern to match AB Line heading

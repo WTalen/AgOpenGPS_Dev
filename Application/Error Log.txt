@@ -594,3 +594,159 @@ Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
    at System.IO.Ports.SerialPort.Open()
    at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 3:23:17 PM
 
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:19:07 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:20:08 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:24:37 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:26:40 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:51:59 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 4:55:18 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:05:12 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:06:13 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:08:36 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:13:02 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:39:06 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 5:41:23 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 8:14:46 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 8:15:05 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 8:25:29 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 8:52:35 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 9:24:04 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 9:24:44 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 9:50:56 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 9:52:54 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 10:27:00 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 10:31:13 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 10:32:47 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 10:34:46 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 05/12/2017 10:50:15 PM
+
+Open GPS Port System.IO.IOException: The port 'COM GPS...' does not exist.
+   at System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
+   at System.IO.Ports.SerialStream..ctor(String portName, Int32 baudRate, Parity parity, Int32 dataBits, StopBits stopBits, Int32 readTimeout, Int32 writeTimeout, Handshake handshake, Boolean dtrEnable, Boolean rtsEnable, Boolean discardNull, Byte parityReplace)
+   at System.IO.Ports.SerialPort.Open()
+   at AgOpenGPS.FormGPS.SerialPortOpenGPS() in C:\Users\Leno\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SerialComm.Designer.cs:line 416 - 06/12/2017 7:07:05 AM
+

@@ -87,13 +87,19 @@ namespace AgOpenGPS
         private int statusUpdateCounter = 1;
         private int fiveSecondCounter = 0;
 
-        //Parsing object of NMEA sentences
+        /// <summary>
+        /// The NMEA class that decodes it
+        /// </summary>
         public CNMEA pn;
 
-        //create an array of sections, so far only 8 section + 1 fullWidth Section
+        /// <summary>
+        /// an array of sections, so far only 8 section + 1 fullWidth Section
+        /// </summary>
         public CSection[] section = new CSection[MAXSECTIONS];
 
-        //ABLine Instance
+        /// <summary>
+        /// AB Line object
+        /// </summary>
         public CABLine ABLine;
 
         /// <summary>
@@ -112,28 +118,42 @@ namespace AgOpenGPS
         /// </summary>
         public CRate rc;
 
-        //a brand new vehicle
+        /// <summary>
+        /// Our vehicle including the tool
+        /// </summary>
         public CVehicle vehicle;
 
-        //module communication object
+        /// <summary>
+        /// All the structs for recv and send of information out ports
+        /// </summary>
         public CModuleComm mc;
 
-        //perimeter object for area calc
+        /// <summary>
+        /// perimeter object for area calc
+        /// </summary>     
         public CPerimeter periArea;
 
-        //boundary instance
+        /// <summary>
+        /// The outer boundary of the field
+        /// </summary>
         public CBoundary boundz;
 
-        //headland path instance
+        /// <summary>
+        /// The headland created
+        /// </summary>
         public CHeadland hl;
 
+        /// <summary>
+        /// The entry and exit sequences, functions, actions
+        /// </summary>
         public CSequence seq;
 
+        /// <summary>
+        /// The internal simulator
+        /// </summary>
         public CSim sim;
 
         #endregion
-
-    // Main GPS Form ................................................................................
 
         // Constructor, Initializes a new instance of the "FormGPS" class.
         public FormGPS()
@@ -332,6 +352,9 @@ namespace AgOpenGPS
             string fileAndDir = @".\YouTurnShapes\" + Properties.Settings.Default.setAS_youTurnShape;
             yt.LoadYouTurnShapeFromFile(fileAndDir);
 
+            sim.latitude = Settings.Default.setSim_lastLat;
+            sim.longitude = Settings.Default.setSim_lastLong;
+
             // load all the gui elements in gui.designer.cs
             LoadGUI();
         }
@@ -351,8 +374,12 @@ namespace AgOpenGPS
                         isSendConnected = false;
                         //sendSocket.Shutdown(SocketShutdown.Both);
                         //recvSocket.Shutdown(SocketShutdown.Both);
+
+                        Settings.Default.setSim_lastLong = sim.longitude;
+                        Settings.Default.setSim_lastLat = sim.latitude;
                         Settings.Default.setF_CurrentDir = currentFieldDirectory;
                         Settings.Default.Save();
+
                         FileSaveEverythingBeforeClosingField();
 
                         //shutdown and reset all module data
@@ -412,7 +439,6 @@ namespace AgOpenGPS
             OpenGL gl = openGLControl.OpenGL;
             //try
             //{
-            //    //  Tractor
             //    particleTexture = new Texture();
             //    particleTexture.Create(gl, @".\Dependencies\Compass.png");
             //    texture[0] = particleTexture.TextureName;
@@ -420,7 +446,6 @@ namespace AgOpenGPS
 
             //catch (System.Exception excep)
             //{
-
             //    MessageBox.Show("Texture File Compass.png is Missing",excep.Message);
             //}
 
@@ -479,8 +504,8 @@ namespace AgOpenGPS
                 sendSocket.Bind(server);
 
                 //IP address and port of Auto Steer server
-                IPAddress epIP = IPAddress.Parse(Properties.Settings.Default.setIP_AutoSteerIP);
-                epAutoSteer = new IPEndPoint(epIP, Properties.Settings.Default.setIP_AutoSteerPort);
+                IPAddress epIP = IPAddress.Parse(Properties.Settings.Default.setIP_autoSteerIP);
+                epAutoSteer = new IPEndPoint(epIP, Properties.Settings.Default.setIP_autoSteerPort);
 
                 // Initialise the IPEndPoint for the client - async listner client only!
                 EndPoint client = new IPEndPoint(IPAddress.Any, 0);

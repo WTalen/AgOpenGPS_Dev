@@ -35,16 +35,16 @@
     <Setting Name="setDisplay_triangleResolution" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="setMenu_IsMetric" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isMetric" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="setMenu_IsGridOn" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isGridOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="setMenu_IsLightbarOn" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isLightbarOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="setMenu_IsAreaRight" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isAreaRight" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="setF_CurrentDir" Type="System.String" Scope="User">
@@ -86,7 +86,7 @@
     <Setting Name="setIMU_rollZero" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setMenu_IsLogNMEA" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isLogNMEA" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="setF_minFixStep" Type="System.Double" Scope="User">
@@ -122,7 +122,7 @@
     <Setting Name="setAS_maxIntegral" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="setMenu_IsSideGuideLines" Type="System.Boolean" Scope="User">
+    <Setting Name="setMenu_isSideGuideLines" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="setAS_countsPerDegree" Type="System.Byte" Scope="User">
@@ -149,17 +149,26 @@
     <Setting Name="setIP_thisPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">9999</Value>
     </Setting>
-    <Setting Name="setIP_AutoSteerIP" Type="System.String" Scope="User">
+    <Setting Name="setIP_autoSteerIP" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
-    <Setting Name="setIP_AutoSteerPort" Type="System.Int32" Scope="User">
+    <Setting Name="setIP_autoSteerPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8888</Value>
     </Setting>
-    <Setting Name="setIP_RateRelayIP" Type="System.String" Scope="User">
+    <Setting Name="setIP_rateRelayIP" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
-    <Setting Name="setIP_RateRelayPort" Type="System.Int32" Scope="User">
+    <Setting Name="setIP_rateRelayPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7777</Value>
+    </Setting>
+    <Setting Name="setMenu_isSimulatorOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="setSim_lastLat" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">53.436026</Value>
+    </Setting>
+    <Setting Name="setSim_lastLong" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-111.160047</Value>
     </Setting>
   </Settings>
 </SettingsFile>

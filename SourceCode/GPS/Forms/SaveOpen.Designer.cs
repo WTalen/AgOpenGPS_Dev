@@ -83,12 +83,12 @@ namespace AgOpenGPS
 
                     writer.WriteLine("IsAtanCam," + Properties.Settings.Default.setCam_isAtanCam.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("TriangleResolution," + Properties.Settings.Default.setDisplay_triangleResolution.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsMetric," + Properties.Settings.Default.setMenu_IsMetric.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsGridOn," + Properties.Settings.Default.setMenu_IsGridOn.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsLightBarOn," + Properties.Settings.Default.setMenu_IsLightbarOn.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsAreaRight," + Properties.Settings.Default.setMenu_IsAreaRight.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsMetric," + Properties.Settings.Default.setMenu_isMetric.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsGridOn," + Properties.Settings.Default.setMenu_isGridOn.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsLightBarOn," + Properties.Settings.Default.setMenu_isLightbarOn.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsAreaRight," + Properties.Settings.Default.setMenu_isAreaRight.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("IsPurePursuitLineOn," + Properties.Settings.Default.setMenu_isPureOn.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsGuideLinesOn," + Properties.Settings.Default.setMenu_IsSideGuideLines.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsGuideLinesOn," + Properties.Settings.Default.setMenu_isSideGuideLines.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
@@ -113,7 +113,7 @@ namespace AgOpenGPS
 
                     writer.WriteLine("IMUPitchZero," + Properties.Settings.Default.setIMU_pitchZero.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("IMURollZero," + Properties.Settings.Default.setIMU_rollZero.ToString(CultureInfo.InvariantCulture));
-                    writer.WriteLine("IsLogNMEA," + Properties.Settings.Default.setMenu_IsLogNMEA.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("IsLogNMEA," + Properties.Settings.Default.setMenu_isLogNMEA.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("MinFixStep," + Properties.Settings.Default.setF_minFixStep.ToString(CultureInfo.InvariantCulture));
 
                     writer.WriteLine("pidP," + Properties.Settings.Default.setAS_Kp.ToString(CultureInfo.InvariantCulture));
@@ -281,17 +281,17 @@ namespace AgOpenGPS
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setDisplay_triangleResolution = double.Parse(words[1], CultureInfo.InvariantCulture);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsMetric = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isMetric = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsGridOn = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isGridOn = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsLightbarOn = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isLightbarOn = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsAreaRight = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isAreaRight = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setMenu_isPureOn = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsSideGuideLines = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isSideGuideLines = bool.Parse(words[1]);
                         line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
@@ -327,7 +327,7 @@ namespace AgOpenGPS
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setIMU_rollZero = double.Parse(words[1], CultureInfo.InvariantCulture);
                         line = reader.ReadLine(); words = line.Split(',');
-                        Properties.Settings.Default.setMenu_IsLogNMEA = bool.Parse(words[1]);
+                        Properties.Settings.Default.setMenu_isLogNMEA = bool.Parse(words[1]);
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Settings.Default.setF_minFixStep = double.Parse(words[1], CultureInfo.InvariantCulture);
 
@@ -452,23 +452,23 @@ namespace AgOpenGPS
                         isAtanCam = Properties.Settings.Default.setCam_isAtanCam;
                         triangleResolution = Properties.Settings.Default.setDisplay_triangleResolution;
 
-                        isMetric = Properties.Settings.Default.setMenu_IsMetric;
+                        isMetric = Properties.Settings.Default.setMenu_isMetric;
                         metricToolStrip.Checked = isMetric;
                         imperialToolStrip.Checked = isMetric;
 
-                        isGridOn = Properties.Settings.Default.setMenu_IsGridOn;
+                        isGridOn = Properties.Settings.Default.setMenu_isGridOn;
                         gridToolStripMenuItem.Checked = (isGridOn);
 
-                        isLightbarOn = Properties.Settings.Default.setMenu_IsLightbarOn;
+                        isLightbarOn = Properties.Settings.Default.setMenu_isLightbarOn;
                         lightbarToolStripMenuItem.Checked = isLightbarOn;
 
                         isPureDisplayOn = Properties.Settings.Default.setMenu_isPureOn;
                         pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
 
-                        isSideGuideLines = Properties.Settings.Default.setMenu_IsSideGuideLines;
+                        isSideGuideLines = Properties.Settings.Default.setMenu_isSideGuideLines;
                         sideGuideLines.Checked = isSideGuideLines;
 
-                        isAreaOnRight = Properties.Settings.Default.setMenu_IsAreaRight;
+                        isAreaOnRight = Properties.Settings.Default.setMenu_isAreaRight;
 
                         redSections = Properties.Settings.Default.setF_SectionColorR;
                         grnSections = Properties.Settings.Default.setF_SectionColorG;
@@ -481,7 +481,7 @@ namespace AgOpenGPS
 
                         pitchZero = Properties.Settings.Default.setIMU_pitchZero;
                         rollZero = Properties.Settings.Default.setIMU_rollZero;
-                        isLogNMEA = Properties.Settings.Default.setMenu_IsLogNMEA;
+                        isLogNMEA = Properties.Settings.Default.setMenu_isLogNMEA;
                         minFixStepDist = Properties.Settings.Default.setF_minFixStep;
 
                         string sentence = Properties.Vehicle.Default.seq_FunctionEnter;

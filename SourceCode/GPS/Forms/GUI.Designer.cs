@@ -30,7 +30,7 @@ namespace AgOpenGPS
             btnFlag.Image = Properties.Resources.FlagRed;
 
             //metric settings
-            isMetric = Settings.Default.setMenu_IsMetric;
+            isMetric = Settings.Default.setMenu_isMetric;
             metricToolStrip.Checked = isMetric;
 
             if (isMetric)
@@ -63,25 +63,29 @@ namespace AgOpenGPS
             btnRate.Text = "Off";
 
             //area side settings
-            isAreaOnRight = Settings.Default.setMenu_IsAreaRight;
+            isAreaOnRight = Settings.Default.setMenu_isAreaRight;
             toolStripMenuAreaSide.Checked = isAreaOnRight;
 
             //set up grid and lightbar
-            isGridOn = Settings.Default.setMenu_IsGridOn;
+            isGridOn = Settings.Default.setMenu_isGridOn;
             gridToolStripMenuItem.Checked = isGridOn;
 
             //log NMEA 
-            isLogNMEA = Settings.Default.setMenu_IsLogNMEA;
+            isLogNMEA = Settings.Default.setMenu_isLogNMEA;
             logNMEAMenuItem.Checked = isLogNMEA;
 
-            isLightbarOn = Settings.Default.setMenu_IsLightbarOn;
+            isLightbarOn = Settings.Default.setMenu_isLightbarOn;
             lightbarToolStripMenuItem.Checked = isLightbarOn;
 
-            isSideGuideLines = Settings.Default.setMenu_IsSideGuideLines;
+            isSideGuideLines = Settings.Default.setMenu_isSideGuideLines;
             sideGuideLines.Checked = isSideGuideLines;
 
             isPureDisplayOn = Settings.Default.setMenu_isPureOn;
             pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
+
+            simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
+            if (simulatorOnToolStripMenuItem.Checked) timerSim.Enabled = true;
+            else timerSim.Enabled = false;
 
             LineUpManualBtns();
         }
@@ -798,7 +802,7 @@ namespace AgOpenGPS
         private void btnUnits_Click(object sender, EventArgs e)
         {
             isMetric = !isMetric;
-            Settings.Default.setMenu_IsMetric = isMetric;
+            Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             if (isMetric)
             {
@@ -1234,14 +1238,14 @@ namespace AgOpenGPS
         {
             isLogNMEA = !isLogNMEA;
             logNMEAMenuItem.Checked = isLogNMEA;
-            Settings.Default.setMenu_IsLogNMEA = isLogNMEA;
+            Settings.Default.setMenu_isLogNMEA = isLogNMEA;
             Settings.Default.Save();
         }
         private void lightbarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLightbarOn = !isLightbarOn;
             lightbarToolStripMenuItem.Checked = isLightbarOn;
-            Settings.Default.setMenu_IsLightbarOn = isLightbarOn;
+            Settings.Default.setMenu_isLightbarOn = isLightbarOn;
             Settings.Default.Save();
         }
         private void polygonsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1253,14 +1257,14 @@ namespace AgOpenGPS
         {
             isGridOn = !isGridOn;
             gridToolStripMenuItem.Checked = isGridOn;
-            Settings.Default.setMenu_IsGridOn = isGridOn;
+            Settings.Default.setMenu_isGridOn = isGridOn;
             Settings.Default.Save();
         }
         private void sideGuideLines_Click(object sender, EventArgs e)
         {
             isSideGuideLines = !isSideGuideLines;
             sideGuideLines.Checked = isSideGuideLines;
-            Settings.Default.setMenu_IsSideGuideLines = isSideGuideLines;
+            Settings.Default.setMenu_isSideGuideLines = isSideGuideLines;
             Settings.Default.Save();
         }
         private void pursuitLineToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1283,7 +1287,7 @@ namespace AgOpenGPS
             metricToolStrip.Checked = true;
             imperialToolStrip.Checked = false;
             isMetric = true;
-            Settings.Default.setMenu_IsMetric = isMetric;
+            Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "kmh";
 
@@ -1293,16 +1297,23 @@ namespace AgOpenGPS
             metricToolStrip.Checked = false;
             imperialToolStrip.Checked = true;
             isMetric = false;
-            Settings.Default.setMenu_IsMetric = isMetric;
+            Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "mph";
+        }
+        private void simulatorOnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (simulatorOnToolStripMenuItem.Checked) timerSim.Enabled = true;
+            else timerSim.Enabled = false;
+            Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
+            Settings.Default.Save();
         }
 
         //Area button context menu items
         private void toolStripMenuAreaSide_Click(object sender, EventArgs e)
         {
             isAreaOnRight = !isAreaOnRight;
-            Settings.Default.setMenu_IsAreaRight = isAreaOnRight;
+            Settings.Default.setMenu_isAreaRight = isAreaOnRight;
             Settings.Default.Save();
         }
 

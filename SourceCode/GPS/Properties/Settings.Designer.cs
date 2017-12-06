@@ -158,48 +158,48 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setMenu_IsMetric {
+        public bool setMenu_isMetric {
             get {
-                return ((bool)(this["setMenu_IsMetric"]));
+                return ((bool)(this["setMenu_isMetric"]));
             }
             set {
-                this["setMenu_IsMetric"] = value;
+                this["setMenu_isMetric"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setMenu_IsGridOn {
+        public bool setMenu_isGridOn {
             get {
-                return ((bool)(this["setMenu_IsGridOn"]));
+                return ((bool)(this["setMenu_isGridOn"]));
             }
             set {
-                this["setMenu_IsGridOn"] = value;
+                this["setMenu_isGridOn"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setMenu_IsLightbarOn {
+        public bool setMenu_isLightbarOn {
             get {
-                return ((bool)(this["setMenu_IsLightbarOn"]));
+                return ((bool)(this["setMenu_isLightbarOn"]));
             }
             set {
-                this["setMenu_IsLightbarOn"] = value;
+                this["setMenu_isLightbarOn"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setMenu_IsAreaRight {
+        public bool setMenu_isAreaRight {
             get {
-                return ((bool)(this["setMenu_IsAreaRight"]));
+                return ((bool)(this["setMenu_isAreaRight"]));
             }
             set {
-                this["setMenu_IsAreaRight"] = value;
+                this["setMenu_isAreaRight"] = value;
             }
         }
         
@@ -362,12 +362,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool setMenu_IsLogNMEA {
+        public bool setMenu_isLogNMEA {
             get {
-                return ((bool)(this["setMenu_IsLogNMEA"]));
+                return ((bool)(this["setMenu_isLogNMEA"]));
             }
             set {
-                this["setMenu_IsLogNMEA"] = value;
+                this["setMenu_isLogNMEA"] = value;
             }
         }
         
@@ -506,12 +506,12 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool setMenu_IsSideGuideLines {
+        public bool setMenu_isSideGuideLines {
             get {
-                return ((bool)(this["setMenu_IsSideGuideLines"]));
+                return ((bool)(this["setMenu_isSideGuideLines"]));
             }
             set {
-                this["setMenu_IsSideGuideLines"] = value;
+                this["setMenu_isSideGuideLines"] = value;
             }
         }
         
@@ -614,48 +614,84 @@ namespace AgOpenGPS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
-        public string setIP_AutoSteerIP {
+        public string setIP_autoSteerIP {
             get {
-                return ((string)(this["setIP_AutoSteerIP"]));
+                return ((string)(this["setIP_autoSteerIP"]));
             }
             set {
-                this["setIP_AutoSteerIP"] = value;
+                this["setIP_autoSteerIP"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("8888")]
-        public int setIP_AutoSteerPort {
+        public int setIP_autoSteerPort {
             get {
-                return ((int)(this["setIP_AutoSteerPort"]));
+                return ((int)(this["setIP_autoSteerPort"]));
             }
             set {
-                this["setIP_AutoSteerPort"] = value;
+                this["setIP_autoSteerPort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
-        public string setIP_RateRelayIP {
+        public string setIP_rateRelayIP {
             get {
-                return ((string)(this["setIP_RateRelayIP"]));
+                return ((string)(this["setIP_rateRelayIP"]));
             }
             set {
-                this["setIP_RateRelayIP"] = value;
+                this["setIP_rateRelayIP"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7777")]
-        public int setIP_RateRelayPort {
+        public int setIP_rateRelayPort {
             get {
-                return ((int)(this["setIP_RateRelayPort"]));
+                return ((int)(this["setIP_rateRelayPort"]));
             }
             set {
-                this["setIP_RateRelayPort"] = value;
+                this["setIP_rateRelayPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setMenu_isSimulatorOn {
+            get {
+                return ((bool)(this["setMenu_isSimulatorOn"]));
+            }
+            set {
+                this["setMenu_isSimulatorOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("53.436026")]
+        public double setSim_lastLat {
+            get {
+                return ((double)(this["setSim_lastLat"]));
+            }
+            set {
+                this["setSim_lastLat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-111.160047")]
+        public double setSim_lastLong {
+            get {
+                return ((double)(this["setSim_lastLong"]));
+            }
+            set {
+                this["setSim_lastLong"] = value;
             }
         }
     }

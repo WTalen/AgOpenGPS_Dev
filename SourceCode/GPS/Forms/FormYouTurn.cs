@@ -405,9 +405,7 @@ namespace AgOpenGPS
             btnYouTurnKeyHole.BackColor = Color.Yellow;
             btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
             btnYouTurnCustom.BackColor = Color.LimeGreen;
-
-            //back to FormGPS
-            //DialogResult = DialogResult.OK;
+            btnYouTurnWideReturn.BackColor = Color.LimeGreen;
         }
 
         private void btnYouTurnSemiCircle_Click(object sender, EventArgs e)
@@ -418,9 +416,18 @@ namespace AgOpenGPS
             btnYouTurnKeyHole.BackColor = Color.LimeGreen;
             btnYouTurnSemiCircle.BackColor = Color.Yellow;
             btnYouTurnCustom.BackColor = Color.LimeGreen;
+            btnYouTurnWideReturn.BackColor = Color.LimeGreen;
+        }
 
-            //back to FormGPS
-            //DialogResult = DialogResult.OK;
+        private void btnYouTurnWideReturn_Click(object sender, EventArgs e)
+        {
+            mf.yt.LoadYouTurnShapeFromFile(@".\YouTurnShapes\WideReturn.txt");
+            Properties.Settings.Default.setAS_youTurnShape = "WideReturn.txt";
+            Properties.Settings.Default.Save();
+            btnYouTurnKeyHole.BackColor = Color.LimeGreen;
+            btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
+            btnYouTurnCustom.BackColor = Color.LimeGreen;
+            btnYouTurnWideReturn.BackColor = Color.Yellow;
         }
 
         private void btnYouTurnCustom_Click(object sender, EventArgs e)
@@ -431,9 +438,7 @@ namespace AgOpenGPS
             btnYouTurnKeyHole.BackColor = Color.LimeGreen;
             btnYouTurnSemiCircle.BackColor = Color.LimeGreen;
             btnYouTurnCustom.BackColor = Color.Yellow;
-
-            //back to FormGPS
-            //DialogResult = DialogResult.OK;
+            btnYouTurnWideReturn.BackColor = Color.LimeGreen;
         }
 
         private void btnYouTurnRecord_Click(object sender, EventArgs e)
@@ -558,5 +563,6 @@ namespace AgOpenGPS
             mf.seq.ResetAllSequences();
             PopulateSequencePages();
         }
+
     }
 }
