@@ -517,6 +517,7 @@
     <None Include="btnImages\PointStart.png" />
     <None Include="btnImages\YouTurnReverse.png" />
     <None Include="btnImages\YouTurnBackground.jpg" />
+    <None Include="btnImages\WideReturn.png" />
     <Content Include="Dependencies\Floor.png" />
     <Content Include="Dependencies\Landscape.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnYouTurnWideReturn = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.lblDistance = new System.Windows.Forms.Label();
             this.lblWhenTrig = new System.Windows.Forms.Label();
@@ -105,7 +106,6 @@
             this.bntOK = new System.Windows.Forms.Button();
             this.btnDeleteAB = new System.Windows.Forms.Button();
             this.btnResetAll = new System.Windows.Forms.Button();
-            this.btnYouTurnWideReturn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabYouTurn.SuspendLayout();
@@ -147,6 +147,19 @@
             this.groupBox1.TabIndex = 133;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Turn Shapes";
+            // 
+            // btnYouTurnWideReturn
+            // 
+            this.btnYouTurnWideReturn.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnYouTurnWideReturn.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnYouTurnWideReturn.Image = global::AgOpenGPS.Properties.Resources.WideReturn;
+            this.btnYouTurnWideReturn.Location = new System.Drawing.Point(15, 334);
+            this.btnYouTurnWideReturn.Name = "btnYouTurnWideReturn";
+            this.btnYouTurnWideReturn.Size = new System.Drawing.Size(100, 100);
+            this.btnYouTurnWideReturn.TabIndex = 149;
+            this.btnYouTurnWideReturn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnYouTurnWideReturn.UseVisualStyleBackColor = false;
+            this.btnYouTurnWideReturn.Click += new System.EventHandler(this.btnYouTurnWideReturn_Click);
             // 
             // label12
             // 
@@ -1183,19 +1196,6 @@
             this.btnResetAll.TabIndex = 131;
             this.btnResetAll.Text = "Reset All Sequences";
             this.btnResetAll.Click += new System.EventHandler(this.btnResetAll_Click);
-            // 
-            // btnYouTurnWideReturn
-            // 
-            this.btnYouTurnWideReturn.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnYouTurnWideReturn.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnYouTurnWideReturn.Image = global::AgOpenGPS.Properties.Resources.SemiCircle;
-            this.btnYouTurnWideReturn.Location = new System.Drawing.Point(15, 334);
-            this.btnYouTurnWideReturn.Name = "btnYouTurnWideReturn";
-            this.btnYouTurnWideReturn.Size = new System.Drawing.Size(100, 100);
-            this.btnYouTurnWideReturn.TabIndex = 149;
-            this.btnYouTurnWideReturn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnYouTurnWideReturn.UseVisualStyleBackColor = false;
-            this.btnYouTurnWideReturn.Click += new System.EventHandler(this.btnYouTurnWideReturn_Click);
             // 
             // FormYouTurn
             // 
