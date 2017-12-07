@@ -213,6 +213,53 @@ namespace AgOpenGPS
         //keystrokes for easy and quick startup
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //speed up
+            if (keyData == Keys.K)
+            {
+                sim.stepDistance += 0.05;
+                if (sim.stepDistance > 6) sim.stepDistance = 6;
+                return true;
+            }
+
+            //slow down
+            if (keyData == Keys.J)
+            {
+                sim.stepDistance -= 0.05;
+                if (sim.stepDistance < 0) sim.stepDistance = 0;
+                return true;
+            }
+
+            //turn right
+            if (keyData == Keys.M)
+            {
+                sim.steerAngle += 0.5;
+                if (sim.steerAngle > 30) sim.steerAngle = 30;
+                sim.steerAngleScrollBar = sim.steerAngle;
+                lblSteerAngle.Text = sim.steerAngle.ToString();
+                tbarSteerAngle.Value = (int)(10 * sim.steerAngle);
+                return true;
+            }
+
+            //turn left
+            if (keyData == Keys.N)
+            {
+                sim.steerAngle -= 0.5;
+                if (sim.steerAngle < -30) sim.steerAngle = -30;
+                sim.steerAngleScrollBar = sim.steerAngle;
+                lblSteerAngle.Text = sim.steerAngle.ToString();
+                tbarSteerAngle.Value = (int)(10 * sim.steerAngle);
+                return true;
+            }
+
+            if (keyData == Keys.Up)
+            {
+                sim.steerAngle = 0;
+                sim.steerAngleScrollBar = sim.steerAngle;
+                lblSteerAngle.Text = sim.steerAngle.ToString();
+                tbarSteerAngle.Value = (int)(10 * sim.steerAngle);
+                return true;
+            }
+
             if (keyData == (Keys.F))
             {
                 JobNewOpenResume();
@@ -375,8 +422,8 @@ namespace AgOpenGPS
                         //sendSocket.Shutdown(SocketShutdown.Both);
                         //recvSocket.Shutdown(SocketShutdown.Both);
 
-                        Settings.Default.setSim_lastLong = sim.longitude;
-                        Settings.Default.setSim_lastLat = sim.latitude;
+                        Settings.Default.setSim_lastLong = pn.longitude;
+                        Settings.Default.setSim_lastLat = pn.latitude;
                         Settings.Default.setF_CurrentDir = currentFieldDirectory;
                         Settings.Default.Save();
 
@@ -563,7 +610,7 @@ namespace AgOpenGPS
 
         private void tbarStepDistance_Scroll(object sender, EventArgs e)
         {
-            sim.stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / 5.0;
+            sim.stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / (double)fixUpdateHz;
         }
 
         private void tbarSteerAngle_Scroll(object sender, EventArgs e)

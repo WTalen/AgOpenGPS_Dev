@@ -16,6 +16,15 @@ namespace AgOpenGPS
         //properties
         private readonly FormGPS mf;
 
+        //strings for comboboxes past auto and manual choices
+        //pos0 is "-" no matter what
+        string pos1 = "Manual";
+        string pos2 = "Auto";
+        string pos3 = "Relay 1";
+        string pos4 = "Relay 2";
+        string pos5 = "Relay 3";
+        
+
         public FormYouTurn(Form callingForm)
         {
             mf = callingForm as FormGPS;
@@ -24,6 +33,9 @@ namespace AgOpenGPS
 
         private void FormYouTurn_Load(object sender, EventArgs e)
         {
+            //Fill in the strings for comboboxes - editable
+            LoadComboStrings();
+
             if (Properties.Settings.Default.setAS_youTurnShape == "KeyHole.txt")
             {
                 btnYouTurnKeyHole.BackColor = Color.Yellow;
@@ -314,6 +326,65 @@ namespace AgOpenGPS
                 mf.seq.seqExit[4].isTrig = false;
                 mf.seq.seqExit[4].distance = (int)nudExit4.Value;
             }
+        }
+
+        private void LoadComboStrings()
+        {
+            cboxEnterFunc0.Items.Add(pos1);
+            cboxEnterFunc0.Items.Add(pos2);
+            cboxEnterFunc0.Items.Add(pos3);
+            cboxEnterFunc0.Items.Add(pos4);
+            cboxEnterFunc0.Items.Add(pos5);
+            cboxExitFunc0.Items.Add(pos1);
+            cboxExitFunc0.Items.Add(pos2);
+            cboxExitFunc0.Items.Add(pos3);
+            cboxExitFunc0.Items.Add(pos4);
+            cboxExitFunc0.Items.Add(pos5);
+
+            cboxEnterFunc1.Items.Add(pos1);
+            cboxEnterFunc1.Items.Add(pos2);
+            cboxEnterFunc1.Items.Add(pos3);
+            cboxEnterFunc1.Items.Add(pos4);
+            cboxEnterFunc1.Items.Add(pos5);
+            cboxExitFunc1.Items.Add(pos1);
+            cboxExitFunc1.Items.Add(pos2);
+            cboxExitFunc1.Items.Add(pos3);
+            cboxExitFunc1.Items.Add(pos4);
+            cboxExitFunc1.Items.Add(pos5);
+
+            cboxEnterFunc2.Items.Add(pos1);
+            cboxEnterFunc2.Items.Add(pos2);
+            cboxEnterFunc2.Items.Add(pos3);
+            cboxEnterFunc2.Items.Add(pos4);
+            cboxEnterFunc2.Items.Add(pos5);
+            cboxExitFunc2.Items.Add(pos1);
+            cboxExitFunc2.Items.Add(pos2);
+            cboxExitFunc2.Items.Add(pos3);
+            cboxExitFunc2.Items.Add(pos4);
+            cboxExitFunc2.Items.Add(pos5);
+
+            cboxEnterFunc3.Items.Add(pos1);
+            cboxEnterFunc3.Items.Add(pos2);
+            cboxEnterFunc3.Items.Add(pos3);
+            cboxEnterFunc3.Items.Add(pos4);
+            cboxEnterFunc3.Items.Add(pos5);
+            cboxExitFunc3.Items.Add(pos1);
+            cboxExitFunc3.Items.Add(pos2);
+            cboxExitFunc3.Items.Add(pos3);
+            cboxExitFunc3.Items.Add(pos4);
+            cboxExitFunc3.Items.Add(pos5);
+
+            cboxEnterFunc4.Items.Add(pos1);
+            cboxEnterFunc4.Items.Add(pos2);
+            cboxEnterFunc4.Items.Add(pos3);
+            cboxEnterFunc4.Items.Add(pos4);
+            cboxEnterFunc4.Items.Add(pos5);
+            cboxExitFunc4.Items.Add(pos1);
+            cboxExitFunc4.Items.Add(pos2);
+            cboxExitFunc4.Items.Add(pos3);
+            cboxExitFunc4.Items.Add(pos4);
+            cboxExitFunc4.Items.Add(pos5);
+
         }
 
         private void bntOK_Click(object sender, EventArgs e)

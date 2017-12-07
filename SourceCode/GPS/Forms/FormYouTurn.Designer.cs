@@ -463,12 +463,7 @@
             this.cboxEnterFunc4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxEnterFunc4.FormattingEnabled = true;
             this.cboxEnterFunc4.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxEnterFunc4.Location = new System.Drawing.Point(44, 460);
             this.cboxEnterFunc4.Name = "cboxEnterFunc4";
             this.cboxEnterFunc4.Size = new System.Drawing.Size(233, 53);
@@ -510,12 +505,7 @@
             this.cboxEnterFunc3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxEnterFunc3.FormattingEnabled = true;
             this.cboxEnterFunc3.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxEnterFunc3.Location = new System.Drawing.Point(44, 358);
             this.cboxEnterFunc3.Name = "cboxEnterFunc3";
             this.cboxEnterFunc3.Size = new System.Drawing.Size(233, 53);
@@ -557,12 +547,7 @@
             this.cboxEnterFunc2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxEnterFunc2.FormattingEnabled = true;
             this.cboxEnterFunc2.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxEnterFunc2.Location = new System.Drawing.Point(44, 256);
             this.cboxEnterFunc2.Name = "cboxEnterFunc2";
             this.cboxEnterFunc2.Size = new System.Drawing.Size(233, 53);
@@ -604,12 +589,7 @@
             this.cboxEnterFunc1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxEnterFunc1.FormattingEnabled = true;
             this.cboxEnterFunc1.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxEnterFunc1.Location = new System.Drawing.Point(44, 154);
             this.cboxEnterFunc1.Name = "cboxEnterFunc1";
             this.cboxEnterFunc1.Size = new System.Drawing.Size(233, 53);
@@ -651,12 +631,7 @@
             this.cboxEnterFunc0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxEnterFunc0.FormattingEnabled = true;
             this.cboxEnterFunc0.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxEnterFunc0.Location = new System.Drawing.Point(44, 52);
             this.cboxEnterFunc0.Name = "cboxEnterFunc0";
             this.cboxEnterFunc0.Size = new System.Drawing.Size(233, 53);
@@ -811,12 +786,7 @@
             this.cboxExitFunc4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxExitFunc4.FormattingEnabled = true;
             this.cboxExitFunc4.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxExitFunc4.Location = new System.Drawing.Point(44, 460);
             this.cboxExitFunc4.Name = "cboxExitFunc4";
             this.cboxExitFunc4.Size = new System.Drawing.Size(233, 53);
@@ -858,12 +828,7 @@
             this.cboxExitFunc3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxExitFunc3.FormattingEnabled = true;
             this.cboxExitFunc3.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxExitFunc3.Location = new System.Drawing.Point(44, 358);
             this.cboxExitFunc3.Name = "cboxExitFunc3";
             this.cboxExitFunc3.Size = new System.Drawing.Size(233, 53);
@@ -905,12 +870,7 @@
             this.cboxExitFunc2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxExitFunc2.FormattingEnabled = true;
             this.cboxExitFunc2.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxExitFunc2.Location = new System.Drawing.Point(44, 256);
             this.cboxExitFunc2.Name = "cboxExitFunc2";
             this.cboxExitFunc2.Size = new System.Drawing.Size(233, 53);
@@ -952,12 +912,7 @@
             this.cboxExitFunc1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxExitFunc1.FormattingEnabled = true;
             this.cboxExitFunc1.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxExitFunc1.Location = new System.Drawing.Point(44, 154);
             this.cboxExitFunc1.Name = "cboxExitFunc1";
             this.cboxExitFunc1.Size = new System.Drawing.Size(233, 53);
@@ -999,12 +954,7 @@
             this.cboxExitFunc0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboxExitFunc0.FormattingEnabled = true;
             this.cboxExitFunc0.Items.AddRange(new object[] {
-            "-",
-            "Manual Btn",
-            "Auto Btn",
-            "Relay 1",
-            "Relay 2",
-            "Thingy"});
+            "-"});
             this.cboxExitFunc0.Location = new System.Drawing.Point(44, 52);
             this.cboxExitFunc0.Name = "cboxExitFunc0";
             this.cboxExitFunc0.Size = new System.Drawing.Size(233, 53);
