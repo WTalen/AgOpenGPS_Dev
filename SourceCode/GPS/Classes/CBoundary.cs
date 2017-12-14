@@ -185,7 +185,7 @@ namespace AgOpenGPS
 
             //the "close the loop" line
             gl.LineWidth(2);
-            gl.Color(0.9f, 0.32f, 0.70f);
+            gl.Color(0.9f, 0.832f, 0.170f);
             gl.Begin(OpenGL.GL_LINE_STRIP);
             gl.Vertex(ptList[ptCount - 1].easting, ptList[ptCount - 1].northing, 0);
             gl.Vertex(ptList[0].easting, ptList[0].northing, 0);

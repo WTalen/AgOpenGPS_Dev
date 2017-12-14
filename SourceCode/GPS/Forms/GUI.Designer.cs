@@ -15,9 +15,7 @@ namespace AgOpenGPS
 {
     public partial class FormGPS
     {
-       
-
-            private void LoadGUI()
+        private void LoadGUI()
         {
             //fix buttons
             btnSection1Man.Enabled = false;
@@ -84,8 +82,16 @@ namespace AgOpenGPS
             pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
 
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
-            if (simulatorOnToolStripMenuItem.Checked) timerSim.Enabled = true;
-            else timerSim.Enabled = false;
+            if (simulatorOnToolStripMenuItem.Checked)
+            {
+                panelSimControls.Visible = true;
+                timerSim.Enabled = true;
+            }
+            else
+            {
+                panelSimControls.Visible = false;
+                timerSim.Enabled = false;
+            }
 
             LineUpManualBtns();
         }
@@ -106,7 +112,7 @@ namespace AgOpenGPS
         //line up section On Off Auto buttons based on how many there are
         public void LineUpManualBtns()
         {
-            const int top = 170;
+            const int top = 150;
 
             btnSection4Man.Top = Height - top;
             btnSection1Man.Top = Height - top;
@@ -118,7 +124,10 @@ namespace AgOpenGPS
             btnSection7Man.Top = Height - top;
             btnSection8Man.Top = Height - top;
 
-            int first2Thirds = (Width - 515) / 2;
+            int first2Thirds;
+            if (tabControl1.Visible) first2Thirds = (Width - 450) / 2;
+            else first2Thirds = (Width) / 2;
+
             switch (vehicle.numOfSections)
             {
                 case 1:
@@ -339,6 +348,45 @@ namespace AgOpenGPS
                         btnSection8Man.Enabled = true;
                         break;
                 }
+            }
+        }
+
+        //hide the left panel
+        public void HideTabControl()
+        {
+            if (tabControl1.Visible)
+            {
+                tabControl1.Visible = false;
+                openGLControl.Width += 415;
+                btnTiltDown.Visible = false;
+                btnTiltUp.Visible = false;
+                btnABLine.Left += 415;
+                btnContour.Left += 415;
+                btnManualOffOn.Left += 415;
+                btnSectionOffAutoOn.Left += 415;
+                btnRightYouTurn.Left += 415;
+                btnZoomIn.Left = 3;
+                btnZoomIn.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
+                LineUpManualBtns();
+                txtDistanceOffABLine.Left += 207;
+                txtDistanceOffABLine.Top += 80;
+            }
+            else
+            {
+                tabControl1.Visible = true;
+                openGLControl.Width -= 415;
+                btnTiltDown.Visible = true;
+                btnTiltUp.Visible = true;
+                btnABLine.Left -= 415;
+                btnContour.Left -= 415;
+                btnManualOffOn.Left -= 415;
+                btnSectionOffAutoOn.Left -= 415;
+                btnRightYouTurn.Left -= 415;
+                LineUpManualBtns();
+                btnZoomIn.Left = Width - 220;
+                btnZoomIn.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+                txtDistanceOffABLine.Left -= 207;
+                txtDistanceOffABLine.Top -= 80;
             }
         }
 
@@ -698,13 +746,6 @@ namespace AgOpenGPS
             ManualBtnUpdate(7, btnSection8Man);
         }
 
-        //The reset button on status bar for distance
-        private void toolStripBtnResetDistance_ButtonClick(object sender, EventArgs e)
-        {
-            userDistance = 0;
-            totalUserSquareMeters = 0;
-        }
-
         //measure area button
         private void btnPerimeter_Click(object sender, EventArgs e)
         {
@@ -777,13 +818,29 @@ namespace AgOpenGPS
             if (camera.camPitch < -80) camera.camPitch = -80;
         }
 
-        private void btnJob_Click(object sender, EventArgs e)
+        private void btnSwapDirection_Click(object sender, EventArgs e)
         {
-            JobNewOpenResume();
+            if (!yt.isYouTurnTriggerPointSet)
+            {
+                //is it turning right already?
+                if (yt.isYouTurnRight)
+                {
+                    yt.isYouTurnRight = false;
+                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
+                    AutoYouTurnButtonsReset();
+                }
+                else
+                {
+                    //make it turn the other way
+                    yt.isYouTurnRight = true;
+                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
+                    AutoYouTurnButtonsReset();
+                }
+            }
         }
         private void btnSnap_Click(object sender, EventArgs e)
         {
-            ABLine.SnapABLine();
+           ABLine.SnapABLine();
         }
 
         //panel buttons
@@ -855,27 +912,6 @@ namespace AgOpenGPS
             form.ShowDialog();
         }
 
-        private void btnYouTurnReverse_Click(object sender, EventArgs e)
-        {
-            if (!yt.isYouTurnTriggerPointSet)
-            {
-                //is it turning right already?
-                if (yt.isYouTurnRight)
-                {
-                    yt.isYouTurnRight = false;
-                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
-                    AutoYouTurnButtonsReset();
-                }
-                else
-                {
-                    //make it turn the other way
-                    yt.isYouTurnRight = true;
-                    yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
-                    AutoYouTurnButtonsReset();
-                }
-            }
-        }
-
         //YouTurn in the tab control
         private void btnEnableAutoYouTurn_Click(object sender, EventArgs e)
         {
@@ -889,40 +925,6 @@ namespace AgOpenGPS
                 yt.isYouTurnBtnOn = false;
                 btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
             }
-        }
-
-        private void btnHeadlandsMenu_Click(object sender, EventArgs e)
-        {
-            if (boundz.isSet)
-            {
-                //field too small
-                if (boundz.ptList.Count < 30) { TimedMessageBox(3000, "Boundary too small", "Unable to create Headland"); return; }
-                using (var form = new FormHeadland(this))
-                {
-                    var result = form.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-
-                    }
-                }
-            }
-            else { TimedMessageBox(3000, "Boundary Not Set", "Create a Boundary First"); }
-        }
-        private void btnBoundary_Click(object sender, EventArgs e)
-        {
-            if (isJobStarted)
-            {
-                using (var form = new FormBoundary(this))
-                {
-                    var result = form.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        Form form2 = new FormBoundaryPlayer(this);
-                        form2.Show();
-                    }
-                }
-            }
-            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); }
         }
         private void btnFileExplorer_Click(object sender, EventArgs e)
         {
@@ -1140,38 +1142,38 @@ namespace AgOpenGPS
             btnRightYouTurn.BackColor = Color.Yellow;
             btnRightYouTurn.Height = 120;
             btnRightYouTurn.Width = 120;
-            btnLeftYouTurn.Height = 80;
-            btnLeftYouTurn.Width = 80;
-            btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
+            btnLeftYouTurn.Height = 64;
+            btnLeftYouTurn.Width = 64;
+            btnLeftYouTurn.BackColor = Color.LightSteelBlue;
         }
         public void AutoYouTurnButtonsLeftTurn()
         {
-            btnRightYouTurn.BackColor = SystemColors.ButtonFace;
-            btnRightYouTurn.Height = 80;
-            btnRightYouTurn.Width = 80;
+            btnRightYouTurn.BackColor = Color.LightSteelBlue;
+            btnRightYouTurn.Height = 64;
+            btnRightYouTurn.Width = 64;
             btnLeftYouTurn.Height = 120;
             btnLeftYouTurn.Width = 120;
             btnLeftYouTurn.BackColor = Color.Yellow;
         }
         public void AutoYouTurnButtonsReset()
         {
-            btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
-            btnRightYouTurn.BackColor = SystemColors.ButtonFace;
-            btnLeftYouTurn.Height = 80;
-            btnLeftYouTurn.Width = 80;
-            btnRightYouTurn.Height = 80;
-            btnRightYouTurn.Width = 80;
+            btnLeftYouTurn.BackColor = Color.LightSteelBlue;
+            btnRightYouTurn.BackColor = Color.LightSteelBlue;
+            btnLeftYouTurn.Height = 64;
+            btnLeftYouTurn.Width = 64;
+            btnRightYouTurn.Height = 64;
+            btnRightYouTurn.Width = 64;
 
             // why yes it is backwards, puzzling
             if (!yt.isYouTurnRight)
             {
-                btnLeftYouTurn.BackColor = SystemColors.ButtonFace;
+                btnLeftYouTurn.BackColor = Color.LightSteelBlue;
                 btnRightYouTurn.BackColor = Color.LightGreen;
             }
             else
             {
                 btnLeftYouTurn.BackColor = Color.LightGreen;
-                btnRightYouTurn.BackColor = SystemColors.ButtonFace;
+                btnRightYouTurn.BackColor = Color.LightSteelBlue;
             }
         }
 
@@ -1303,8 +1305,17 @@ namespace AgOpenGPS
         }
         private void simulatorOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (simulatorOnToolStripMenuItem.Checked) timerSim.Enabled = true;
-            else timerSim.Enabled = false;
+            if (simulatorOnToolStripMenuItem.Checked)
+            {
+                panelSimControls.Visible = true;
+                timerSim.Enabled = true;
+            }
+            else
+            {
+                panelSimControls.Visible = false;
+                timerSim.Enabled = false;
+            }
+
             Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
             Settings.Default.Save();
         }
@@ -1361,11 +1372,6 @@ namespace AgOpenGPS
         private void gPSDataToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form form = new FormGPSData(this);
-            form.Show();
-        }
-        private void variablesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Form form = new FormVariables(this);
             form.Show();
         }
 
@@ -1494,6 +1500,120 @@ namespace AgOpenGPS
             }
         }
 
+        //taskbar buttons
+        private void toolstripYouTurnConfig_Click(object sender, EventArgs e)
+        {
+            var form = new FormYouTurn(this);
+            form.ShowDialog();
+        }
+        private void toolstripAutoSteerConfig_Click(object sender, EventArgs e)
+        {
+            //check if window already exists
+            Form fc = Application.OpenForms["FormSteer"];
+
+            if (fc != null)
+            {
+                fc.Focus();
+                return;
+            }
+
+            //
+            Form form = new FormSteer(this);
+            form.Show();
+        }
+        private void toolstripVehicleConfig_Click(object sender, EventArgs e)
+        {
+            SettingsPageOpen(0);
+        }
+        private void toolstripUSBPortsConfig_Click(object sender, EventArgs e)
+        {
+            SettingsCommunications();
+        }
+       private void toolstripUDPConfig_Click(object sender, EventArgs e)
+        {
+            SettingsUDP();
+        }
+
+        private void toolstripResetTrip_Click_1(object sender, EventArgs e)
+        {
+            userDistance = 0;
+            totalUserSquareMeters = 0;
+        }
+        private void toolstripHeadland_Click(object sender, EventArgs e)
+        {
+            if (boundz.isSet)
+            {
+                //field too small
+                if (boundz.ptList.Count < 30) { TimedMessageBox(3000, "Boundary too small", "Unable to create Headland"); return; }
+                using (var form = new FormHeadland(this))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+
+                    }
+                }
+            }
+            else { TimedMessageBox(3000, "Boundary Not Set", "Create a Boundary First"); }
+        }
+        private void toolstripBoundary_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                using (var form = new FormBoundary(this))
+                {
+                    var result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        Form form2 = new FormBoundaryPlayer(this);
+                        form2.Show();
+                    }
+                }
+            }
+            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); }
+        }
+        private void toolstripField_Click(object sender, EventArgs e)
+        {
+            JobNewOpenResume();
+        }
+
+        //batman to maximize GPS mapping - hide tab control
+        private void btnHideTabs_Click(object sender, EventArgs e)
+        {
+            HideTabControl();
+        }        
+        
+        //Sim controls
+        private void timerSim_Tick(object sender, EventArgs e)
+        {
+            //if a GPS is connected disable sim
+            if (!sp.IsOpen)
+            {
+                if (isAutoSteerBtnOn) sim.DoSimTick(guidanceLineSteerAngle / 10.0);
+                else sim.DoSimTick(sim.steerAngleScrollBar);
+            }
+        }
+        private void tbarStepDistance_Scroll(object sender, EventArgs e)
+        {
+            sim.stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / (double)fixUpdateHz;
+        }
+        private void tbarSteerAngle_Scroll(object sender, EventArgs e)
+        {
+            sim.steerAngleScrollBar = (tbarSteerAngle.Value) * 0.1;
+            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
+        }
+        private void btnResetSteerAngle_Click(object sender, EventArgs e)
+        {
+            sim.steerAngleScrollBar = 0;
+            tbarSteerAngle.Value = 0;
+            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
+        }
+        private void btnResetSim_Click(object sender, EventArgs e)
+        {
+            sim.latitude = 53.436026;
+            sim.longitude = -111.160047;
+        }
+
         #region Properties // ---------------------------------------------------------------------
 
         public string Zone { get { return Convert.ToString(pn.zone); } }
@@ -1584,12 +1704,13 @@ namespace AgOpenGPS
 
         public string PeriAreaAcres { get { return Math.Round(periArea.area * 0.000247105, 2).ToString(); } }
         public string PeriAreaHectares { get { return Math.Round(periArea.area * 0.0001, 2).ToString(); } }
-        public string Acres { get { return (totalSquareMeters * 0.000247105).ToString("N2"); } }
-        //else return (totalSquareMeters * 0.000247105).ToString();  }  }
-        public string Hectares { get { return (totalSquareMeters * 0.0001).ToString("N2"); } }
-        //else return (totalSquareMeters * 0.0001).ToString(); }  }
-        public string AcresUser { get { return Math.Round(totalUserSquareMeters * 0.000247105, 2).ToString(); } }
-        public string HectaresUser { get { return Math.Round(totalUserSquareMeters * 0.0001, 2).ToString(); } }
+        public string Acres { get {
+                if (totalSquareMeters < 404048) return (totalSquareMeters * 0.000247105).ToString("N2");
+                    else return (totalSquareMeters * 0.000247105).ToString("N1");  }  }
+        public string Hectares { get { if (totalSquareMeters < 99000) return (totalSquareMeters * 0.0001).ToString("N2");
+                    else return (totalSquareMeters * 0.0001).ToString("N1"); }  }
+        public string AcresUser { get { return (totalUserSquareMeters * 0.000247105).ToString("N2") + " Ac"; } }
+        public string HectaresUser { get { return (totalUserSquareMeters * 0.0001).ToString("N2") + " Ha"; } }
 
         public string RateAccumulatedVolumeLiters { get { return rc.volumeActual.ToString("N0") + " L"; } }
         public string RateAccumulatedVolumeGallons { get { return ((double)rc.volumeActual * 0.264172875).ToString("N0") + " Gal"; } }
@@ -1614,7 +1735,7 @@ namespace AgOpenGPS
 
 
             //every half of a second update all status
-            if (statusUpdateCounter > 25)
+            if (statusUpdateCounter > 10)
             {
                 //reset the counter
                 statusUpdateCounter = 0;
@@ -1622,6 +1743,62 @@ namespace AgOpenGPS
                 //counter used for saving field in background
                 saveCounter++;
 
+                if (tabControl1.SelectedIndex == 0 && tabControl1.Visible)
+                {
+                    if (isMetric)
+                    {
+                    lblAltitude.Text = Altitude;
+
+                    ////boundary and headland
+                    lblBoundaryArea.Text = boundz.areaHectare;
+                    if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(distPivot)) + "m";
+                    else lblHeadlandDistanceAway.Text = "***";
+
+                    lblHeadlandDistanceFromTool.Text = ((int)(distTool)) + "m";
+
+                    }
+                    else //imperial
+                    {
+                    lblAltitude.Text = AltitudeFeet;
+
+                    ////Boundary
+                    lblBoundaryArea.Text = boundz.areaAcre;
+                    if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
+                    else lblHeadlandDistanceAway.Text = "***";
+
+                    lblHeadlandDistanceFromTool.Text = ((int)(glm.m2ft * distTool)) + "ft";
+
+                    }
+
+                    //both
+                lblLatitude.Text = Latitude;
+                lblLongitude.Text = Longitude;
+                lblFixQuality.Text = FixQuality;
+                lblSats.Text = SatsTracked;
+
+                lblRoll.Text = RollInDegrees;
+                lblGyroHeading.Text = GyroInDegrees;
+                lblGPSHeading.Text = GPSHeading;
+                //lblTurnProgressBar.Value = youTurnProgressBar;
+
+                //up in the menu a few pieces of info
+                if (isJobStarted)
+                {
+                    lblEasting.Text = "E: " + Math.Round(pn.easting, 1).ToString();
+                    lblNorthing.Text = "N: " + Math.Round(pn.northing, 1).ToString();
+                }
+                else
+                {
+                    lblEasting.Text = "E: " + ((int)pn.actualEasting).ToString();
+                    lblNorthing.Text = "N: " + ((int)pn.actualNorthing).ToString();
+                }
+
+                lblZone.Text = pn.zone.ToString();
+                tboxSentence.Text = recvSentenceSettings;
+
+                }
+
+                //the main formgps window
                 if (isMetric)  //metric or imperial
                 {
                     //Hectares on the master section soft control and sections
@@ -1635,13 +1812,8 @@ namespace AgOpenGPS
                     stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed * 0.1, 2)).ToString();
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth, 2)).ToString() + " m";
 
-                    //boundary
-                    toolStripStatusLabelBoundaryArea.Text = boundz.areaHectare;
-                    if (distPivot > 0) strip2BoundaryDistanceAway.Text = ((int)(distPivot)) + "m";
-                    else strip2BoundaryDistanceAway.Text = "***";
-
                     //rate
-                    if (rc.isRateControlOn)
+                    if (rc.isRateControlOn && tabControl1.SelectedIndex == 2)
                     {
                         lblAccumulatedVolume.Text = RateAccumulatedVolumeLiters;
                         lblRateAppliedActual.Text = RateAppliedActualLPerHA;
@@ -1661,13 +1833,8 @@ namespace AgOpenGPS
                     stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed * 0.1) * 2.47)).ToString();
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth * glm.m2ft, 2)).ToString() + " ft";
 
-                    //Boundary
-                    toolStripStatusLabelBoundaryArea.Text = boundz.areaAcre;
-                    if (distPivot > 0) strip2BoundaryDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
-                    else strip2BoundaryDistanceAway.Text = "***";
-
                     //rate
-                    if (rc.isRateControlOn)
+                    if (rc.isRateControlOn && tabControl1.SelectedIndex == 2)
                     {
                         lblAccumulatedVolume.Text = RateAccumulatedVolumeGallons;
                         lblRateAppliedActual.Text = RateAppliedActualGPA;
@@ -1679,28 +1846,12 @@ namespace AgOpenGPS
                 stripHz.Text = NMEAHz + "Hz " + (int)(frameTime);
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
+                lblPureSteerAngle.Text = PureSteerAngle;
 
-                //strip2
-                strip2PureSteerAngle.Text = PureSteerAngle;
-                strip2Roll.Text = RollInDegrees;
-                strip2GyroHeading.Text = GyroInDegrees;
-                strip2GPSHeading.Text = GPSHeading;
-                strip2TurnProgressBar.Value = youTurnProgressBar;
+                //binary of sequences
+                stripSequenceBinary.Text = Convert.ToString(mc.relayRateData[mc.rdYouTurnControlByte], 2).PadLeft(6, '0'); ;
+                
 
-                //up in the menu a few pieces of info
-                if (isJobStarted)
-                {
-                    lblEasting.Text = "E: " + Math.Round(pn.easting, 1).ToString();
-                    lblNorthing.Text = "N: " + Math.Round(pn.northing, 1).ToString();
-                }
-                else
-                {
-                    lblEasting.Text = "E: " + ((int)pn.actualEasting).ToString();
-                    lblNorthing.Text = "N: " + ((int)pn.actualNorthing).ToString();
-                }
-
-                lblZone.Text = pn.zone.ToString();
-                tboxSentence.Text = recvSentenceSettings;
 
                 //update the online indicator
                 if (recvCounter > 50)

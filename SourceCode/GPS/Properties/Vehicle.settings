@@ -108,28 +108,28 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="seq_FunctionEnter" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_FunctionExit" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_ActionEnter" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_ActionExit" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_DistanceEnter" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_DistanceExit" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0,0,0,0,0</Value>
+      <Value Profile="(Default)">0,0,0,0,0,0,0,0</Value>
     </Setting>
     <Setting Name="seq_FunctionList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Manual Btn,Auto Button,Relay1,Relay2,Relay3</Value>
+      <Value Profile="(Default)">Relay 1,Relay 2,Relay 3,Relay 4,Relay 5,Relay 6</Value>
     </Setting>
     <Setting Name="seq_ActionList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Turn On,Turn Off</Value>
+      <Value Profile="(Default)">Turn Off,Turn On</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -39,7 +39,7 @@
             // 
             // btnJobOpen
             // 
-            this.btnJobOpen.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJobOpen.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJobOpen.Image = global::AgOpenGPS.Properties.Resources.FileOpen;
             this.btnJobOpen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnJobOpen.Location = new System.Drawing.Point(44, 361);
@@ -54,7 +54,7 @@
             // 
             // btnJobNew
             // 
-            this.btnJobNew.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJobNew.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJobNew.Image = global::AgOpenGPS.Properties.Resources.FileNew;
             this.btnJobNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnJobNew.Location = new System.Drawing.Point(44, 225);
@@ -70,7 +70,7 @@
             // btnDeleteAB
             // 
             this.btnDeleteAB.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDeleteAB.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteAB.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteAB.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDeleteAB.Image = global::AgOpenGPS.Properties.Resources.back_button;
             this.btnDeleteAB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -83,7 +83,7 @@
             // 
             // btnJobResume
             // 
-            this.btnJobResume.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnJobResume.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnJobResume.Image = global::AgOpenGPS.Properties.Resources.FilePrevious;
             this.btnJobResume.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnJobResume.Location = new System.Drawing.Point(44, 85);
@@ -99,20 +99,20 @@
             // lblResumeDirectory
             // 
             this.lblResumeDirectory.AutoSize = true;
-            this.lblResumeDirectory.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResumeDirectory.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResumeDirectory.Location = new System.Drawing.Point(39, 34);
             this.lblResumeDirectory.Name = "lblResumeDirectory";
-            this.lblResumeDirectory.Size = new System.Drawing.Size(65, 25);
+            this.lblResumeDirectory.Size = new System.Drawing.Size(68, 23);
             this.lblResumeDirectory.TabIndex = 5;
             this.lblResumeDirectory.Text = "label1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 13);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(40, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 21);
+            this.label1.Size = new System.Drawing.Size(131, 23);
             this.label1.TabIndex = 6;
             this.label1.Text = "Previous Field:";
             // 
@@ -128,7 +128,7 @@
             this.Controls.Add(this.btnJobResume);
             this.Controls.Add(this.btnJobNew);
             this.Controls.Add(this.btnJobOpen);
-            this.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

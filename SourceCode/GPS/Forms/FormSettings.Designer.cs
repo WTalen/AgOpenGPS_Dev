@@ -154,7 +154,7 @@
             this.tabControl1.Controls.Add(this.tabWorkSwitch);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabExamples);
-            this.tabControl1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(2, 5);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
@@ -185,12 +185,12 @@
             this.tabVehicle.Controls.Add(this.nudAntennaPivot);
             this.tabVehicle.Controls.Add(this.nudWheelbase);
             this.tabVehicle.Controls.Add(this.nudAntennaHeight);
-            this.tabVehicle.Location = new System.Drawing.Point(4, 41);
+            this.tabVehicle.Location = new System.Drawing.Point(4, 42);
             this.tabVehicle.Margin = new System.Windows.Forms.Padding(4);
             this.tabVehicle.Name = "tabVehicle";
             this.tabVehicle.Padding = new System.Windows.Forms.Padding(4);
             this.tabVehicle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tabVehicle.Size = new System.Drawing.Size(951, 506);
+            this.tabVehicle.Size = new System.Drawing.Size(951, 505);
             this.tabVehicle.TabIndex = 1;
             this.tabVehicle.Text = " Vehicle ";
             this.tabVehicle.UseVisualStyleBackColor = true;
@@ -198,10 +198,10 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.Location = new System.Drawing.Point(104, 447);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(223, 32);
+            this.label29.Size = new System.Drawing.Size(241, 32);
             this.label29.TabIndex = 23;
             this.label29.Text = "* Anything rigidly attached to vehicle like\r\n    Drawbar, feeder/header, 3 pt hit" +
     "ch";
@@ -221,32 +221,32 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(753, 167);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(127, 23);
+            this.label15.Size = new System.Drawing.Size(141, 23);
             this.label15.TabIndex = 21;
             this.label15.Text = "Antenna Height";
             // 
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.Location = new System.Drawing.Point(215, 9);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(124, 23);
+            this.label36.Size = new System.Drawing.Size(125, 23);
             this.label36.TabIndex = 20;
-            this.label36.Text = "Tool Attached..";
+            this.label36.Text = "Tool Attached";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.Location = new System.Drawing.Point(85, 10);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(73, 23);
+            this.label27.Size = new System.Drawing.Size(63, 23);
             this.label27.TabIndex = 18;
-            this.label27.Text = "Tool is...";
+            this.label27.Text = "Tool is";
             // 
             // chkIsTrailingRigid
             // 
@@ -275,10 +275,10 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.Location = new System.Drawing.Point(408, 477);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(107, 23);
+            this.label28.Size = new System.Drawing.Size(117, 23);
             this.label28.TabIndex = 14;
             this.label28.Text = "Hitch Length";
             // 
@@ -306,30 +306,30 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(199, 353);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(107, 23);
+            this.label24.Size = new System.Drawing.Size(117, 23);
             this.label24.TabIndex = 16;
             this.label24.Text = "Hitch Length\r\n";
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.Location = new System.Drawing.Point(622, 468);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(94, 23);
+            this.label26.Size = new System.Drawing.Size(101, 23);
             this.label26.TabIndex = 13;
             this.label26.Text = "Wheelbase";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(544, 154);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(91, 23);
+            this.label12.Size = new System.Drawing.Size(96, 23);
             this.label12.TabIndex = 12;
             this.label12.Text = "Pivot Point";
             // 
@@ -348,32 +348,32 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(199, 138);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(94, 23);
+            this.label13.Size = new System.Drawing.Size(101, 23);
             this.label13.TabIndex = 11;
             this.label13.Text = "Wheelbase";
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label25.Location = new System.Drawing.Point(199, 245);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(127, 23);
+            this.label25.Size = new System.Drawing.Size(141, 23);
             this.label25.TabIndex = 10;
             this.label25.Text = "Antenna Height";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(497, 25);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(161, 23);
+            this.label18.Size = new System.Drawing.Size(154, 23);
             this.label18.TabIndex = 8;
-            this.label18.Text = "Pivot Axle Point is....";
+            this.label18.Text = "Pivot Axle Point is";
             // 
             // nudAntennaPivot
             // 
@@ -467,9 +467,9 @@
             this.tabTool.Controls.Add(this.nudOverlap);
             this.tabTool.Controls.Add(this.label5);
             this.tabTool.Controls.Add(this.nudOffset);
-            this.tabTool.Location = new System.Drawing.Point(4, 41);
+            this.tabTool.Location = new System.Drawing.Point(4, 42);
             this.tabTool.Name = "tabTool";
-            this.tabTool.Size = new System.Drawing.Size(951, 506);
+            this.tabTool.Size = new System.Drawing.Size(951, 505);
             this.tabTool.TabIndex = 9;
             this.tabTool.Text = "  Tool  ";
             this.tabTool.UseVisualStyleBackColor = true;
@@ -477,20 +477,20 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(26, 25);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(185, 69);
+            this.label22.Size = new System.Drawing.Size(206, 69);
             this.label22.TabIndex = 116;
             this.label22.Text = "Tow Between Disabled \r\n< 200 cm\r\n< 78 inches";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(18, 122);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(154, 46);
+            this.label8.Size = new System.Drawing.Size(172, 46);
             this.label8.TabIndex = 115;
             this.label8.Text = "Tow Between Hitch\r\nLength Only\r\n";
             // 
@@ -516,30 +516,30 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.Location = new System.Drawing.Point(293, 456);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(139, 25);
+            this.label35.Size = new System.Drawing.Size(133, 23);
             this.label35.TabIndex = 113;
             this.label35.Text = "Set in Sections\r\n";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.Location = new System.Drawing.Point(310, 428);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(104, 25);
+            this.label34.Size = new System.Drawing.Size(100, 23);
             this.label34.TabIndex = 111;
             this.label34.Text = "Tool Width";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.Location = new System.Drawing.Point(761, 151);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(169, 23);
+            this.label23.Size = new System.Drawing.Size(191, 23);
             this.label23.TabIndex = 109;
             this.label23.Text = "Turn Off Delay (Secs)";
             // 
@@ -576,10 +576,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(761, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(153, 23);
+            this.label3.Size = new System.Drawing.Size(165, 23);
             this.label3.TabIndex = 107;
             this.label3.Text = "Look Ahead (Secs)";
             // 
@@ -616,20 +616,20 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(18, 271);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(110, 46);
+            this.label19.Size = new System.Drawing.Size(121, 46);
             this.label19.TabIndex = 105;
             this.label19.Text = "Trailing Hitch\r\nLength Only\r\n";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(592, 359);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 50);
+            this.label1.Size = new System.Drawing.Size(138, 46);
             this.label1.TabIndex = 103;
             this.label1.Text = "    AB Line \r\nSkip or Overlap";
             // 
@@ -684,10 +684,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(761, 280);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 25);
+            this.label5.Size = new System.Drawing.Size(100, 23);
             this.label5.TabIndex = 100;
             this.label5.Text = "Tool Offset";
             // 
@@ -735,9 +735,9 @@
             this.tabSections.Controls.Add(this.nudSection1);
             this.tabSections.Controls.Add(this.label2);
             this.tabSections.Controls.Add(this.nudNumberOfSections);
-            this.tabSections.Location = new System.Drawing.Point(4, 41);
+            this.tabSections.Location = new System.Drawing.Point(4, 42);
             this.tabSections.Name = "tabSections";
-            this.tabSections.Size = new System.Drawing.Size(951, 506);
+            this.tabSections.Size = new System.Drawing.Size(951, 505);
             this.tabSections.TabIndex = 2;
             this.tabSections.Text = " Sections ";
             this.tabSections.UseVisualStyleBackColor = true;
@@ -745,20 +745,20 @@
             // lblTurnOffBelowUnits
             // 
             this.lblTurnOffBelowUnits.AutoSize = true;
-            this.lblTurnOffBelowUnits.Font = new System.Drawing.Font("Arial Narrow", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTurnOffBelowUnits.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTurnOffBelowUnits.Location = new System.Drawing.Point(199, 435);
             this.lblTurnOffBelowUnits.Name = "lblTurnOffBelowUnits";
-            this.lblTurnOffBelowUnits.Size = new System.Drawing.Size(80, 35);
+            this.lblTurnOffBelowUnits.Size = new System.Drawing.Size(82, 33);
             this.lblTurnOffBelowUnits.TabIndex = 30;
             this.lblTurnOffBelowUnits.Text = "Km/H";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.Location = new System.Drawing.Point(29, 391);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(216, 25);
+            this.label30.Size = new System.Drawing.Size(238, 25);
             this.label30.TabIndex = 29;
             this.label30.Text = "Sections Turn Off below";
             // 
@@ -789,7 +789,7 @@
             // 
             // nudSection8
             // 
-            this.nudSection8.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection8.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection8.Location = new System.Drawing.Point(839, 168);
             this.nudSection8.Maximum = new decimal(new int[] {
             4000,
@@ -797,7 +797,7 @@
             0,
             0});
             this.nudSection8.Name = "nudSection8";
-            this.nudSection8.Size = new System.Drawing.Size(102, 56);
+            this.nudSection8.Size = new System.Drawing.Size(102, 52);
             this.nudSection8.TabIndex = 27;
             this.nudSection8.Value = new decimal(new int[] {
             99,
@@ -808,7 +808,7 @@
             // 
             // nudSection7
             // 
-            this.nudSection7.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection7.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection7.Location = new System.Drawing.Point(723, 168);
             this.nudSection7.Maximum = new decimal(new int[] {
             4000,
@@ -816,7 +816,7 @@
             0,
             0});
             this.nudSection7.Name = "nudSection7";
-            this.nudSection7.Size = new System.Drawing.Size(102, 56);
+            this.nudSection7.Size = new System.Drawing.Size(102, 52);
             this.nudSection7.TabIndex = 26;
             this.nudSection7.Value = new decimal(new int[] {
             99,
@@ -827,7 +827,7 @@
             // 
             // nudSection6
             // 
-            this.nudSection6.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection6.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection6.Location = new System.Drawing.Point(606, 168);
             this.nudSection6.Maximum = new decimal(new int[] {
             4000,
@@ -835,7 +835,7 @@
             0,
             0});
             this.nudSection6.Name = "nudSection6";
-            this.nudSection6.Size = new System.Drawing.Size(102, 56);
+            this.nudSection6.Size = new System.Drawing.Size(102, 52);
             this.nudSection6.TabIndex = 25;
             this.nudSection6.Value = new decimal(new int[] {
             99,
@@ -847,36 +847,36 @@
             // lblDoNotExceed
             // 
             this.lblDoNotExceed.AutoSize = true;
-            this.lblDoNotExceed.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDoNotExceed.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDoNotExceed.Location = new System.Drawing.Point(502, 338);
             this.lblDoNotExceed.Name = "lblDoNotExceed";
-            this.lblDoNotExceed.Size = new System.Drawing.Size(203, 25);
+            this.lblDoNotExceed.Size = new System.Drawing.Size(233, 25);
             this.lblDoNotExceed.TabIndex = 24;
             this.lblDoNotExceed.Text = "* Do not exceed 1570 *";
             // 
             // lblVehicleToolWidth
             // 
             this.lblVehicleToolWidth.AutoSize = true;
-            this.lblVehicleToolWidth.Font = new System.Drawing.Font("Verdana", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVehicleToolWidth.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVehicleToolWidth.Location = new System.Drawing.Point(534, 279);
             this.lblVehicleToolWidth.Name = "lblVehicleToolWidth";
-            this.lblVehicleToolWidth.Size = new System.Drawing.Size(60, 45);
+            this.lblVehicleToolWidth.Size = new System.Drawing.Size(56, 45);
             this.lblVehicleToolWidth.TabIndex = 23;
             this.lblVehicleToolWidth.Text = "II";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(381, 288);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 33);
+            this.label4.Size = new System.Drawing.Size(152, 33);
             this.label4.TabIndex = 22;
             this.label4.Text = "Total Width";
             // 
             // nudSection5
             // 
-            this.nudSection5.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection5.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection5.Location = new System.Drawing.Point(488, 168);
             this.nudSection5.Maximum = new decimal(new int[] {
             4000,
@@ -884,7 +884,7 @@
             0,
             0});
             this.nudSection5.Name = "nudSection5";
-            this.nudSection5.Size = new System.Drawing.Size(102, 56);
+            this.nudSection5.Size = new System.Drawing.Size(102, 52);
             this.nudSection5.TabIndex = 13;
             this.nudSection5.Value = new decimal(new int[] {
             99,
@@ -895,7 +895,7 @@
             // 
             // nudSection4
             // 
-            this.nudSection4.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection4.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection4.Location = new System.Drawing.Point(371, 168);
             this.nudSection4.Maximum = new decimal(new int[] {
             4000,
@@ -903,7 +903,7 @@
             0,
             0});
             this.nudSection4.Name = "nudSection4";
-            this.nudSection4.Size = new System.Drawing.Size(102, 56);
+            this.nudSection4.Size = new System.Drawing.Size(102, 52);
             this.nudSection4.TabIndex = 12;
             this.nudSection4.Value = new decimal(new int[] {
             99,
@@ -914,7 +914,7 @@
             // 
             // nudSection3
             // 
-            this.nudSection3.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection3.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection3.Location = new System.Drawing.Point(254, 168);
             this.nudSection3.Maximum = new decimal(new int[] {
             4000,
@@ -922,7 +922,7 @@
             0,
             0});
             this.nudSection3.Name = "nudSection3";
-            this.nudSection3.Size = new System.Drawing.Size(102, 56);
+            this.nudSection3.Size = new System.Drawing.Size(102, 52);
             this.nudSection3.TabIndex = 11;
             this.nudSection3.Value = new decimal(new int[] {
             99,
@@ -933,7 +933,7 @@
             // 
             // nudSection2
             // 
-            this.nudSection2.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection2.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection2.Location = new System.Drawing.Point(134, 168);
             this.nudSection2.Maximum = new decimal(new int[] {
             4000,
@@ -941,7 +941,7 @@
             0,
             0});
             this.nudSection2.Name = "nudSection2";
-            this.nudSection2.Size = new System.Drawing.Size(102, 56);
+            this.nudSection2.Size = new System.Drawing.Size(102, 52);
             this.nudSection2.TabIndex = 10;
             this.nudSection2.Value = new decimal(new int[] {
             99,
@@ -952,7 +952,7 @@
             // 
             // nudSection1
             // 
-            this.nudSection1.Font = new System.Drawing.Font("Arial Narrow", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudSection1.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSection1.Location = new System.Drawing.Point(13, 168);
             this.nudSection1.Maximum = new decimal(new int[] {
             4000,
@@ -960,7 +960,7 @@
             0,
             0});
             this.nudSection1.Name = "nudSection1";
-            this.nudSection1.Size = new System.Drawing.Size(102, 56);
+            this.nudSection1.Size = new System.Drawing.Size(102, 52);
             this.nudSection1.TabIndex = 9;
             this.nudSection1.Value = new decimal(new int[] {
             99,
@@ -972,10 +972,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(48, 260);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 25);
+            this.label2.Size = new System.Drawing.Size(89, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Sections";
             // 
@@ -1008,9 +1008,9 @@
             this.tabWorkSwitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.WorkSwitch;
             this.tabWorkSwitch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabWorkSwitch.Controls.Add(this.groupBox3);
-            this.tabWorkSwitch.Location = new System.Drawing.Point(4, 41);
+            this.tabWorkSwitch.Location = new System.Drawing.Point(4, 42);
             this.tabWorkSwitch.Name = "tabWorkSwitch";
-            this.tabWorkSwitch.Size = new System.Drawing.Size(951, 506);
+            this.tabWorkSwitch.Size = new System.Drawing.Size(951, 505);
             this.tabWorkSwitch.TabIndex = 10;
             this.tabWorkSwitch.Text = "Work Switch";
             this.tabWorkSwitch.UseVisualStyleBackColor = true;
@@ -1019,7 +1019,7 @@
             // 
             this.groupBox3.Controls.Add(this.chkWorkSwActiveLow);
             this.groupBox3.Controls.Add(this.chkEnableWorkSwitch);
-            this.groupBox3.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(550, 27);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(370, 158);
@@ -1030,10 +1030,10 @@
             // chkWorkSwActiveLow
             // 
             this.chkWorkSwActiveLow.AutoSize = true;
-            this.chkWorkSwActiveLow.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkWorkSwActiveLow.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkWorkSwActiveLow.Location = new System.Drawing.Point(46, 103);
             this.chkWorkSwActiveLow.Name = "chkWorkSwActiveLow";
-            this.chkWorkSwActiveLow.Size = new System.Drawing.Size(136, 34);
+            this.chkWorkSwActiveLow.Size = new System.Drawing.Size(131, 29);
             this.chkWorkSwActiveLow.TabIndex = 0;
             this.chkWorkSwActiveLow.Text = "Active Low";
             this.chkWorkSwActiveLow.UseVisualStyleBackColor = true;
@@ -1042,10 +1042,10 @@
             // chkEnableWorkSwitch
             // 
             this.chkEnableWorkSwitch.AutoSize = true;
-            this.chkEnableWorkSwitch.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEnableWorkSwitch.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEnableWorkSwitch.Location = new System.Drawing.Point(46, 49);
             this.chkEnableWorkSwitch.Name = "chkEnableWorkSwitch";
-            this.chkEnableWorkSwitch.Size = new System.Drawing.Size(221, 34);
+            this.chkEnableWorkSwitch.Size = new System.Drawing.Size(218, 29);
             this.chkEnableWorkSwitch.TabIndex = 1;
             this.chkEnableWorkSwitch.Text = "Enable Work Switch";
             this.chkEnableWorkSwitch.UseVisualStyleBackColor = true;
@@ -1057,9 +1057,9 @@
             this.tabDisplay.Controls.Add(this.groupBox2);
             this.tabDisplay.Controls.Add(this.groupBox1);
             this.tabDisplay.Controls.Add(this.groupBox4);
-            this.tabDisplay.Location = new System.Drawing.Point(4, 41);
+            this.tabDisplay.Location = new System.Drawing.Point(4, 42);
             this.tabDisplay.Name = "tabDisplay";
-            this.tabDisplay.Size = new System.Drawing.Size(951, 506);
+            this.tabDisplay.Size = new System.Drawing.Size(951, 505);
             this.tabDisplay.TabIndex = 5;
             this.tabDisplay.Text = " Display ";
             this.tabDisplay.UseVisualStyleBackColor = true;
@@ -1068,7 +1068,7 @@
             // 
             this.groupBox5.Controls.Add(this.label31);
             this.groupBox5.Controls.Add(this.nudBoundaryDistance);
-            this.groupBox5.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.Location = new System.Drawing.Point(488, 213);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(453, 131);
@@ -1079,9 +1079,10 @@
             // label31
             // 
             this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.Location = new System.Drawing.Point(190, 66);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(190, 27);
+            this.label31.Size = new System.Drawing.Size(193, 29);
             this.label31.TabIndex = 67;
             this.label31.Text = "6 to 10m is good\r\n";
             // 
@@ -1120,7 +1121,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.nudTriangleResolution);
-            this.groupBox2.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(488, 53);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(453, 142);
@@ -1131,18 +1132,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(205, 93);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(205, 27);
+            this.label7.Size = new System.Drawing.Size(210, 29);
             this.label7.TabIndex = 67;
             this.label7.Text = "4 -> Few triangles";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(183, 49);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(224, 27);
+            this.label6.Size = new System.Drawing.Size(229, 29);
             this.label6.TabIndex = 66;
             this.label6.Text = "1 -> Many Triangles";
             // 
@@ -1179,7 +1182,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.chkIsAtanCam);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(34, 259);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(433, 85);
@@ -1192,9 +1195,10 @@
             this.chkIsAtanCam.AutoSize = true;
             this.chkIsAtanCam.Checked = true;
             this.chkIsAtanCam.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkIsAtanCam.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkIsAtanCam.Location = new System.Drawing.Point(40, 47);
             this.chkIsAtanCam.Name = "chkIsAtanCam";
-            this.chkIsAtanCam.Size = new System.Drawing.Size(211, 31);
+            this.chkIsAtanCam.Size = new System.Drawing.Size(208, 33);
             this.chkIsAtanCam.TabIndex = 61;
             this.chkIsAtanCam.Text = "Use Fix For Cam";
             this.chkIsAtanCam.UseVisualStyleBackColor = true;
@@ -1205,7 +1209,7 @@
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.nudMinFixStepDistance);
-            this.groupBox4.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(21, 53);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(446, 170);
@@ -1216,19 +1220,20 @@
             // label21
             // 
             this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(26, 125);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(351, 27);
+            this.label21.Size = new System.Drawing.Size(353, 29);
             this.label21.TabIndex = 68;
             this.label21.Text = "More Meters is More Smoothing";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.Location = new System.Drawing.Point(198, 64);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(77, 29);
+            this.label20.Size = new System.Drawing.Size(94, 29);
             this.label20.TabIndex = 67;
             this.label20.Text = "Meters";
             // 
@@ -1276,40 +1281,40 @@
             // lblSecTotalWidthInches
             // 
             this.lblSecTotalWidthInches.AutoSize = true;
-            this.lblSecTotalWidthInches.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSecTotalWidthInches.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecTotalWidthInches.Location = new System.Drawing.Point(454, 576);
             this.lblSecTotalWidthInches.Name = "lblSecTotalWidthInches";
-            this.lblSecTotalWidthInches.Size = new System.Drawing.Size(47, 35);
+            this.lblSecTotalWidthInches.Size = new System.Drawing.Size(43, 35);
             this.lblSecTotalWidthInches.TabIndex = 25;
             this.lblSecTotalWidthInches.Text = "II";
             // 
             // lblSecTotalWidthFeet
             // 
             this.lblSecTotalWidthFeet.AutoSize = true;
-            this.lblSecTotalWidthFeet.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSecTotalWidthFeet.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecTotalWidthFeet.Location = new System.Drawing.Point(373, 576);
             this.lblSecTotalWidthFeet.Name = "lblSecTotalWidthFeet";
-            this.lblSecTotalWidthFeet.Size = new System.Drawing.Size(53, 35);
+            this.lblSecTotalWidthFeet.Size = new System.Drawing.Size(49, 35);
             this.lblSecTotalWidthFeet.TabIndex = 24;
             this.lblSecTotalWidthFeet.Text = "FF";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(7, 558);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(140, 23);
+            this.label17.Size = new System.Drawing.Size(153, 23);
             this.label17.TabIndex = 89;
             this.label17.Text = "Measurements in";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(249, 581);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(110, 25);
+            this.label16.Size = new System.Drawing.Size(120, 25);
             this.label16.TabIndex = 107;
             this.label16.Text = "Tool Width:";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1317,21 +1322,21 @@
             // lblSecTotalWidthMeters
             // 
             this.lblSecTotalWidthMeters.AutoSize = true;
-            this.lblSecTotalWidthMeters.Font = new System.Drawing.Font("Verdana", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSecTotalWidthMeters.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecTotalWidthMeters.Location = new System.Drawing.Point(412, 576);
             this.lblSecTotalWidthMeters.Name = "lblSecTotalWidthMeters";
-            this.lblSecTotalWidthMeters.Size = new System.Drawing.Size(47, 35);
+            this.lblSecTotalWidthMeters.Size = new System.Drawing.Size(43, 35);
             this.lblSecTotalWidthMeters.TabIndex = 108;
             this.lblSecTotalWidthMeters.Text = "II";
             // 
             // lblInchesCm
             // 
             this.lblInchesCm.AutoSize = true;
-            this.lblInchesCm.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInchesCm.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInchesCm.ForeColor = System.Drawing.Color.Red;
             this.lblInchesCm.Location = new System.Drawing.Point(20, 586);
             this.lblInchesCm.Name = "lblInchesCm";
-            this.lblInchesCm.Size = new System.Drawing.Size(101, 37);
+            this.lblInchesCm.Size = new System.Drawing.Size(111, 39);
             this.lblInchesCm.TabIndex = 109;
             this.lblInchesCm.Text = "Inches";
             // 
@@ -1339,7 +1344,7 @@
             // 
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
             this.btnCancel.Location = new System.Drawing.Point(689, 557);
             this.btnCancel.Name = "btnCancel";
@@ -1351,7 +1356,7 @@
             // bntOK
             // 
             this.bntOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bntOK.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntOK.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bntOK.Image = global::AgOpenGPS.Properties.Resources.OK64;
             this.bntOK.Location = new System.Drawing.Point(802, 557);
             this.bntOK.Name = "bntOK";
@@ -1377,7 +1382,7 @@
             this.Controls.Add(this.bntOK);
             this.Controls.Add(this.lblSecTotalWidthFeet);
             this.Controls.Add(this.lblSecTotalWidthInches);
-            this.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;

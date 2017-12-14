@@ -218,11 +218,12 @@ namespace AgOpenGPS
         {
             //make sure distance isn't too small between points on headland
             int headCount = mf.hl.ptList.Count;
+            double spacing = mf.vehicle.toolWidth * 0.5;
             for (int i = 0; i < headCount - 1; i++)
             {
                 distance = mf.pn.Distance(mf.hl.ptList[i].northing, mf.hl.ptList[i].easting
                                 , mf.hl.ptList[i + 1].northing, mf.hl.ptList[i + 1].easting);
-                if (distance < 4)
+                if (distance < spacing)
                 {
                     mf.hl.ptList.RemoveAt(i + 1);
                     headCount = mf.hl.ptList.Count;
@@ -238,7 +239,7 @@ namespace AgOpenGPS
                 if (j == headCount) j = 0;
                 distance = mf.pn.Distance(mf.hl.ptList[i].northing, mf.hl.ptList[i].easting
                                 , mf.hl.ptList[j].northing, mf.hl.ptList[j].easting);
-                if (distance > (4.1))
+                if (distance > (spacing))
                 {
                     point.easting = (mf.hl.ptList[i].easting + mf.hl.ptList[j].easting) / 2.0;
                     point.northing = (mf.hl.ptList[i].northing + mf.hl.ptList[j].northing) / 2.0;
@@ -388,7 +389,7 @@ namespace AgOpenGPS
             ptCount = mf.hl.ptList.Count;
             if (ptCount > 0)
             {
-                glh.Color(0.038f, 0.9892f, 0.10f);
+                glh.Color(0.9038f, 0.9892f, 0.10f);
                 glh.Begin(OpenGL.GL_POINTS);
                 for (int h = 0; h < ptCount; h++) glh.Vertex(mf.hl.ptList[h].easting, mf.hl.ptList[h].northing, 0);
                 glh.End();

@@ -194,10 +194,10 @@ namespace AgOpenGPS
                 hl.DrawHeadlandLine();
 
                 //screen text for debug
-                gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "Head: " + distPivot.ToString("N1"));
-                gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "Tool: " + distTool.ToString("N1"));
-                gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "You: " + yt.isYouTurnTriggered.ToString());
-                gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "Seq: " + yt.isSequenceTriggered.ToString());
+                //gl.DrawText(120, 10, 1, 1, 1, "Courier Bold", 18, "Head: " + distPivot.ToString("N1"));
+                //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "Tool: " + distTool.ToString("N1"));
+                //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Where: " + yt.whereAmI.ToString());
+                //gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "Seq: " + yt.isSequenceTriggered.ToString());
                 //gl.DrawText(120, 40, 1, 1, 1, "Courier Bold", 18, "  GPS: " + Convert.ToString(Math.Round(glm.toDegrees(gpsHeading), 2)));
                 //gl.DrawText(120, 70, 1, 1, 1, "Courier Bold", 18, "Fixed: " + Convert.ToString(Math.Round(glm.toDegrees(gyroCorrected), 2)));
                 //gl.DrawText(120, 100, 1, 1, 1, "Courier Bold", 18, "L/Min: " + Convert.ToString(rc.CalculateRateLitersPerMinute()));
@@ -267,24 +267,24 @@ namespace AgOpenGPS
                         if ((ct.distanceFromCurrentLine) < 0.0)
                         {
                             txtDistanceOffABLine.ForeColor = Color.Green;
-                            if (isMetric) dist = ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1)) + " \u2192";
-                            else dist = ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1)) + " \u2192";
+                            if (isMetric) dist = ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1)) + " ->";
+                            else dist = ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
                             txtDistanceOffABLine.Text = dist;
                         }
 
                         else
                         {
                             txtDistanceOffABLine.ForeColor = Color.Red;
-                            if (isMetric) dist = "\u2190 " + ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1));
-                            else dist = "\u2190 " + ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1));
+                            if (isMetric) dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine * 0.1));
+                            else dist = "<- " + ((int)Math.Abs(ct.distanceFromCurrentLine / 2.54 * 0.1));
                             txtDistanceOffABLine.Text = dist;
                         }
 
                         //if (guidanceLineHeadingDelta < 0) lblDelta.ForeColor = Color.Red;
                         //else lblDelta.ForeColor = Color.Green;
 
-                        if (guidanceLineDistanceOff == 32020 | guidanceLineDistanceOff == 32000) btnAutoSteer.Text = "\u2715";
-                        else btnAutoSteer.Text = "\u2713";
+                        if (guidanceLineDistanceOff == 32020 | guidanceLineDistanceOff == 32000) btnAutoSteer.Text = "-";
+                        else btnAutoSteer.Text = "Y";
                     }
 
                     else
@@ -300,8 +300,8 @@ namespace AgOpenGPS
                             {
                                 // --->
                                 txtDistanceOffABLine.ForeColor = Color.Green;
-                                if (isMetric) dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1)) + " \u21D2";
-                                else dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1)) + " \u21D2";
+                                if (isMetric) dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1)) + " ->";
+                                else dist = ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1)) + " ->";
                                 txtDistanceOffABLine.Text = dist;
                             }
 
@@ -309,15 +309,15 @@ namespace AgOpenGPS
                             {
                                 // <----
                                 txtDistanceOffABLine.ForeColor = Color.Red;
-                                if (isMetric) dist = "\u21D0 " + ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1));
-                                else dist = "\u21D0 " + ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1));
+                                if (isMetric) dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine * 0.1));
+                                else dist = "<- " + ((int)Math.Abs(ABLine.distanceFromCurrentLine / 2.54 * 0.1));
                                 txtDistanceOffABLine.Text = dist;
                             }
 
                             //if (guidanceLineHeadingDelta < 0) lblDelta.ForeColor = Color.Red;
                             //else lblDelta.ForeColor = Color.Green;
-                            if (guidanceLineDistanceOff == 32020 | guidanceLineDistanceOff == 32000) btnAutoSteer.Text = "\u2715";
-                            else btnAutoSteer.Text = "\u2713";
+                            if (guidanceLineDistanceOff == 32020 | guidanceLineDistanceOff == 32000) btnAutoSteer.Text = "-";
+                            else btnAutoSteer.Text = "Y";
                         }
                     }
 
@@ -1195,7 +1195,7 @@ namespace AgOpenGPS
                 if (pts > 0)
                 {
                     gl.PointSize(4);
-                    gl.Color(0.298f, 0.9572f, 0.260f);
+                    gl.Color(0.9298f, 0.9572f, 0.260f);
                     gl.Begin(OpenGL.GL_POINTS);
                     for (int h = 0; h < pts; h++) gl.Vertex(hl.ptList[h].easting, hl.ptList[h].northing, 0);
                     gl.End();

@@ -73,8 +73,11 @@ namespace AgOpenGPS
             //if (chkGGA.Checked) sbSendText.Append(sbGGA.ToString());
             //if (chkRMC.Checked) sbSendText.Append(sbRMC.ToString());
 
-            sbSendText.Append(sbRMC.ToString());
+            sbSendText.Append(sbGGA.ToString());
+            sbSendText.Append(sbVTG.ToString());
             mf.pn.rawBuffer += sbSendText.ToString();
+            mf.recvSentenceSettings = mf.pn.rawBuffer;
+
             sbSendText.Clear();
         }
 

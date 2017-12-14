@@ -46,21 +46,15 @@ namespace AgOpenGPS
             double headAB = mf.ABLine.abHeading;
             if (!mf.ABLine.isABSameAsFixHeading)
                 headAB += Math.PI;
-
-            //box width must be at least as wide as minimum point spacing
-            //double boxWidth = mf.vehicle.toolWidth * 0.25;
-            //if (boxWidth < 3) boxWidth = 3;
-            const double boxWidth = 3;
-
             //Draw a bounding box to determine if points are in it
 
             if (mf.yt.isSequenceTriggered)
             {
-                boxA.easting = fromPt.easting - (Math.Sin(headAB + glm.PIBy2) * boxWidth);
-                boxA.northing = fromPt.northing - (Math.Cos(headAB + glm.PIBy2) * boxWidth);
+                boxA.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * mf.vehicle.toolFarLeftPosition); //subtract if positive
+                boxA.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * mf.vehicle.toolFarLeftPosition);
 
-                boxB.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * boxWidth);
-                boxB.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * boxWidth);
+                boxB.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * mf.vehicle.toolFarRightPosition);
+                boxB.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * mf.vehicle.toolFarRightPosition);
 
                 boxC.easting = boxB.easting + (Math.Sin(headAB) * 70.0);
                 boxC.northing = boxB.northing + (Math.Cos(headAB) * 70.0);
@@ -76,22 +70,18 @@ namespace AgOpenGPS
             }
             else
             {
-                boxA.easting = fromPt.easting - (Math.Sin(headAB + glm.PIBy2) * boxWidth);
-                boxA.northing = fromPt.northing - (Math.Cos(headAB + glm.PIBy2) * boxWidth);
+                boxA.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * mf.vehicle.toolFarLeftPosition);
+                boxA.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * mf.vehicle.toolFarLeftPosition);
 
-                boxB.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * boxWidth);
-                boxB.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * boxWidth);
+                boxB.easting = fromPt.easting + (Math.Sin(headAB + glm.PIBy2) * mf.vehicle.toolFarRightPosition);
+                boxB.northing = fromPt.northing + (Math.Cos(headAB + glm.PIBy2) * mf.vehicle.toolFarRightPosition);
 
-                boxC.easting = boxB.easting + (Math.Sin(headAB) * 70.0);
-                boxC.northing = boxB.northing + (Math.Cos(headAB) * 70.0);
+                boxC.easting = boxB.easting + (Math.Sin(headAB) * 2000.0);
+                boxC.northing = boxB.northing + (Math.Cos(headAB) * 2000.0);
 
-                boxD.easting = boxA.easting + (Math.Sin(headAB) * 70.0);
-                boxD.northing = boxA.northing + (Math.Cos(headAB) * 70.0);
+                boxD.easting = boxA.easting + (Math.Sin(headAB) * 2000.0);
+                boxD.northing = boxA.northing + (Math.Cos(headAB) * 2000.0);
             }
-
-
-
-
 
             //determine if point is inside bounding box
             hdList.Clear();
@@ -174,7 +164,7 @@ namespace AgOpenGPS
             int ptCount = ptList.Count;
             if (ptCount < 1) return;
             gl.PointSize(4);
-            gl.Color(0.198f, 0.9272f, 0.360f);
+            gl.Color(0.9198f, 0.9272f, 0.360f);
             gl.Begin(OpenGL.GL_POINTS);
             for (int h = 0; h < ptCount; h++) gl.Vertex(ptList[h].easting, ptList[h].northing, 0);
             gl.End();
@@ -187,18 +177,15 @@ namespace AgOpenGPS
             //gl.Vertex(ptList[0].easting, ptList[0].northing, 0);
             //gl.End();
 
-            gl.LineWidth(2);
-            gl.Color(0.98f, 0.2f, 0.60f);
-            gl.Begin(OpenGL.GL_LINE_STRIP);
-            gl.Vertex(boxD.easting, boxD.northing, 0);
-            gl.Vertex(boxA.easting, boxA.northing, 0);
-            gl.Vertex(boxB.easting, boxB.northing, 0);
-            gl.Vertex(boxC.easting, boxC.northing, 0);
-            gl.End();
+            //gl.LineWidth(2);
+            //gl.Color(0.98f, 0.2f, 0.60f);
+            //gl.Begin(OpenGL.GL_LINE_STRIP);
+            //gl.Vertex(boxD.easting, boxD.northing, 0);
+            //gl.Vertex(boxA.easting, boxA.northing, 0);
+            //gl.Vertex(boxB.easting, boxB.northing, 0);
+            //gl.Vertex(boxC.easting, boxC.northing, 0);
+            //gl.End();
 
-            ptCount = ptList.Count;
-            if (ptCount < 1) return;
-            gl.PointSize(4);
             gl.Color(0.919f, 0.0932f, 0.070f);
             gl.Begin(OpenGL.GL_POINTS);
             gl.Vertex(closestHeadlandPt.easting, closestHeadlandPt.northing, 0);

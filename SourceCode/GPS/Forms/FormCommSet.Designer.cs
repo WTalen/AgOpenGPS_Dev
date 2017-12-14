@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCommSet));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnSerialCancel = new System.Windows.Forms.Button();
             this.btnRescan = new System.Windows.Forms.Button();
             this.btnSerialOK = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -75,29 +74,15 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnSerialCancel
-            // 
-            this.btnSerialCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSerialCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSerialCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSerialCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSerialCancel.Image = global::AgOpenGPS.Properties.Resources.Cancel64;
-            this.btnSerialCancel.Location = new System.Drawing.Point(318, 484);
-            this.btnSerialCancel.Name = "btnSerialCancel";
-            this.btnSerialCancel.Size = new System.Drawing.Size(88, 72);
-            this.btnSerialCancel.TabIndex = 62;
-            this.btnSerialCancel.UseVisualStyleBackColor = true;
-            this.btnSerialCancel.Click += new System.EventHandler(this.btnSerialCancel_Click);
-            // 
             // btnRescan
             // 
             this.btnRescan.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnRescan.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRescan.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnRescan.Location = new System.Drawing.Point(72, 501);
+            this.btnRescan.Location = new System.Drawing.Point(54, 532);
             this.btnRescan.Name = "btnRescan";
-            this.btnRescan.Size = new System.Drawing.Size(117, 50);
+            this.btnRescan.Size = new System.Drawing.Size(117, 72);
             this.btnRescan.TabIndex = 58;
             this.btnRescan.Text = "Rescan Ports";
             this.btnRescan.UseVisualStyleBackColor = false;
@@ -107,10 +92,10 @@
             // 
             this.btnSerialOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSerialOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSerialOK.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSerialOK.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSerialOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnSerialOK.Image = ((System.Drawing.Image)(resources.GetObject("btnSerialOK.Image")));
-            this.btnSerialOK.Location = new System.Drawing.Point(427, 484);
+            this.btnSerialOK.Location = new System.Drawing.Point(427, 532);
             this.btnSerialOK.Name = "btnSerialOK";
             this.btnSerialOK.Size = new System.Drawing.Size(156, 72);
             this.btnSerialOK.TabIndex = 59;
@@ -182,10 +167,10 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(19, 84);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(74, 16);
+            this.label16.Size = new System.Drawing.Size(65, 16);
             this.label16.TabIndex = 48;
             this.label16.Text = "Currently:";
             // 
@@ -213,7 +198,7 @@
             // 
             this.btnCloseSerial.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCloseSerial.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCloseSerial.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseSerial.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseSerial.Location = new System.Drawing.Point(437, 39);
             this.btnCloseSerial.Name = "btnCloseSerial";
             this.btnCloseSerial.Size = new System.Drawing.Size(117, 36);
@@ -226,7 +211,7 @@
             // 
             this.textBoxRcv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxRcv.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxRcv.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRcv.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRcv.Location = new System.Drawing.Point(7, 110);
             this.textBoxRcv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBoxRcv.Multiline = true;
@@ -238,10 +223,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(225, 89);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(190, 16);
+            this.label1.Size = new System.Drawing.Size(167, 16);
             this.label1.TabIndex = 41;
             this.label1.Text = "NMEA string from GPS Port:";
             // 
@@ -249,7 +234,7 @@
             // 
             this.btnOpenSerial.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnOpenSerial.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerial.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerial.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenSerial.Location = new System.Drawing.Point(298, 39);
             this.btnOpenSerial.Name = "btnOpenSerial";
             this.btnOpenSerial.Size = new System.Drawing.Size(117, 36);
@@ -262,7 +247,7 @@
             // 
             this.btnCloseSerialArduino.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCloseSerialArduino.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCloseSerialArduino.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseSerialArduino.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseSerialArduino.Location = new System.Drawing.Point(437, 28);
             this.btnCloseSerialArduino.Name = "btnCloseSerialArduino";
             this.btnCloseSerialArduino.Size = new System.Drawing.Size(117, 36);
@@ -275,7 +260,7 @@
             // 
             this.btnOpenSerialArduino.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnOpenSerialArduino.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerialArduino.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerialArduino.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenSerialArduino.Location = new System.Drawing.Point(298, 28);
             this.btnOpenSerialArduino.Name = "btnOpenSerialArduino";
             this.btnOpenSerialArduino.Size = new System.Drawing.Size(117, 36);
@@ -287,10 +272,10 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(303, 77);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(133, 16);
+            this.label15.Size = new System.Drawing.Size(116, 16);
             this.label15.TabIndex = 58;
             this.label15.Text = "From Section Port:";
             // 
@@ -307,7 +292,7 @@
             // txtBoxRecvArduino
             // 
             this.txtBoxRecvArduino.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBoxRecvArduino.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxRecvArduino.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxRecvArduino.Location = new System.Drawing.Point(298, 98);
             this.txtBoxRecvArduino.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtBoxRecvArduino.Name = "txtBoxRecvArduino";
@@ -339,7 +324,7 @@
             this.groupBox2.Controls.Add(this.btnOpenSerialArduino);
             this.groupBox2.Controls.Add(this.btnCloseSerialArduino);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 192);
+            this.groupBox2.Location = new System.Drawing.Point(12, 201);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(576, 134);
             this.groupBox2.TabIndex = 65;
@@ -349,17 +334,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(29, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 16);
+            this.label2.Size = new System.Drawing.Size(101, 16);
             this.label2.TabIndex = 66;
             this.label2.Text = "To Section Port:";
             // 
             // txtBoxSendArduino
             // 
             this.txtBoxSendArduino.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBoxSendArduino.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSendArduino.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxSendArduino.Location = new System.Drawing.Point(25, 98);
             this.txtBoxSendArduino.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtBoxSendArduino.Name = "txtBoxSendArduino";
@@ -370,10 +355,10 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(162, 28);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(74, 16);
+            this.label17.Size = new System.Drawing.Size(65, 16);
             this.label17.TabIndex = 60;
             this.label17.Text = "Currently:";
             // 
@@ -390,7 +375,7 @@
             this.groupBox3.Controls.Add(this.btnOpenSerialAutoSteer);
             this.groupBox3.Controls.Add(this.btnCloseSerialAutoSteer);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 342);
+            this.groupBox3.Location = new System.Drawing.Point(12, 363);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(576, 132);
             this.groupBox3.TabIndex = 66;
@@ -400,17 +385,17 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(29, 77);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 16);
+            this.label3.Size = new System.Drawing.Size(93, 16);
             this.label3.TabIndex = 66;
             this.label3.Text = "To Auto Steer:";
             // 
             // txtBoxSendAutoSteer
             // 
             this.txtBoxSendAutoSteer.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBoxSendAutoSteer.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSendAutoSteer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxSendAutoSteer.Location = new System.Drawing.Point(25, 98);
             this.txtBoxSendAutoSteer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtBoxSendAutoSteer.Name = "txtBoxSendAutoSteer";
@@ -433,7 +418,7 @@
             // txtBoxRecvAutoSteer
             // 
             this.txtBoxRecvAutoSteer.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBoxRecvAutoSteer.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxRecvAutoSteer.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxRecvAutoSteer.Location = new System.Drawing.Point(298, 98);
             this.txtBoxRecvAutoSteer.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtBoxRecvAutoSteer.Name = "txtBoxRecvAutoSteer";
@@ -444,10 +429,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(162, 28);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 16);
+            this.label4.Size = new System.Drawing.Size(65, 16);
             this.label4.TabIndex = 60;
             this.label4.Text = "Currently:";
             // 
@@ -464,10 +449,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(303, 77);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 16);
+            this.label6.Size = new System.Drawing.Size(108, 16);
             this.label6.TabIndex = 58;
             this.label6.Text = "From Auto Steer:";
             // 
@@ -475,7 +460,7 @@
             // 
             this.btnOpenSerialAutoSteer.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnOpenSerialAutoSteer.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnOpenSerialAutoSteer.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenSerialAutoSteer.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOpenSerialAutoSteer.Location = new System.Drawing.Point(298, 28);
             this.btnOpenSerialAutoSteer.Name = "btnOpenSerialAutoSteer";
             this.btnOpenSerialAutoSteer.Size = new System.Drawing.Size(117, 36);
@@ -488,7 +473,7 @@
             // 
             this.btnCloseSerialAutoSteer.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnCloseSerialAutoSteer.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCloseSerialAutoSteer.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseSerialAutoSteer.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCloseSerialAutoSteer.Location = new System.Drawing.Point(437, 28);
             this.btnCloseSerialAutoSteer.Name = "btnCloseSerialAutoSteer";
             this.btnCloseSerialAutoSteer.Size = new System.Drawing.Size(117, 36);
@@ -500,10 +485,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(35, 482);
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(17, 513);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(212, 16);
+            this.label5.Size = new System.Drawing.Size(186, 16);
             this.label5.TabIndex = 51;
             this.label5.Text = "To Refresh Available USB Ports";
             // 
@@ -511,11 +496,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(595, 568);
+            this.ClientSize = new System.Drawing.Size(595, 616);
             this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.btnSerialCancel);
             this.Controls.Add(this.btnRescan);
             this.Controls.Add(this.btnSerialOK);
             this.Controls.Add(this.groupBox1);
@@ -539,7 +523,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btnSerialCancel;
         private System.Windows.Forms.Button btnRescan;
         private System.Windows.Forms.Button btnSerialOK;
         private System.Windows.Forms.GroupBox groupBox1;

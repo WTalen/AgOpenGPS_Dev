@@ -1,6 +1,9 @@
 ﻿//Please, if you use this, share the improvements
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
@@ -11,6 +14,9 @@ namespace AgOpenGPS
         private readonly FormGPS mf = null;
 
         private double upDnHeading = 0;
+
+        //the abline stored file
+        string filename = "";
 
         public FormABLine(Form callingForm)
         {
@@ -37,6 +43,7 @@ namespace AgOpenGPS
                 upDnHeading = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 1);
                 nudTramRepeats.Value = mf.ABLine.tramPassEvery;
                 nudBasedOnPass.Value = mf.ABLine.passBasedOn;
+                tboxHeading.Text = upDnHeading.ToString(CultureInfo.InvariantCulture);
             }
             else
             {
@@ -55,6 +62,21 @@ namespace AgOpenGPS
                 mf.ABLine.tramPassEvery=0;
                 mf.ABLine.passBasedOn=0;
             }
+
+            //make sure at least a blank AB Line file exists
+            string dirABLines = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString(CultureInfo.InvariantCulture) + "\\AgOpenGPS\\ABLines\\";
+            string directoryName = Path.GetDirectoryName(dirABLines).ToString(CultureInfo.InvariantCulture);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+            filename = directoryName + "\\ABLines.txt";
+            if (!File.Exists(filename))
+            {
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    //writer.WriteLine(DateTime.Now.ToString("MMM-dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+                }
+            }
+
         }
 
         private void btnAPoint_Click(object sender, EventArgs e)
@@ -69,19 +91,23 @@ namespace AgOpenGPS
             btnUpABHeadingBy1.Enabled = true;
             btnDnABHeadingBy1.Enabled = true;
             upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 1);
+            tboxHeading.Text = upDnHeading.ToString(CultureInfo.InvariantCulture);
         }
 
-       private void btnBPoint_Click(object sender, EventArgs e)
+        private void btnBPoint_Click(object sender, EventArgs e)
         {
             mf.ABLine.SetABLineByBPoint();
             btnABLineOk.Enabled = true;
             btnDeleteAB.Enabled = true;
             upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 1);
+            tboxHeading.Text = upDnHeading.ToString(CultureInfo.InvariantCulture);
         }
 
         private void btnUpABHeading_Click(object sender, EventArgs e)
         {
-            if ((upDnHeading += 0.1) > 359.9) upDnHeading = 0;
+            if ((upDnHeading += 10) > 359.9) upDnHeading = 0;
+            upDnHeading = (int)upDnHeading;
+            tboxHeading.Text = Convert.ToString(upDnHeading,CultureInfo.InvariantCulture);
             mf.ABLine.abHeading = glm.toRadians(upDnHeading);
             mf.ABLine.SetABLineByHeading();
             btnABLineOk.Enabled = true;
@@ -89,7 +115,9 @@ namespace AgOpenGPS
 
         private void btnDownABHeading_Click(object sender, EventArgs e)
         {
-            if ((upDnHeading -= 0.1) < 0) upDnHeading = 359.9;
+            if ((upDnHeading -= 10) < 0) upDnHeading = 350;
+            upDnHeading = (int)upDnHeading;
+            tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
             mf.ABLine.abHeading = glm.toRadians(upDnHeading);
             mf.ABLine.SetABLineByHeading();
             btnABLineOk.Enabled = true;
@@ -97,7 +125,9 @@ namespace AgOpenGPS
 
         private void btnUpABHeadingBy1_Click(object sender, EventArgs e)
         {
-            if ((upDnHeading++) > 359.9) upDnHeading -= 360;
+            if ((upDnHeading++) > 358) upDnHeading = 0;
+            upDnHeading = (int)upDnHeading;
+            tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
             mf.ABLine.abHeading = glm.toRadians(upDnHeading);
             mf.ABLine.SetABLineByHeading();
             btnABLineOk.Enabled = true;
@@ -105,7 +135,10 @@ namespace AgOpenGPS
 
         private void btnDnABHeadingBy1_Click(object sender, EventArgs e)
         {
-            if ((upDnHeading--) < 0 ) upDnHeading += 360.0;
+            upDnHeading--;
+            if (upDnHeading < 0 ) upDnHeading = 359;
+            upDnHeading = (int)upDnHeading;
+            tboxHeading.Text = Convert.ToString(upDnHeading, CultureInfo.InvariantCulture);
             mf.ABLine.abHeading = glm.toRadians(upDnHeading);
             mf.ABLine.SetABLineByHeading();
             btnABLineOk.Enabled = true;
@@ -165,5 +198,50 @@ namespace AgOpenGPS
         {
             mf.ABLine.passBasedOn = (int)nudBasedOnPass.Value;
         }
-     }
+
+        private void btnLoadPrevious_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormABPrev(mf))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.Yes)
+                {
+                    mf.FileSaveABLine();
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+            }
+        }
+
+        private void btnAddToFile_Click(object sender, EventArgs e)
+        {
+            using (StreamWriter writer = new StreamWriter(filename,true))
+            {
+                //make it culture invariant
+                string line = mf.currentFieldDirectory + ',' + (Math.Round(glm.toDegrees(mf.ABLine.abHeading), 8)).ToString(CultureInfo.InvariantCulture)
+                +',' + (Math.Round(mf.ABLine.refPoint1.easting, 3)).ToString(CultureInfo.InvariantCulture)
+                + ',' + (Math.Round(mf.ABLine.refPoint1.northing, 3)).ToString(CultureInfo.InvariantCulture);
+
+                //write out to file
+                writer.WriteLine(line);
+            }
+        }
+
+        private void tboxHeading_TextChanged(object sender, EventArgs e)
+        {
+            var textboxSender = (TextBox)sender;
+            var cursorPosition = textboxSender.SelectionStart;
+            textboxSender.Text = Regex.Replace(textboxSender.Text, "[^0-9.]", "");
+            textboxSender.SelectionStart = cursorPosition;
+            string line = tboxHeading.Text.Trim();
+            if (line == "") line = "0";
+            if (line == ".") line = "0";
+            upDnHeading = double.Parse(line,CultureInfo.InvariantCulture);
+            mf.ABLine.abHeading = glm.toRadians(upDnHeading);
+            mf.ABLine.SetABLineByHeading();
+            btnABLineOk.Enabled = true;
+
+
+        }
+    }
 }

@@ -15,6 +15,15 @@ namespace AgOpenGPS
         /// <summary> /// Has the you turn shape been built and displayed? /// </summary>
         public bool isYouTurnShapeDisplayed;
 
+        public string pos1 = "Manual Button";
+        public string pos2 = "Auto Button";
+        public string pos3 = "";
+        public string pos4 = "";
+        public string pos5 = "";
+        public string pos6 = "";
+        public string pos7 = "";
+        public string pos8 = "";
+
         /// <summary>  /// turning right or left?/// </summary>
         public bool isYouTurnRight;
 
@@ -31,7 +40,7 @@ namespace AgOpenGPS
         public vec2 youTurnTriggerPoint = new vec2(0, 0);
 
         //if not in workArea but in bounds, then we are on headland
-        public bool isInWorkArea, isInBoundz, isInHeadland, isABLineSameAsFixHeading;
+        public bool isInWorkArea, isInBoundz, isInHeadland;
 
         /// <summary> /// At trigger point, was vehicle going same direction as ABLine? /// </summary>        
         public bool isABLineSameAsHeadingAtTrigger;
@@ -86,6 +95,18 @@ namespace AgOpenGPS
             //the youturn shape scaling.
             rowSkipsHeight = Properties.Vehicle.Default.set_youSkipHeight;
             rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
+
+            //Fill in the strings for comboboxes - editable
+            string line = Properties.Vehicle.Default.seq_FunctionList;
+            string[] words = line.Split(',');
+
+            pos3 = words[0];
+            pos4 = words[1];
+            pos5 = words[2];
+            pos6 = words[3];
+            pos7 = words[4];
+            pos8 = words[5];
+
         }
 
         //Normal copmpletion of youturn
@@ -118,7 +139,7 @@ namespace AgOpenGPS
         //reset trig flag to false on all array elements with a function
         public void ResetSequenceEventTriggers()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
             {
                 if (mf.seq.seqEnter[i].function != 0) mf.seq.seqEnter[i].isTrig = false;
                 if (mf.seq.seqExit[i].function != 0) mf.seq.seqExit[i].isTrig = false;
@@ -126,74 +147,101 @@ namespace AgOpenGPS
         }
 
         //determine when if and how functions are triggered
-        public void DoSequenceEvent(double dist)
+        public void DoSequenceEvent()
         {
-            if (isABLineSameAsHeadingAtTrigger == mf.ABLine.isABSameAsFixHeading)
+            if (mf.yt.isSequenceTriggered)
             {
-                //since same as AB Line, we are entering
-                whereAmI = 1;
-                if (isInHeadland) dist *= -1;
-            }
-            else
-            {
-                //since opposite of AB Line at trigger we are exiting
-                whereAmI = 2;
-                if (isInHeadland) dist *= -1;
-            }
+                //determine if Section is entry or exit based on trigger point direction
+                bool isToolHeadingSameAsABHeading;
 
-            //did we do all the events?
-            int c = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                //checked for any not triggered yet (false) - if there is, not done yet
-                if (!mf.seq.seqEnter[i].isTrig) c++;
-                if (!mf.seq.seqExit[i].isTrig) c++;
-            }
+                //Subtract the two headings, if > 1.57 its going the opposite heading as refAB
+                double abFixHeadingDelta = (Math.Abs(mf.fixHeadingSection - mf.ABLine.abHeading));
+                if (abFixHeadingDelta >= Math.PI) abFixHeadingDelta = Math.Abs(abFixHeadingDelta - glm.twoPI);
 
-            if (c == 0)
-            {
-                //sequences all done so reset everything
-                isSequenceTriggered = false;
-                whereAmI = 0;
-                ResetSequenceEventTriggers();
-            }
+                if (abFixHeadingDelta >= glm.PIBy2) isToolHeadingSameAsABHeading = false;
+                else isToolHeadingSameAsABHeading = true;
 
-            switch (whereAmI)
-            {
-                case 0: //not in you turn
-                    break;
+                mf.hl.FindClosestHeadlandPoint(mf.toolPos);
+                if ((int)mf.hl.closestHeadlandPt.easting != -1)
+                    mf.distTool = mf.pn.Distance(mf.toolPos.northing, mf.toolPos.easting,
+                        mf.hl.closestHeadlandPt.northing, mf.hl.closestHeadlandPt.easting);
+                else //we've lost the headland
+                {
+                    mf.yt.isSequenceTriggered = false;
+                    mf.yt.ResetSequenceEventTriggers();
+                    mf.distTool = 999;
+                    return;
+                }
 
-                case 1: //Entering the headland
 
-                    for (int i = 0; i < 5; i++)
-                    {
-                        //have we gone past the distance and still haven't done it
-                        if (dist < mf.seq.seqEnter[i].distance && !mf.seq.seqEnter[i].isTrig)
+
+                if (isABLineSameAsHeadingAtTrigger == isToolHeadingSameAsABHeading)
+                {
+                    //since same as AB Line, we are entering
+                    whereAmI = 1;
+                    if (isInHeadland) mf.distTool *= -1;
+                }
+                else
+                {
+                    //since opposite of AB Line at trigger we are exiting
+                    whereAmI = 2;
+                    if (isInHeadland) mf.distTool *= -1;
+                }
+
+                //did we do all the events?
+                int c = 0;
+                for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
+                {
+                    //checked for any not triggered yet (false) - if there is, not done yet
+                    if (!mf.seq.seqEnter[i].isTrig) c++;
+                    if (!mf.seq.seqExit[i].isTrig) c++;
+                }
+
+                if (c == 0)
+                {
+                    //sequences all done so reset everything
+                    isSequenceTriggered = false;
+                    whereAmI = 0;
+                    ResetSequenceEventTriggers();
+                }
+
+                switch (whereAmI)
+                {
+                    case 0: //not in you turn
+                        break;
+
+                    case 1: //Entering the headland
+
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
                         {
-                            //it shall only run once
-                            mf.seq.seqEnter[i].isTrig = true;
+                            //have we gone past the distance and still haven't done it
+                            if (mf.distTool < mf.seq.seqEnter[i].distance && !mf.seq.seqEnter[i].isTrig)
+                            {
+                                //it shall only run once
+                                mf.seq.seqEnter[i].isTrig = true;
 
-                            //send the function and action to perform
-                            mf.DoYouTurnSequenceEvent(mf.seq.seqEnter[i].function, mf.seq.seqEnter[i].action);
+                                //send the function and action to perform
+                                mf.DoYouTurnSequenceEvent(mf.seq.seqEnter[i].function, mf.seq.seqEnter[i].action);
+                            }
                         }
-                    }
-                    break;
+                        break;
 
-                case 2: //Leaving the headland
+                    case 2: //Leaving the headland
 
-                    for (int i = 0; i < 5; i++)
-                    {
-                        //have we gone past the distance and still haven't done it
-                        if (dist > mf.seq.seqExit[i].distance && !mf.seq.seqExit[i].isTrig)
+                        for (int i = 0; i < FormGPS.MAXFUNCTIONS; i++)
                         {
-                            //it shall only run once
-                            mf.seq.seqExit[i].isTrig = true;
+                            //have we gone past the distance and still haven't done it
+                            if (mf.distTool > mf.seq.seqExit[i].distance && !mf.seq.seqExit[i].isTrig)
+                            {
+                                //it shall only run once
+                                mf.seq.seqExit[i].isTrig = true;
 
-                            //send the function and action to perform
-                            mf.DoYouTurnSequenceEvent(mf.seq.seqExit[i].function, mf.seq.seqExit[i].action);
+                                //send the function and action to perform
+                                mf.DoYouTurnSequenceEvent(mf.seq.seqExit[i].function, mf.seq.seqExit[i].action);
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
             }
         }
 

@@ -18,7 +18,7 @@ namespace AgOpenGPS
         #region // Class Props and instances
         //maximum sections available
         private const int MAXSECTIONS = 9;
-        public const int MAXFUNCTIONS = 5;
+        public const int MAXFUNCTIONS = 8;
 
         //some test variables
         //double testDouble = 0;
@@ -213,26 +213,44 @@ namespace AgOpenGPS
         //keystrokes for easy and quick startup
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //reset Sim
+            if (keyData == Keys.L)
+            {
+                btnResetSim.PerformClick();
+                return true;
+            }
+
             //speed up
             if (keyData == Keys.K)
             {
                 sim.stepDistance += 0.05;
-                if (sim.stepDistance > 6) sim.stepDistance = 6;
+                if (sim.stepDistance > 5.8) sim.stepDistance = 5.8;
+                 tbarStepDistance.Value = (int)(sim.stepDistance* 10.0 * fixUpdateHz);
+
+                return true;
+            }
+
+            //Stop
+            if (keyData == Keys.J)
+            {
+                sim.stepDistance = 0;
+                tbarStepDistance.Value = 0;
                 return true;
             }
 
             //slow down
-            if (keyData == Keys.J)
+            if (keyData == Keys.H)
             {
                 sim.stepDistance -= 0.05;
                 if (sim.stepDistance < 0) sim.stepDistance = 0;
+                tbarStepDistance.Value = (int)(sim.stepDistance * 10.0 * fixUpdateHz);
                 return true;
             }
 
             //turn right
             if (keyData == Keys.M)
             {
-                sim.steerAngle += 0.5;
+                sim.steerAngle += 1.0;
                 if (sim.steerAngle > 30) sim.steerAngle = 30;
                 sim.steerAngleScrollBar = sim.steerAngle;
                 lblSteerAngle.Text = sim.steerAngle.ToString();
@@ -241,9 +259,9 @@ namespace AgOpenGPS
             }
 
             //turn left
-            if (keyData == Keys.N)
+            if (keyData == Keys.B)
             {
-                sim.steerAngle -= 0.5;
+                sim.steerAngle -= 1.0;
                 if (sim.steerAngle < -30) sim.steerAngle = -30;
                 sim.steerAngleScrollBar = sim.steerAngle;
                 lblSteerAngle.Text = sim.steerAngle.ToString();
@@ -251,9 +269,10 @@ namespace AgOpenGPS
                 return true;
             }
 
-            if (keyData == Keys.Up)
+            //zero steering
+            if (keyData == Keys.N)
             {
-                sim.steerAngle = 0;
+                sim.steerAngle = 0.0;
                 sim.steerAngleScrollBar = sim.steerAngle;
                 lblSteerAngle.Text = sim.steerAngle.ToString();
                 tbarSteerAngle.Value = (int)(10 * sim.steerAngle);
@@ -263,25 +282,6 @@ namespace AgOpenGPS
             if (keyData == (Keys.F))
             {
                 JobNewOpenResume();
-                return true;    // indicate that you handled this keystroke
-            }
-
-            if (keyData == (Keys.NumPad1))
-            {
-                Form form = new FormGPSData(this);
-                form.Show();
-                return true;    // indicate that you handled this keystroke
-            }
-
-            if (keyData == (Keys.S))
-            {
-                SettingsPageOpen(0);
-                return true;    // indicate that you handled this keystroke
-            }
-
-            if (keyData == (Keys.C))
-            {
-                SettingsCommunications();
                 return true;    // indicate that you handled this keystroke
             }
 
@@ -296,6 +296,7 @@ namespace AgOpenGPS
                 btnSectionOffAutoOn.PerformClick();
                 return true;    // indicate that you handled this keystroke
             }
+
             // Call the base class
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -338,7 +339,7 @@ namespace AgOpenGPS
             SectionCalcWidths();
 
             //start udp server
-            StartUDPServer();
+            //StartUDPServer();
 
             //set the correct zoom and grid
             camera.camSetDistance = zoomValue * zoomValue * -1;
@@ -369,7 +370,7 @@ namespace AgOpenGPS
                 Size = Settings.Default.setWindow_Size;
             }
 
-            //don;t draw the back opengl to GDI - it still works tho
+            //don't draw the back opengl to GDI - it still works tho
             openGLControlBack.Visible = false;
 
             //set previous job directory
@@ -478,6 +479,8 @@ namespace AgOpenGPS
         private void FormGPS_Resize(object sender, EventArgs e)
         {
             LineUpManualBtns();
+            if (Width < 850 && tabControl1.Visible) HideTabControl();
+            if (Width > 1100 && !tabControl1.Visible) HideTabControl();
         }
 
         // Procedures and Functions ---------------------------------------
@@ -598,40 +601,6 @@ namespace AgOpenGPS
             AutoSteerSettingsOutToPort();
         }
 
-        private void timerSim_Tick(object sender, EventArgs e)
-        {
-            //if a GPS is connected disable sim
-            if (!sp.IsOpen)
-            {
-                if (isAutoSteerBtnOn) sim.DoSimTick(guidanceLineSteerAngle / 10.0);
-                else sim.DoSimTick(sim.steerAngleScrollBar);
-            }
-        }
-
-        private void tbarStepDistance_Scroll(object sender, EventArgs e)
-        {
-            sim.stepDistance = ((double)(tbarStepDistance.Value)) / 10.0 / (double)fixUpdateHz;
-        }
-
-        private void tbarSteerAngle_Scroll(object sender, EventArgs e)
-        {
-            sim.steerAngleScrollBar = (tbarSteerAngle.Value) * 0.1;
-            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
-        }
-
-        private void btnResetSteerAngle_Click(object sender, EventArgs e)
-        {
-            sim.steerAngleScrollBar = 0;
-            tbarSteerAngle.Value = 0;
-            lblSteerAngle.Text = sim.steerAngleScrollBar.ToString("N1");
-        }
-
-        private void btnResetSim_Click(object sender, EventArgs e)
-        {
-            sim.latitude = 53.436026;
-            sim.longitude = -111.160047;
-        }
-
         //show the UDP ethernet settings page
         private void SettingsUDP()
         {
@@ -722,7 +691,6 @@ namespace AgOpenGPS
             btnABLine.Enabled = true;
             btnContour.Enabled = true;
             btnAutoSteer.Enabled = true;
-            btnSnap.Enabled = true;
             ABLine.abHeading = 0.00;
 
             btnRightYouTurn.Enabled = false;
@@ -792,7 +760,6 @@ namespace AgOpenGPS
             btnABLine.Enabled = false;
             btnContour.Enabled = false;
             btnAutoSteer.Enabled = false;
-            btnSnap.Enabled = false;
             isAutoSteerBtnOn = false;
 
             ct.isContourBtnOn = false;
@@ -948,6 +915,132 @@ namespace AgOpenGPS
             }
         }
 
+        //called by you turn class to set control byte, click auto man buttons
+        public void DoYouTurnSequenceEvent(int function, int action)
+        {
+            switch (function)
+            {
+                case 0: //should not be here - it means no function at all
+                    TimedMessageBox(2000, "ID 0 ??????", "YouTurn fucked up");
+                    break;
+
+                case 1: //Manual button
+                    if (action == 0) //turn auto off
+                    {
+                        if (manualBtnState != btnStates.Off)
+                        {
+                            btnManualOffOn.PerformClick();
+                        }
+                    }
+                    else
+                    {
+                        if (manualBtnState != btnStates.On)
+                        {
+                            btnManualOffOn.PerformClick();
+                        }
+                    }
+                    break;
+
+                case 2: //Auto Button
+                    if (action == 0) //turn auto off
+                    {
+                        if (autoBtnState != btnStates.Off)
+                        {
+                            btnSectionOffAutoOn.PerformClick();
+                        }
+                    }
+                    else
+                    {
+                        if (autoBtnState != btnStates.Auto)
+                        {
+                            btnSectionOffAutoOn.PerformClick();
+                        }
+                    }
+                    break;
+
+                case 3: //Relay 1
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos3, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11111110;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos3, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00000001;
+                    }
+                    break;
+
+                case 4: //Relay 2
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos4, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11111101;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos4, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00000010;
+                    }
+                    break;
+
+                case 5: //Relay 3
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos5, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11111011;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos5, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00000100;
+                    }
+                    break;
+
+                case 6: //Relay 4
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos6, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11110111;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos6, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00001000;
+                    }
+                    break;
+
+                case 7: //Relay 5
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos7, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11101111;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos7, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00010000;
+                    }
+                    break;
+
+                case 8: //Relay 6
+                    if (action == 0)
+                    {
+                        TimedMessageBox(1000, yt.pos8, "Turn Off");
+                        mc.relayRateData[mc.rdYouTurnControlByte] &= 0b11011111;
+                    }
+                    else
+                    {
+                        TimedMessageBox(1000, yt.pos8, "Turn On");
+                        mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00100000;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         //take the distance from object and convert to camera data
         private void SetZoom()
         {
@@ -1038,92 +1131,13 @@ namespace AgOpenGPS
             }
         }
 
-        //called by you turn class to do the actual sequence events
-        public void DoYouTurnSequenceEvent(int function, int action)
-        {
-            switch (function)
-            {
-                case 0: //should not be here - it means no function at all
-                    TimedMessageBox(2000, "ID 0 ??????", "YouTurn fucked up");
-                    break;
-
-                case 1: //Manual button
-                    if (action == 0) //turn auto off
-                    {
-                        if (manualBtnState != btnStates.Off)
-                        {
-                            btnManualOffOn.PerformClick();
-                        }
-                    }
-                    else
-                    {
-                        if (manualBtnState != btnStates.On)
-                        {
-                            btnManualOffOn.PerformClick();
-                        }
-                    }
-                    break;
-
-                case 2: //Auto Button
-                    if (action == 0) //turn auto off
-                    {
-                        if (autoBtnState != btnStates.Off)
-                        {
-                            btnSectionOffAutoOn.PerformClick();
-                        }
-                    }
-                    else
-                    {
-                        if (autoBtnState != btnStates.Auto)
-                        {
-                            btnSectionOffAutoOn.PerformClick();
-                        }
-                    }
-                    break;
-
-                case 3: //Relay 1
-                    if (action == 0)
-                    {
-                        TimedMessageBox(1000, "Relay 1 ", "Turn Off");
-                    }
-                    else
-                    {
-                        TimedMessageBox(1000, "Relay 1 ", "Turn On");
-                    }
-                    break;
-
-                case 4: //Relay 2
-                    if (action == 0)
-                    {
-                        TimedMessageBox(1000, "Relay 2 ", "Turn Off");
-                    }
-                    else
-                    {
-                        TimedMessageBox(1000, "Relay 2 ", "Turn On");
-                    }
-                    break;
-
-                case 5: //thingy
-                    if (action == 0)
-                    {
-                        TimedMessageBox(1000, "Thingy ", "Turn Off");
-                    }
-                    else
-                    {
-                        TimedMessageBox(1000, "Thingy ", "Turn On");
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
+        //message box pops up with info then goes away
         public void TimedMessageBox(int timeout, string s1, string s2)
         {
             var form = new FormTimedMessage(timeout, s1, s2);
             form.Show();
         }
+
    }//class FormGPS
 }//namespace AgOpenGPS
 

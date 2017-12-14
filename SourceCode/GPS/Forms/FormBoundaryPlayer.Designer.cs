@@ -39,7 +39,7 @@
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnStop.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.Image = global::AgOpenGPS.Properties.Resources.boundaryStop;
             this.btnStop.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnStop.Location = new System.Drawing.Point(6, 5);
@@ -54,7 +54,7 @@
             // btnPausePlay
             // 
             this.btnPausePlay.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnPausePlay.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPausePlay.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPausePlay.Image = global::AgOpenGPS.Properties.Resources.BoundaryRecord;
             this.btnPausePlay.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnPausePlay.Location = new System.Drawing.Point(167, 4);

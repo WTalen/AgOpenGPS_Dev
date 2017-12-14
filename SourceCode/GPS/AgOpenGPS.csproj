@@ -111,6 +111,12 @@
     <Compile Include="Classes\CWaypoint.cs" />
     <Compile Include="Classes\CWorldGrid.cs" />
     <Compile Include="Classes\CSequence.cs" />
+    <Compile Include="Forms\FormABPrev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormABPrev.Designer.cs">
+      <DependentUpon>FormABPrev.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormHeadland.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,12 +177,6 @@
     <Compile Include="Forms\FormTimedMessage.Designer.cs">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormVariables.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormVariables.Designer.cs">
-      <DependentUpon>FormVariables.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormWebCam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,12 +202,6 @@
     <Compile Include="Forms\Position.designer.cs">
       <SubType>Form</SubType>
       <DependentUpon>FormGPS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormTrip.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormTrip.Designer.cs">
-      <DependentUpon>FormTrip.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormYouTurn.cs">
       <SubType>Form</SubType>
@@ -283,6 +277,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Forms\FormABPrev.resx">
+      <DependentUpon>FormABPrev.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormHeadland.resx">
       <DependentUpon>FormHeadland.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,9 +331,6 @@
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormVariables.resx">
-      <DependentUpon>FormVariables.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWebCam.resx">
       <DependentUpon>FormWebCam.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,9 +339,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYouTurnRecord.resx">
       <DependentUpon>FormYouTurnRecord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormTrip.resx">
-      <DependentUpon>FormTrip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormYouTurn.resx">
       <DependentUpon>FormYouTurn.cs</DependentUpon>
@@ -518,6 +509,12 @@
     <None Include="btnImages\YouTurnReverse.png" />
     <None Include="btnImages\YouTurnBackground.jpg" />
     <None Include="btnImages\WideReturn.png" />
+    <None Include="btnImages\Settings48.png" />
+    <None Include="btnImages\Batman48.png" />
+    <None Include="btnImages\SettingsGear32.png" />
+    <None Include="btnImages\start.png" />
+    <None Include="btnImages\AutoSteerConf.png" />
+    <None Include="btnImages\SetupStatusStrip.png" />
     <Content Include="Dependencies\Floor.png" />
     <Content Include="Dependencies\Landscape.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -526,12 +523,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Keypad\Keypad.csproj">
-      <Project>{AFCE5A35-ABC0-4BE5-9364-711F6BAD8135}</Project>
-      <Name>Keypad</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

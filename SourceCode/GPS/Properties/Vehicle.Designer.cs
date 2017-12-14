@@ -12,7 +12,7 @@ namespace AgOpenGPS.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
     internal sealed partial class Vehicle : global::System.Configuration.ApplicationSettingsBase {
         
         private static Vehicle defaultInstance = ((Vehicle)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Vehicle())));
@@ -445,7 +445,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_FunctionEnter {
             get {
                 return ((string)(this["seq_FunctionEnter"]));
@@ -457,7 +457,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_FunctionExit {
             get {
                 return ((string)(this["seq_FunctionExit"]));
@@ -469,7 +469,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_ActionEnter {
             get {
                 return ((string)(this["seq_ActionEnter"]));
@@ -481,7 +481,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_ActionExit {
             get {
                 return ((string)(this["seq_ActionExit"]));
@@ -493,7 +493,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_DistanceEnter {
             get {
                 return ((string)(this["seq_DistanceEnter"]));
@@ -505,7 +505,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0,0,0,0,0,0,0,0")]
         public string seq_DistanceExit {
             get {
                 return ((string)(this["seq_DistanceExit"]));
@@ -517,7 +517,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Manual Btn,Auto Button,Relay1,Relay2,Relay3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Relay 1,Relay 2,Relay 3,Relay 4,Relay 5,Relay 6")]
         public string seq_FunctionList {
             get {
                 return ((string)(this["seq_FunctionList"]));
@@ -529,7 +529,7 @@ namespace AgOpenGPS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Turn On,Turn Off")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Turn Off,Turn On")]
         public string seq_ActionList {
             get {
                 return ((string)(this["seq_ActionList"]));

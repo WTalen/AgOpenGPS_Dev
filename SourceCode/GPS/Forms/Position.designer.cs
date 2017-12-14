@@ -80,7 +80,7 @@ namespace AgOpenGPS
 
         //youturn
         double distPivot = -2;
-        double distTool;
+        public double distTool;
         double distanceToStartAutoTurn;  
         
         //the value to fill in you turn progress bar
@@ -356,6 +356,7 @@ namespace AgOpenGPS
 
                 mc.relayRateData[mc.rdSpeedXFour] = (byte)(pn.speed * 4.0);
                 //relay byte is built in SerialComm function BuildRelayByte()
+                //youturn control byte is built in SerialComm BuildYouTurnByte()
             }
             else
             {
@@ -363,7 +364,7 @@ namespace AgOpenGPS
                 mc.relayRateData[mc.rdRateSetPointHi] = (byte)0;
                 mc.relayRateData[mc.rdSpeedXFour] = (byte)(pn.speed * 4.0);
                 //relay byte is built in SerialComm.cs - function BuildRelayByte()
-
+                //youturn control byte is built in SerialComm BuildYouTurnByte()
             }
 
             //send out the port
@@ -395,16 +396,6 @@ namespace AgOpenGPS
                                         hl.closestHeadlandPt.northing, hl.closestHeadlandPt.easting);
                     }
                     else distPivot = -2;
-
-                    hl.FindClosestHeadlandPoint(toolPos);
-                    if ((int)hl.closestHeadlandPt.easting != -1)
-                        distTool = pn.Distance(toolPos.northing, toolPos.easting,
-                            hl.closestHeadlandPt.northing, hl.closestHeadlandPt.easting);
-                    else //we've lost the headland
-                    {
-                        yt.isSequenceTriggered = false;
-                        yt.ResetSequenceEventTriggers();
-                    }
                 }
                 else distPivot = -2;
 
@@ -418,7 +409,7 @@ namespace AgOpenGPS
                 //Do the sequencing of functions around the turn.
                 if (yt.isSequenceTriggered)
                 {
-                    yt.DoSequenceEvent(distTool);
+                    yt.DoSequenceEvent();
                 }
 
                 distanceToStartAutoTurn = -1;
