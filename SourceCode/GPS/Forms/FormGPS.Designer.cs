@@ -307,7 +307,7 @@
             this.openGLControlBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.openGLControlBack.FrameRate = 1;
             this.openGLControlBack.Location = new System.Drawing.Point(6, 34);
-            this.openGLControlBack.Margin = new System.Windows.Forms.Padding(1);
+            this.openGLControlBack.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.openGLControlBack.Name = "openGLControlBack";
             this.openGLControlBack.OpenGLVersion = SharpGL.Version.OpenGLVersion.OpenGL2_1;
             this.openGLControlBack.RenderContextType = SharpGL.RenderContextType.HiddenWindow;

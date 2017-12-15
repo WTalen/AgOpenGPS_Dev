@@ -50,13 +50,16 @@ namespace AgOpenGPS
                     try
                     {
                         string line;
+                        ListViewItem itm;
 
                         //read all the lines
                         while (!reader.EndOfStream)
                         {
                             line = reader.ReadLine();
-                            //string[] words = line.Split(',');
+                            string[] words = line.Split(',');
                             listboxLines.Items.Add(line);
+                            itm = new ListViewItem(words);
+                            lvLines.Items.Add(itm);
 
                             //coords.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
                             //coords.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
@@ -126,7 +129,6 @@ namespace AgOpenGPS
             var cursorPosition = textboxSender.SelectionStart;
             textboxSender.Text = Regex.Replace(textboxSender.Text, "[^0-9.]", "");
             textboxSender.SelectionStart = cursorPosition;
-
         }
 
         private void btnAddManualInput_Click(object sender, EventArgs e)
@@ -185,6 +187,17 @@ namespace AgOpenGPS
                     //write out to file
                     writer.WriteLine(line);
                 }
+            }
+        }
+
+        private void btnDeleteListviewItem_Click(object sender, EventArgs e)
+        {
+            string words;
+            int count = lvLines.SelectedItems.Count;
+            if (count > 0)
+            {
+                words = lvLines.SelectedItems[0].SubItems[2].Text;
+                lvLines.SelectedItems[0].Remove();                
             }
         }
     }

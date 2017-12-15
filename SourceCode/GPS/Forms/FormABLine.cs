@@ -34,12 +34,6 @@ namespace AgOpenGPS
                 //AB line is on screen and set
                 btnAPoint.Enabled = false;
                 btnBPoint.Enabled = true;
-                btnABLineOk.Enabled = true;
-                btnDeleteAB.Enabled = true;
-                btnUpABHeading.Enabled = true;
-                btnDnABHeading.Enabled = true;
-                btnUpABHeadingBy1.Enabled = true;
-                btnDnABHeadingBy1.Enabled = true;
                 upDnHeading = Math.Round(glm.toDegrees(mf.ABLine.abHeading), 1);
                 nudTramRepeats.Value = mf.ABLine.tramPassEvery;
                 nudBasedOnPass.Value = mf.ABLine.passBasedOn;
@@ -50,19 +44,13 @@ namespace AgOpenGPS
                 //no AB line
                 btnAPoint.Enabled = true;
                 btnBPoint.Enabled = false;
-                btnDeleteAB.Enabled = true;
-                btnABLineOk.Enabled = false;
-                btnUpABHeading.Enabled = false;
-                btnDnABHeading.Enabled = false;
-                btnUpABHeadingBy1.Enabled = false;
-                btnDnABHeadingBy1.Enabled = false;
+                //btnABLineOk.Enabled = false;
                 upDnHeading = Math.Round(glm.toDegrees(mf.fixHeading), 1);
                 nudTramRepeats.Value = 0;
                 nudBasedOnPass.Value = 0;
                 mf.ABLine.tramPassEvery=0;
                 mf.ABLine.passBasedOn=0;
             }
-
             //make sure at least a blank AB Line file exists
             string dirABLines = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString(CultureInfo.InvariantCulture) + "\\AgOpenGPS\\ABLines\\";
             string directoryName = Path.GetDirectoryName(dirABLines).ToString(CultureInfo.InvariantCulture);
@@ -75,6 +63,51 @@ namespace AgOpenGPS
                 {
                     //writer.WriteLine(DateTime.Now.ToString("MMM-dd hh:mm:ss tt", CultureInfo.InvariantCulture));
                 }
+            }
+
+            //get the file of previous AB Lines
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            filename = directoryName + "\\ABLines.txt";
+
+            if (!File.Exists(filename))
+            {
+                mf.TimedMessageBox(2000, "File Error", "Missing AB Line File, Critical Error");
+            }
+            else
+            {
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    try
+                    {
+                        string line;
+                        ListViewItem itm;
+
+                        //read all the lines
+                        while (!reader.EndOfStream)
+                        {
+                            line = reader.ReadLine();
+                            string[] words = line.Split(',');
+                            //listboxLines.Items.Add(line);
+                            itm = new ListViewItem(words);
+                            lvLines.Items.Add(itm);
+
+                            //coords.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                            //coords.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                            //youFileList.Add(coords);
+                        }
+                    }
+                    catch (Exception er)
+                    {
+                        var form = new FormTimedMessage(4000, "ABLine File is Corrupt", "Please delete it!!!");
+                        form.Show();
+                        mf.WriteErrorLog("FieldOpen, Loading ABLine, Corrupt ABLine File" + er);
+                    }
+                }
+
+                // go to bottom of list - if there is a bottom
+                if (lvLines.Items.Count > 0)  lvLines.Items[lvLines.Items.Count - 1].EnsureVisible();
             }
 
         }
@@ -157,8 +190,8 @@ namespace AgOpenGPS
             mf.ABLine.DeleteAB();
             btnAPoint.Enabled = true;
             btnBPoint.Enabled = false;
-            btnDeleteAB.Enabled = false;
-            btnABLineOk.Enabled = false;
+            //btnDeleteAB.Enabled = false;
+            //btnABLineOk.Enabled = false;
             nudTramRepeats.Value = 0;
             nudBasedOnPass.Value = 0;
             mf.ABLine.tramPassEvery = 0;
@@ -167,8 +200,8 @@ namespace AgOpenGPS
             //save the no ABLine;
             mf.FileSaveABLine();
 
-            DialogResult = DialogResult.Cancel;
-            Close();
+            //DialogResult = DialogResult.Cancel;
+            //Close();
          }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -185,8 +218,22 @@ namespace AgOpenGPS
                 + Math.Pow(mf.ABLine.refPoint1.northing - mf.pn.northing, 2);
 
                 if (pointAToFixDistance > 100) btnBPoint.Enabled = true;
-                else lblKeepGoing.Text = "    Keep\r\n Going  " + Convert.ToInt16(100 - pointAToFixDistance).ToString();
+                else lblKeepGoing.Text = Convert.ToInt16(100 - pointAToFixDistance).ToString();
             }
+
+            int count = lvLines.SelectedItems.Count;
+            if (count > 0)
+            {
+                btnListDelete.Enabled = true;
+                btnListUse.Enabled = true;
+            }
+
+            else
+            {
+                btnListDelete.Enabled = false;
+                btnListUse.Enabled = false;
+            }
+
         }
 
         private void nudTramRepeats_ValueChanged(object sender, EventArgs e)
@@ -224,7 +271,18 @@ namespace AgOpenGPS
 
                 //write out to file
                 writer.WriteLine(line);
+
+                //update the list box
+                ListViewItem itm;
+                string[] words = line.Split(',');
+                itm = new ListViewItem(words);
+                lvLines.Items.Add(itm);
+
+                // go to bottom of list - if there is a bottom
+                if (lvLines.Items.Count > 0) lvLines.Items[lvLines.Items.Count - 1].EnsureVisible();
             }
+
+
         }
 
         private void tboxHeading_TextChanged(object sender, EventArgs e)
@@ -242,6 +300,60 @@ namespace AgOpenGPS
             btnABLineOk.Enabled = true;
 
 
+        }
+
+        private void btnListDelete_Click(object sender, EventArgs e)
+        {
+            int count = lvLines.SelectedItems.Count;
+            if (count > 0)
+            {
+                lvLines.SelectedItems[0].Remove();
+            }
+            using (StreamWriter writer = new StreamWriter(filename))
+            {
+                string words;
+                count = lvLines.Items.Count;
+                if (count > 0)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        words = lvLines.Items[i].SubItems[0].Text + "," +
+                                lvLines.Items[i].SubItems[1].Text + "," +
+                                lvLines.Items[i].SubItems[2].Text + "," +
+                                lvLines.Items[i].SubItems[3].Text;
+                        //out to file
+                        writer.WriteLine(words);
+                    }
+
+                }
+
+            }
+        }
+
+        private void btnListUse_Click(object sender, EventArgs e)
+        {
+            int count = lvLines.SelectedItems.Count;
+            if (count > 0)
+            {
+
+                double temp = double.Parse(lvLines.SelectedItems[0].SubItems[1].Text, CultureInfo.InvariantCulture);
+                mf.ABLine.abHeading = glm.toRadians(temp);
+                temp = double.Parse(lvLines.SelectedItems[0].SubItems[2].Text, CultureInfo.InvariantCulture);
+                mf.ABLine.refPoint1.easting = temp;
+                temp = double.Parse(lvLines.SelectedItems[0].SubItems[3].Text, CultureInfo.InvariantCulture);
+                mf.ABLine.refPoint1.northing = temp;
+                mf.ABLine.SetABLineByHeading();
+
+                //can go back to Mainform without seeing ABLine form.
+                DialogResult = DialogResult.Yes;
+                Close();
+            }
+
+            //no item selected
+            else
+            {
+                return;
+            }
         }
     }
 }

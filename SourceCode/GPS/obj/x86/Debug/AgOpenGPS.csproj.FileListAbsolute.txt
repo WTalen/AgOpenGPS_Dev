@@ -237,3 +237,4 @@ C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Debug\AgOpenGPS.cspr
 C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Debug\AgOpenGPS.csproj.CoreCompileInputs.cache
 C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Debug\AgOpenGPS.exe
 C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Debug\AgOpenGPS.pdb
+C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\obj\x86\Debug\AgOpenGPS.csprojResolveAssemblyReference.cache

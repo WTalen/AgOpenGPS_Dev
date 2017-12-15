@@ -461,29 +461,18 @@ namespace AgOpenGPS
                 ABLine.isABLineBeingSet = true;
                 txtDistanceOffABLine.Visible = true;
                 var result = form.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    ABLine.isABLineBeingSet = false;
-                }
 
-                //change image to reflect on off
-                btnABLine.Image = Properties.Resources.ABLineOn;
-                btnRightYouTurn.Visible = true;
-                btnLeftYouTurn.Visible = true;
+                //Comes back
 
-                if (result == DialogResult.Cancel)
+                //if ABLine isn't set, turn off the YouTurn
+                if (!ABLine.isABLineSet)
                 {
                     ABLine.isABLineBeingSet = false;
                     txtDistanceOffABLine.Visible = false;
                     //change image to reflect on off
                     btnABLine.Image = Properties.Resources.ABLineOff;
-                    btnRightYouTurn.Visible = false;
-                    btnLeftYouTurn.Visible = false;
-                }
+                    ABLine.isABLineBeingSet = false;
 
-                //if ABLine isn't set, turn off the YouTurn
-                if (!ABLine.isABLineSet)
-                {
                     btnRightYouTurn.Enabled = false;
                     btnLeftYouTurn.Enabled = false;
                     btnRightYouTurn.Visible = false;
@@ -497,6 +486,10 @@ namespace AgOpenGPS
                 //ab line is made
                 else
                 {
+                    //change image to reflect on off
+                    btnABLine.Image = Properties.Resources.ABLineOn;
+                    ABLine.isABLineBeingSet = false;
+
                     btnRightYouTurn.Enabled = true;
                     btnLeftYouTurn.Enabled = true;
                     btnRightYouTurn.Visible = true;
