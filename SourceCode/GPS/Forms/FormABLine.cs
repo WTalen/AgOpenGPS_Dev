@@ -355,5 +355,16 @@ namespace AgOpenGPS
                 return;
             }
         }
+
+        private void btnPlus90_Click(object sender, EventArgs e)
+        {
+            upDnHeading += 90;
+            if (upDnHeading > 359.9) upDnHeading -= 360;
+            mf.ABLine.abHeading = glm.toRadians(upDnHeading);
+            mf.ABLine.SetABLineByHeading();
+            tboxHeading.Text = Convert.ToString((int)upDnHeading, CultureInfo.InvariantCulture);
+            btnABLineOk.Enabled = true;
+
+        }
     }
 }

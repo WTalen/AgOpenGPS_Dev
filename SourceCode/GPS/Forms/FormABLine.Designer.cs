@@ -51,8 +51,11 @@
             this.lvLines = new System.Windows.Forms.ListView();
             this.chField = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chAngle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chEasting = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chNorthing = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnListDelete = new System.Windows.Forms.Button();
             this.btnListUse = new System.Windows.Forms.Button();
+            this.btnPlus90 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudBasedOnPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTramRepeats)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +66,7 @@
             this.lblABHeading.AutoSize = true;
             this.lblABHeading.BackColor = System.Drawing.SystemColors.Control;
             this.lblABHeading.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblABHeading.Location = new System.Drawing.Point(291, 318);
+            this.lblABHeading.Location = new System.Drawing.Point(258, 295);
             this.lblABHeading.Name = "lblABHeading";
             this.lblABHeading.Size = new System.Drawing.Size(83, 33);
             this.lblABHeading.TabIndex = 63;
@@ -80,7 +83,7 @@
             this.lblFixHeading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFixHeading.AutoSize = true;
             this.lblFixHeading.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFixHeading.Location = new System.Drawing.Point(291, 277);
+            this.lblFixHeading.Location = new System.Drawing.Point(258, 254);
             this.lblFixHeading.Name = "lblFixHeading";
             this.lblFixHeading.Size = new System.Drawing.Size(32, 33);
             this.lblFixHeading.TabIndex = 64;
@@ -91,7 +94,7 @@
             this.lblKeepGoing.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblKeepGoing.AutoSize = true;
             this.lblKeepGoing.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKeepGoing.Location = new System.Drawing.Point(685, 226);
+            this.lblKeepGoing.Location = new System.Drawing.Point(676, 226);
             this.lblKeepGoing.Name = "lblKeepGoing";
             this.lblKeepGoing.Size = new System.Drawing.Size(22, 25);
             this.lblKeepGoing.TabIndex = 74;
@@ -175,7 +178,7 @@
             this.btnDeleteAB.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDeleteAB.Image = global::AgOpenGPS.Properties.Resources.back_button;
             this.btnDeleteAB.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnDeleteAB.Location = new System.Drawing.Point(504, 278);
+            this.btnDeleteAB.Location = new System.Drawing.Point(495, 255);
             this.btnDeleteAB.Name = "btnDeleteAB";
             this.btnDeleteAB.Size = new System.Drawing.Size(89, 74);
             this.btnDeleteAB.TabIndex = 0;
@@ -188,7 +191,7 @@
             this.btnBPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBPoint.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBPoint.Image = global::AgOpenGPS.Properties.Resources.LetterBBlue;
-            this.btnBPoint.Location = new System.Drawing.Point(680, 132);
+            this.btnBPoint.Location = new System.Drawing.Point(671, 132);
             this.btnBPoint.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnBPoint.Name = "btnBPoint";
             this.btnBPoint.Size = new System.Drawing.Size(86, 90);
@@ -201,7 +204,7 @@
             this.btnAPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAPoint.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAPoint.Image = global::AgOpenGPS.Properties.Resources.LetterABlue;
-            this.btnAPoint.Location = new System.Drawing.Point(680, 18);
+            this.btnAPoint.Location = new System.Drawing.Point(671, 18);
             this.btnAPoint.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnAPoint.Name = "btnAPoint";
             this.btnAPoint.Size = new System.Drawing.Size(86, 90);
@@ -214,7 +217,7 @@
             this.btnABLineOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnABLineOk.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnABLineOk.Image = global::AgOpenGPS.Properties.Resources.OK64;
-            this.btnABLineOk.Location = new System.Drawing.Point(631, 278);
+            this.btnABLineOk.Location = new System.Drawing.Point(622, 255);
             this.btnABLineOk.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnABLineOk.Name = "btnABLineOk";
             this.btnABLineOk.Size = new System.Drawing.Size(135, 74);
@@ -281,7 +284,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvLines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chField,
-            this.chAngle});
+            this.chAngle,
+            this.chEasting,
+            this.chNorthing});
             this.lvLines.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvLines.FullRowSelect = true;
             this.lvLines.GridLines = true;
@@ -289,7 +294,7 @@
             this.lvLines.Location = new System.Drawing.Point(255, 12);
             this.lvLines.MultiSelect = false;
             this.lvLines.Name = "lvLines";
-            this.lvLines.Size = new System.Drawing.Size(413, 255);
+            this.lvLines.Size = new System.Drawing.Size(404, 232);
             this.lvLines.TabIndex = 84;
             this.lvLines.UseCompatibleStateImageBehavior = false;
             this.lvLines.View = System.Windows.Forms.View.Details;
@@ -304,6 +309,18 @@
             this.chAngle.Text = "Angle";
             this.chAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.chAngle.Width = 150;
+            // 
+            // chEasting
+            // 
+            this.chEasting.Text = "X";
+            this.chEasting.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.chEasting.Width = 100;
+            // 
+            // chNorthing
+            // 
+            this.chNorthing.Text = "Y";
+            this.chNorthing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.chNorthing.Width = 100;
             // 
             // btnListDelete
             // 
@@ -333,13 +350,26 @@
             this.btnListUse.UseVisualStyleBackColor = true;
             this.btnListUse.Click += new System.EventHandler(this.btnListUse_Click);
             // 
+            // btnPlus90
+            // 
+            this.btnPlus90.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlus90.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPlus90.Location = new System.Drawing.Point(365, 255);
+            this.btnPlus90.Name = "btnPlus90";
+            this.btnPlus90.Size = new System.Drawing.Size(75, 74);
+            this.btnPlus90.TabIndex = 87;
+            this.btnPlus90.Text = "+90 Degrees";
+            this.btnPlus90.UseVisualStyleBackColor = true;
+            this.btnPlus90.Click += new System.EventHandler(this.btnPlus90_Click);
+            // 
             // FormABLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.ClientSize = new System.Drawing.Size(778, 361);
+            this.ClientSize = new System.Drawing.Size(769, 384);
             this.ControlBox = false;
+            this.Controls.Add(this.btnPlus90);
             this.Controls.Add(this.btnListUse);
             this.Controls.Add(this.btnListDelete);
             this.Controls.Add(this.label3);
@@ -406,5 +436,8 @@
         private System.Windows.Forms.ColumnHeader chAngle;
         private System.Windows.Forms.Button btnListDelete;
         private System.Windows.Forms.Button btnListUse;
+        private System.Windows.Forms.ColumnHeader chEasting;
+        private System.Windows.Forms.ColumnHeader chNorthing;
+        private System.Windows.Forms.Button btnPlus90;
     }
 }

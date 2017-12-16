@@ -357,7 +357,7 @@ namespace AgOpenGPS
             if (tabControl1.Visible)
             {
                 tabControl1.Visible = false;
-                openGLControl.Width += 415;
+                openGLControl.Width = Width;
                 btnTiltDown.Visible = false;
                 btnTiltUp.Visible = false;
                 btnABLine.Left += 415;
@@ -374,7 +374,7 @@ namespace AgOpenGPS
             else
             {
                 tabControl1.Visible = true;
-                openGLControl.Width -= 415;
+                openGLControl.Width = Width - 435;
                 btnTiltDown.Visible = true;
                 btnTiltUp.Visible = true;
                 btnABLine.Left -= 415;
