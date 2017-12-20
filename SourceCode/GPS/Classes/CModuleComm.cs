@@ -40,7 +40,7 @@ namespace AgOpenGPS
                     ssSteerOffset = 6, ssMinPWM = 7, ssMaxIntegral = 8, ssCountsPerDegree = 9;
 
         //for the workswitch
-        public bool isWorkSwitchOn, isWorkSwitchActiveLow, isWorkSwitchEnabled;
+        public bool isWorkSwitchActiveLow, isWorkSwitchEnabled;
         public int workSwitchValue;
 
         //imu and roll inclinometer
@@ -56,7 +56,6 @@ namespace AgOpenGPS
 
             //WorkSwitch logic
             isWorkSwitchEnabled = false;
-            isWorkSwitchOn = false;
 
             //does a low, grounded out, mean on
             isWorkSwitchActiveLow = true;

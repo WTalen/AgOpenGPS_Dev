@@ -694,5 +694,29 @@ namespace AgOpenGPS.Properties {
                 this["setSim_lastLong"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setMenu_isSkyOn {
+            get {
+                return ((bool)(this["setMenu_isSkyOn"]));
+            }
+            set {
+                this["setMenu_isSkyOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setMenu_isBigAltitudeOn {
+            get {
+                return ((bool)(this["setMenu_isBigAltitudeOn"]));
+            }
+            set {
+                this["setMenu_isBigAltitudeOn"] = value;
+            }
+        }
     }
 }

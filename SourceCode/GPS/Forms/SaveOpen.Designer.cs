@@ -892,79 +892,80 @@ namespace AgOpenGPS
 
                     }
                 }
+            }
 
 
                 // Boundary  -------------------------------------------------------------------------------------------------
 
                 //Either exit or update running save
                 fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Boundary.txt";
-                if (!File.Exists(fileAndDirectory))
-                {
-                    var form = new FormTimedMessage(4000, "Missing Boundary File", "But Field is Loaded");
-                    form.Show();
-                }
+            if (!File.Exists(fileAndDirectory))
+            {
+                var form = new FormTimedMessage(4000, "Missing Boundary File", "But Field is Loaded");
+                form.Show();
+            }
 
-                //2017-June-05 09:48:52 PM
-                //Points in line followed by easting, northing
-                //$BoundaryDir
-                //gtr Jun05
-                //$Offsets
-                //555799,5921092,12
-                //$NumLinePoints
-                //27
-                //-3.1814080592639,-3.1814080592639
-                //-3.16491526875197,-3.16491526875197
+            //2017-June-05 09:48:52 PM
+            //Points in line followed by easting, northing
+            //$BoundaryDir
+            //gtr Jun05
+            //$Offsets
+            //555799,5921092,12
+            //$NumLinePoints
+            //27
+            //-3.1814080592639,-3.1814080592639
+            //-3.16491526875197,-3.16491526875197
 
-                else
+            else
+            {
+                using (StreamReader reader = new StreamReader(fileAndDirectory))
                 {
-                    using (StreamReader reader = new StreamReader(fileAndDirectory))
+                    try
                     {
-                        try
+                        //read the lines and skip them
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+
+                        line = reader.ReadLine();
+                        int numPoints = int.Parse(line);
+
+                        if (numPoints > 0)
                         {
-                            //read the lines and skip them
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
-                            line = reader.ReadLine();
+                            vec2 vecPt = new vec2(0, 0);
+                            boundz.ptList.Clear();
 
-                            line = reader.ReadLine();
-                            int numPoints = int.Parse(line);
-
-                            if (numPoints > 0)
+                            //load the line
+                            for (int i = 0; i < numPoints; i++)
                             {
-                                vec2 vecPt = new vec2(0, 0);
-                                boundz.ptList.Clear();
-
-                                //load the line
-                                for (int i = 0; i < numPoints; i++)
-                                {
-                                    line = reader.ReadLine();
-                                    string[] words = line.Split(',');
-                                    vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
-                                    vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
-                                    boundz.ptList.Add(vecPt);
-                                }
-
-                                boundz.CalculateBoundaryArea();
-                                boundz.PreCalcBoundaryLines();
-                                if (boundz.area > 0) boundz.isSet = true;
-                                else boundz.isSet = false;
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                boundz.ptList.Add(vecPt);
                             }
-                        }
 
-                        catch (Exception e)
-                        {
-                            var form = new FormTimedMessage(4000, "Boundary Line File is Corrupt", "But Field is Loaded");
-                            form.Show();
-                            WriteErrorLog("Load Boundary Line" + e.ToString());
-
+                            boundz.CalculateBoundaryArea();
+                            boundz.PreCalcBoundaryLines();
+                            if (boundz.area > 0) boundz.isSet = true;
+                            else boundz.isSet = false;
                         }
+                    }
+
+                    catch (Exception e)
+                    {
+                        var form = new FormTimedMessage(4000, "Boundary Line File is Corrupt", "But Field is Loaded");
+                        form.Show();
+                        WriteErrorLog("Load Boundary Line" + e.ToString());
+
                     }
                 }
             }
+            
 
             // Headland  -------------------------------------------------------------------------------------------------
 

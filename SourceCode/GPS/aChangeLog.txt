@@ -13,6 +13,8 @@
 * Able to turn on turn off uturn functions
 * Updated AB Lines to save and recall.
 * Side panle can be turned off.
+* touchscreen gestures with pinch zoom, rotate for camera 3D
+* Rate system is much better.
 
 v2.2 Nov 15, 2017
 * Sprayer rate control

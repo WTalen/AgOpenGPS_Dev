@@ -33,7 +33,6 @@
             this.btnRate1Up = new ProXoft.WinForms.RepeatButton();
             this.btnRate2Dn = new ProXoft.WinForms.RepeatButton();
             this.btnRate2Up = new ProXoft.WinForms.RepeatButton();
-            this.btnRateOnOff = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nudRate1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -118,18 +117,6 @@
             this.btnRate2Up.TabIndex = 127;
             this.btnRate2Up.UseVisualStyleBackColor = true;
             this.btnRate2Up.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnRate2Up_MouseDown);
-            // 
-            // btnRateOnOff
-            // 
-            this.btnRateOnOff.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRateOnOff.Location = new System.Drawing.Point(333, 286);
-            this.btnRateOnOff.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnRateOnOff.Name = "btnRateOnOff";
-            this.btnRateOnOff.Size = new System.Drawing.Size(120, 72);
-            this.btnRateOnOff.TabIndex = 130;
-            this.btnRateOnOff.Text = "Off";
-            this.btnRateOnOff.UseVisualStyleBackColor = true;
-            this.btnRateOnOff.Click += new System.EventHandler(this.btnRateOnOff_Click);
             // 
             // groupBox1
             // 
@@ -314,7 +301,6 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnRateOnOff);
             this.Controls.Add(this.bntOK);
             this.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -340,7 +326,6 @@
         private ProXoft.WinForms.RepeatButton btnRate1Up;
         private ProXoft.WinForms.RepeatButton btnRate2Dn;
         private ProXoft.WinForms.RepeatButton btnRate2Up;
-        private System.Windows.Forms.Button btnRateOnOff;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

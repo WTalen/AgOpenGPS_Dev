@@ -56,9 +56,6 @@ namespace AgOpenGPS
         public double boundaryTriggerDistance = 4.0;
         public vec2 prevBoundaryPos = new vec2(0, 0);
 
-        //for skipping a few frames while doing calcs
-        private int youTurnCounter = 0;
-
         //are we still getting valid data from GPS, resets to 0 in NMEA RMC block, watchdog 
         public int recvCounter = 20;
 
@@ -377,8 +374,7 @@ namespace AgOpenGPS
             //do the auto youturn logic every half second
             if (hl.isSet && yt.isYouTurnBtnOn && isAutoSteerBtnOn)// && (youTurnCounter++ > (fixUpdateHz>>3)))
             {
-                //reset the counter and figure out where we are
-                youTurnCounter = 0;
+                //figure out where we are
                 yt.isInBoundz = boundz.IsPointInsideBoundary(toolPos);
                 yt.isInWorkArea = hl.IsPointInsideHeadland(toolPos);
 

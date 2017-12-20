@@ -170,5 +170,11 @@
     <Setting Name="setSim_lastLong" Type="System.Double" Scope="User">
       <Value Profile="(Default)">-111.160047</Value>
     </Setting>
+    <Setting Name="setMenu_isSkyOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="setMenu_isBigAltitudeOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

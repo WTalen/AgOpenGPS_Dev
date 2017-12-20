@@ -61,7 +61,8 @@ namespace AgOpenGPS
             {
                 using (StreamWriter writer = new StreamWriter(filename))
                 {
-                    //writer.WriteLine(DateTime.Now.ToString("MMM-dd hh:mm:ss tt", CultureInfo.InvariantCulture));
+                    writer.WriteLine("ABLine N S,0,0,0");
+                    writer.WriteLine("ABLine E W,90,0,0");
                 }
             }
 

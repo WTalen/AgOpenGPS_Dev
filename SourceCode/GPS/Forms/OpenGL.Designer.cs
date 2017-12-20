@@ -226,7 +226,7 @@ namespace AgOpenGPS
                 gl.PushMatrix();
                 gl.LoadIdentity();
 
-                if (skyToolStripMenu.Checked)
+                if (isSkyOn)
                 {
                     ////draw the background when in 3D
                     if (camera.camPitch < -60)

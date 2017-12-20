@@ -22,7 +22,7 @@ namespace AgOpenGPS
         //GPS related properties
         private readonly int fixQuality = 3, sats = 7;
         private readonly double HDOP = 0.9;
-        private readonly int altitude = 20;
+        private readonly double altitude = 20.09876;
         private readonly char EW = 'W';
         private readonly char NS = 'N';
 

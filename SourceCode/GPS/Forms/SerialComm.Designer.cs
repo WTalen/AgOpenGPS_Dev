@@ -256,14 +256,14 @@ namespace AgOpenGPS
             //the ArdRelay sentence to be parsed
             sentence = sentence.Substring(0, end);
             string[] words = sentence.Split(',');
-            if (words.Length < 4) return;
+            if (words.Length !=3) return;
 
             //fill in the holes
             //int.TryParse(words[0], out mc);
-            int.TryParse(words[1], out mc.incomingInt);
+            int.TryParse(words[0], out mc.incomingInt);
             rc.rateActual = (double)mc.incomingInt/100.0;
 
-            int.TryParse(words[2], out mc.incomingInt);
+            int.TryParse(words[1], out mc.incomingInt);
             rc.volumeActual = mc.incomingInt;
 
             //int.TryParse(words[3], out mc.);
@@ -391,7 +391,7 @@ namespace AgOpenGPS
                 }
                 catch (Exception ex)
                 {
-                    WriteErrorLog("GPS Data Recv" + e.ToString());
+                    WriteErrorLog("GPS Data Recv" + ex.ToString());
 
                     //MessageBox.Show(ex.Message + "\n\r" + "\n\r" + "Go to Settings -> COM Ports to Fix", "ComPort Failure!");
                 }

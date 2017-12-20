@@ -81,6 +81,14 @@ namespace AgOpenGPS
             isPureDisplayOn = Settings.Default.setMenu_isPureOn;
             pursuitLineToolStripMenuItem.Checked = isPureDisplayOn;
 
+            isSkyOn = Settings.Default.setMenu_isSkyOn;
+            skyToolStripMenu.Checked = isSkyOn;
+
+            isBigAltitudeOn = Settings.Default.setMenu_isBigAltitudeOn;
+            bigAltitudeToolStripMenuItem.Checked = isBigAltitudeOn;
+            if (isBigAltitudeOn) lblBigElevation.Visible = true;
+            else lblBigElevation.Visible = false;
+
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
             if (simulatorOnToolStripMenuItem.Checked)
             {
@@ -472,6 +480,8 @@ namespace AgOpenGPS
                     //change image to reflect on off
                     btnABLine.Image = Properties.Resources.ABLineOff;
                     ABLine.isABLineBeingSet = false;
+
+                    if (isAutoSteerBtnOn) btnAutoSteer.PerformClick();
 
                     btnRightYouTurn.Enabled = false;
                     btnLeftYouTurn.Enabled = false;
@@ -929,20 +939,37 @@ namespace AgOpenGPS
                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory);
         }
 
+        private void btnRateConfig_Click(object sender, EventArgs e)
+        {
+            var form = new FormRate(this);
+            form.ShowDialog();
+            btnRate1Select.Text = rc.rate1.ToString();
+            btnRate2Select.Text = rc.rate2.ToString();
+        }
+
         private void btnRate_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
             {
-                var form = new FormRate(this);
-                form.ShowDialog();
+                rc.isRateControlOn = !rc.isRateControlOn;
 
                 if (rc.isRateControlOn)
                 {
+                    mc.relayRateSettings[mc.rsFlowCalFactorHi] = (byte)(Properties.Settings.Default.setRate_FlowmeterCalNumber >> 8);
+                    mc.relayRateSettings[mc.rsFlowCalFactorLo] = (byte)(Properties.Settings.Default.setRate_FlowmeterCalNumber);
+                    RateRelayOutToPort(mc.relayRateSettings, CModuleComm.numRelayRateSettingsItems);
+
+                    //get the last saved rates from setting file - always stored in L/Ha
+                    rc.rate1 = Properties.Settings.Default.setRate_rate1;
+                    rc.rate2 = Properties.Settings.Default.setRate_rate2;
+
+
                     btnRate1Select.Visible = true;
                     btnRate2Select.Visible = true;
                     btnRateDn.Visible = true;
                     btnRateUp.Visible = true;
                     btnRate.Image = Properties.Resources.RateControlOn;
+                    btnRate.Text = "-";
 
                     if (isMetric)
                     {
@@ -974,6 +1001,7 @@ namespace AgOpenGPS
                     btnRateUp.Visible = false;
                     btnRate.Image = Properties.Resources.RateControlOff;
                     btnRate.Text = "Off";
+                    lblRateAppliedActual.Text = "-";
                     rc.rateSetPoint = 0.0;
                     mc.relayRateData[mc.rdRateSetPointLo] = 0;
                     mc.relayRateData[mc.rdRateSetPointHi] = 0;
@@ -1007,7 +1035,7 @@ namespace AgOpenGPS
                 else
                 {
                     rc.rate2 += 1.0;
-                    btnRate2Select.Text = rc.rate2.ToString("N0");
+                    btnRate2Select.Text = rc.rate2.ToString("N1");
                 }
             }
             else
@@ -1033,13 +1061,13 @@ namespace AgOpenGPS
                 {
                     rc.rate1 -= 1.0;
                     if (rc.rate1 < 2.0) rc.rate1 = 2.0;
-                    btnRate1Select.Text = rc.rate1.ToString();
+                    btnRate1Select.Text = rc.rate1.ToString("N1");
                 }
                 else
                 {
                     rc.rate2 -= 1.0;
                     if (rc.rate2 < 2.0) rc.rate2 = 2.0;
-                    btnRate2Select.Text = rc.rate2.ToString();
+                    btnRate2Select.Text = rc.rate2.ToString("N1");
                 }
             }
             else
@@ -1269,14 +1297,6 @@ namespace AgOpenGPS
             Settings.Default.setMenu_isPureOn = isPureDisplayOn;
             Settings.Default.Save();
         }
-        private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            SettingsPageOpen(0);
-        }
-        private void communicationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SettingsCommunications();
-        }
         private void metricToolStrip_Click(object sender, EventArgs e)
         {
             metricToolStrip.Checked = true;
@@ -1286,6 +1306,22 @@ namespace AgOpenGPS
             Settings.Default.Save();
             lblSpeedUnits.Text = "kmh";
 
+        }
+        private void bigAltitudeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isBigAltitudeOn = !isBigAltitudeOn;
+            bigAltitudeToolStripMenuItem.Checked = isBigAltitudeOn;
+            if (isBigAltitudeOn) lblBigElevation.Visible = true;
+            else lblBigElevation.Visible = false;
+            Settings.Default.setMenu_isBigAltitudeOn = isBigAltitudeOn;
+            Settings.Default.Save();
+        }
+        private void skyToolStripMenu_Click(object sender, EventArgs e)
+        {
+            isSkyOn = !isSkyOn;
+            skyToolStripMenu.Checked = isSkyOn;
+            Settings.Default.setMenu_isSkyOn = isSkyOn;
+            Settings.Default.Save();
         }
         private void imperialToolStrip_Click(object sender, EventArgs e)
         {
@@ -1310,6 +1346,60 @@ namespace AgOpenGPS
             }
 
             Settings.Default.setMenu_isSimulatorOn = simulatorOnToolStripMenuItem.Checked;
+            Settings.Default.Save();
+        }
+
+        //setting color off Options Menu
+        private void sectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //color picker for sections
+            ColorDialog colorDlg = new ColorDialog
+            {
+                FullOpen = true,
+                AnyColor = true,
+                SolidColorOnly = false,
+                Color = Color.FromArgb(255, redSections, grnSections, bluSections)
+            };
+
+            if (colorDlg.ShowDialog() != DialogResult.OK) return;
+
+            redSections = colorDlg.Color.R;
+            if (redSections > 253) redSections = 253;
+            grnSections = colorDlg.Color.G;
+            if (grnSections > 253) grnSections = 253;
+            bluSections = colorDlg.Color.B;
+            if (bluSections > 253) bluSections = 253;
+
+            Settings.Default.setF_SectionColorR = redSections;
+            Settings.Default.setF_SectionColorG = grnSections;
+            Settings.Default.setF_SectionColorB = bluSections;
+            Settings.Default.Save();
+        }
+        private void fieldToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //color picker for fields
+
+            ColorDialog colorDlg = new ColorDialog
+            {
+                FullOpen = true,
+                AnyColor = true,
+                SolidColorOnly = false,
+                Color = Color.FromArgb(255, Settings.Default.setF_FieldColorR,
+                Settings.Default.setF_FieldColorG, Settings.Default.setF_FieldColorB)
+            };
+
+            if (colorDlg.ShowDialog() != DialogResult.OK) return;
+
+            redField = colorDlg.Color.R;
+            if (redField > 253) redField = 253;
+            grnField = colorDlg.Color.G;
+            if (grnField > 253) grnField = 253;
+            bluField = colorDlg.Color.B;
+            if (bluField > 253) bluField = 253;
+
+            Settings.Default.setF_FieldColorR = redField;
+            Settings.Default.setF_FieldColorG = grnField;
+            Settings.Default.setF_FieldColorB = bluField;
             Settings.Default.Save();
         }
 
@@ -1426,59 +1516,6 @@ namespace AgOpenGPS
             }
         }
 
-        //setting color off Options Menu
-        private void sectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //color picker for sections
-            ColorDialog colorDlg = new ColorDialog
-            {
-                FullOpen = true,
-                AnyColor = true,
-                SolidColorOnly = false,
-                Color = Color.FromArgb(255, redSections, grnSections, bluSections)
-            };
-
-            if (colorDlg.ShowDialog() != DialogResult.OK) return;
-
-            redSections = colorDlg.Color.R;
-            if (redSections > 253) redSections = 253;
-            grnSections = colorDlg.Color.G;
-            if (grnSections > 253) grnSections = 253;
-            bluSections = colorDlg.Color.B;
-            if (bluSections > 253) bluSections = 253;
-
-            Settings.Default.setF_SectionColorR = redSections;
-            Settings.Default.setF_SectionColorG = grnSections;
-            Settings.Default.setF_SectionColorB = bluSections;
-            Settings.Default.Save();
-        }
-        private void fieldToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //color picker for fields
-
-            ColorDialog colorDlg = new ColorDialog
-            {
-                FullOpen = true,
-                AnyColor = true,
-                SolidColorOnly = false,
-                Color = Color.FromArgb(255, Settings.Default.setF_FieldColorR,
-                Settings.Default.setF_FieldColorG, Settings.Default.setF_FieldColorB)
-            };
-
-            if (colorDlg.ShowDialog() != DialogResult.OK) return;
-
-            redField = colorDlg.Color.R;
-            if (redField > 253) redField = 253;
-            grnField = colorDlg.Color.G;
-            if (grnField > 253) grnField = 253;
-            bluField = colorDlg.Color.B;
-            if (bluField > 253) bluField = 253;
-
-            Settings.Default.setF_FieldColorR = redField;
-            Settings.Default.setF_FieldColorG = grnField;
-            Settings.Default.setF_FieldColorB = bluField;
-            Settings.Default.Save();
-        }
 
         //function mouse down in window for picking
         private void openGLControl_MouseDown(object sender, MouseEventArgs e)
@@ -1692,8 +1729,8 @@ namespace AgOpenGPS
             }
         }
 
-        public string Altitude { get { return Convert.ToString(pn.altitude); } }
-        public string AltitudeFeet { get { return Convert.ToString((int)(pn.altitude * 3.28084)); } }
+        public string Altitude { get { return Convert.ToString(Math.Round(pn.altitude,3)); } }
+        public string AltitudeFeet { get { return Convert.ToString((Math.Round((pn.altitude * 3.28084),3))); } }
 
         public string PeriAreaAcres { get { return Math.Round(periArea.area * 0.000247105, 2).ToString(); } }
         public string PeriAreaHectares { get { return Math.Round(periArea.area * 0.0001, 2).ToString(); } }
@@ -1740,26 +1777,27 @@ namespace AgOpenGPS
                 {
                     if (isMetric)
                     {
-                    lblAltitude.Text = Altitude;
+                        lblAltitude.Text = Altitude;
+                        if (isBigAltitudeOn) lblBigElevation.Text = Altitude;
 
-                    ////boundary and headland
-                    lblBoundaryArea.Text = boundz.areaHectare;
-                    if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(distPivot)) + "m";
-                    else lblHeadlandDistanceAway.Text = "***";
+                        ////boundary and headland
+                        lblBoundaryArea.Text = boundz.areaHectare;
+                        if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(distPivot)) + "m";
+                        else lblHeadlandDistanceAway.Text = "***";
 
-                    lblHeadlandDistanceFromTool.Text = ((int)(distTool)) + "m";
+                        lblHeadlandDistanceFromTool.Text = ((int)(distTool)) + "m";
 
                     }
                     else //imperial
                     {
-                    lblAltitude.Text = AltitudeFeet;
+                        lblAltitude.Text = AltitudeFeet;
+                        if (isBigAltitudeOn) lblBigElevation.Text = AltitudeFeet;
+                        ////Boundary
+                        lblBoundaryArea.Text = boundz.areaAcre;
+                        if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
+                        else lblHeadlandDistanceAway.Text = "***";
 
-                    ////Boundary
-                    lblBoundaryArea.Text = boundz.areaAcre;
-                    if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
-                    else lblHeadlandDistanceAway.Text = "***";
-
-                    lblHeadlandDistanceFromTool.Text = ((int)(glm.m2ft * distTool)) + "ft";
+                        lblHeadlandDistanceFromTool.Text = ((int)(glm.m2ft * distTool)) + "ft";
 
                     }
 
