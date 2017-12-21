@@ -247,20 +247,6 @@ namespace AgOpenGPS
             mf.ABLine.passBasedOn = (int)nudBasedOnPass.Value;
         }
 
-        private void btnLoadPrevious_Click(object sender, EventArgs e)
-        {
-            using (var form = new FormABPrev(mf))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.Yes)
-                {
-                    mf.FileSaveABLine();
-                    DialogResult = DialogResult.OK;
-                    Close();
-                }
-            }
-        }
-
         private void btnAddToFile_Click(object sender, EventArgs e)
         {
             using (StreamWriter writer = new StreamWriter(filename,true))

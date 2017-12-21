@@ -11,6 +11,8 @@ using SharpGL;
 using AgOpenGPS.Properties;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Resources;
+using System.Reflection;
 
 namespace AgOpenGPS
 {
@@ -154,6 +156,11 @@ namespace AgOpenGPS
         /// The internal simulator
         /// </summary>
         public CSim sim;
+
+        /// <summary>        
+        /// Resource manager for gloabal strings        
+        /// </summary>
+        public ResourceManager _rm;
 
         #endregion
 
@@ -565,6 +572,9 @@ namespace AgOpenGPS
 
             //start the stopwatch
             swFrame.Start();
+
+            //resource for gloabal language strings
+            _rm = new ResourceManager("AgOpenGPS.gStr", Assembly.GetExecutingAssembly());
         }
 
         //keystrokes for easy and quick startup
@@ -928,6 +938,7 @@ namespace AgOpenGPS
                 MessageBox.Show("Load Error: " + e.Message, "UDP Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         //dialog for requesting user to save or cancel

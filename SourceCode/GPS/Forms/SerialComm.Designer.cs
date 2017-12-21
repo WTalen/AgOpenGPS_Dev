@@ -261,13 +261,12 @@ namespace AgOpenGPS
             //fill in the holes
             //int.TryParse(words[0], out mc);
             int.TryParse(words[0], out mc.incomingInt);
-            rc.rateActual = (double)mc.incomingInt/100.0;
+            rc.rateActual = (double)mc.incomingInt*0.01;
 
             int.TryParse(words[1], out mc.incomingInt);
             rc.volumeActual = mc.incomingInt;
 
-            //int.TryParse(words[3], out mc.);
-
+            //int.TryParse(words[2], out mc.);
         }
 
         //the delegate for thread
@@ -337,6 +336,7 @@ namespace AgOpenGPS
             }
         }
 
+        //close the relay port
         public void SerialPortRateRelayClose()
         {
             if (spRelay.IsOpen)

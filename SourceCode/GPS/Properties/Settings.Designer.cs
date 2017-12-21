@@ -718,5 +718,17 @@ namespace AgOpenGPS.Properties {
                 this["setMenu_isBigAltitudeOn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string set_culture {
+            get {
+                return ((string)(this["set_culture"]));
+            }
+            set {
+                this["set_culture"] = value;
+            }
+        }
     }
 }

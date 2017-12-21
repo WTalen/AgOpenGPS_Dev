@@ -58,7 +58,8 @@ namespace AgOpenGPS
             btnLeftYouTurn.Visible = false;
 
             //rate control button
-            btnRate.Text = "Off";
+
+            btnRate.Text = _rm.GetString("Off");
 
             //area side settings
             isAreaOnRight = Settings.Default.setMenu_isAreaRight;
@@ -102,6 +103,19 @@ namespace AgOpenGPS
             }
 
             LineUpManualBtns();
+
+            if (Settings.Default.set_culture == "en")
+            {
+                menuLanguageEnglish.Checked = true;
+                menuLanguageDeutsch.Checked = false;
+            }
+
+            if (Settings.Default.set_culture == "de")
+            {
+                menuLanguageEnglish.Checked = false;
+                menuLanguageDeutsch.Checked = true;
+            }
+
         }
 
         //force all the buttons same according to two main buttons
@@ -943,8 +957,16 @@ namespace AgOpenGPS
         {
             var form = new FormRate(this);
             form.ShowDialog();
-            btnRate1Select.Text = rc.rate1.ToString();
-            btnRate2Select.Text = rc.rate2.ToString();
+            if (isMetric)
+            {
+                btnRate1Select.Text = (rc.rate1).ToString("N1");
+                btnRate2Select.Text = (rc.rate2).ToString("N1");
+            }
+            else
+            {
+                btnRate1Select.Text = (rc.rate1 * glm.LHa2galAc).ToString("N1");
+                btnRate2Select.Text = (rc.rate2 * glm.LHa2galAc).ToString("N1");
+            }
         }
 
         private void btnRate_Click(object sender, EventArgs e)
@@ -1000,7 +1022,7 @@ namespace AgOpenGPS
                     btnRateDn.Visible = false;
                     btnRateUp.Visible = false;
                     btnRate.Image = Properties.Resources.RateControlOff;
-                    btnRate.Text = "Off";
+                    btnRate.Text = _rm.GetString("Off");
                     lblRateAppliedActual.Text = "-";
                     rc.rateSetPoint = 0.0;
                     mc.relayRateData[mc.rdRateSetPointLo] = 0;
@@ -1008,7 +1030,7 @@ namespace AgOpenGPS
                     RateRelayOutToPort(mc.relayRateData, CModuleComm.numRelayRateDataItems);
                 }
             }
-            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); }
+            else { TimedMessageBox(3000, _rm.GetString("FieldNotOpen"), _rm.GetString("StartNewField")); }
         }
         private void btnRate1Select_Click(object sender, EventArgs e)
         {
@@ -1030,7 +1052,7 @@ namespace AgOpenGPS
                 if (rc.isRate1Selected)
                 {
                     rc.rate1 += 1.0;
-                    btnRate1Select.Text = rc.rate1.ToString("N0");
+                    btnRate1Select.Text = rc.rate1.ToString("N1");
                 }
                 else
                 {
@@ -1220,6 +1242,24 @@ namespace AgOpenGPS
             JobNewOpenResume();
         }
 
+        private void menuLanguageEnglish_Click(object sender, EventArgs e)
+        {
+            menuLanguageEnglish.Checked = true;
+            menuLanguageDeutsch.Checked = false;
+            Settings.Default.set_culture = "en";
+            Settings.Default.Save();
+            Close();
+        }
+
+        private void menuLanguageDeutsch_Click(object sender, EventArgs e)
+        {
+            menuLanguageEnglish.Checked = false;
+            menuLanguageDeutsch.Checked = true;
+            Settings.Default.set_culture = "de";
+            Settings.Default.Save();
+            Close();
+        }
+
         //Help menu drop down items
         private void aboutToolStripMenuHelpAbout_Click(object sender, EventArgs e)
         {
@@ -1305,6 +1345,16 @@ namespace AgOpenGPS
             Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "kmh";
+            if (isMetric)
+            {
+                btnRate1Select.Text = (rc.rate1).ToString("N1");
+                btnRate2Select.Text = (rc.rate2).ToString("N1");
+            }
+            else
+            {
+                btnRate1Select.Text = (rc.rate1 * glm.LHa2galAc).ToString("N1");
+                btnRate2Select.Text = (rc.rate2 * glm.LHa2galAc).ToString("N1");
+            }
 
         }
         private void bigAltitudeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1331,6 +1381,17 @@ namespace AgOpenGPS
             Settings.Default.setMenu_isMetric = isMetric;
             Settings.Default.Save();
             lblSpeedUnits.Text = "mph";
+
+            if (isMetric)
+            {
+                btnRate1Select.Text = (rc.rate1).ToString("N1");
+                btnRate2Select.Text = (rc.rate2).ToString("N1");
+            }
+            else
+            {
+                btnRate1Select.Text = (rc.rate1 * glm.LHa2galAc).ToString("N1");
+                btnRate2Select.Text = (rc.rate2 * glm.LHa2galAc).ToString("N1");
+            }
         }
         private void simulatorOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1600,7 +1661,7 @@ namespace AgOpenGPS
                     }
                 }
             }
-            else { TimedMessageBox(3000, "Field not Open", "Start a Field First"); }
+            else { TimedMessageBox(3000, _rm.GetString( "FieldNotOpen"), _rm.GetString("StartNewField") ); }
         }
         private void toolstripField_Click(object sender, EventArgs e)
         {
