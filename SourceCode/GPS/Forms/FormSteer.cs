@@ -160,7 +160,7 @@ namespace AgOpenGPS
             mf.vehicle.goalPointLookAhead += 0.5;
             btnLookAheadMinus.Text = mf.vehicle.goalPointLookAhead.ToString();
             Properties.Vehicle.Default.setVehicle_goalPointLookAhead = mf.vehicle.goalPointLookAhead;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnLookAheadMinus_Click(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace AgOpenGPS
             if (mf.vehicle.goalPointLookAhead < 1.0) mf.vehicle.goalPointLookAhead = 1.0;
             btnLookAheadMinus.Text = mf.vehicle.goalPointLookAhead.ToString();
             Properties.Vehicle.Default.setVehicle_goalPointLookAhead = mf.vehicle.goalPointLookAhead;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnMaxSteerPlus_Click(object sender, EventArgs e)
@@ -177,7 +177,7 @@ namespace AgOpenGPS
             mf.vehicle.maxSteerAngle++;
             btnMaxSteerMinus.Text = mf.vehicle.maxSteerAngle.ToString();
             Properties.Vehicle.Default.setVehicle_maxSteerAngle = mf.vehicle.maxSteerAngle;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnMaxSteerMinus_Click(object sender, EventArgs e)
@@ -186,7 +186,7 @@ namespace AgOpenGPS
             if (mf.vehicle.maxSteerAngle < 3) mf.vehicle.maxSteerAngle = 3;
             btnMaxSteerMinus.Text = mf.vehicle.maxSteerAngle.ToString();
             Properties.Vehicle.Default.setVehicle_maxSteerAngle = mf.vehicle.maxSteerAngle;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnMaxAngVelPlus_Click(object sender, EventArgs e)
@@ -194,7 +194,7 @@ namespace AgOpenGPS
             mf.vehicle.maxAngularVelocity += 0.1;
             btnMaxAngVelMinus.Text = mf.vehicle.maxAngularVelocity.ToString();
             Properties.Vehicle.Default.setVehicle_maxAngularVelocity = mf.vehicle.maxAngularVelocity;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnMaxAngVelMinus_Click(object sender, EventArgs e)
@@ -203,7 +203,7 @@ namespace AgOpenGPS
             if (mf.vehicle.maxAngularVelocity < 0.2) mf.vehicle.maxAngularVelocity = 0.2;
             btnMaxAngVelMinus.Text = mf.vehicle.maxAngularVelocity.ToString();
             Properties.Vehicle.Default.setVehicle_maxAngularVelocity = mf.vehicle.maxAngularVelocity;
-            Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
         }
 
         private void btnSteerPlus_Click(object sender, EventArgs e)

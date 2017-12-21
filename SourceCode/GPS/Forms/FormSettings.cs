@@ -317,6 +317,7 @@ namespace AgOpenGPS
             mf.vehicle.slowSpeedCutoff = cutoffSpeed*cutoffMetricImperial;
 
             Properties.Settings.Default.Save();
+            Properties.Vehicle.Default.Save();
 
             //back to FormGPS
             DialogResult = DialogResult.OK;

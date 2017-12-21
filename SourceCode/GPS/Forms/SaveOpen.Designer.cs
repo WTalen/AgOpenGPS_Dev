@@ -41,7 +41,7 @@ namespace AgOpenGPS
             {
                 vehiclefileName = Path.GetFileNameWithoutExtension(saveDialog.FileName) + " - ";
                 Properties.Vehicle.Default.setVehicle_Name = vehiclefileName;
-                Properties.Settings.Default.Save();
+                Properties.Vehicle.Default.Save();
 
                 using (StreamWriter writer = new StreamWriter(saveDialog.FileName))
                 {
@@ -390,6 +390,7 @@ namespace AgOpenGPS
                         Properties.Vehicle.Default.setVehicle_Name = vehiclefileName;
 
                         Properties.Settings.Default.Save();
+                        Properties.Vehicle.Default.Save();
 
                         //get the number of sections from settings
                         vehicle.numOfSections = Properties.Vehicle.Default.setVehicle_numSections;
