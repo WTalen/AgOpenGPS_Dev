@@ -24,13 +24,17 @@ namespace AgOpenGPS
         private const int MAXSECTIONS = 9;
         public const int MAXFUNCTIONS = 8;
 
-        //some test variables
-        //double testDouble = 0;
-        //bool testBool = false;
-        //int testInt = 0;
+        //The base directory where AgOpenGPS will be stored and fields and vehicles branch from
+        public string baseDirectory;
+        
+        //current directory of vehicle
+        public string  vehiclesDirectory, vehiclefileName = "";
 
-        //current directory of field;
-        public string currentFieldDirectory = "", workingDirectory = "", vehiclefileName = "";
+        //current fields and field directory
+        public string fieldsDirectory, currentFieldDirectory;
+
+        //ABLines directory
+        public string ablinesDirectory;
 
         //colors for sections and field background
         private byte redSections,grnSections,bluSections;
@@ -675,12 +679,45 @@ namespace AgOpenGPS
             ToolTip ToolTip1 = new ToolTip();
             ToolTip1.SetToolTip(btnABLine, "Set and configure\n an ABLine");
 
-            //get the working directory, if not exist, create
-            workingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-                + "\\AgOpenGPS\\Fields\\";
-            string dir = Path.GetDirectoryName(workingDirectory);
-            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
-            { Directory.CreateDirectory(dir); }
+            if (Settings.Default.setF_workingDirectory == "Default")
+                baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\";
+
+            else baseDirectory = Settings.Default.setF_workingDirectory + "\\AgOpenGPS\\";
+
+            //get the fields directory, if not exist, create
+            fieldsDirectory = baseDirectory + "Fields\\";
+            string dir = Path.GetDirectoryName(fieldsDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //get the fields directory, if not exist, create
+            vehiclesDirectory = baseDirectory + "Vehicles\\";
+            dir = Path.GetDirectoryName(vehiclesDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
+            //make sure current field directory exists, null if not
+            currentFieldDirectory = Settings.Default.setF_CurrentDir;
+
+            string curDir;
+            if (currentFieldDirectory != "")
+            {
+                curDir = fieldsDirectory + currentFieldDirectory + "//";
+                dir = Path.GetDirectoryName(curDir);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                {
+                    currentFieldDirectory = "";
+                    Settings.Default.setF_CurrentDir = "";
+                    Settings.Default.Save();
+                }
+            }
+
+            //grab the current vehicle filename - make sure it exists
+            vehiclefileName = Vehicle.Default.setVehicle_Name;
+
+            //get the abLines directory, if not exist, create
+            ablinesDirectory = baseDirectory + "ABLines\\";
+            dir = Path.GetDirectoryName(fieldsDirectory);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
+
 
             //set baud and port from last time run
             baudRateGPS = Settings.Default.setPort_baudRate;
@@ -740,9 +777,6 @@ namespace AgOpenGPS
             //don't draw the back opengl to GDI - it still works tho
             openGLControlBack.Visible = false;
 
-            //set previous job directory
-            currentFieldDirectory = Settings.Default.setF_CurrentDir;
-            vehiclefileName = Vehicle.Default.setVehicle_Name;
 
             //clear the flags
             flagPts.Clear();
@@ -939,8 +973,7 @@ namespace AgOpenGPS
             }
         }
 
-
-
+ 
         //dialog for requesting user to save or cancel
         public int SaveOrNot()
         {

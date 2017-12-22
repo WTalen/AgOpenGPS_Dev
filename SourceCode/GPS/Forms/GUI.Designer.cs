@@ -108,12 +108,21 @@ namespace AgOpenGPS
             {
                 menuLanguageEnglish.Checked = true;
                 menuLanguageDeutsch.Checked = false;
+                menuLanguageRussian.Checked = false;
             }
 
             if (Settings.Default.set_culture == "de")
             {
                 menuLanguageEnglish.Checked = false;
                 menuLanguageDeutsch.Checked = true;
+                menuLanguageRussian.Checked = false;
+            }
+
+            if (Settings.Default.set_culture == "ru")
+            {
+                menuLanguageEnglish.Checked = false;
+                menuLanguageDeutsch.Checked = false;
+                menuLanguageRussian.Checked = true;
             }
 
         }
@@ -949,8 +958,7 @@ namespace AgOpenGPS
             {
                 FileSaveFlagsKML();
             }
-            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                        "\\AgOpenGPS\\Fields\\" + currentFieldDirectory);
+            Process.Start(fieldsDirectory + currentFieldDirectory);
         }
 
         private void btnRateConfig_Click(object sender, EventArgs e)
@@ -1241,24 +1249,95 @@ namespace AgOpenGPS
         {
             JobNewOpenResume();
         }
+        private void setWorkingDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                var form = new FormTimedMessage(2000, "Ooops, Field Open", "Close Field First");
+                form.Show();
+                return;
+            }
+
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.ShowNewFolderButton = true;
+            fbd.Description = "Currently: " + Settings.Default.setF_workingDirectory;
+
+            if (Settings.Default.setF_workingDirectory == "Default") fbd.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            else fbd.SelectedPath = Settings.Default.setF_workingDirectory;
+
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                if (fbd.SelectedPath != Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+                {
+                    Settings.Default.setF_workingDirectory = fbd.SelectedPath;
+                    Settings.Default.Save();
+                }
+                else
+                {
+                    Settings.Default.setF_workingDirectory = "Default";
+                    Settings.Default.Save();
+                }
+                MessageBox.Show("Program will exit. Please Restart");
+                Close();
+            }
+        }
 
         private void menuLanguageEnglish_Click(object sender, EventArgs e)
         {
+            if (isJobStarted)
+            {
+                var form = new FormTimedMessage(2000, "Ooops, Field Open", "Close Field First");
+                form.Show();
+                return;
+            }
+
             menuLanguageEnglish.Checked = true;
             menuLanguageDeutsch.Checked = false;
+            menuLanguageRussian.Checked = false;
+
             Settings.Default.set_culture = "en";
             Settings.Default.Save();
+            MessageBox.Show("Program will exit. Please Restart");
             Close();
         }
 
         private void menuLanguageDeutsch_Click(object sender, EventArgs e)
         {
+            if (isJobStarted)
+            {
+                var form = new FormTimedMessage(2000, "Ooops, Field Open", "Close Field First");
+                form.Show();
+                return;
+            }
+
             menuLanguageEnglish.Checked = false;
             menuLanguageDeutsch.Checked = true;
+            menuLanguageRussian.Checked = false;
             Settings.Default.set_culture = "de";
             Settings.Default.Save();
+            MessageBox.Show("Program will exit. Please Restart");
             Close();
         }
+
+       private void menuLanguageRussian_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                var form = new FormTimedMessage(2000, "Ooops, Field Open", "Close Field First");
+                form.Show();
+                return;
+            }
+
+            menuLanguageEnglish.Checked = false;
+            menuLanguageDeutsch.Checked = false;
+            menuLanguageRussian.Checked = true;
+            Settings.Default.set_culture = "ru";
+            Settings.Default.Save();
+            MessageBox.Show("Program will exit. Please Restart");
+            Close();
+
+        }
+
 
         //Help menu drop down items
         private void aboutToolStripMenuHelpAbout_Click(object sender, EventArgs e)
@@ -1479,8 +1558,7 @@ namespace AgOpenGPS
             {
                 FileSaveFlagsKML();
             }
-            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                        "\\AgOpenGPS\\Fields\\" + currentFieldDirectory);
+            Process.Start(fieldsDirectory + currentFieldDirectory);
         }
         private void webCamToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -1495,7 +1573,7 @@ namespace AgOpenGPS
                 FileSaveFlagsKML();
 
                 //Process.Start(@"C:\Program Files (x86)\Google\Google Earth\client\googleearth", workingDirectory + currentFieldDirectory + "\\Flags.KML");
-                Process.Start(workingDirectory + currentFieldDirectory + "\\Flags.KML");
+                Process.Start(fieldsDirectory + currentFieldDirectory + "\\Flags.KML");
             }
             else
             {
@@ -1573,7 +1651,7 @@ namespace AgOpenGPS
                 FileSaveSingleFlagKML(flagNumberPicked);
 
                 //Process.Start(@"C:\Program Files (x86)\Google\Google Earth\client\googleearth", workingDirectory + currentFieldDirectory + "\\Flags.KML");
-                Process.Start(workingDirectory + currentFieldDirectory + "\\Flag.KML");
+                Process.Start(fieldsDirectory + currentFieldDirectory + "\\Flag.KML");
             }
         }
 

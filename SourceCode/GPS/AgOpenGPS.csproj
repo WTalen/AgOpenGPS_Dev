@@ -296,6 +296,9 @@
     <EmbeddedResource Include="Forms\FormGPS.de.resx">
       <DependentUpon>FormGPS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGPS.ru.resx">
+      <DependentUpon>FormGPS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormHeadland.resx">
       <DependentUpon>FormHeadland.cs</DependentUpon>
     </EmbeddedResource>

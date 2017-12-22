@@ -52,7 +52,7 @@ namespace AgOpenGPS
                 mf.ABLine.passBasedOn=0;
             }
             //make sure at least a blank AB Line file exists
-            string dirABLines = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString(CultureInfo.InvariantCulture) + "\\AgOpenGPS\\ABLines\\";
+            string dirABLines = mf.ablinesDirectory;
             string directoryName = Path.GetDirectoryName(dirABLines).ToString(CultureInfo.InvariantCulture);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }

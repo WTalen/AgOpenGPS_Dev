@@ -24,7 +24,7 @@ namespace AgOpenGPS
             //string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             //string fieldDir = dir + "\\fields\\";
 
-            string dirVehicle = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).ToString(CultureInfo.InvariantCulture) + "\\AgOpenGPS\\Vehicles\\";
+            string dirVehicle = vehiclesDirectory;
 
             string directoryName = Path.GetDirectoryName(dirVehicle).ToString(CultureInfo.InvariantCulture);
 
@@ -167,7 +167,7 @@ namespace AgOpenGPS
             OpenFileDialog ofd = new OpenFileDialog();
 
             //get the directory where the fields are stored
-            string directoryName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\Vehicles\\";
+            string directoryName = vehiclesDirectory;
 
             //make sure the directory exists, if not, create it
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -537,7 +537,7 @@ namespace AgOpenGPS
             if (_openType == "Resume")
             {
                 //Either exit or update running save
-                fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Field.txt";
+                fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Field.txt";
                 if (!File.Exists(fileAndDirectory)) return;
             }
 
@@ -548,7 +548,7 @@ namespace AgOpenGPS
                 OpenFileDialog ofd = new OpenFileDialog();
 
                 //the initial directory, fields, for the open dialog
-                ofd.InitialDirectory = workingDirectory;
+                ofd.InitialDirectory = fieldsDirectory;
 
                 //When leaving dialog put windows back where it was
                 ofd.RestoreDirectory = true;
@@ -667,7 +667,7 @@ namespace AgOpenGPS
 
             // Contour points ----------------------------------------------------------------------------
 
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Contour.txt";
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Contour.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(4000, "Missing Contour File", "But Field is Loaded");
@@ -737,7 +737,7 @@ namespace AgOpenGPS
             // Flags -------------------------------------------------------------------------------------------------
 
             //Either exit or update running save
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Flags.txt";
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Flags.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(4000, "Missing Flags File", "But Field is Loaded");
@@ -801,7 +801,7 @@ namespace AgOpenGPS
             // ABLine -------------------------------------------------------------------------------------------------
 
             //Either exit or update running save
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\ABLine.txt";
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\ABLine.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(4000, "Missing ABLine File", "But Field is Loaded");
@@ -899,7 +899,7 @@ namespace AgOpenGPS
                 // Boundary  -------------------------------------------------------------------------------------------------
 
                 //Either exit or update running save
-                fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Boundary.txt";
+                fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Boundary.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(4000, "Missing Boundary File", "But Field is Loaded");
@@ -971,7 +971,7 @@ namespace AgOpenGPS
             // Headland  -------------------------------------------------------------------------------------------------
 
             //Either exit or update running save
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Headland.txt";
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\Headland.txt";
             if (!File.Exists(fileAndDirectory))
             {
                 var form = new FormTimedMessage(4000, "Missing Headland File", "But Field is Loaded");
@@ -1062,8 +1062,7 @@ namespace AgOpenGPS
             string myFileName, dirField;
 
             //get the directory and make sure it exists, create if not
-            dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                                                                    "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            dirField = fieldsDirectory + currentFieldDirectory + "\\";
             string directoryName = Path.GetDirectoryName(dirField);
 
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1099,7 +1098,7 @@ namespace AgOpenGPS
             if (patchSaveList.Count() > 0)
             {
                 //Append the current list to the field file
-                using (StreamWriter writer = new StreamWriter((workingDirectory + currentFieldDirectory + "\\Field.txt"), true))
+                using (StreamWriter writer = new StreamWriter((fieldsDirectory + currentFieldDirectory + "\\Field.txt"), true))
                 {
                     //for each patch, write out the list of triangles to the file
                     foreach (var triList in patchSaveList)
@@ -1130,8 +1129,7 @@ namespace AgOpenGPS
             //533172,5927719,12
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1167,7 +1165,7 @@ namespace AgOpenGPS
             if (contourSaveList.Count() > 0)
             {
                 //Append the current list to the field file
-                using (StreamWriter writer = new StreamWriter((workingDirectory + currentFieldDirectory + "\\Contour.txt"), true))
+                using (StreamWriter writer = new StreamWriter((fieldsDirectory + currentFieldDirectory + "\\Contour.txt"), true))
                 {
 
                     //for every new chunk of patch in the whole section
@@ -1207,8 +1205,7 @@ namespace AgOpenGPS
             //533172,5927719,12
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1254,8 +1251,7 @@ namespace AgOpenGPS
             //533172,5927719,12
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1298,8 +1294,7 @@ namespace AgOpenGPS
             //533172,5927719,12 - offset easting, northing, zone
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1355,8 +1350,7 @@ namespace AgOpenGPS
             //Saturday, February 11, 2017  -->  7:26:52 AM
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1397,7 +1391,7 @@ namespace AgOpenGPS
         //save nmea sentences
         public void FileSaveNMEA()
         {
-            using (StreamWriter writer =  new StreamWriter((workingDirectory + currentFieldDirectory + "\\NMEA_log.txt"), true))
+            using (StreamWriter writer =  new StreamWriter((fieldsDirectory + currentFieldDirectory + "\\NMEA_log.txt"), true))
             {
                 writer.Write(pn.logNMEASentence.ToString());
             }
@@ -1409,8 +1403,7 @@ namespace AgOpenGPS
         {
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1464,8 +1457,7 @@ namespace AgOpenGPS
         {
 
             //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\";
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 
             string directoryName = Path.GetDirectoryName(dirField);
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
@@ -1505,485 +1497,3 @@ namespace AgOpenGPS
         }
     }
 }
-
-//binary saves etc, cold storage
-
-//AB Line
-/*
-                //write out the ABLine
-                writer.WriteLine("$Heading");
-
-                //true or false if ABLine is set
-                if (ABLine.isABLineSet) writer.WriteLine(true);
-                else writer.WriteLine(false);
-
-                writer.WriteLine(ABLine.abHeading + "," + ABLine.refPoint1.x + ","
-                    + ABLine.refPoint1.z + "," + ABLine.refPoint2.x + "," + ABLine.refPoint2.z + "," + ABLine.tramPassEvery + "," + ABLine.passBasedOn);
-*/
-
-//Binary save field
-/*
-//Function to save a field
-public void FileSaveField()
-{
-   //Friday, February 10, 2017  -->  2:58:24 PM
-    //$FieldDir
-    //test_2017Feb10_02.55.46.PM
-    //$Offsets
-    //533210,5927965
-    //$Heading
-    //False
-    //0,0.2,0.2,0.3,0.3,0,0
-    //$Sections
-    //3
-    //4
-    //76
-    //-10.791,-10.964
-
-    if (!isJobStarted)
-    {
-        using (var form = new FormTimedMessage(this, 3000, "Ooops, Job Not Started", "Start a job"))
-        { form.Show(); }
-        return;
-    }
-
-    //the saved filename
-    string myFileName = workingDirectory + currentFieldDirectory + "\\Field.fld";
-
-    //set saving flag on to ensure rapid save, no gps update
-    isSavingFile = true;
-
- 
-    //make the file
-    using (BinaryWriter bw = new BinaryWriter(File.Open(myFileName, FileMode.Create, FileAccess.Write)))
-    {
-        //Write out the date
-        bw.Write(DateTime.Now.ToLongDateString() + "  -->  " + DateTime.Now.ToLongTimeString()); //string
- 
-        bw.Write("$FieldDir");
-        bw.Write(currentFieldDirectory); //string
-
-        //write out the easting and northing Offsets
-        bw.Write("$Offsets");
-        bw.Write(pn.utmEast); //int
-        bw.Write(pn.utmNorth); //int
-        bw.Write(pn.zone); //double
-
-        //write out the ABLine
-        bw.Write("$Heading");
-
-        //true or false if ABLine is set
-        if (ABLine.isABLineSet) bw.Write(true); //bool
-        else bw.Write(false);
-
-        bw.Write(ABLine.abHeading);
-        bw.Write(ABLine.refPoint1.x);   // double
-        bw.Write(ABLine.refPoint1.z);   // double
-        bw.Write(ABLine.refPoint2.x);   // double
-        bw.Write(ABLine.refPoint2.z);   // double
-        bw.Write(ABLine.tramPassEvery); //int
-        bw.Write(ABLine.passBasedOn);   //int
-                 
-        //write paths # of sections
-        bw.Write("$Sections");
-        bw.Write(vehicle.numOfSections+1);
-
-        for (int j = 0; j < vehicle.numOfSections+1; j++)
-        {
-            //total patches for each section
-            int patchCount = section[j].patchList.Count;
-
-            //Write out the patches number
-            bw.Write(patchCount);
-
-            if (patchCount > 0)
-            {
-                //for every new chunk of patch in the whole section
-                for (int q = 0; q < patchCount; q++ ) //each (var triList in section[j].patchList)
-                {
-                    int count2 = section[j].patchList[q].Count();
-
-                    bw.Write(count2);
-
-                    for (int i = 0; i < count2; i++)
-                    {
-                        bw.Write(section[j].patchList[q][i].x);
-                        bw.Write(section[j].patchList[q][i].z);
-                    }
-                }
-            }
-
-        }
-
-        bw.Write("$TotalSqM");
-        bw.Write(totalSquareMeters); //double                
-        //bw.Close();
-
-    }
-
-    //set saving flag off
-    isSavingFile = false;
-}
-
- * */
-
-//save binary version of contour points
-/*
-        public void FileSaveContourPooper()
-        {
-            //get the directory and make sure it exists, create if not
-            string dirField = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                         "\\AgOpenGPS\\Fields\\" + currentFieldDirectory + "\\" + "Contour.ctr";;
-
-            //set saving flag on to ensure rapid save, no gps update
-            isSavingFile = true;
-
-            //every time the patch turns off and on is a new patch
-            int stripCount = ct.stripList.Count;
-
-                       //create the file
-            using (BinaryWriter bw = new BinaryWriter(File.Open(dirField, FileMode.Create, FileAccess.Write)))
-            {
-                //$Contour
-                //First_2017Feb10_09.58.51.AM
-                //$Offsets
-                //533210,5927965,12
-                //$Patches
-                //2
-                //76
-                //1.384,3.135,-86.304,0
-
-                //writing into the file
-                try
-                {
-                    //which field directory
-                    bw.Write("$FieldDir");
-                    bw.Write(currentFieldDirectory);
-
-                    //write out the easting and northing Offsets
-                    bw.Write("$Offsets");
-                    bw.Write(pn.utmEast); //int
-                    bw.Write(pn.utmNorth); //int
-                    bw.Write(pn.zone); //double
-
-                    //write out how many strips total
-                    bw.Write("$Patches");
-                    bw.Write(stripCount);
-
-                    if (stripCount > 0)
-                    {
-                        //for every new chunk of patch in the whole section
-                        for (int i = 0; i < stripCount; i++)
-                        {
-                            int count2 = ct.stripList[i].Count;
-                            bw.Write(count2);
-
-                            for (int j = 0; j < count2; j++)
-                            {
-                                bw.Write(Math.Round(ct.stripList[i][j].x, 3));
-                                bw.Write(Math.Round(ct.stripList[i][j].y, 3));
-                                bw.Write(Math.Round(ct.stripList[i][j].z, 3));
-                                bw.Write(Math.Round(ct.stripList[i][j].k, 3));
-                            }
-                        }
-                    }
-
-                }
-
-                catch (IOException e)
-                {
-                    MessageBox.Show(e.Message, "\n Cannot write to file.");
-                    return;
-                }
-                //bw.Close();
-
-            }
-
-            isSavingFile = false;
-
-        }
-         */
-
-
-//binary open field
-       //function to open a previously saved field, Contour, Flags
-/*
-        public void FileOpenField(string _openType)
-        {
-            string fileAndDirectory;
-            //get the directory where the fields are stored
-            //string directoryName = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+ "\\fields\\";
-
-            if (_openType == "Resume")
-            {
-                //Either exit or update running save
-                fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Field.fld";
-                if (!File.Exists(fileAndDirectory)) return;
-            }
-
-            //open file dialog instead
-            else
-            {
-                //create the dialog instance
-                OpenFileDialog ofd = new OpenFileDialog();
-
-                //the initial directory, fields, for the open dialog
-                ofd.InitialDirectory = workingDirectory;
-
-                //When leaving dialog put windows back where it was
-                ofd.RestoreDirectory = true;
-
-                //set the filter to text files only
-                ofd.Filter = "fld files (*.fld)|*.fld";
-
-                //was a file selected
-                if (ofd.ShowDialog() == DialogResult.Cancel) return;
-                else fileAndDirectory = ofd.FileName;
-            }
-
-
-            //Friday, February 10, 2017  -->  2:58:24 PM
-            //$FieldDir
-            //test_2017Feb10_02.55.46.PM
-            //$Offsets
-            //533210,5927965,12
-            //$Heading
-            //False
-            //0,0.2,0.2,0.3,0.3,0,0
-            //$Sections
-            //3
-            //4
-            //76
-            //-10.791,-10.964
-
-            //close the existing job and reset everything
-            this.JobClose();
-
-            //and open a new job
-            this.JobNew();
-
-            using (BinaryReader br = new BinaryReader(new FileStream(fileAndDirectory, FileMode.Open)))
-            {
-                string s = br.ReadString(); //Date/time
-
-                s = br.ReadString();        //$FieldDir
-                if (s.IndexOf("$FieldDir") == -1)
-                { MessageBox.Show("Sections header is Corrupt"); JobClose(); return; }
-
-
-                currentFieldDirectory = br.ReadString(); //read current directory
-                currentFieldDirectory = currentFieldDirectory.Trim();
-
-                //Offset header
-                s = br.ReadString(); //$Offsets
-
-                //read the Offsets 
-                pn.utmEast = br.ReadInt32();
-                pn.utmNorth = br.ReadInt32();
-                pn.zone = br.ReadDouble();
-
-                worldGrid.CreateWorldGrid(pn.actualNorthing - pn.utmNorth, pn.actualEasting - pn.utmEast);
-
-                //AB Line header
-                s = br.ReadString(); //$Heading
-
-
-                //read the boolean if AB is set
-                bool b = br.ReadBoolean();
-
-                //If is true there is AB Line data
-                if (b)
-                {
-                    //set gui image button on
-                    btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOn;
-
-                    //Heading, refPoint1x,z,refPoint2x,z                    
-                    ABLine.abHeading        = br.ReadDouble();
-                    ABLine.refPoint1.x      = br.ReadDouble();
-                    ABLine.refPoint1.z      = br.ReadDouble();
-                    ABLine.refPoint2.x      = br.ReadDouble();
-                    ABLine.refPoint2.z      = br.ReadDouble();
-                    ABLine.tramPassEvery    = br.ReadInt32();
-                    ABLine.passBasedOn      = br.ReadInt32();
-
-                    ABLine.refABLineP1.x = ABLine.refPoint1.x - Math.Sin(ABLine.abHeading) * 10000.0;
-                    ABLine.refABLineP1.z = ABLine.refPoint1.z - Math.Cos(ABLine.abHeading) * 10000.0;
-
-                    ABLine.refABLineP2.x = ABLine.refPoint1.x + Math.Sin(ABLine.abHeading) * 10000.0;
-                    ABLine.refABLineP2.z = ABLine.refPoint1.z + Math.Cos(ABLine.abHeading) * 10000.0;
-
-                    ABLine.isABLineSet = true;
-                }
-                  
-                //false so just read and skip the heading line, reset btn image
-                else 
-                {
-                    btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOff;
-                    
-                    br.ReadDouble();
-                    br.ReadDouble();
-                    br.ReadDouble();
-                    br.ReadDouble();
-                    br.ReadDouble();
-                    br.ReadInt32();
-                    br.ReadInt32();
-                }
-
-                //read the line $Sections
-                s = br.ReadString();        //$Sections
-                if (s.IndexOf("$Sections") == -1)
-                { MessageBox.Show("Sections header is Corrupt"); JobClose(); return; }
-
-                //read number of sections
-                int numSects = br.ReadInt32() - 1;        //$Sections
-
-                //make sure sections in file matches sections set in current vehicle
-                if (vehicle.numOfSections != numSects)
-                { MessageBox.Show("# of Sections doesn't match this field"); JobClose(); return; }
-
-
-                //finally start loading triangles
-                vec2 vecFix = new vec2(0, 0);
-
-                for (int j = 0; j < vehicle.numOfSections+1; j++)
-                {
-                    //now read number of patches, then how many vertex's
-                    int patches = br.ReadInt32();
-                    for (int k = 0; k < patches; k++)
-                    {
-                        section[j].triangleList = new List<vec2>();
-                        section[j].patchList.Add(section[j].triangleList);
-                        int verts = br.ReadInt32();
-                        for (int v = 0; v < verts; v++)
-                        {
-                            vecFix.x = br.ReadDouble();
-                            vecFix.z = br.ReadDouble();
-                            section[j].triangleList.Add(vecFix);
-                        }
-                    }
-                }
-
-                s = br.ReadString();
-                if (s.IndexOf("$TotalSqM") == -1)
-                { MessageBox.Show("Meters header is Corrupt"); JobClose(); return; }
-                
-                totalSquareMeters = br.ReadDouble();//total square meters
-            }
-
-            // Contour points ----------------------------------------------------------------------------
-
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Contour.ctr";
-            if (!File.Exists(fileAndDirectory))
-            {
-                MessageBox.Show("Missing Contour File");
-                return;
-            }
-
-            
-                $Contour
-                First_2017Feb10_09.58.51.AM
-                //$Offsets
-                //533210,5927965,12
-                $Patches
-                2
-                76
-                1.384,3.135,-86.304,0 -easting, heading, northing, altitude
-             
-            using (BinaryReader br = new BinaryReader(new FileStream(fileAndDirectory, FileMode.Open)))
-            {
-                string s = br.ReadString(); //$Contour string
-                s = br.ReadString();        //current directory string
-
-
-                //Offset header
-                s = br.ReadString(); //$Offsets
-
-                //read the Offsets  - Just read and skip them
-                br.ReadInt32();
-                br.ReadInt32();
-                br.ReadDouble();
-
-                //$Patches line
-                s = br.ReadString();
-                if (s.IndexOf("$Patches") == -1)
-                { MessageBox.Show("Contour File is Corrupt"); return; }
-
-                vec4 vecFix = new vec4(0, 0, 0, 0);
-
-                //now read number of patches, then how many vertex's
-                int patches = br.ReadInt32();
-
-                for (int k = 0; k < patches; k++)
-                {
-                    ct.ptList = new List<vec4>();
-                    ct.stripList.Add(ct.ptList);
-
-                    int verts = br.ReadInt32();
-
-                    for (int v = 0; v < verts; v++)
-                    {
-                        vecFix.x = br.ReadDouble();
-                        vecFix.y = br.ReadDouble();
-                        vecFix.z = br.ReadDouble();
-                        vecFix.k = br.ReadDouble();  
-
-                        ct.ptList.Add(vecFix);
-                    }
-
-                }
-            }
-
-
-       // Flags -------------------------------------------------------------------------------------------------
-
-            //Either exit or update running save
-            fileAndDirectory = workingDirectory + currentFieldDirectory + "\\Flags.flg";
-            if (!File.Exists(fileAndDirectory))
-            {
-                MessageBox.Show("Missing Flag File");
-                return;
-            }
-
-            using (BinaryReader br = new BinaryReader(new FileStream(fileAndDirectory, FileMode.Open)))
-            {
-                string s = br.ReadString();
-                s = br.ReadString();
-
-                //Offset header
-                s = br.ReadString(); //$Offsets
-
-                //read the Offsets - Just read and skip them
-                br.ReadInt32();
-                br.ReadInt32();
-                br.ReadDouble();
- 
-                //CFlag flagPt = new CFlag(0,0,0,0,0);
-                int points = br.ReadInt32();
- 
-                if (points > 0)
-                {
-                    double lat  ;
-                    double longi;
-                    double east ;
-                    double nort ;
-                    int color, ID;
-
-                    for (int v = 0; v < points; v++)
-                    {
-                        
-                    
-                        lat = br.ReadDouble();
-                        longi = br.ReadDouble();
-                        east = br.ReadDouble();
-                        nort = br.ReadDouble();
-                        color = br.ReadInt32();
-                        ID = br.ReadInt32();
-                        
-                        CFlag flagPt = new CFlag(lat, longi, east, nort, color, ID);
-                        flagPts.Add(flagPt);
-                     }
-                    
-                }
-            }
-        }//end of open file
-*/

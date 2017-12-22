@@ -6151,4 +6151,13 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="setWorkingDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verzeichnisse</value>
+  </data>
+  <data name="menuLanguageEnglish.Text" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="menuLanguageDeutsch.Text" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
 </root>

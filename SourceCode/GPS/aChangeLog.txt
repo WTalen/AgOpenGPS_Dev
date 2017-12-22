@@ -15,7 +15,7 @@
 * Side panle can be turned off.
 * touchscreen gestures with pinch zoom, rotate for camera 3D
 * Rate system is much better.
-* Added german
+* Added German and Russian
 
 v2.2 Nov 15, 2017
 * Sprayer rate control

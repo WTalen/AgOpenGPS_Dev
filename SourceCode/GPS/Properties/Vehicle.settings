@@ -36,7 +36,7 @@
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="setVehicle_lookAhead" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="setVehicle_isToolTrailing" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
