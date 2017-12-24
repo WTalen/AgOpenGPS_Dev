@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="openGLControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>981, 681</value>
+    <value>929, 644</value>
   </data>
   <data name="deleteFlagToolOpenGLContextMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -355,7 +355,7 @@
 </value>
   </data>
   <data name="txtDistanceOffABLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 0</value>
+    <value>413, -1</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 37</value>
@@ -363,14 +363,155 @@
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
     <value>файл</value>
   </data>
+  <data name="menustripLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 40</value>
+  </data>
+  <data name="menustripLanguage.Text" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="setWorkingDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 40</value>
+  </data>
+  <data name="setWorkingDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Справочник</value>
+  </data>
+  <data name="loadVehicleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 40</value>
+  </data>
+  <data name="loadVehicleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Загрузить транспорта</value>
+  </data>
+  <data name="saveVehicleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 40</value>
+  </data>
+  <data name="saveVehicleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 6</value>
+  </data>
+  <data name="fieldToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 40</value>
+  </data>
+  <data name="fieldToolStripMenuItem.Text" xml:space="preserve">
+    <value>Начало поля</value>
+  </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 37</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>дисплей</value>
   </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 6</value>
+  </data>
+  <data name="resetALLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="resetALLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Сбросить все</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 6</value>
+  </data>
+  <data name="colorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="colorsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Цвета</value>
+  </data>
+  <data name="sectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 40</value>
+  </data>
+  <data name="sectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Секция</value>
+  </data>
+  <data name="fieldToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 40</value>
+  </data>
+  <data name="fieldToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Поле</value>
+  </data>
+  <data name="toolStripUnitsMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="toolStripUnitsMenu.Text" xml:space="preserve">
+    <value>Единицы</value>
+  </data>
+  <data name="metricToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 40</value>
+  </data>
+  <data name="metricToolStrip.Text" xml:space="preserve">
+    <value>Mетрический</value>
+  </data>
+  <data name="imperialToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 40</value>
+  </data>
+  <data name="imperialToolStrip.Text" xml:space="preserve">
+    <value>Имперский</value>
+  </data>
+  <data name="bigAltitudeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="bigAltitudeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Большая высота</value>
+  </data>
+  <data name="sideGuideLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="sideGuideLines.Text" xml:space="preserve">
+    <value>Дополнительные гиды</value>
+  </data>
+  <data name="gridToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="gridToolStripMenuItem.Text" xml:space="preserve">
+    <value>Сетка</value>
+  </data>
+  <data name="lightbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="lightbarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Курсоуказатель</value>
+  </data>
+  <data name="logNMEAMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="logNMEAMenuItem.Text" xml:space="preserve">
+    <value>Журнал NMEA</value>
+  </data>
+  <data name="polygonsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="polygonsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Вид закрашивания</value>
+  </data>
+  <data name="pursuitLineToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="pursuitLineToolStripMenuItem.Text" xml:space="preserve">
+    <value>Линия преследования</value>
+  </data>
+  <data name="skyToolStripMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="skyToolStripMenu.Text" xml:space="preserve">
+    <value>Небо</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 6</value>
+  </data>
+  <data name="simulatorOnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 40</value>
+  </data>
+  <data name="simulatorOnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Симулятор</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 6</value>
+  </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1398, 37</value>
+    <value>1346, 37</value>
   </data>
   <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 37</value>
@@ -378,62 +519,134 @@
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>инструменты</value>
   </data>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 718</value>
+  <data name="explorerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
   </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1398, 41</value>
+  <data name="explorerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Проводник windows</value>
+  </data>
+  <data name="webCamToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
+  </data>
+  <data name="webCamToolStripMenuItem.Text" xml:space="preserve">
+    <value>Веб камера</value>
+  </data>
+  <data name="fieldViewerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
+  </data>
+  <data name="fieldViewerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Просмотр полей</value>
+  </data>
+  <data name="googleEarthToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
+  </data>
+  <data name="googleEarthToolStripMenuItem.Text" xml:space="preserve">
+    <value>Google Earth — Flags</value>
+  </data>
+  <data name="gPSDataToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
+  </data>
+  <data name="gPSDataToolStripMenuItem1.Text" xml:space="preserve">
+    <value>GPS данные</value>
+  </data>
+  <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 40</value>
+  </data>
+  <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="aboutToolStripMenuHelpAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 40</value>
+  </data>
+  <data name="aboutToolStripMenuHelpAbout.Text" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="helpToolStripMenuHelpHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 40</value>
+  </data>
+  <data name="helpToolStripMenuHelpHelp.Text" xml:space="preserve">
+    <value>Помощь</value>
   </data>
   <data name="btnHideTabs.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
         AAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="toolStripDropDownBtnFuncs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 15.75pt</value>
+  </data>
+  <data name="toolStripDropDownBtnFuncs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 39</value>
+  </data>
+  <data name="toolStripDropDownBtnFuncs.Text" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="toolStripDropDownButton2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 15.75pt</value>
+  </data>
+  <data name="toolStripDropDownButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 39</value>
+  </data>
+  <data name="toolStripDropDownButton2.Text" xml:space="preserve">
+    <value>Конфиг</value>
+  </data>
+  <data name="stripAreaRate.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="stripEqWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>449, 41</value>
+  </data>
+  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1346, 41</value>
+  </data>
+  <data name="statusStrip1.Text" xml:space="preserve">
+    <value>Полоса статуса1</value>
   </data>
   <data name="toolstripField.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -584,6 +797,12 @@
         973GCfw/5s1Uc+1vfXEAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="toolstripField.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 70</value>
+  </data>
+  <data name="toolstripField.Text" xml:space="preserve">
+    <value>Поле</value>
+  </data>
   <data name="toolstripBoundary.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -649,6 +868,12 @@
         WWYoJa5j8Df/3Ar5LzO82DEVjABtgFJ6RUTNMqMhonixIaF4sSGheLEhoXixIaF4seFAqv8BL8LGxYr3
         o8EAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="toolstripBoundary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 70</value>
+  </data>
+  <data name="toolstripBoundary.Text" xml:space="preserve">
+    <value>Граница</value>
   </data>
   <data name="toolstripHeadland.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -781,6 +1006,12 @@
         /wMWoUlfURhdmwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="toolstripHeadland.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 70</value>
+  </data>
+  <data name="toolstripHeadland.Text" xml:space="preserve">
+    <value>Мыс</value>
+  </data>
   <data name="toolstripResetTrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAYAAACohjseAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -883,6 +1114,12 @@
         enXeiBvwPO9fWERG7yh13V1A9ynG5Ip+hvyvEbvaEFEJJMFEVm6lFkqZ1/8XuNyfZXmlfFlKLi9rSVmK
         9f8ZYrmHb1UJKcISWPHjQyQEfZYylDR0re7Rvb8gMef+D3QyissGOUF4AAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="toolstripResetTrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 70</value>
+  </data>
+  <data name="toolstripResetTrip.Text" xml:space="preserve">
+    <value>Поездка</value>
   </data>
   <data name="toolstripUDPConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1014,6 +1251,9 @@
         dB4ag13oPDQGu9B5aAx2ofPQGOxC56Ex2IXOQ2OwC52HxmAXOg+NwS50HhqDXeg8NAa70HloDHah89AY
         7ELnoTHYhc5DY7ALnYfGYBc6CzD/A+0QTy8h4KhCAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="toolstripUDPConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 86</value>
   </data>
   <data name="toolstripUSBPortsConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1222,6 +1462,12 @@
         f+tHBfH/AJoRYWvZ/G16AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="toolstripUSBPortsConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 86</value>
+  </data>
+  <data name="toolstripUSBPortsConfig.Text" xml:space="preserve">
+    <value>Порты</value>
+  </data>
   <data name="toolstripVehicleConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -1333,6 +1579,12 @@
         De31v4E/DQHS0n8A/jQEGPLOfwN/GgK6/nZLGLLiXtBlvT+UAGMsd/EeXv574A8l4F5L0O+Be9sDif8D
         zwn7OxVuMNYAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="toolstripVehicleConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 86</value>
+  </data>
+  <data name="toolstripVehicleConfig.Text" xml:space="preserve">
+    <value>Транспорт</value>
   </data>
   <data name="toolstripAutoSteerConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1525,6 +1777,12 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="toolstripAutoSteerConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 86</value>
+  </data>
+  <data name="toolstripAutoSteerConfig.Text" xml:space="preserve">
+    <value>Автопилот</value>
+  </data>
   <data name="toolstripYouTurnConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -1563,11 +1821,14 @@
         gg==
 </value>
   </data>
-  <data name="stripEqWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 41</value>
+  <data name="toolstripYouTurnConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 86</value>
+  </data>
+  <data name="toolstripYouTurnConfig.Text" xml:space="preserve">
+    <value>U разворот</value>
   </data>
   <data name="lblSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>990, -5</value>
+    <value>938, -5</value>
   </data>
   <data name="toolStripMenuItemFlagRed.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1958,18 +2219,36 @@
         jHcnBooPpp0XreaEiW7LrmX1WXHteAeHs51+332TwfCXSYb/AXOWVBWhrp12AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 23</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Объем</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 23</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Скорость</value>
+  </data>
   <data name="lblSpeedUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1073, 14</value>
+    <value>1021, 14</value>
+  </data>
+  <data name="lblSpeedUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 17</value>
+  </data>
+  <data name="lblSpeedUnits.Text" xml:space="preserve">
+    <value>Ккм/ч</value>
   </data>
   <data name="lblHeading.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1145, -5</value>
+    <value>1093, -5</value>
   </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACO
-        MgAAAk1TRnQBSQFMAgEBBAEAASgBCQEoAQkBQAEAAUABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        MgAAAk1TRnQBSQFMAgEBBAEAAZgBCQGYAQkBQAEAAUABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         BAABAQIAAYADAAEBAQABCAYAAYAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -2188,7 +2467,70 @@
 </value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>982, 38</value>
+    <value>930, 38</value>
+  </data>
+  <data name="lblFixQuality.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 97</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 97</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 174</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 23</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>Точка:</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 203</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 23</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Орудие:</value>
+  </data>
+  <data name="lblHeadlandDistanceFromTool.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 203</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 145</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 23</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Граница:</value>
+  </data>
+  <data name="lblHeadlandDistanceAway.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 174</value>
+  </data>
+  <data name="lblBoundaryArea.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 145</value>
+  </data>
+  <data name="lblRoll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 203</value>
+  </data>
+  <data name="lblGPSHeading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 174</value>
+  </data>
+  <data name="lblGyroHeading.Location" type="System.Drawing.Point, System.Drawing">
+    <value>115, 145</value>
+  </data>
+  <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 203</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 145</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>67, 174</value>
+  </data>
+  <data name="btnRateConfig.Text" xml:space="preserve">
+    <value>Конфиг</value>
   </data>
   <data name="btnRateDn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2629,6 +2971,9 @@
         zwn7OxVuMNYAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnSettings.Text" xml:space="preserve">
+    <value>Конфиг</value>
+  </data>
   <data name="btnAutoYouTurn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -2666,6 +3011,9 @@
         KoOi4BkznCmLVM/KKK9mMHgYu4OpwAflkupZGs0R54fNCeeHzQcy/wN+DvZU+RE2uwAAAABJRU5ErkJg
         gg==
 </value>
+  </data>
+  <data name="btnAutoYouTurn.Text" xml:space="preserve">
+    <value>Конфиг</value>
   </data>
   <data name="btnAutoSteerConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2857,6 +3205,9 @@
         8wsYFzzIx2fkgBEj9AMWLGg5MTYG41bGYPWWbCTztVxH+oA9AGqertAY6vGfJeD/DxD+D9TF1b3SXXPH
         AAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="btnAutoSteerConfig.Text" xml:space="preserve">
+    <value>Конфиг</value>
   </data>
   <data name="btnUnits.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3217,6 +3568,9 @@
         wAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnFileExplorer.Text" xml:space="preserve">
+    <value>Файлы</value>
+  </data>
   <data name="btnUdpSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -3555,6 +3909,9 @@
         f+tHBfH/AJoRYWvZ/G16AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnComm.Text" xml:space="preserve">
+    <value>Порты</value>
+  </data>
   <data name="btnGPSData.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -3818,10 +4175,13 @@
 </value>
   </data>
   <data name="lblPureSteerAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1286, -4</value>
+    <value>1234, -4</value>
+  </data>
+  <data name="btnResetSim.Text" xml:space="preserve">
+    <value>Сброс</value>
   </data>
   <data name="panelSimControls.Location" type="System.Drawing.Point, System.Drawing">
-    <value>985, 554</value>
+    <value>933, 554</value>
   </data>
   <data name="btnLeftYouTurn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3962,7 +4322,7 @@
 </value>
   </data>
   <data name="btnTiltDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1083, 665</value>
+    <value>1031, 628</value>
   </data>
   <data name="btnTiltUp.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4028,7 +4388,7 @@
 </value>
   </data>
   <data name="btnTiltUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>986, 665</value>
+    <value>934, 628</value>
   </data>
   <data name="btnZoomIn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4098,7 +4458,7 @@
 </value>
   </data>
   <data name="btnZoomIn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1200, 665</value>
+    <value>1148, 628</value>
   </data>
   <data name="btnZoomOut.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4170,7 +4530,7 @@
 </value>
   </data>
   <data name="btnZoomOut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1308, 665</value>
+    <value>1256, 628</value>
   </data>
   <data name="btnSwapDirection.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4653,7 +5013,7 @@
 </value>
   </data>
   <data name="btnSectionOffAutoOn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>867, 455</value>
+    <value>815, 455</value>
   </data>
   <data name="btnFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5048,7 +5408,7 @@
 </value>
   </data>
   <data name="btnRightYouTurn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>751, 119</value>
+    <value>699, 119</value>
   </data>
   <data name="btnContour.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5139,7 +5499,10 @@
 </value>
   </data>
   <data name="btnContour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>875, 207</value>
+    <value>823, 207</value>
+  </data>
+  <data name="btnContour.Text" xml:space="preserve">
+    <value>Контур</value>
   </data>
   <data name="btnManualOffOn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5220,7 +5583,7 @@
 </value>
   </data>
   <data name="btnManualOffOn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>875, 331</value>
+    <value>823, 331</value>
   </data>
   <data name="btnABLine.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5364,7 +5727,7 @@
 </value>
   </data>
   <data name="btnABLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>875, 83</value>
+    <value>823, 83</value>
   </data>
   <data name="btnSection8Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5388,9 +5751,6 @@
         TfgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnSection8Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 428</value>
-  </data>
   <data name="btnSection7Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAIAAAAa6/jkAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -5412,9 +5772,6 @@
         erYA4halXFgaB92WWZOMi7M0ag/s/EO2XFpCqlT/fTzPxVnKDVNLk8DU0iQwtTQJ/I+WCoW/iKH/xY+o
         TfgAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="btnSection7Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 416</value>
   </data>
   <data name="btnSection6Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5438,9 +5795,6 @@
         TfgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnSection6Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 403</value>
-  </data>
   <data name="btnSection5Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAIAAAAa6/jkAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -5462,9 +5816,6 @@
         erYA4halXFgaB92WWZOMi7M0ag/s/EO2XFpCqlT/fTzPxVnKDVNLk8DU0iQwtTQJ/I+WCoW/iKH/xY+o
         TfgAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="btnSection5Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 390</value>
   </data>
   <data name="btnSection4Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5488,9 +5839,6 @@
         TfgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnSection4Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 335</value>
-  </data>
   <data name="btnSection3Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAIAAAAa6/jkAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -5512,9 +5860,6 @@
         erYA4halXFgaB92WWZOMi7M0ag/s/EO2XFpCqlT/fTzPxVnKDVNLk8DU0iQwtTQJ/I+WCoW/iKH/xY+o
         TfgAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="btnSection3Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 322</value>
   </data>
   <data name="btnSection2Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5538,9 +5883,6 @@
         TfgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnSection2Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 309</value>
-  </data>
   <data name="btnSection1Man.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEYAAAAuCAIAAAAa6/jkAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -5563,11 +5905,8 @@
         TfgAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btnSection1Man.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 296</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1398, 759</value>
+    <value>1346, 722</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

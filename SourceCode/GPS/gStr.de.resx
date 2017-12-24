@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FieldNotOpen" xml:space="preserve">
-    <value>Feld Nicht Offen</value>
-  </data>
-  <data name="Off" xml:space="preserve">
+  <data name="gsOff" xml:space="preserve">
     <value>Aus</value>
   </data>
-  <data name="StartNewField" xml:space="preserve">
+  <data name="gsStartNewField" xml:space="preserve">
     <value>Feld Neu Anfangen</value>
+  </data>
+  <data name="gsFieldNotOpen" xml:space="preserve">
+    <value>Feld Nicht Offen</value>
   </data>
 </root>

@@ -41,6 +41,8 @@
             this.menustripLanguage = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLanguageEnglish = new System.Windows.Forms.ToolStripMenuItem();
             this.menuLanguageDeutsch = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLanguageRussian = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuLanguageDutch = new System.Windows.Forms.ToolStripMenuItem();
             this.setWorkingDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveVehicleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,7 +211,9 @@
             this.btnSection3Man = new System.Windows.Forms.Button();
             this.btnSection2Man = new System.Windows.Forms.Button();
             this.btnSection1Man = new System.Windows.Forms.Button();
-            this.menuLanguageRussian = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControl)).BeginInit();
             this.contextMenuStripOpenGL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.openGLControlBack)).BeginInit();
@@ -301,8 +305,11 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator9,
             this.menustripLanguage,
+            this.toolStripSeparator11,
             this.setWorkingDirectoryToolStripMenuItem,
+            this.toolStripSeparator10,
             this.loadVehicleToolStripMenuItem,
             this.saveVehicleToolStripMenuItem,
             this.toolStripSeparator8,
@@ -316,7 +323,8 @@
             this.menustripLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuLanguageEnglish,
             this.menuLanguageDeutsch,
-            this.menuLanguageRussian});
+            this.menuLanguageRussian,
+            this.menuLanguageDutch});
             this.menustripLanguage.Name = "menustripLanguage";
             resources.ApplyResources(this.menustripLanguage, "menustripLanguage");
             // 
@@ -331,9 +339,24 @@
             // 
             // menuLanguageDeutsch
             // 
+            this.menuLanguageDeutsch.CheckOnClick = true;
             this.menuLanguageDeutsch.Name = "menuLanguageDeutsch";
             resources.ApplyResources(this.menuLanguageDeutsch, "menuLanguageDeutsch");
             this.menuLanguageDeutsch.Click += new System.EventHandler(this.menuLanguageDeutsch_Click);
+            // 
+            // menuLanguageRussian
+            // 
+            this.menuLanguageRussian.CheckOnClick = true;
+            this.menuLanguageRussian.Name = "menuLanguageRussian";
+            resources.ApplyResources(this.menuLanguageRussian, "menuLanguageRussian");
+            this.menuLanguageRussian.Click += new System.EventHandler(this.menuLanguageRussian_Click);
+            // 
+            // menuLanguageDutch
+            // 
+            this.menuLanguageDutch.CheckOnClick = true;
+            this.menuLanguageDutch.Name = "menuLanguageDutch";
+            resources.ApplyResources(this.menuLanguageDutch, "menuLanguageDutch");
+            this.menuLanguageDutch.Click += new System.EventHandler(this.menuLanguageDutch_Click);
             // 
             // setWorkingDirectoryToolStripMenuItem
             // 
@@ -1639,11 +1662,20 @@
             this.btnSection1Man.UseVisualStyleBackColor = false;
             this.btnSection1Man.Click += new System.EventHandler(this.btnSection1Man_Click);
             // 
-            // menuLanguageRussian
+            // toolStripSeparator9
             // 
-            this.menuLanguageRussian.Name = "menuLanguageRussian";
-            resources.ApplyResources(this.menuLanguageRussian, "menuLanguageRussian");
-            this.menuLanguageRussian.Click += new System.EventHandler(this.menuLanguageRussian_Click);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             // 
             // FormGPS
             // 
@@ -1899,6 +1931,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ToolStripMenuItem setWorkingDirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageRussian;
+        private System.Windows.Forms.ToolStripMenuItem menuLanguageDutch;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     }
 }
 
