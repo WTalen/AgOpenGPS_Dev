@@ -5967,4 +5967,7 @@
   <data name="menuLanguageRussian.Text" xml:space="preserve">
     <value>Russian</value>
   </data>
+  <data name="label17.Text" xml:space="preserve">
+    <value>Fox:</value>
+  </data>
 </root>

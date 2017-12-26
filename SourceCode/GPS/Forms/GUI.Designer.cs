@@ -398,37 +398,39 @@ namespace AgOpenGPS
         {
             if (tabControl1.Visible)
             {
+                //tab will be gone
                 tabControl1.Visible = false;
                 openGLControl.Width = Width;
                 btnTiltDown.Visible = false;
                 btnTiltUp.Visible = false;
-                btnABLine.Left += 415;
-                btnContour.Left += 415;
-                btnManualOffOn.Left += 415;
-                btnSectionOffAutoOn.Left += 415;
-                btnRightYouTurn.Left += 415;
+                btnABLine.Left = Width - 120;
+                btnContour.Left = Width - 120;
+                btnManualOffOn.Left = Width - 120;
+                btnSectionOffAutoOn.Left = Width - 130;
+                btnRightYouTurn.Left = Width - 240;
                 btnZoomIn.Left = 3;
                 btnZoomIn.Anchor = (AnchorStyles.Bottom | AnchorStyles.Left);
                 LineUpManualBtns();
-                txtDistanceOffABLine.Left += 207;
-                txtDistanceOffABLine.Top += 80;
+                txtDistanceOffABLine.Left = Width/2 - 33;
+                txtDistanceOffABLine.Top = 80;
             }
             else
             {
+                //tab will be visible
                 tabControl1.Visible = true;
                 openGLControl.Width = Width - 435;
                 btnTiltDown.Visible = true;
                 btnTiltUp.Visible = true;
-                btnABLine.Left -= 415;
-                btnContour.Left -= 415;
-                btnManualOffOn.Left -= 415;
-                btnSectionOffAutoOn.Left -= 415;
-                btnRightYouTurn.Left -= 415;
+                btnABLine.Left = Width - 540;
+                btnContour.Left = Width - 540;
+                btnManualOffOn.Left = Width - 540;
+                btnSectionOffAutoOn.Left = Width - 548;
+                btnRightYouTurn.Left = Width - 660;
                 LineUpManualBtns();
                 btnZoomIn.Left = Width - 220;
                 btnZoomIn.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                txtDistanceOffABLine.Left -= 207;
-                txtDistanceOffABLine.Top -= 80;
+                txtDistanceOffABLine.Left = (Width - 430)/2 - 33;
+                txtDistanceOffABLine.Top = -1;
             }
         }
 

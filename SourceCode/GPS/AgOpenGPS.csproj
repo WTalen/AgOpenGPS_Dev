@@ -389,6 +389,9 @@
     <EmbeddedResource Include="Forms\FormSteer.resx">
       <DependentUpon>FormSteer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormtimedMessage.de.resx">
+      <DependentUpon>FormTimedMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormtimedMessage.resx">
       <DependentUpon>FormTimedMessage.cs</DependentUpon>
     </EmbeddedResource>

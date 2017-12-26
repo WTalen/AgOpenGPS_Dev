@@ -61,15 +61,6 @@ namespace AgOpenGPS {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Field Not Open.
-        /// </summary>
-        internal static string FieldNotOpen {
-            get {
-                return ResourceManager.GetString("FieldNotOpen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Boundary Not Set.
         /// </summary>
         internal static string gsBoundaryNotSet {
@@ -228,24 +219,6 @@ namespace AgOpenGPS {
         internal static string gsTurnOnContourOrABLine {
             get {
                 return ResourceManager.GetString("gsTurnOnContourOrABLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Off.
-        /// </summary>
-        internal static string Off {
-            get {
-                return ResourceManager.GetString("Off", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start New Field.
-        /// </summary>
-        internal static string StartNewField {
-            get {
-                return ResourceManager.GetString("StartNewField", resourceCulture);
             }
         }
     }
