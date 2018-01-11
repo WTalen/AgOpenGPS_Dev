@@ -83,10 +83,10 @@ namespace AgOpenGPS
             {
                 //first 2 used for display mainly in autosteer window chart as strings
                 //parse the values
-                mc.prevGyroHeading = mc.gyroHeading;
-                int.TryParse(words[2], out mc.gyroHeading);
-                int.TryParse(words[3], out mc.rollRaw);
-                int.TryParse(words[4], out mc.steerSwitchValue);
+                //mc.prevGyroHeading = mc.gyroHeading;
+                //int.TryParse(words[2], out mc.gyroHeading);
+                //int.TryParse(words[3], out mc.rollRaw);
+                //int.TryParse(words[4], out mc.steerSwitchValue);
             }
         }
 

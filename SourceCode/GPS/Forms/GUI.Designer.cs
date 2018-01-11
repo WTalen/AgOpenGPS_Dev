@@ -1440,7 +1440,7 @@ namespace AgOpenGPS
         {
             //string appPath = Assembly.GetEntryAssembly().Location;
             //string filename = Path.Combine(Path.GetDirectoryName(appPath), "help.htm");
-            Process.Start("help.htm");
+            Process.Start("http://agopengps.gh-ortner.com/doku.php");
         }
 
         //Options Drop down menu items
@@ -1994,7 +1994,7 @@ namespace AgOpenGPS
 
 
             //every half of a second update all status
-            if (statusUpdateCounter > 10)
+            if (statusUpdateCounter > 3)
             {
                 //reset the counter
                 statusUpdateCounter = 0;

@@ -516,7 +516,7 @@
     <value>285, 40</value>
   </data>
   <data name="menuLanguageDutch.Text" xml:space="preserve">
-    <value>Niederländisch</value>
+    <value>Nederlands</value>
   <comment>x</comment></data>
   <data name="menuLanguageSpanish.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 40</value>
@@ -529,7 +529,7 @@
   </data>
   <data name="menuLanguageFrench.Text" xml:space="preserve">
     <value>Français</value>
-  </data>
+  <comment>x</comment></data>
   <data name="menuLanguageItalian.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 40</value>
   </data>
@@ -3813,7 +3813,7 @@
     <value>176</value>
   </data>
   <data name="lblLongitude.Text" xml:space="preserve">
-    <value>111.253475</value>
+    <value>111.25347499999999</value>
   </data>
   <data name="&gt;&gt;lblLongitude.Name" xml:space="preserve">
     <value>lblLongitude</value>
@@ -3843,7 +3843,7 @@
     <value>175</value>
   </data>
   <data name="lblLatitude.Text" xml:space="preserve">
-    <value>53.234455</value>
+    <value>53.234454999999997</value>
   </data>
   <data name="&gt;&gt;lblLatitude.Name" xml:space="preserve">
     <value>lblLatitude</value>
@@ -6448,7 +6448,7 @@
     <value>108</value>
   </data>
   <data name="btnPerimeter.Text" xml:space="preserve">
-    <value>000.00</value>
+    <value>0</value>
   </data>
   <data name="btnPerimeter.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>BottomCenter</value>

@@ -373,13 +373,13 @@
     <value>285, 40</value>
   </data>
   <data name="menuLanguageRussian.Text" xml:space="preserve">
-    <value>Russian</value>
+    <value>русский</value>
   </data>
   <data name="menuLanguageDutch.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 40</value>
   </data>
   <data name="menuLanguageDutch.Text" xml:space="preserve">
-    <value>Niederländisch</value>
+    <value>Nederlands</value>
   </data>
   <data name="menustripLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>350, 40</value>

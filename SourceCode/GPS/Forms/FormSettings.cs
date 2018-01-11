@@ -206,6 +206,8 @@ namespace AgOpenGPS
             nudCutoffSpeed.ValueChanged -= nudCutoffSpeed_ValueChanged;
             nudCutoffSpeed.Value = (decimal)cutoffSpeed;
             nudCutoffSpeed.ValueChanged += nudCutoffSpeed_ValueChanged;
+
+            tboxTinkerUID.Text = Properties.Settings.Default.setIMU_UID;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -315,6 +317,8 @@ namespace AgOpenGPS
 
             Properties.Vehicle.Default.setVehicle_slowSpeedCutoff = cutoffSpeed*cutoffMetricImperial;
             mf.vehicle.slowSpeedCutoff = cutoffSpeed*cutoffMetricImperial;
+
+            Properties.Settings.Default.setIMU_UID = tboxTinkerUID.Text.Trim();
 
             Properties.Settings.Default.Save();
             Properties.Vehicle.Default.Save();

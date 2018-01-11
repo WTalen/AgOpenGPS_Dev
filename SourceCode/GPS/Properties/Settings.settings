@@ -182,5 +182,8 @@
     <Setting Name="setF_workingDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)">Default</Value>
     </Setting>
+    <Setting Name="setIMU_UID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">68wESU</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

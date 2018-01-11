@@ -742,5 +742,17 @@ namespace AgOpenGPS.Properties {
                 this["setF_workingDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("68wESU")]
+        public string setIMU_UID {
+            get {
+                return ((string)(this["setIMU_UID"]));
+            }
+            set {
+                this["setIMU_UID"] = value;
+            }
+        }
     }
 }

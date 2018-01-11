@@ -88,6 +88,8 @@
             this.chkWorkSwActiveLow = new System.Windows.Forms.CheckBox();
             this.chkEnableWorkSwitch = new System.Windows.Forms.CheckBox();
             this.tabDisplay = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tboxTinkerUID = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
             this.nudBoundaryDistance = new System.Windows.Forms.NumericUpDown();
@@ -148,20 +150,20 @@
             // 
             // tabControl1
             // 
-            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tabVehicle);
             this.tabControl1.Controls.Add(this.tabTool);
             this.tabControl1.Controls.Add(this.tabSections);
             this.tabControl1.Controls.Add(this.tabWorkSwitch);
             this.tabControl1.Controls.Add(this.tabDisplay);
             this.tabControl1.Controls.Add(this.tabExamples);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // tabVehicle
             // 
-            resources.ApplyResources(this.tabVehicle, "tabVehicle");
             this.tabVehicle.BackgroundImage = global::AgOpenGPS.Properties.Resources.VehicleSettings;
+            resources.ApplyResources(this.tabVehicle, "tabVehicle");
             this.tabVehicle.Controls.Add(this.label29);
             this.tabVehicle.Controls.Add(this.chkIsSteerAxleAhead);
             this.tabVehicle.Controls.Add(this.label15);
@@ -347,8 +349,8 @@
             // 
             // tabTool
             // 
-            resources.ApplyResources(this.tabTool, "tabTool");
             this.tabTool.BackgroundImage = global::AgOpenGPS.Properties.Resources.ImplementSettings;
+            resources.ApplyResources(this.tabTool, "tabTool");
             this.tabTool.Controls.Add(this.nudOffset);
             this.tabTool.Controls.Add(this.label22);
             this.tabTool.Controls.Add(this.label8);
@@ -431,8 +433,8 @@
             // 
             // nudTurnOffDelay
             // 
-            resources.ApplyResources(this.nudTurnOffDelay, "nudTurnOffDelay");
             this.nudTurnOffDelay.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudTurnOffDelay, "nudTurnOffDelay");
             this.nudTurnOffDelay.Increment = new decimal(new int[] {
             2,
             0,
@@ -463,8 +465,8 @@
             // 
             // nudLookAhead
             // 
-            resources.ApplyResources(this.nudLookAhead, "nudLookAhead");
             this.nudLookAhead.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudLookAhead, "nudLookAhead");
             this.nudLookAhead.Increment = new decimal(new int[] {
             2,
             0,
@@ -547,8 +549,8 @@
             // 
             // tabSections
             // 
-            resources.ApplyResources(this.tabSections, "tabSections");
             this.tabSections.BackgroundImage = global::AgOpenGPS.Properties.Resources.SectionSettings8;
+            resources.ApplyResources(this.tabSections, "tabSections");
             this.tabSections.Controls.Add(this.lblTurnOffBelowUnits);
             this.tabSections.Controls.Add(this.label30);
             this.tabSections.Controls.Add(this.nudCutoffSpeed);
@@ -580,8 +582,8 @@
             // 
             // nudCutoffSpeed
             // 
-            resources.ApplyResources(this.nudCutoffSpeed, "nudCutoffSpeed");
             this.nudCutoffSpeed.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudCutoffSpeed, "nudCutoffSpeed");
             this.nudCutoffSpeed.Increment = new decimal(new int[] {
             1,
             0,
@@ -771,17 +773,17 @@
             // 
             // tabWorkSwitch
             // 
-            resources.ApplyResources(this.tabWorkSwitch, "tabWorkSwitch");
             this.tabWorkSwitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.WorkSwitch;
+            resources.ApplyResources(this.tabWorkSwitch, "tabWorkSwitch");
             this.tabWorkSwitch.Controls.Add(this.groupBox3);
             this.tabWorkSwitch.Name = "tabWorkSwitch";
             this.tabWorkSwitch.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.chkWorkSwActiveLow);
             this.groupBox3.Controls.Add(this.chkEnableWorkSwitch);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -801,19 +803,31 @@
             // 
             // tabDisplay
             // 
-            resources.ApplyResources(this.tabDisplay, "tabDisplay");
+            this.tabDisplay.Controls.Add(this.label9);
+            this.tabDisplay.Controls.Add(this.tboxTinkerUID);
             this.tabDisplay.Controls.Add(this.groupBox5);
             this.tabDisplay.Controls.Add(this.groupBox2);
             this.tabDisplay.Controls.Add(this.groupBox1);
             this.tabDisplay.Controls.Add(this.groupBox4);
+            resources.ApplyResources(this.tabDisplay, "tabDisplay");
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // tboxTinkerUID
+            // 
+            resources.ApplyResources(this.tboxTinkerUID, "tboxTinkerUID");
+            this.tboxTinkerUID.Name = "tboxTinkerUID";
+            // 
             // groupBox5
             // 
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.label31);
             this.groupBox5.Controls.Add(this.nudBoundaryDistance);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -824,8 +838,8 @@
             // 
             // nudBoundaryDistance
             // 
-            resources.ApplyResources(this.nudBoundaryDistance, "nudBoundaryDistance");
             this.nudBoundaryDistance.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudBoundaryDistance, "nudBoundaryDistance");
             this.nudBoundaryDistance.Increment = new decimal(new int[] {
             5,
             0,
@@ -851,10 +865,10 @@
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.nudTriangleResolution);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -870,8 +884,8 @@
             // 
             // nudTriangleResolution
             // 
-            resources.ApplyResources(this.nudTriangleResolution, "nudTriangleResolution");
             this.nudTriangleResolution.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudTriangleResolution, "nudTriangleResolution");
             this.nudTriangleResolution.Increment = new decimal(new int[] {
             2,
             0,
@@ -897,8 +911,8 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.chkIsAtanCam);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -913,10 +927,10 @@
             // 
             // groupBox4
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.nudMinFixStepDistance);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -932,8 +946,8 @@
             // 
             // nudMinFixStepDistance
             // 
-            resources.ApplyResources(this.nudMinFixStepDistance, "nudMinFixStepDistance");
             this.nudMinFixStepDistance.DecimalPlaces = 1;
+            resources.ApplyResources(this.nudMinFixStepDistance, "nudMinFixStepDistance");
             this.nudMinFixStepDistance.Increment = new decimal(new int[] {
             2,
             0,
@@ -1061,6 +1075,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabDisplay.ResumeLayout(false);
+            this.tabDisplay.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBoundaryDistance)).EndInit();
@@ -1160,5 +1175,7 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.NumericUpDown nudBoundaryDistance;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tboxTinkerUID;
     }
 }

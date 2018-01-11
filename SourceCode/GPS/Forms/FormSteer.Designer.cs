@@ -529,9 +529,9 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(435, 3);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(170, 13);
+            this.label18.Size = new System.Drawing.Size(202, 13);
             this.label18.TabIndex = 207;
-            this.label18.Text = "Steer Angle, P, I, D, PWM, Switch";
+            this.label18.Text = "Steer Angle, PWM, Heading, Roll, Switch";
             // 
             // btnMaxSteerMinus
             // 

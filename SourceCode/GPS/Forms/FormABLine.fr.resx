@@ -117,7 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblABHeading.Text" xml:space="preserve">
+    <value></value>
+    <comment>`</comment>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>AB Fre</value>
+    <value>Ligne AB</value>
+  </data>
+  <data name="btnAddToFile.Text" xml:space="preserve">
+    <value>Ajoutter</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Démarrer</value>
+  </data>
+  <data name="btnListUse.Text" xml:space="preserve">
+    <value>Utiliser</value>
+  </data>
+  <data name="btnDeleteAB.Text" xml:space="preserve">
+    <value>Redémarrer</value>
+  </data>
+  <data name="chField.Text" xml:space="preserve">
+    <value>Champ</value>
+  </data>
+  <data name="btnPlus90.Text" xml:space="preserve">
+    <value>+90degrés</value>
+  </data>
+  <data name="chAngle.Text" xml:space="preserve">
+    <value>Angle</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Répeter</value>
+  </data>
+  <data name="btnListDelete.Text" xml:space="preserve">
+    <value>Retirer</value>
   </data>
 </root>
