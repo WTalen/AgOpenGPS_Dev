@@ -495,43 +495,43 @@
     <value>255, 6</value>
   </data>
   <data name="menuLanguageEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageEnglish.Text" xml:space="preserve">
     <value>English</value>
   <comment>x</comment></data>
   <data name="menuLanguageDeutsch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageDeutsch.Text" xml:space="preserve">
     <value>Deutsch</value>
   <comment>x</comment></data>
   <data name="menuLanguageRussian.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageRussian.Text" xml:space="preserve">
     <value>русский</value>
   <comment>x</comment></data>
   <data name="menuLanguageDutch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageDutch.Text" xml:space="preserve">
     <value>Nederlands</value>
   <comment>x</comment></data>
   <data name="menuLanguageSpanish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageSpanish.Text" xml:space="preserve">
     <value>Español</value>
   <comment>x</comment></data>
   <data name="menuLanguageFrench.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageFrench.Text" xml:space="preserve">
     <value>Français</value>
   <comment>x</comment></data>
   <data name="menuLanguageItalian.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 40</value>
+    <value>240, 40</value>
   </data>
   <data name="menuLanguageItalian.Text" xml:space="preserve">
     <value>Italiano</value>
@@ -3186,7 +3186,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACO
-        MgAAAk1TRnQBSQFMAgEBBAEAAVABCgFQAQoBQAEAAUABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        MgAAAk1TRnQBSQFMAgEBBAEAAVgBCgFYAQoBQAEAAUABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         BAABAQIAAYADAAEBAQABCAYAAYAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3807,13 +3807,13 @@
     <value>67, 97</value>
   </data>
   <data name="lblLongitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 23</value>
+    <value>144, 23</value>
   </data>
   <data name="lblLongitude.TabIndex" type="System.Int32, mscorlib">
     <value>176</value>
   </data>
   <data name="lblLongitude.Text" xml:space="preserve">
-    <value>111.25347499999999</value>
+    <value>-111.2534749</value>
   </data>
   <data name="&gt;&gt;lblLongitude.Name" xml:space="preserve">
     <value>lblLongitude</value>
@@ -3837,13 +3837,13 @@
     <value>67, 67</value>
   </data>
   <data name="lblLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 23</value>
+    <value>124, 23</value>
   </data>
   <data name="lblLatitude.TabIndex" type="System.Int32, mscorlib">
     <value>175</value>
   </data>
   <data name="lblLatitude.Text" xml:space="preserve">
-    <value>53.234454999999997</value>
+    <value>53.2344549</value>
   </data>
   <data name="&gt;&gt;lblLatitude.Name" xml:space="preserve">
     <value>lblLatitude</value>

@@ -1,19 +1,18 @@
 ﻿//Please, if you use this, share the improvements
 
+using AgOpenGPS.Properties;
+using SharpGL;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Windows.Forms;
-using SharpGL;
-using AgOpenGPS.Properties;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using System.Resources;
-using System.Reflection;
-using Microsoft.Win32;
+using System.Windows.Forms;
 using Tinkerforge;
 
 namespace AgOpenGPS
@@ -22,20 +21,22 @@ namespace AgOpenGPS
     public partial class FormGPS : Form
     {
         #region // Class Props and instances
+
         //maximum sections available
         private const int MAXSECTIONS = 9;
+
+        //How many turn functions
         public const int MAXFUNCTIONS = 8;
 
-        private static string HOST = "localhost";
-        private static int PORT = 4223;
-        private static string UID = Properties.Settings.Default.setIMU_UID; // "68wESU"; // Change XXYYZZ to the UID of your IMU Brick 2.0
-
+        private const string HOST = "localhost";
+        private const int PORT = 4223;
+        private static readonly string UID = Properties.Settings.Default.setIMU_UID; // "68wESU"; // Change XXYYZZ to the UID of your IMU Brick 2.0
 
         //The base directory where AgOpenGPS will be stored and fields and vehicles branch from
         public string baseDirectory;
-        
+
         //current directory of vehicle
-        public string  vehiclesDirectory, vehiclefileName = "";
+        public string vehiclesDirectory, vehiclefileName = "";
 
         //current fields and field directory
         public string fieldsDirectory, currentFieldDirectory;
@@ -44,8 +45,9 @@ namespace AgOpenGPS
         public string ablinesDirectory;
 
         //colors for sections and field background
-        private byte redSections,grnSections,bluSections;
-        public byte redField,grnField,bluField;
+        private byte redSections, grnSections, bluSections;
+
+        public byte redField, grnField, bluField;
 
         //polygon mode for section drawing
         private bool isDrawPolygons;
@@ -55,18 +57,21 @@ namespace AgOpenGPS
 
         //Flag stuff
         public byte flagColor = 0;
+
         private bool leftMouseDownOnOpenGL = false; //mousedown event in opengl window
         private int flagNumberPicked = 0;
 
         //Is it in 2D or 3D, metric or imperial, display lightbar, display grid etc
         public bool isIn3D = true, isMetric = true, isLightbarOn = true, isGridOn, isSideGuideLines = true;
+
         public bool isPureDisplayOn = true, isSkyOn = true, isBigAltitudeOn = false;
 
         //bool for whether or not a job is active
         public bool isJobStarted = false, isAreaOnRight = true, isAutoSteerBtnOn = false;
 
         //master Manual and Auto, 3 states possible
-        public enum btnStates {Off,Auto,On}
+        public enum btnStates { Off, Auto, On }
+
         public btnStates manualBtnState = btnStates.Off;
         public btnStates autoBtnState = btnStates.Off;
 
@@ -78,6 +83,7 @@ namespace AgOpenGPS
 
         //Zoom variables
         public double gridZoom;
+
         public double zoomValue = 15;
         public double triangleResolution = 1.0;
         private double previousZoom = 25;
@@ -100,6 +106,7 @@ namespace AgOpenGPS
 
         //used to update the screen status bar etc
         private int statusUpdateCounter = 1;
+
         private int fiveSecondCounter = 0;
 
         /// <summary>
@@ -145,7 +152,7 @@ namespace AgOpenGPS
 
         /// <summary>
         /// perimeter object for area calc
-        /// </summary>     
+        /// </summary>
         public CPerimeter periArea;
 
         /// <summary>
@@ -171,15 +178,16 @@ namespace AgOpenGPS
         /// <summary>
         /// The USB TinkerForge Bricklet
         /// </summary>
-        IPConnection ipcon;
-        BrickIMUV2 imu;
+        private readonly IPConnection ipcon;
 
-        /// <summary>        
-        /// Resource manager for gloabal strings        
+        private readonly BrickIMUV2 imu;
+
+        /// <summary>
+        /// Resource manager for gloabal strings
         /// </summary>
         public ResourceManager _rm;
 
-        #endregion
+        #endregion // Class Props and instances
 
         // Constructor, Initializes a new instance of the "FormGPS" class.
         public FormGPS()
@@ -261,7 +269,7 @@ namespace AgOpenGPS
             {
                 sim.stepDistance += 0.05;
                 if (sim.stepDistance > 5.8) sim.stepDistance = 5.8;
-                 tbarStepDistance.Value = (int)(sim.stepDistance* 10.0 * fixUpdateHz);
+                tbarStepDistance.Value = (int)(sim.stepDistance * 10.0 * fixUpdateHz);
 
                 return true;
             }
@@ -286,7 +294,7 @@ namespace AgOpenGPS
             //turn right
             if (keyData == Keys.M)
             {
-                sim.steerAngle += 1.0;
+                sim.steerAngle++;
                 if (sim.steerAngle > 30) sim.steerAngle = 30;
                 sim.steerAngleScrollBar = sim.steerAngle;
                 lblSteerAngle.Text = sim.steerAngle.ToString();
@@ -297,7 +305,7 @@ namespace AgOpenGPS
             //turn left
             if (keyData == Keys.B)
             {
-                sim.steerAngle -= 1.0;
+                sim.steerAngle--;
                 if (sim.steerAngle < -30) sim.steerAngle = -30;
                 sim.steerAngleScrollBar = sim.steerAngle;
                 lblSteerAngle.Text = sim.steerAngle.ToString();
@@ -352,11 +360,10 @@ namespace AgOpenGPS
                 imu.SetOrientationPeriod(200);
 
                 //set the mode without mag
-                imu.SetSensorFusionMode(2);
+                imu.SetSensorFusionMode(1);
 
                 imu.LedsOff();
             }
-
             catch
             {
             }
@@ -367,7 +374,6 @@ namespace AgOpenGPS
 
             if (Settings.Default.setF_workingDirectory == "Default")
                 baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\AgOpenGPS\\";
-
             else baseDirectory = Settings.Default.setF_workingDirectory + "\\AgOpenGPS\\";
 
             //get the fields directory, if not exist, create
@@ -403,7 +409,6 @@ namespace AgOpenGPS
             ablinesDirectory = baseDirectory + "ABLines\\";
             dir = Path.GetDirectoryName(fieldsDirectory);
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) { Directory.CreateDirectory(dir); }
-
 
             //set baud and port from last time run
             baudRateGPS = Settings.Default.setPort_baudRate;
@@ -462,7 +467,6 @@ namespace AgOpenGPS
 
             //don't draw the back opengl to GDI - it still works tho
             openGLControlBack.Visible = false;
-
 
             //clear the flags
             flagPts.Clear();
@@ -532,7 +536,7 @@ namespace AgOpenGPS
             }
 
             //save window settings
-                if (WindowState == FormWindowState.Maximized)
+            if (WindowState == FormWindowState.Maximized)
             {
                 Settings.Default.setWindow_Location = RestoreBounds.Location;
                 Settings.Default.setWindow_Size = RestoreBounds.Size;
@@ -559,7 +563,7 @@ namespace AgOpenGPS
             Settings.Default.setF_UserTripAlarm = userSquareMetersAlarm;
 
             Settings.Default.Save();
-       }
+        }
 
         //called everytime window is resized, clean up button positions
         private void FormGPS_Resize(object sender, EventArgs e)
@@ -571,14 +575,15 @@ namespace AgOpenGPS
 
         //Kalman variables
         private double rollK = 0;
+
         private double Pc = 0.0;
         private double G = 0.0;
         private double P = 1.0;
         private double Xp = 0.0;
         private double Zp = 0.0;
         private double XeRoll = 0;
-        private double varRoll = 0.06; // variance, smaller, more faster filtering
-        private double varProcess = 0.02;
+        private readonly double varRoll = 0.06; // variance, smaller, more faster filtering
+        private readonly double varProcess = 0.02;
 
         //event for TinkerForge IMU
         private void OrientCB(BrickIMUV2 sender, short heading, short roll, short pitch)
@@ -592,7 +597,7 @@ namespace AgOpenGPS
             P = (1 - G) * Pc;
             Xp = XeRoll;
             Zp = Xp;
-            XeRoll = G * (rollK - Zp) + Xp;
+            XeRoll = (G * (rollK - Zp)) + Xp;
 
             mc.prevGyroHeading = mc.gyroHeading;
             mc.gyroHeading = heading;
@@ -638,8 +643,8 @@ namespace AgOpenGPS
             catch (Exception e)
             {
                 WriteErrorLog("Loading Floor Texture" + e);
-               MessageBox.Show("Texture File FLOOR.PNG is Missing", e.Message);
-             }
+                MessageBox.Show("Texture File FLOOR.PNG is Missing", e.Message);
+            }
 
             return texture[0];
         }// Load Bitmaps And Convert To Textures
@@ -836,7 +841,7 @@ namespace AgOpenGPS
             {
                 section[j].isAllowedOn = false;
                 section[j].manBtnState = manBtn.On;
-             }
+            }
 
             //turn manual button off
             manualBtnState = btnStates.Off;
@@ -988,14 +993,14 @@ namespace AgOpenGPS
         {
             //if (pn.speed > 0.2)
             {
-                for (int j = 0; j < vehicle.numOfSections+1; j++)
+                for (int j = 0; j < vehicle.numOfSections + 1; j++)
                 {
                     //Turn ON
                     //if requested to be on, set the timer to Max 10 (1 seconds) = 10 frames per second
                     if (section[j].sectionOnRequest && !section[j].sectionOnOffCycle)
                     {
-                        section[j].sectionOnTimer = (int)(pn.speed * vehicle.toolLookAhead)+1;
-                        if (section[j].sectionOnTimer > fixUpdateHz+3) section[j].sectionOnTimer = fixUpdateHz+3;
+                        section[j].sectionOnTimer = (int)(pn.speed * vehicle.toolLookAhead) + 1;
+                        if (section[j].sectionOnTimer > fixUpdateHz + 3) section[j].sectionOnTimer = fixUpdateHz + 3;
                         section[j].sectionOnOffCycle = true;
                     }
 
@@ -1161,14 +1166,14 @@ namespace AgOpenGPS
         {
             //match grid to cam distance and redo perspective
             if (camera.camSetDistance <= -20000) gridZoom = 2000;
-            if (camera.camSetDistance >= -20000 && camera.camSetDistance < -10000) gridZoom =   2000;
-            if (camera.camSetDistance >= -10000 && camera.camSetDistance < -5000) gridZoom =    1000;
-            if (camera.camSetDistance >= -5000 && camera.camSetDistance < -2000) gridZoom =     503;
-            if (camera.camSetDistance >= -2000 && camera.camSetDistance < -1000) gridZoom =     201.2;
-            if (camera.camSetDistance >= -1000 && camera.camSetDistance < -500) gridZoom =      100.6;
-            if (camera.camSetDistance >= -500 && camera.camSetDistance < -250) gridZoom =       50.3;
-            if (camera.camSetDistance >= -250 && camera.camSetDistance < -150) gridZoom =       25.15;
-            if (camera.camSetDistance >= -150 && camera.camSetDistance < -50) gridZoom =         10.06;
+            if (camera.camSetDistance >= -20000 && camera.camSetDistance < -10000) gridZoom = 2000;
+            if (camera.camSetDistance >= -10000 && camera.camSetDistance < -5000) gridZoom = 1000;
+            if (camera.camSetDistance >= -5000 && camera.camSetDistance < -2000) gridZoom = 503;
+            if (camera.camSetDistance >= -2000 && camera.camSetDistance < -1000) gridZoom = 201.2;
+            if (camera.camSetDistance >= -1000 && camera.camSetDistance < -500) gridZoom = 100.6;
+            if (camera.camSetDistance >= -500 && camera.camSetDistance < -250) gridZoom = 50.3;
+            if (camera.camSetDistance >= -250 && camera.camSetDistance < -150) gridZoom = 25.15;
+            if (camera.camSetDistance >= -150 && camera.camSetDistance < -50) gridZoom = 10.06;
             if (camera.camSetDistance >= -50 && camera.camSetDistance < -1) gridZoom = 5.03;
             //1.216 2.532
 
@@ -1254,11 +1259,13 @@ namespace AgOpenGPS
         }
 
         //pinch and rotate screen
+
         #region Gesture
 
         // Private variables used to maintain the state of gestures
         //private DrawingObject _dwo = new DrawingObject();
         private Point _ptFirst = new Point();
+
         private Point _ptSecond = new Point();
         private int _iArguments = 0;
 
@@ -1269,18 +1276,20 @@ namespace AgOpenGPS
 
         //-----------------------------------------------------------------------
         // Multitouch/Touch glue (from winuser.h file)
-        // Since the managed layer between C# and WinAPI functions does not 
-        // exist at the moment for multi-touch related functions this part of 
+        // Since the managed layer between C# and WinAPI functions does not
+        // exist at the moment for multi-touch related functions this part of
         // code is required to replicate definitions from winuser.h file.
         //-----------------------------------------------------------------------
         // Touch event window message constants [winuser.h]
         private const int WM_GESTURENOTIFY = 0x011A;
+
         private const int WM_GESTURE = 0x0119;
 
         private const int GC_ALLGESTURES = 0x00000001;
 
-        // Gesture IDs 
+        // Gesture IDs
         private const int GID_BEGIN = 1;
+
         private const int GID_END = 2;
         private const int GID_ZOOM = 3;
         private const int GID_PAN = 4;
@@ -1290,6 +1299,7 @@ namespace AgOpenGPS
 
         // Gesture flags - GESTUREINFO.dwFlags
         private const int GF_BEGIN = 0x00000001;
+
         private const int GF_INERTIA = 0x00000002;
         private const int GF_END = 0x00000004;
 
@@ -1306,8 +1316,10 @@ namespace AgOpenGPS
         {
             public int dwID;    // gesture ID
             public int dwWant;  // settings related to gesture ID that are to be
+
                                 // turned on
             public int dwBlock; // settings related to gesture ID that are to be
+
                                 // turned off
         }
 
@@ -1320,29 +1332,35 @@ namespace AgOpenGPS
 
         //
         // Gesture information structure
-        //   - Pass the HGESTUREINFO received in the WM_GESTURE message lParam 
+        //   - Pass the HGESTUREINFO received in the WM_GESTURE message lParam
         //     into the GetGestureInfo function to retrieve this information.
-        //   - If cbExtraArgs is non-zero, pass the HGESTUREINFO received in 
-        //     the WM_GESTURE message lParam into the GetGestureExtraArgs 
+        //   - If cbExtraArgs is non-zero, pass the HGESTUREINFO received in
+        //     the WM_GESTURE message lParam into the GetGestureExtraArgs
         //     function to retrieve extended argument information.
         //
         [StructLayout(LayoutKind.Sequential)]
         private struct GESTUREINFO
         {
             public int cbSize;           // size, in bytes, of this structure
-                                         // (including variable length Args 
+
+                                         // (including variable length Args
                                          // field)
             public int dwFlags;          // see GF_* flags
+
             public int dwID;             // gesture ID, see GID_* defines
-            public IntPtr hwndTarget;    // handle to window targeted by this 
+            public IntPtr hwndTarget;    // handle to window targeted by this
+
                                          // gesture
             [MarshalAs(UnmanagedType.Struct)]
             internal POINTS ptsLocation; // current location of this gesture
+
             public int dwInstanceID;     // internally used
             public int dwSequenceID;     // internally used
-            public Int64 ullArguments;   // arguments for gestures whose 
+            public Int64 ullArguments;   // arguments for gestures whose
+
                                          // arguments fit in 8 BYTES
-            public int cbExtraArgs;      // size, in bytes, of extra arguments, 
+            public int cbExtraArgs;      // size, in bytes, of extra arguments,
+
                                          // if any, that accompany this gesture
         }
 
@@ -1358,6 +1376,7 @@ namespace AgOpenGPS
 
         // size of GESTURECONFIG structure
         private int _gestureConfigSize;
+
         // size of GESTUREINFO structure
         private int _gestureInfoSize;
 
@@ -1375,25 +1394,24 @@ namespace AgOpenGPS
         // Since there is no managed layer at the moment that supports
         // event handlers for WM_GESTURENOTIFY and WM_GESTURE
         // messages we have to override WndProc function
-        // 
-        // in 
+        //
+        // in
         //   m - Message object
         //-------------------------------------------------------------
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         protected override void WndProc(ref Message m)
         {
-            bool handled;
-            handled = false;
+            bool handled = false;
 
             switch (m.Msg)
             {
                 case WM_GESTURENOTIFY:
                     {
                         // This is the right place to define the list of gestures
-                        // that this application will support. By populating 
-                        // GESTURECONFIG structure and calling SetGestureConfig 
-                        // function. We can choose gestures that we want to 
-                        // handle in our application. In this app we decide to 
+                        // that this application will support. By populating
+                        // GESTURECONFIG structure and calling SetGestureConfig
+                        // function. We can choose gestures that we want to
+                        // handle in our application. In this app we decide to
                         // handle all gestures.
                         GESTURECONFIG gc = new GESTURECONFIG
                         {
@@ -1402,16 +1420,16 @@ namespace AgOpenGPS
                                                      // ID that are to be turned on
                             dwBlock = 0 // settings related to gesture ID that are
                         };
-                        // to be     
+                        // to be
 
                         // We must p/invoke into user32 [winuser.h]
                         bool bResult = SetGestureConfig(
                             Handle, // window for which configuration is specified
                             0,      // reserved, must be 0
                             1,      // count of GESTURECONFIG structures
-                            ref gc, // array of GESTURECONFIG structures, dwIDs 
-                                    // will be processed in the order specified 
-                                    // and repeated occurances will overwrite 
+                            ref gc, // array of GESTURECONFIG structures, dwIDs
+                                    // will be processed in the order specified
+                                    // and repeated occurances will overwrite
                                     // previous ones
                             _gestureConfigSize // sizeof(GESTURECONFIG)
                         );
@@ -1425,7 +1443,7 @@ namespace AgOpenGPS
                     break;
 
                 case WM_GESTURE:
-                    // The gesture processing code is implemented in 
+                    // The gesture processing code is implemented in
                     // the DecodeGesture method
                     handled = DecodeGesture(ref m);
                     break;
@@ -1457,7 +1475,7 @@ namespace AgOpenGPS
         // Converts from "binary radians" to traditional radians.
         static protected double ArgToRadians(Int64 arg)
         {
-            return ((((double)(arg) / 65535.0) * 4.0 * 3.14159265) - 2.0 * 3.14159265);
+            return (arg / 65535.0 * 4.0 * 3.14159265) - (2.0 * 3.14159265);
         }
 
         // Handler of gestures
@@ -1506,16 +1524,16 @@ namespace AgOpenGPS
 
                         default:
                             // We read here the second point of the gesture. This
-                            // is middle point between fingers in this new 
+                            // is middle point between fingers in this new
                             // position.
                             _ptSecond.X = gi.ptsLocation.x;
                             _ptSecond.Y = gi.ptsLocation.y;
                             _ptSecond = PointToClient(_ptSecond);
                             {
                                 // The zoom factor is the ratio of the new
-                                // and the old distance. The new distance 
-                                // between two fingers is stored in 
-                                // gi.ullArguments (lower 4 bytes) and the old 
+                                // and the old distance. The new distance
+                                // between two fingers is stored in
+                                // gi.ullArguments (lower 4 bytes) and the old
                                 // distance is stored in _iArguments.
                                 double k = (double)(_iArguments)
                                             / (double)(gi.ullArguments & ULL_ARGUMENTS_BIT_MASK);
@@ -1571,7 +1589,7 @@ namespace AgOpenGPS
 
                         default:
                             // Gesture handler returns cumulative rotation angle. However we
-                            // have to pass the delta angle to our function responsible 
+                            // have to pass the delta angle to our function responsible
                             // to process the rotation gesture.
                             double k = ((int)(gi.ullArguments & ULL_ARGUMENTS_BIT_MASK) - _iArguments) * 0.01;
                             camera.camPitch -= k;
@@ -1602,31 +1620,27 @@ namespace AgOpenGPS
         }
 
         #endregion Gesture
-
-   }//class FormGPS
+    }//class FormGPS
 }//namespace AgOpenGPS
 
-        /*The order is:
-         * 
-         * The watchdog timer times out and runs this function tmrWatchdog_tick().
-         * 50 times per second so statusUpdateCounter counts to 25 and updates strip menu etc at 2 hz
-         * it also makes sure there is new sentences showing up otherwise it shows **** No GGA....
-         * saveCounter ticks 2 x per second, used at end of draw routine every minute to save a backup of field
-         * then ScanForNMEA function checks for a complete sentence if contained in pn.rawbuffer
-         * if not it comes right back and waits for next watchdog trigger and starts all over
-         * if a new sentence is there, UpdateFix() is called
-         * Right away CalculateLookAhead(), no skips, is called to determine lookaheads and trigger distances to save triangles plotted
-         * Then UpdateFix() continues. 
-         * Hitch, pivot, antenna locations etc and directions are figured out if trigDistance is triggered
-         * When that is done, DoRender() is called on the visible OpenGL screen and its draw routine _draw is run
-         * before triangles are drawn, frustum cull figures out how many of the triangles should be drawn 
-         * When its all the way thru, it triggers the sectioncontrol Draw, its frustum cull, and determines if sections should be on
-         * ProcessSectionOnOffRequests() runs and that does the section on off magic
-         * SectionControlToArduino() runs and spits out the port relay control based on sections on or off
-         * If field needs saving (1.5 minute since last time) field is saved
-         * Now the program is "Done" and waits for the next watchdog trigger, determines if a new sentence is available etc
-         * and starts all over from the top. 
-         */
-
-
-
+/*The order is:
+ *
+ * The watchdog timer times out and runs this function tmrWatchdog_tick().
+ * 50 times per second so statusUpdateCounter counts to 25 and updates strip menu etc at 2 hz
+ * it also makes sure there is new sentences showing up otherwise it shows **** No GGA....
+ * saveCounter ticks 2 x per second, used at end of draw routine every minute to save a backup of field
+ * then ScanForNMEA function checks for a complete sentence if contained in pn.rawbuffer
+ * if not it comes right back and waits for next watchdog trigger and starts all over
+ * if a new sentence is there, UpdateFix() is called
+ * Right away CalculateLookAhead(), no skips, is called to determine lookaheads and trigger distances to save triangles plotted
+ * Then UpdateFix() continues.
+ * Hitch, pivot, antenna locations etc and directions are figured out if trigDistance is triggered
+ * When that is done, DoRender() is called on the visible OpenGL screen and its draw routine _draw is run
+ * before triangles are drawn, frustum cull figures out how many of the triangles should be drawn
+ * When its all the way thru, it triggers the sectioncontrol Draw, its frustum cull, and determines if sections should be on
+ * ProcessSectionOnOffRequests() runs and that does the section on off magic
+ * SectionControlToArduino() runs and spits out the port relay control based on sections on or off
+ * If field needs saving (1.5 minute since last time) field is saved
+ * Now the program is "Done" and waits for the next watchdog trigger, determines if a new sentence is available etc
+ * and starts all over from the top.
+ */

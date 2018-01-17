@@ -119,13 +119,11 @@ namespace AgOpenGPS
                     et = (1 / (hzTime * 0.000025));
                     if (et > 4 && et < 8) fixUpdateHz = 5;
                     if (et > 9 && et < 13) fixUpdateHz = 10;
-                    if (et > 1.2 && et < 3) fixUpdateHz = 2;
-                    if (et > 0.8 && et < 1.2) fixUpdateHz = 1;
+                    if (et > 1.6 && et < 3) fixUpdateHz = 2;
+                    if (et > 0.5 && et < 1.5) fixUpdateHz = 1;
                     fixUpdateTime = 1 / (double)fixUpdateHz;
                     timerPn = 0;
                     hzTime = 0;
-                    //fixUpdateHz = 5;
-                    //fixUpdateTime = 0.2;
                 }
 
                 //start the watch and time till it gets back here
@@ -139,7 +137,7 @@ namespace AgOpenGPS
                 UpdateFixPosition();
             }
 
-            //must make sure arduinos are kept off
+            //must make sure arduinos are kept off if initializing
             else
             {
                 if (!isGPSPositionInitialized)  mc.ResetAllModuleCommValues();
@@ -161,10 +159,10 @@ namespace AgOpenGPS
             if (mc.rollRaw != 9999)
             {
                 //calculate how far the antenna moves based on sidehill roll
-                double roll = Math.Sin(glm.toRadians(mc.rollRaw/16.0));
+                double roll = Math.Sin(glm.toRadians(mc.rollRaw * 0.0625));
                 rollCorrectionDistance = Math.Abs(roll * vehicle.antennaHeight);
 
-                // tilt to left is positive  **** important!!
+                // roll to left is positive  **** important!!
                 if (roll > 0)
                 {
                     pn.easting = (Math.Cos(fixHeading) * rollCorrectionDistance) + pn.easting;
@@ -177,9 +175,9 @@ namespace AgOpenGPS
                 }
             }
 
-            //tiltDistance = (pitch * vehicle.antennaHeight);
-            ////pn.easting = (Math.Sin(fixHeading) * tiltDistance) + pn.easting;
-            //pn.northing = (Math.Cos(fixHeading) * tiltDistance) + pn.northing;
+            //pitchDistance = (pitch * vehicle.antennaHeight);
+            ////pn.easting = (Math.Sin(fixHeading) * pitchDistance) + pn.easting;
+            //pn.northing = (Math.Cos(fixHeading) * pitchDistance) + pn.northing;
 
             #endregion Roll
 
@@ -399,7 +397,7 @@ namespace AgOpenGPS
                 if (distPivot < 45.0 && distPivot > 42 && !yt.isYouTurnTriggered && yt.isInWorkArea)
                 {
                     //begin the whole process, all conditions are met
-                    YouTurnTrigger();
+                    yt.YouTurnTrigger();
                 }
 
                 //Do the sequencing of functions around the turn.
@@ -457,62 +455,6 @@ namespace AgOpenGPS
         //end of UppdateFixPosition
         }
 
-
-        //called when the 45 m mark is reached before headland
-        private void YouTurnTrigger()
-        {
-            //trigger pulled and make box double ended
-            yt.isYouTurnTriggered = true;
-            yt.isSequenceTriggered = true;
-
-            //our direction heading into turn
-            yt.isABLineSameAsHeadingAtTrigger = ABLine.isABSameAsFixHeading;
-
-            //data buffer for pixels read from off screen buffer
-            byte[] grnPix = new byte[401];
-
-            //read a pixel line across full buffer width
-            OpenGL gl = openGLControlBack.OpenGL;
-            gl.ReadPixels(0, 205, 399, 1, OpenGL.GL_GREEN, OpenGL.GL_UNSIGNED_BYTE, grnPix);
-
-            //set up the positions to scan in the array for applied
-            int leftPos = vehicle.rpXPosition - 15;
-            if (leftPos < 0) leftPos = 0;
-            int rightPos = vehicle.rpXPosition + vehicle.rpWidth + 15;
-            if (rightPos > 399) rightPos = 399;
-
-            //do we need a left or right turn
-            bool isGrnOnLeft = false, isGrnOnRight = false;
-
-            //green on left means turn right
-            for (int j = leftPos; j < vehicle.rpXPosition; j++)
-            { if (grnPix[j] > 50) isGrnOnLeft = true; else isGrnOnLeft = false; }
-
-            //green on right means turn left
-            for (int j = (rightPos - 10); j < rightPos; j++)
-            { if (grnPix[j] > 50) isGrnOnRight = true; else isGrnOnRight = false; }
-
-            //set point and save to start measuring from
-            yt.isYouTurnTriggerPointSet = true;
-            yt.youTurnTriggerPoint = pivotAxlePos;
-
-            //one side or the other - but not both
-            if (!isGrnOnLeft && isGrnOnRight || isGrnOnLeft && !isGrnOnRight)
-            {
-                if (isGrnOnRight) yt.isYouTurnRight = false;
-                else yt.isYouTurnRight = true;
-            }
-            else //can't determine which way to turn, so pick opposite of last turn
-            {
-                //just do the opposite of last turn
-                yt.isYouTurnRight = !yt.isLastYouTurnRight;
-                yt.isLastYouTurnRight = !yt.isLastYouTurnRight;
-            }
-
-            //modify the buttons to show the correct turn direction
-            if (yt.isYouTurnRight) AutoYouTurnButtonsRightTurn();
-            else AutoYouTurnButtonsLeftTurn();
-        }
 
         //all the hitch, pivot, section, trailing hitch, headings and fixes
         private void CalculatePositionHeading()
@@ -699,7 +641,7 @@ namespace AgOpenGPS
             cosSectionHeading = Math.Cos(-fixHeadingSection);
         }
 
-        //
+        //perimter and boundary point generation
         private void AddBoundaryAndPerimiterPoint()
         {
             //save the north & east as previous
