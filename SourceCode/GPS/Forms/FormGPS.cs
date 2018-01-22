@@ -52,9 +52,6 @@ namespace AgOpenGPS
         //polygon mode for section drawing
         private bool isDrawPolygons;
 
-        //flag for free drive window to control autosteer
-        public bool isInFreeDriveMode;
-
         //Flag stuff
         public byte flagColor = 0;
 
@@ -129,7 +126,11 @@ namespace AgOpenGPS
         /// </summary>
         public CContour ct;
 
-        //Auto Headland Instance
+        /// <summary>
+        /// ABCurve instance
+        /// </summary>
+        public CABCurve curve;
+
         /// <summary>
         /// Auto Headland YouTurn
         /// </summary>
@@ -179,13 +180,22 @@ namespace AgOpenGPS
         /// The USB TinkerForge Bricklet
         /// </summary>
         private readonly IPConnection ipcon;
-
         private readonly BrickIMUV2 imu;
 
         /// <summary>
         /// Resource manager for gloabal strings
         /// </summary>
         public ResourceManager _rm;
+
+        /// <summary>
+        /// AutoSteer class of properties
+        /// </summary>
+        public CAutoSteer ast;
+
+        /// <summary>
+        /// Heading, Roll, Pitch, GPS, Properties
+        /// </summary>
+        public CAHRS ahrs;
 
         #endregion // Class Props and instances
 
@@ -221,6 +231,9 @@ namespace AgOpenGPS
             //new instance of contour mode
             ct = new CContour(gl, this);
 
+            //new instance of contour mode
+            curve = new CABCurve(gl, this);
+
             //new instance of auto headland turn
             yt = new CYouTurn(gl, this);
 
@@ -239,13 +252,24 @@ namespace AgOpenGPS
             //rate object
             rc = new CRate(this);
 
+            //headland entry/exit sequences
             seq = new CSequence(this);
 
+            //nmea simulator built in.
             sim = new CSim(this);
 
+            //all the autosteer objects
+            ast = new CAutoSteer(this);
+
+            //all the attitude, heading, roll, pitch reference system
+            ahrs = new CAHRS(this);
+
             ////usb IMU Tinker
-            ipcon = new IPConnection(); // Create IP connection
-            imu = new BrickIMUV2(UID, ipcon); // Create device object
+            if (ahrs.isHeadingBrick | ahrs.isRollBrick)
+            {
+                ipcon = new IPConnection(); // Create IP connection
+                imu = new BrickIMUV2(UID, ipcon); // Create device object
+            }
 
             //start the stopwatch
             swFrame.Start();
@@ -348,24 +372,27 @@ namespace AgOpenGPS
         //Initialize items before the form Loads or is visible
         private void FormGPS_Load(object sender, EventArgs e)
         {
-            try
+            if (ahrs.isHeadingBrick | ahrs.isRollBrick)
             {
-                ipcon.Connect(HOST, PORT); // Connect to brickd
-                                           // Don't use device before ipcon is connected
+                try
+                {
+                    ipcon.Connect(HOST, PORT); // Connect to brickd - daemon
+                                               // Don't use device before ipcon is connected
 
-                // Register Orientation callback
-                imu.OrientationCallback += OrientCB;
+                    // Register Orientation callback in AHRS class
+                    imu.OrientationCallback += ahrs.OrientCB;
 
-                // Set period for Orientation callback to 0.1s (100ms)
-                imu.SetOrientationPeriod(200);
+                    // Set period for Orientation callback to 0.1s (100ms)
+                    imu.SetOrientationPeriod(200);
 
-                //set the mode without mag
-                imu.SetSensorFusionMode(1);
+                    //set the mode without mag
+                    imu.SetSensorFusionMode(1);
 
-                imu.LedsOff();
-            }
-            catch
-            {
+                    imu.LedsOff();
+                }
+                catch
+                {
+                }
             }
 
             //tooltips of controls
@@ -478,9 +505,6 @@ namespace AgOpenGPS
 
             minFixStepDist = Settings.Default.setF_minFixStep;
 
-            pitchZero = Settings.Default.setIMU_pitchZero;
-            rollZero = Settings.Default.setIMU_rollZero;
-
             totalUserSquareMeters = Settings.Default.setF_UserTotalArea;
             userSquareMetersAlarm = Settings.Default.setF_UserTripAlarm;
 
@@ -571,37 +595,6 @@ namespace AgOpenGPS
             LineUpManualBtns();
             if (Width < 850 && tabControl1.Visible) HideTabControl();
             if (Width > 1100 && !tabControl1.Visible) HideTabControl();
-        }
-
-        //Kalman variables
-        private double rollK = 0;
-
-        private double Pc = 0.0;
-        private double G = 0.0;
-        private double P = 1.0;
-        private double Xp = 0.0;
-        private double Zp = 0.0;
-        private double XeRoll = 0;
-        private readonly double varRoll = 0.06; // variance, smaller, more faster filtering
-        private readonly double varProcess = 0.02;
-
-        //event for TinkerForge IMU
-        private void OrientCB(BrickIMUV2 sender, short heading, short roll, short pitch)
-        {
-            //input to the Kalman
-            rollK = roll;
-
-            //Kalman filter
-            Pc = P + varProcess;
-            G = Pc / (Pc + varRoll);
-            P = (1 - G) * Pc;
-            Xp = XeRoll;
-            Zp = Xp;
-            XeRoll = (G * (rollK - Zp)) + Xp;
-
-            mc.prevGyroHeading = mc.gyroHeading;
-            mc.gyroHeading = heading;
-            mc.rollRaw = (int)XeRoll;
         }
 
         // Procedures and Functions ---------------------------------------
@@ -809,6 +802,7 @@ namespace AgOpenGPS
             btnSectionOffAutoOn.Image = Properties.Resources.SectionMasterOff;
 
             btnABLine.Enabled = true;
+            btnABCurve.Enabled = true;
             btnContour.Enabled = true;
             btnAutoSteer.Enabled = true;
             ABLine.abHeading = 0.00;
@@ -869,10 +863,8 @@ namespace AgOpenGPS
             for (int j = 0; j < MAXSECTIONS; j++)
             {
                 //clean out the lists
-                section[j].patchList.Clear();
-#pragma warning disable RCS1146 // Use conditional access.
-                if (section[j].triangleList != null) section[j].triangleList.Clear();
-#pragma warning restore RCS1146 // Use conditional access.
+                section[j].patchList?.Clear();
+                section[j].triangleList?.Clear();
             }
 
             //clear out the contour Lists
@@ -884,6 +876,7 @@ namespace AgOpenGPS
 
             //reset the buttons
             btnABLine.Enabled = false;
+            btnABCurve.Enabled = true;
             btnContour.Enabled = false;
             btnAutoSteer.Enabled = false;
             isAutoSteerBtnOn = false;
@@ -1289,7 +1282,6 @@ namespace AgOpenGPS
 
         // Gesture IDs
         private const int GID_BEGIN = 1;
-
         private const int GID_END = 2;
         private const int GID_ZOOM = 3;
         private const int GID_PAN = 4;

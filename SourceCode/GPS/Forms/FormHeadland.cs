@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using SharpGL;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using SharpGL;
 
 namespace AgOpenGPS
 {
@@ -36,8 +31,8 @@ namespace AgOpenGPS
             }
             else
             {
-             //create a single tool width headland
-               BuildHeadland();
+                //create a single tool width headland
+                BuildHeadland();
             }
         }
 
@@ -80,6 +75,7 @@ namespace AgOpenGPS
         }
 
         private bool isDrawingHeadland;
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             //clear the headland point list
@@ -120,15 +116,14 @@ namespace AgOpenGPS
         private void btnDeleteLastPoint_Click(object sender, EventArgs e)
         {
             int ptCnt = mf.hl.ptList.Count;
-            if ( ptCnt > 0 )
+            if (ptCnt > 0)
             {
-                mf.hl.ptList.RemoveAt(ptCnt-1);
+                mf.hl.ptList.RemoveAt(ptCnt - 1);
             }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
         }
 
         private void nudWidths_ValueChanged(object sender, EventArgs e)
@@ -150,8 +145,8 @@ namespace AgOpenGPS
             heading = Math.Atan2(mf.boundz.ptList[3].easting - mf.boundz.ptList[4].easting
                                         , mf.boundz.ptList[3].northing - mf.boundz.ptList[4].northing);
             oneSide = glm.PIBy2;
-            point2.easting = mf.boundz.ptList[3].easting - (Math.Sin(oneSide+heading) * 2.0);
-            point2.northing = mf.boundz.ptList[3].northing - (Math.Cos(oneSide+heading) * 2.0);
+            point2.easting = mf.boundz.ptList[3].easting - (Math.Sin(oneSide + heading) * 2.0);
+            point2.northing = mf.boundz.ptList[3].northing - (Math.Cos(oneSide + heading) * 2.0);
 
             if (!mf.boundz.IsPointInsideBoundary(point2)) oneSide *= -1.0;
 
@@ -167,18 +162,18 @@ namespace AgOpenGPS
             bnd[0].x = mf.boundz.ptList[0].easting;
             bnd[0].y = mf.boundz.ptList[0].northing;
 
-            for (int i = 1; i < ptCount-1; i++)
+            for (int i = 1; i < ptCount - 1; i++)
             {
                 bnd[i].x = mf.boundz.ptList[i].easting;
                 bnd[i].y = mf.boundz.ptList[i].northing;
 
-                bnd[i-1].k = Math.Atan2(bnd[i-1].x - bnd[i].x, bnd[i-1].y - bnd[i].y);
+                bnd[i - 1].k = Math.Atan2(bnd[i - 1].x - bnd[i].x, bnd[i - 1].y - bnd[i].y);
 
-                point.easting = bnd[i-1].x - (Math.Sin(bnd[i - 1].k+oneSide) * totalHeadWidth);
-                point.northing = bnd[i-1].y - (Math.Cos(bnd[i - 1].k+oneSide) * totalHeadWidth);
+                point.easting = bnd[i - 1].x - (Math.Sin(bnd[i - 1].k + oneSide) * totalHeadWidth);
+                point.northing = bnd[i - 1].y - (Math.Cos(bnd[i - 1].k + oneSide) * totalHeadWidth);
 
                 //only add if inside actual field boundary
-                if (mf.boundz.IsPointInsideBoundary(point))  mf.hl.ptList.Add(point);
+                if (mf.boundz.IsPointInsideBoundary(point)) mf.hl.ptList.Add(point);
             }
 
             int headCount = mf.hl.ptList.Count;
@@ -210,7 +205,7 @@ namespace AgOpenGPS
             btnOK.Enabled = true;
 
             double area = mf.hl.CalculateHeadlandArea();
-            if (mf.isMetric)   lblArea.Text = Math.Round(area * 0.0001, 1) + " Ha";
+            if (mf.isMetric) lblArea.Text = Math.Round(area * 0.0001, 1) + " Ha";
             else lblArea.Text = Math.Round(area * 0.000247105, 1) + " Ac";
         }
 
@@ -296,7 +291,7 @@ namespace AgOpenGPS
             //rotate camera so heading matched fix heading in the world
             //glh.Rotate(glm.toDegrees(fixHeadingSection), 0, 0, 1);
 
-            //translate to that spot in the world 
+            //translate to that spot in the world
             glh.Translate(-fieldCenterX, -fieldCenterY, 0);
 
             //calculate the frustum for the section control window

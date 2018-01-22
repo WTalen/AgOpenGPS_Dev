@@ -1,14 +1,13 @@
 ﻿//Please, if you use this, share the improvements
 
 using System;
-using System.IO;
 using System.Windows.Forms;
 
 namespace AgOpenGPS
 {
     public partial class FormSettings : Form
     {
-       //class variables
+        //class variables
         private readonly FormGPS mf = null;
 
         private double toolOverlap, toolTrailingHitchLength, tankTrailingHitchLength, toolOffset, toolTurnOffDelay, toolLookAhead;
@@ -18,12 +17,15 @@ namespace AgOpenGPS
         private int numberOfSections;
 
         private decimal sectionWidth1, sectionWidth2, sectionWidth3, sectionWidth4, sectionWidth5, sectionWidth6, sectionWidth7, sectionWidth8;
+
         private decimal sectionPosition1, sectionPosition2, sectionPosition3, sectionPosition4,
                     sectionPosition5, sectionPosition6, sectionPosition7, sectionPosition8, sectionPosition9;
 
         private decimal triResolution, minFixStepDistance, boundaryDistance;
 
         private bool isWorkSwEn, isWorkSwActiveLow;
+
+        private bool isHeadingBNO, isHeadingBrick, isRollDogs, isRollBrick;
 
         private readonly double metImp2m, m2MetImp, cutoffMetricImperial, maxWidth;
         private double cutoffSpeed;
@@ -153,7 +155,7 @@ namespace AgOpenGPS
             nudLookAhead.Value = (decimal)(toolLookAhead);
             nudLookAhead.ValueChanged += nudLookAhead_ValueChanged;
 
-             //Sections set to settings page ----------------------------------------------------------------------
+            //Sections set to settings page ----------------------------------------------------------------------
             numberOfSections = Properties.Vehicle.Default.setVehicle_numSections;
 
             //grab number of sections
@@ -201,18 +203,30 @@ namespace AgOpenGPS
             chkEnableWorkSwitch.Checked = isWorkSwEn;
             chkEnableWorkSwitch.CheckedChanged += chkEnableWorkSwitch_CheckedChanged;
 
-            cutoffSpeed = Properties.Vehicle.Default.setVehicle_slowSpeedCutoff/cutoffMetricImperial;
+            cutoffSpeed = Properties.Vehicle.Default.setVehicle_slowSpeedCutoff / cutoffMetricImperial;
 
             nudCutoffSpeed.ValueChanged -= nudCutoffSpeed_ValueChanged;
             nudCutoffSpeed.Value = (decimal)cutoffSpeed;
             nudCutoffSpeed.ValueChanged += nudCutoffSpeed_ValueChanged;
 
             tboxTinkerUID.Text = Properties.Settings.Default.setIMU_UID;
+
+            cboxHeadingBNO.Checked = Properties.Settings.Default.setIMU_isHeadingFromBNO;
+            cboxHeadingBrick.Checked = Properties.Settings.Default.setIMU_isHeadingFromBrick;
+            cboxRollDogs.Checked = Properties.Settings.Default.setIMU_isRollFromDogs;
+            cboxRollBrick.Checked = Properties.Settings.Default.setIMU_isRollFromBrick;
+
+            isHeadingBNO = Properties.Settings.Default.setIMU_isHeadingFromBNO;
+            isHeadingBrick = Properties.Settings.Default.setIMU_isHeadingFromBrick;
+            isRollDogs = Properties.Settings.Default.setIMU_isRollFromDogs;
+            isRollBrick = Properties.Settings.Default.setIMU_isRollFromBrick;
+
+            lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZero / 16).ToString("N2");
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-           //Vehicle settings -------------------------------------------------------------------------------
+            //Vehicle settings -------------------------------------------------------------------------------
 
             if (!isPivotBehindAntenna) antennaPivot *= -1;
             mf.vehicle.antennaPivot = antennaPivot;
@@ -315,10 +329,17 @@ namespace AgOpenGPS
             mf.mc.isWorkSwitchEnabled = isWorkSwEn;
             Properties.Settings.Default.setF_IsWorkSwitchEnabled = isWorkSwEn;
 
-            Properties.Vehicle.Default.setVehicle_slowSpeedCutoff = cutoffSpeed*cutoffMetricImperial;
-            mf.vehicle.slowSpeedCutoff = cutoffSpeed*cutoffMetricImperial;
+            Properties.Vehicle.Default.setVehicle_slowSpeedCutoff = cutoffSpeed * cutoffMetricImperial;
+            mf.vehicle.slowSpeedCutoff = cutoffSpeed * cutoffMetricImperial;
 
             Properties.Settings.Default.setIMU_UID = tboxTinkerUID.Text.Trim();
+
+            Properties.Settings.Default.setIMU_isHeadingFromBNO = isHeadingBNO;
+            Properties.Settings.Default.setIMU_isHeadingFromBrick = isHeadingBrick;
+            Properties.Settings.Default.setIMU_isRollFromDogs = isRollDogs;
+            mf.ahrs.isRollDogs = isRollDogs;
+            Properties.Settings.Default.setIMU_isRollFromBrick = isRollBrick;
+            mf.ahrs.isRollBrick = isRollBrick;
 
             Properties.Settings.Default.Save();
             Properties.Vehicle.Default.Save();
@@ -404,7 +425,7 @@ namespace AgOpenGPS
             isToolBehindPivot = !isToolBehindPivot;
         }
 
-         private void chkIsPivotBehindAntenna_CheckedChanged(object sender, EventArgs e)
+        private void chkIsPivotBehindAntenna_CheckedChanged(object sender, EventArgs e)
         {
             isPivotBehindAntenna = !isPivotBehindAntenna;
             UpdateIsPivotBehindAntennaCheckbox();
@@ -446,7 +467,7 @@ namespace AgOpenGPS
             toolOverlap = (double)nudOverlap.Value * metImp2m;
         }
 
-       #endregion Vehicle
+        #endregion Vehicle //----------------------------------------------------------------
 
         #region Sections //---------------------------------------------------------------
 
@@ -458,7 +479,7 @@ namespace AgOpenGPS
             {
                 case 1:
                     {
-                        nudSection1.Enabled = true;  nudSection1.Visible = true;
+                        nudSection1.Enabled = true; nudSection1.Visible = true;
                         nudSection2.Enabled = false; nudSection2.Visible = false;
                         nudSection3.Enabled = false; nudSection3.Visible = false;
                         nudSection4.Enabled = false; nudSection4.Visible = false;
@@ -507,7 +528,7 @@ namespace AgOpenGPS
                         nudSection2.Left = 433;
                         nudSection3.Left = 733;
 
-                        lblVehicleToolWidth.Text = Convert.ToString((int)(nudSection1.Value+nudSection2.Value+nudSection3.Value));
+                        lblVehicleToolWidth.Text = Convert.ToString((int)(nudSection1.Value + nudSection2.Value + nudSection3.Value));
                         tabSections.BackgroundImage = Properties.Resources.SectionSettings3;
                         break;
                     }
@@ -526,7 +547,7 @@ namespace AgOpenGPS
                         nudSection3.Left = 551;
                         nudSection4.Left = 781;
 
-                        lblVehicleToolWidth.Text = Convert.ToString((int)(nudSection1.Value+nudSection2.Value+nudSection3.Value+nudSection4.Value));
+                        lblVehicleToolWidth.Text = Convert.ToString((int)(nudSection1.Value + nudSection2.Value + nudSection3.Value + nudSection4.Value));
                         tabSections.BackgroundImage = Properties.Resources.SectionSettings4;
                         break;
                     }
@@ -812,38 +833,54 @@ namespace AgOpenGPS
 
         //Did user spin a section distance spinner?
         private void nudSection1_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection1.Value--; }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection1.Value--;
+        }
 
         private void nudSection2_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection2.Value--; }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection2.Value--;
+        }
 
         private void nudSection3_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection3.Value--; }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection3.Value--;
+        }
 
         private void nudSection4_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection4.Value--; }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection4.Value--;
+        }
 
         private void nudSection5_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection5.Value--; }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection5.Value--;
+        }
 
-       private void nudSection6_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection6.Value--; }
+        private void nudSection6_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection6.Value--;
+        }
 
         private void nudSection7_ValueChanged(object sender, EventArgs e)
-       { UpdateSpinners();
-           if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection7.Value--;  }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection7.Value--;
+        }
 
         private void nudSection8_ValueChanged(object sender, EventArgs e)
-        { UpdateSpinners();
-           if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection8.Value--;  }
+        {
+            UpdateSpinners();
+            if (Convert.ToDouble(lblVehicleToolWidth.Text) > maxWidth) nudSection8.Value--;
+        }
 
-        #endregion Sections
+        #endregion Sections //---------------------------------------------------------------
 
         #region Display //----------------------------------------------------------------
 
@@ -868,7 +905,7 @@ namespace AgOpenGPS
             chkIsAtanCam.Checked = isAtanCamera;
         }
 
-        #endregion
+        #endregion Display //----------------------------------------------------------------
 
         #region WorkSwitch //---------------------------------------------------------
 
@@ -884,7 +921,73 @@ namespace AgOpenGPS
             chkEnableWorkSwitch.Checked = isWorkSwEn;
         }
 
-        #endregion
+        #endregion WorkSwitch //---------------------------------------------------------
 
+        #region Guidance
+
+        private void cboxHeadingBNO_CheckedChanged(object sender, EventArgs e)
+        {
+            isHeadingBNO = cboxHeadingBNO.Checked;
+            if (isHeadingBNO)
+            {
+                cboxHeadingBrick.Checked = false;
+                isHeadingBrick = false;
+            }
+        }
+
+        private void cboxHeadingBrick_CheckedChanged(object sender, EventArgs e)
+        {
+            isHeadingBrick = cboxHeadingBrick.Checked;
+            if (isHeadingBrick)
+            {
+                cboxHeadingBNO.Checked = false;
+                isHeadingBNO = false;
+            }
+        }
+
+        private void cboxRollDogs_CheckedChanged(object sender, EventArgs e)
+        {
+            isRollDogs = cboxRollDogs.Checked;
+            if (isRollDogs)
+            {
+                cboxRollBrick.Checked = false;
+                isRollBrick = false;
+            }
+        }
+
+        private void cboxRollBrick_CheckedChanged(object sender, EventArgs e)
+        {
+            isRollBrick = cboxRollBrick.Checked;
+            if (isRollBrick)
+            {
+                cboxRollDogs.Checked = false;
+                isRollDogs = false;
+            }
+        }
+
+        private void btnZeroRoll_Click(object sender, EventArgs e)
+        {
+            if (mf.mc.rollRaw == 9999)
+            {
+                lblRollZeroOffset.Text = "***";
+            }
+            else
+            {
+                mf.ahrs.rollZero = mf.mc.rollRaw;
+                lblRollZeroOffset.Text = ((double)mf.ahrs.rollZero / 16).ToString("N2");
+                Properties.Settings.Default.setIMU_rollZero = mf.mc.rollRaw;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void btnRemoveZeroOffset_Click(object sender, EventArgs e)
+        {
+            mf.ahrs.rollZero = 0;
+            lblRollZeroOffset.Text = "0.00";
+            Properties.Settings.Default.setIMU_rollZero = 0;
+            Properties.Settings.Default.Save();
+        }
+
+        #endregion Guidance
     }
 }

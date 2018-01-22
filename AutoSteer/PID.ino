@@ -29,20 +29,20 @@ void calcSteeringPID(void) {
   lastError = steerAngleError;
 
   drive = pValue + dValue + iValue;
-  pwmDrive = int(constrain(drive, -255, 255));
+  pwmDrive = (constrain(drive, -255, 255));
 
   //add throttle factor so no delay from motor resistance.
-  if (pwmDrive < 0 & pwmDrive > (-255 + minPWMValue)) pwmDrive = pwmDrive - minPWMValue;
-  else if (pwmDrive > 0 & pwmDrive < (255 - minPWMValue)) pwmDrive = pwmDrive + minPWMValue;
-
-  pwmDrive = int(constrain(drive, -200, 200));
-
+  if (pwmDrive < 0 ) pwmDrive -= minPWMValue;
+  else if (pwmDrive > 0 ) pwmDrive += minPWMValue;
+  
+ if (pwmDrive > 200) pwmDrive = 200;
+ if (pwmDrive < -200) pwmDrive = -200;
  }
 
  void motorDrive(void) 
   {
     pwmDisplay = pwmDrive;
-    if (pwmDrive > 0) bitSet(PORTB, 4);  //set the correct direction
+    if (pwmDrive >= 0) bitSet(PORTB, 4);  //set the correct direction
     else   
     {
       bitClear(PORTB, 4); 

@@ -83,13 +83,7 @@
             this.nudSection1 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.nudNumberOfSections = new System.Windows.Forms.NumericUpDown();
-            this.tabWorkSwitch = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkWorkSwActiveLow = new System.Windows.Forms.CheckBox();
-            this.chkEnableWorkSwitch = new System.Windows.Forms.CheckBox();
             this.tabDisplay = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tboxTinkerUID = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
             this.nudBoundaryDistance = new System.Windows.Forms.NumericUpDown();
@@ -103,6 +97,22 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.nudMinFixStepDistance = new System.Windows.Forms.NumericUpDown();
+            this.tabGuidance = new System.Windows.Forms.TabPage();
+            this.btnRollZero = new System.Windows.Forms.GroupBox();
+            this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
+            this.lblRollZeroOffset = new System.Windows.Forms.Label();
+            this.btnZeroRoll = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cboxHeadingBNO = new System.Windows.Forms.CheckBox();
+            this.cboxHeadingBrick = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cboxRollDogs = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tboxTinkerUID = new System.Windows.Forms.TextBox();
+            this.tabWorkSwitch = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkWorkSwActiveLow = new System.Windows.Forms.CheckBox();
+            this.chkEnableWorkSwitch = new System.Windows.Forms.CheckBox();
             this.tabExamples = new System.Windows.Forms.TabPage();
             this.lblSecTotalWidthInches = new System.Windows.Forms.Label();
             this.lblSecTotalWidthFeet = new System.Windows.Forms.Label();
@@ -112,6 +122,8 @@
             this.lblInchesCm = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bntOK = new System.Windows.Forms.Button();
+            this.cboxRollBrick = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabVehicle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHitchLength)).BeginInit();
@@ -136,8 +148,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSection2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumberOfSections)).BeginInit();
-            this.tabWorkSwitch.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBoundaryDistance)).BeginInit();
@@ -146,6 +156,12 @@
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinFixStepDistance)).BeginInit();
+            this.tabGuidance.SuspendLayout();
+            this.btnRollZero.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tabWorkSwitch.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -153,12 +169,14 @@
             this.tabControl1.Controls.Add(this.tabVehicle);
             this.tabControl1.Controls.Add(this.tabTool);
             this.tabControl1.Controls.Add(this.tabSections);
-            this.tabControl1.Controls.Add(this.tabWorkSwitch);
             this.tabControl1.Controls.Add(this.tabDisplay);
+            this.tabControl1.Controls.Add(this.tabGuidance);
+            this.tabControl1.Controls.Add(this.tabWorkSwitch);
             this.tabControl1.Controls.Add(this.tabExamples);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             // 
             // tabVehicle
             // 
@@ -771,40 +789,8 @@
             0});
             this.nudNumberOfSections.ValueChanged += new System.EventHandler(this.nudNumberOfSections_ValueChanged);
             // 
-            // tabWorkSwitch
-            // 
-            this.tabWorkSwitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.WorkSwitch;
-            resources.ApplyResources(this.tabWorkSwitch, "tabWorkSwitch");
-            this.tabWorkSwitch.Controls.Add(this.groupBox3);
-            this.tabWorkSwitch.Name = "tabWorkSwitch";
-            this.tabWorkSwitch.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.chkWorkSwActiveLow);
-            this.groupBox3.Controls.Add(this.chkEnableWorkSwitch);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // chkWorkSwActiveLow
-            // 
-            resources.ApplyResources(this.chkWorkSwActiveLow, "chkWorkSwActiveLow");
-            this.chkWorkSwActiveLow.Name = "chkWorkSwActiveLow";
-            this.chkWorkSwActiveLow.UseVisualStyleBackColor = true;
-            this.chkWorkSwActiveLow.CheckedChanged += new System.EventHandler(this.chkWorkSwActiveLow_CheckedChanged);
-            // 
-            // chkEnableWorkSwitch
-            // 
-            resources.ApplyResources(this.chkEnableWorkSwitch, "chkEnableWorkSwitch");
-            this.chkEnableWorkSwitch.Name = "chkEnableWorkSwitch";
-            this.chkEnableWorkSwitch.UseVisualStyleBackColor = true;
-            this.chkEnableWorkSwitch.CheckedChanged += new System.EventHandler(this.chkEnableWorkSwitch_CheckedChanged);
-            // 
             // tabDisplay
             // 
-            this.tabDisplay.Controls.Add(this.label9);
-            this.tabDisplay.Controls.Add(this.tboxTinkerUID);
             this.tabDisplay.Controls.Add(this.groupBox5);
             this.tabDisplay.Controls.Add(this.groupBox2);
             this.tabDisplay.Controls.Add(this.groupBox1);
@@ -812,16 +798,6 @@
             resources.ApplyResources(this.tabDisplay, "tabDisplay");
             this.tabDisplay.Name = "tabDisplay";
             this.tabDisplay.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // tboxTinkerUID
-            // 
-            resources.ApplyResources(this.tboxTinkerUID, "tboxTinkerUID");
-            this.tboxTinkerUID.Name = "tboxTinkerUID";
             // 
             // groupBox5
             // 
@@ -971,6 +947,123 @@
             65536});
             this.nudMinFixStepDistance.ValueChanged += new System.EventHandler(this.nudMinFixStepDistance_ValueChanged);
             // 
+            // tabGuidance
+            // 
+            this.tabGuidance.Controls.Add(this.label10);
+            this.tabGuidance.Controls.Add(this.btnRollZero);
+            this.tabGuidance.Controls.Add(this.groupBox7);
+            this.tabGuidance.Controls.Add(this.groupBox6);
+            this.tabGuidance.Controls.Add(this.label9);
+            this.tabGuidance.Controls.Add(this.tboxTinkerUID);
+            resources.ApplyResources(this.tabGuidance, "tabGuidance");
+            this.tabGuidance.Name = "tabGuidance";
+            this.tabGuidance.UseVisualStyleBackColor = true;
+            // 
+            // btnRollZero
+            // 
+            this.btnRollZero.Controls.Add(this.btnRemoveZeroOffset);
+            this.btnRollZero.Controls.Add(this.lblRollZeroOffset);
+            this.btnRollZero.Controls.Add(this.btnZeroRoll);
+            resources.ApplyResources(this.btnRollZero, "btnRollZero");
+            this.btnRollZero.Name = "btnRollZero";
+            this.btnRollZero.TabStop = false;
+            // 
+            // btnRemoveZeroOffset
+            // 
+            resources.ApplyResources(this.btnRemoveZeroOffset, "btnRemoveZeroOffset");
+            this.btnRemoveZeroOffset.Name = "btnRemoveZeroOffset";
+            this.btnRemoveZeroOffset.UseVisualStyleBackColor = true;
+            this.btnRemoveZeroOffset.Click += new System.EventHandler(this.btnRemoveZeroOffset_Click);
+            // 
+            // lblRollZeroOffset
+            // 
+            resources.ApplyResources(this.lblRollZeroOffset, "lblRollZeroOffset");
+            this.lblRollZeroOffset.Name = "lblRollZeroOffset";
+            // 
+            // btnZeroRoll
+            // 
+            resources.ApplyResources(this.btnZeroRoll, "btnZeroRoll");
+            this.btnZeroRoll.Name = "btnZeroRoll";
+            this.btnZeroRoll.UseVisualStyleBackColor = true;
+            this.btnZeroRoll.Click += new System.EventHandler(this.btnZeroRoll_Click);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.cboxHeadingBNO);
+            this.groupBox7.Controls.Add(this.cboxHeadingBrick);
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
+            // cboxHeadingBNO
+            // 
+            resources.ApplyResources(this.cboxHeadingBNO, "cboxHeadingBNO");
+            this.cboxHeadingBNO.Name = "cboxHeadingBNO";
+            this.cboxHeadingBNO.UseVisualStyleBackColor = true;
+            this.cboxHeadingBNO.CheckedChanged += new System.EventHandler(this.cboxHeadingBNO_CheckedChanged);
+            // 
+            // cboxHeadingBrick
+            // 
+            resources.ApplyResources(this.cboxHeadingBrick, "cboxHeadingBrick");
+            this.cboxHeadingBrick.Name = "cboxHeadingBrick";
+            this.cboxHeadingBrick.UseVisualStyleBackColor = true;
+            this.cboxHeadingBrick.CheckedChanged += new System.EventHandler(this.cboxHeadingBrick_CheckedChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.cboxRollBrick);
+            this.groupBox6.Controls.Add(this.cboxRollDogs);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // cboxRollDogs
+            // 
+            resources.ApplyResources(this.cboxRollDogs, "cboxRollDogs");
+            this.cboxRollDogs.Name = "cboxRollDogs";
+            this.cboxRollDogs.UseVisualStyleBackColor = true;
+            this.cboxRollDogs.CheckedChanged += new System.EventHandler(this.cboxRollDogs_CheckedChanged);
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // tboxTinkerUID
+            // 
+            resources.ApplyResources(this.tboxTinkerUID, "tboxTinkerUID");
+            this.tboxTinkerUID.Name = "tboxTinkerUID";
+            // 
+            // tabWorkSwitch
+            // 
+            this.tabWorkSwitch.BackgroundImage = global::AgOpenGPS.Properties.Resources.WorkSwitch;
+            resources.ApplyResources(this.tabWorkSwitch, "tabWorkSwitch");
+            this.tabWorkSwitch.Controls.Add(this.groupBox3);
+            this.tabWorkSwitch.Name = "tabWorkSwitch";
+            this.tabWorkSwitch.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkWorkSwActiveLow);
+            this.groupBox3.Controls.Add(this.chkEnableWorkSwitch);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // chkWorkSwActiveLow
+            // 
+            resources.ApplyResources(this.chkWorkSwActiveLow, "chkWorkSwActiveLow");
+            this.chkWorkSwActiveLow.Name = "chkWorkSwActiveLow";
+            this.chkWorkSwActiveLow.UseVisualStyleBackColor = true;
+            this.chkWorkSwActiveLow.CheckedChanged += new System.EventHandler(this.chkWorkSwActiveLow_CheckedChanged);
+            // 
+            // chkEnableWorkSwitch
+            // 
+            resources.ApplyResources(this.chkEnableWorkSwitch, "chkEnableWorkSwitch");
+            this.chkEnableWorkSwitch.Name = "chkEnableWorkSwitch";
+            this.chkEnableWorkSwitch.UseVisualStyleBackColor = true;
+            this.chkEnableWorkSwitch.CheckedChanged += new System.EventHandler(this.chkEnableWorkSwitch_CheckedChanged);
+            // 
             // tabExamples
             // 
             resources.ApplyResources(this.tabExamples, "tabExamples");
@@ -1025,6 +1118,18 @@
             this.bntOK.UseVisualStyleBackColor = true;
             this.bntOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // cboxRollBrick
+            // 
+            resources.ApplyResources(this.cboxRollBrick, "cboxRollBrick");
+            this.cboxRollBrick.Name = "cboxRollBrick";
+            this.cboxRollBrick.UseVisualStyleBackColor = true;
+            this.cboxRollBrick.CheckedChanged += new System.EventHandler(this.cboxRollBrick_CheckedChanged);
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
             // FormSettings
             // 
             resources.ApplyResources(this, "$this");
@@ -1071,11 +1176,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSection2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumberOfSections)).EndInit();
-            this.tabWorkSwitch.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tabDisplay.ResumeLayout(false);
-            this.tabDisplay.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBoundaryDistance)).EndInit();
@@ -1087,6 +1188,17 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMinFixStepDistance)).EndInit();
+            this.tabGuidance.ResumeLayout(false);
+            this.tabGuidance.PerformLayout();
+            this.btnRollZero.ResumeLayout(false);
+            this.btnRollZero.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.tabWorkSwitch.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1177,5 +1289,17 @@
         private System.Windows.Forms.NumericUpDown nudBoundaryDistance;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tboxTinkerUID;
+        private System.Windows.Forms.TabPage tabGuidance;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox cboxRollDogs;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.CheckBox cboxHeadingBNO;
+        private System.Windows.Forms.CheckBox cboxHeadingBrick;
+        private System.Windows.Forms.GroupBox btnRollZero;
+        private System.Windows.Forms.Label lblRollZeroOffset;
+        private System.Windows.Forms.Button btnZeroRoll;
+        private System.Windows.Forms.Button btnRemoveZeroOffset;
+        private System.Windows.Forms.CheckBox cboxRollBrick;
+        private System.Windows.Forms.Label label10;
     }
 }

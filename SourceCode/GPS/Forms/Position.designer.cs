@@ -85,7 +85,6 @@ namespace AgOpenGPS
 
         //IMU 
         double rollCorrectionDistance = 0;
-        public double rollZero = 0, pitchZero = 0;
         double gyroDelta, gyroCorrection, gyroRaw, gyroCorrected, turnDelta;
 
         //step position - slow speed spinner killer
@@ -159,7 +158,7 @@ namespace AgOpenGPS
             if (mc.rollRaw != 9999)
             {
                 //calculate how far the antenna moves based on sidehill roll
-                double roll = Math.Sin(glm.toRadians(mc.rollRaw * 0.0625));
+                double roll = Math.Sin(glm.toRadians((mc.rollRaw - ahrs.rollZero) * 0.0625));
                 rollCorrectionDistance = Math.Abs(roll * vehicle.antennaHeight);
 
                 // roll to left is positive  **** important!!
@@ -309,7 +308,7 @@ namespace AgOpenGPS
             }
 
             // If Drive button enabled be normal, or just fool the autosteer and fill values
-            if (!isInFreeDriveMode)
+            if (!ast.isInFreeDriveMode)
             {
 
                 //fill up0 the auto steer array with new values
@@ -494,20 +493,18 @@ namespace AgOpenGPS
                 //calculate current turn rate of vehicle
                 prevPrevGPSHeading = prevGPSHeading;
                 prevGPSHeading = gpsHeading;
-                turnDelta = Math.Abs(Math.Atan2(Math.Sin(fixHeading - prevPrevGPSHeading), Math.Cos(fixHeading - prevPrevGPSHeading)));
+                //turnDelta = Math.Abs(Math.Atan2(Math.Sin(fixHeading - prevPrevGPSHeading), Math.Cos(fixHeading - prevPrevGPSHeading)));
 
-                //Only adjust gyro if going in a straight line 
-                if (turnDelta < 0.01 && pn.speed > 1)
+                //if the gyro and last corrected fix is < 10 degrees, super low pass for gps
+                if (Math.Abs(gyroDelta) < 0.18)
                 {
                     //a bit of delta and add to correction to current gyro
-                    gyroCorrection += (gyroDelta * (0.4 / fixUpdateHz));
+                    gyroCorrection += (gyroDelta * (0.5 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
                     gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
                 }
-
-                //if the gyro and GPS delta are > 10 degrees speed up filter
-                if (Math.Abs(gyroDelta) > 0.18)
+                else
                 {
                     //a bit of delta and add to correction to current gyro
                     gyroCorrection += (gyroDelta * (2.0 / fixUpdateHz));

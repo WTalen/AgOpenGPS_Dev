@@ -1,4 +1,10 @@
-﻿v2.3 Dec 15
+﻿v 2.3 Jan 15
+* zero Roll
+* Selectable inputs for roll/heading
+* fix bug in imu heading /gps fusion
+
+
+v2.3 Dec 15
 * Sequencing functions and actions on headland
 * Completely different interface
 * Headland drawing and auto gen

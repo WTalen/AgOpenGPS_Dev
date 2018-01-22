@@ -531,6 +531,7 @@ namespace AgOpenGPS
                 }
             }
         }
+
         //turn on contour guidance or off
         private void btnContour_Click(object sender, EventArgs e)
         {
@@ -569,6 +570,45 @@ namespace AgOpenGPS
                     btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
                 }
             }
+        }
+
+        private void btnABCurve_Click(object sender, EventArgs e)
+        {
+            //if contour is on, turn it off
+            if (ct.isContourBtnOn)
+            {
+                ct.isContourBtnOn = !ct.isContourBtnOn;
+                btnContour.Image = Properties.Resources.ContourOff;
+            }
+
+            //turn off youturn...
+            btnRightYouTurn.Enabled = false;
+            btnLeftYouTurn.Enabled = false;
+            btnRightYouTurn.Visible = false;
+            btnLeftYouTurn.Visible = false;
+            btnEnableAutoYouTurn.Enabled = false;
+            yt.isYouTurnBtnOn = false;
+            btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
+            yt.ResetYouTurnAndSequenceEvents();
+
+            //kill the ABLine
+            ABLine.DeleteAB();
+            ABLine.tramPassEvery = 0;
+            ABLine.passBasedOn = 0;
+
+            //save the no ABLine;
+            FileSaveABLine();
+            ABLine.isABLineBeingSet = false;
+            txtDistanceOffABLine.Visible = false;
+
+            //change image to reflect on off
+            btnABLine.Image = Properties.Resources.ABLineOff;
+            ABLine.isABLineBeingSet = false;
+
+            if (isAutoSteerBtnOn) btnAutoSteer.PerformClick();
+
+            Form form = new FormABCurve(this);
+            form.Show();
         }
 
         //zoom up close and far away
@@ -862,72 +902,10 @@ namespace AgOpenGPS
         }
 
         //panel buttons
-        private void btnSettings_Click_1(object sender, EventArgs e)
-        {
-            SettingsPageOpen(0);
-        }
-        private void btnComm_Click(object sender, EventArgs e)
-        {
-            SettingsCommunications();
-        }
-        private void btnUDPSettings_Click(object sender, EventArgs e)
-        {
-            SettingsUDP();
-        }
-        private void btnUnits_Click(object sender, EventArgs e)
-        {
-            isMetric = !isMetric;
-            Settings.Default.setMenu_isMetric = isMetric;
-            Settings.Default.Save();
-            if (isMetric)
-            {
-                lblSpeedUnits.Text = "kmh";
-                metricToolStrip.Checked = true;
-                imperialToolStrip.Checked = false;
-            }
-            else
-            {
-                lblSpeedUnits.Text = "mph";
-                metricToolStrip.Checked = false;
-                imperialToolStrip.Checked = true;
-            }
-        }
         private void btnGPSData_Click(object sender, EventArgs e)
         {
             Form form = new FormGPSData(this);
             form.Show();
-        }
-        private void btnAutoSteerConfig_Click(object sender, EventArgs e)
-        {
-            //check if window already exists
-            Form fc = Application.OpenForms["FormSteer"];
-
-            if (fc != null)
-            {
-                fc.Focus();
-                return;
-            }
-
-            //
-            Form form = new FormSteer(this);
-            form.Show();
-        }
-
-        //private void btnTripOdometer_Click(object sender, EventArgs e)
-        //{
-        //    
-        //    using (var form = new FormTrip(this))
-        //    {
-        //        var result = form.ShowDialog();
-        //        if (result == DialogResult.OK) { }
-        //    }
-        //}
-
-        //the youturn form
-        private void btnAutoYouTurn_Click(object sender, EventArgs e)
-        {
-            var form = new FormYouTurn(this);
-            form.ShowDialog();
         }
 
         //YouTurn in the tab control
@@ -1919,7 +1897,7 @@ namespace AgOpenGPS
             get
             {
                 if (mc.rollRaw != 9999)
-                    return Math.Round(mc.rollRaw * 0.0625, 1) + "\u00B0";
+                    return Math.Round((mc.rollRaw - ahrs.rollZero) * 0.0625, 1) + "\u00B0";
                 else return "-";
             }
         }
@@ -1994,7 +1972,7 @@ namespace AgOpenGPS
 
 
             //every half of a second update all status
-            if (statusUpdateCounter > 3)
+            if (statusUpdateCounter > 6)
             {
                 //reset the counter
                 statusUpdateCounter = 0;
