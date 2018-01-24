@@ -54,6 +54,7 @@
   float steerAngleSetPoint = 0; //the desired angle from AgOpen
   int steeringPosition = 0, steeringPositionZero = 512; //from steering sensor
   float steerAngleError = 0; //setpoint - actual
+  float distanceError = 0; //
   float steerSensorCounts = 4;
 
   //inclinometer variables
@@ -116,7 +117,7 @@ void setup()
   calibrationData.accel_radius = 1000;
   calibrationData.mag_radius = 968;
   
-  //IMU.setSensorOffsets(calibrationData);
+  IMU.setSensorOffsets(calibrationData);
 
   //use external 32K crystal
   IMU.setExtCrystalUse(true);    

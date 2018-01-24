@@ -82,8 +82,8 @@
             // 
             // nudBasedOnPass
             // 
-            this.nudBasedOnPass.BackColor = System.Drawing.Color.MediumOrchid;
             resources.ApplyResources(this.nudBasedOnPass, "nudBasedOnPass");
+            this.nudBasedOnPass.BackColor = System.Drawing.Color.MediumOrchid;
             this.nudBasedOnPass.Minimum = new decimal(new int[] {
             100,
             0,
@@ -94,8 +94,8 @@
             // 
             // nudTramRepeats
             // 
-            this.nudTramRepeats.BackColor = System.Drawing.Color.Lime;
             resources.ApplyResources(this.nudTramRepeats, "nudTramRepeats");
+            this.nudTramRepeats.BackColor = System.Drawing.Color.Lime;
             this.nudTramRepeats.Name = "nudTramRepeats";
             this.nudTramRepeats.ValueChanged += new System.EventHandler(this.nudTramRepeats_ValueChanged);
             // 

@@ -28,10 +28,6 @@ namespace AgOpenGPS
         //How many turn functions
         public const int MAXFUNCTIONS = 8;
 
-        private const string HOST = "localhost";
-        private const int PORT = 4223;
-        private static readonly string UID = Properties.Settings.Default.setIMU_UID; // "68wESU"; // Change XXYYZZ to the UID of your IMU Brick 2.0
-
         //The base directory where AgOpenGPS will be stored and fields and vehicles branch from
         public string baseDirectory;
 
@@ -79,11 +75,6 @@ namespace AgOpenGPS
         public bool isSavingFile = false, isLogNMEA = false;
 
         //Zoom variables
-        public double gridZoom;
-
-        public double zoomValue = 15;
-        public double triangleResolution = 1.0;
-        private double previousZoom = 25;
         public uint[] texture = new uint[3];
 
         //create the scene camera
@@ -177,12 +168,6 @@ namespace AgOpenGPS
         public CSim sim;
 
         /// <summary>
-        /// The USB TinkerForge Bricklet
-        /// </summary>
-        private readonly IPConnection ipcon;
-        private readonly BrickIMUV2 imu;
-
-        /// <summary>
         /// Resource manager for gloabal strings
         /// </summary>
         public ResourceManager _rm;
@@ -263,13 +248,6 @@ namespace AgOpenGPS
 
             //all the attitude, heading, roll, pitch reference system
             ahrs = new CAHRS(this);
-
-            ////usb IMU Tinker
-            if (ahrs.isHeadingBrick | ahrs.isRollBrick)
-            {
-                ipcon = new IPConnection(); // Create IP connection
-                imu = new BrickIMUV2(UID, ipcon); // Create device object
-            }
 
             //start the stopwatch
             swFrame.Start();
@@ -372,29 +350,6 @@ namespace AgOpenGPS
         //Initialize items before the form Loads or is visible
         private void FormGPS_Load(object sender, EventArgs e)
         {
-            if (ahrs.isHeadingBrick | ahrs.isRollBrick)
-            {
-                try
-                {
-                    ipcon.Connect(HOST, PORT); // Connect to brickd - daemon
-                                               // Don't use device before ipcon is connected
-
-                    // Register Orientation callback in AHRS class
-                    imu.OrientationCallback += ahrs.OrientCB;
-
-                    // Set period for Orientation callback to 0.1s (100ms)
-                    imu.SetOrientationPeriod(200);
-
-                    //set the mode without mag
-                    imu.SetSensorFusionMode(1);
-
-                    imu.LedsOff();
-                }
-                catch
-                {
-                }
-            }
-
             //tooltips of controls
             ToolTip ToolTip1 = new ToolTip();
             ToolTip1.SetToolTip(btnABLine, "Set and configure\n an ABLine");
@@ -432,6 +387,10 @@ namespace AgOpenGPS
             //grab the current vehicle filename - make sure it exists
             vehiclefileName = Vehicle.Default.setVehicle_Name;
 
+            fixUpdateHz = Properties.Settings.Default.setPort_NMEAHz;
+            fixUpdateTime = 1 / (double)fixUpdateHz;
+
+
             //get the abLines directory, if not exist, create
             ablinesDirectory = baseDirectory + "ABLines\\";
             dir = Path.GetDirectoryName(fieldsDirectory);
@@ -464,14 +423,14 @@ namespace AgOpenGPS
             StartUDPServer();
 
             //set the correct zoom and grid
-            camera.camSetDistance = zoomValue * zoomValue * -1;
+            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
             SetZoom();
 
             //which cam source is being used
             isAtanCam = Settings.Default.setCam_isAtanCam;
 
             //triangle resolution is how far to next triangle point trigger distance
-            triangleResolution = Settings.Default.setDisplay_triangleResolution;
+            camera.triangleResolution = Settings.Default.setDisplay_triangleResolution;
 
             //remembered window position
             if (Settings.Default.setWindow_Maximized)
@@ -676,7 +635,7 @@ namespace AgOpenGPS
 
                 // Start listening for incoming data
                 recvSocket.BeginReceiveFrom(buffer, 0, buffer.Length, SocketFlags.None,
-                                                ref client, ReceiveData, recvSocket);
+                                                ref client, new AsyncCallback(ReceiveData), recvSocket);
                 isSendConnected = true;
             }
             catch (Exception e)
@@ -1158,16 +1117,16 @@ namespace AgOpenGPS
         private void SetZoom()
         {
             //match grid to cam distance and redo perspective
-            if (camera.camSetDistance <= -20000) gridZoom = 2000;
-            if (camera.camSetDistance >= -20000 && camera.camSetDistance < -10000) gridZoom = 2000;
-            if (camera.camSetDistance >= -10000 && camera.camSetDistance < -5000) gridZoom = 1000;
-            if (camera.camSetDistance >= -5000 && camera.camSetDistance < -2000) gridZoom = 503;
-            if (camera.camSetDistance >= -2000 && camera.camSetDistance < -1000) gridZoom = 201.2;
-            if (camera.camSetDistance >= -1000 && camera.camSetDistance < -500) gridZoom = 100.6;
-            if (camera.camSetDistance >= -500 && camera.camSetDistance < -250) gridZoom = 50.3;
-            if (camera.camSetDistance >= -250 && camera.camSetDistance < -150) gridZoom = 25.15;
-            if (camera.camSetDistance >= -150 && camera.camSetDistance < -50) gridZoom = 10.06;
-            if (camera.camSetDistance >= -50 && camera.camSetDistance < -1) gridZoom = 5.03;
+            if (camera.camSetDistance <= -20000) camera.gridZoom = 2000;
+            if (camera.camSetDistance >= -20000 && camera.camSetDistance < -10000) camera.gridZoom = 2000;
+            if (camera.camSetDistance >= -10000 && camera.camSetDistance < -5000) camera.gridZoom = 1000;
+            if (camera.camSetDistance >= -5000 && camera.camSetDistance < -2000) camera.gridZoom = 503;
+            if (camera.camSetDistance >= -2000 && camera.camSetDistance < -1000) camera.gridZoom = 201.2;
+            if (camera.camSetDistance >= -1000 && camera.camSetDistance < -500) camera.gridZoom = 100.6;
+            if (camera.camSetDistance >= -500 && camera.camSetDistance < -250) camera.gridZoom = 50.3;
+            if (camera.camSetDistance >= -250 && camera.camSetDistance < -150) camera.gridZoom = 25.15;
+            if (camera.camSetDistance >= -150 && camera.camSetDistance < -50) camera.gridZoom = 10.06;
+            if (camera.camSetDistance >= -50 && camera.camSetDistance < -1) camera.gridZoom = 5.03;
             //1.216 2.532
 
             //  Get the OpenGL object.
@@ -1530,9 +1489,9 @@ namespace AgOpenGPS
                                 double k = (double)(_iArguments)
                                             / (double)(gi.ullArguments & ULL_ARGUMENTS_BIT_MASK);
                                 //lblX.Text = k.ToString();
-                                zoomValue *= k;
-                                if (zoomValue < 6.0) zoomValue = 6;
-                                camera.camSetDistance = zoomValue * zoomValue * -1;
+                                camera.zoomValue *= k;
+                                if (camera.zoomValue < 6.0) camera.zoomValue = 6;
+                                camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
                                 SetZoom();
                             }
 

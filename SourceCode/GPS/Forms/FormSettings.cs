@@ -317,8 +317,8 @@ namespace AgOpenGPS
             mf.boundaryTriggerDistance = (double)boundaryDistance;
             Properties.Settings.Default.setF_boundaryTriggerDistance = mf.boundaryTriggerDistance;
 
-            mf.triangleResolution = (double)triResolution;
-            Properties.Settings.Default.setDisplay_triangleResolution = mf.triangleResolution;
+            mf.camera.triangleResolution = (double)triResolution;
+            Properties.Settings.Default.setDisplay_triangleResolution = mf.camera.triangleResolution;
 
             mf.minFixStepDist = (double)minFixStepDistance;
             Properties.Settings.Default.setF_minFixStep = mf.minFixStepDist;

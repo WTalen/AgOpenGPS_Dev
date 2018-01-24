@@ -2,9 +2,17 @@ void calcSteeringPID(void) {
   
   //Proportional
   pValue = Kp * steerAngleError *Ko;  
-  
-  //Integral
-  integrated_error = integrated_error + steerAngleError;
+
+  //if (abs(distanceFromLine) < 15)
+  //{
+    //Integral
+    integrated_error = integrated_error + steerAngleError;
+  //}
+  //else
+  {
+    //integrated_error = integrated_error + distanceFromLine/10;    
+  }
+
   if (integrated_error > maxIntErr) integrated_error = maxIntErr;
   if (integrated_error < -maxIntErr) integrated_error = -maxIntErr;
 
@@ -19,6 +27,9 @@ void calcSteeringPID(void) {
   iValue = Ki * integrated_error;  
   if (iValue > maxIntegralValue) iValue = maxIntegralValue;
   if (iValue < -maxIntegralValue) iValue = -maxIntegralValue;
+
+
+  
 
   //Derivative
   dError = steerAngleError - lastLastError;

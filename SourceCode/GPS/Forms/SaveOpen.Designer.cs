@@ -460,7 +460,7 @@ namespace AgOpenGPS
                         camera.camPitch = Properties.Settings.Default.setCam_pitch;
 
                         isAtanCam = Properties.Settings.Default.setCam_isAtanCam;
-                        triangleResolution = Properties.Settings.Default.setDisplay_triangleResolution;
+                        camera.triangleResolution = Properties.Settings.Default.setDisplay_triangleResolution;
 
                         isMetric = Properties.Settings.Default.setMenu_isMetric;
                         metricToolStrip.Checked = isMetric;

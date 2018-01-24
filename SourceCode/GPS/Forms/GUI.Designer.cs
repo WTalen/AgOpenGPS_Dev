@@ -615,16 +615,16 @@ namespace AgOpenGPS
         private void btnMinMax_Click(object sender, EventArgs e)
         {
             //keep a copy to go back to previous zoom
-            if (zoomValue < 56)
+            if (camera.zoomValue < 56)
             {
-                previousZoom = zoomValue;
-                zoomValue = 60;
+                camera.previousZoom = camera.zoomValue;
+                camera.zoomValue = 60;
             }
             else
             {
-                zoomValue = previousZoom;
+                camera.zoomValue = camera.previousZoom;
             }
-            camera.camSetDistance = zoomValue * zoomValue * -1;
+            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
             SetZoom();
         }
         //button for Manual On Off of the sections
@@ -850,18 +850,18 @@ namespace AgOpenGPS
         //The zoom buttons in out
         private void btnZoomIn_MouseDown(object sender, MouseEventArgs e)
         {
-            if (zoomValue <= 20) zoomValue += zoomValue * 0.1;
-            else zoomValue += zoomValue * 0.05;
-            camera.camSetDistance = zoomValue * zoomValue * -1;
+            if (camera.zoomValue <= 20) camera.zoomValue += camera.zoomValue * 0.1;
+            else camera.zoomValue += camera.zoomValue * 0.05;
+            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
             SetZoom();
         }
         private void btnZoomOut_MouseDown(object sender, MouseEventArgs e)
         {
-            if (zoomValue <= 20)
-            { if ((zoomValue -= zoomValue * 0.1) < 6.0) zoomValue = 6.0; }
-            else { if ((zoomValue -= zoomValue * 0.05) < 6.0) zoomValue = 6.0; }
+            if (camera.zoomValue <= 20)
+            { if ((camera.zoomValue -= camera.zoomValue * 0.1) < 6.0) camera.zoomValue = 6.0; }
+            else { if ((camera.zoomValue -= camera.zoomValue * 0.05) < 6.0) camera.zoomValue = 6.0; }
 
-            camera.camSetDistance = zoomValue * zoomValue * -1;
+            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
             SetZoom();
         }
         //view tilt up down and saving in settings
@@ -1952,8 +1952,15 @@ namespace AgOpenGPS
         public string RateAccumulatedVolumeLiters { get { return rc.volumeActual.ToString("N0") + " L"; } }
         public string RateAccumulatedVolumeGallons { get { return ((double)rc.volumeActual * 0.264172875).ToString("N0") + " Gal"; } }
 
-        public string RateAppliedActualLPerHA { get { return (rc.rateActual / (rc.currentWidth * pn.speed * .0016666666666 + 0.001)).ToString("N1"); } }
-        public string RateAppliedActualGPA { get { return ((rc.rateActual / (rc.currentWidth * pn.speed * .0016666666666 + 0.1)) * glm.LHa2galAc).ToString("N1"); } }
+        public string RateAppliedActualLPerHA { get {
+                if (rc.currentWidth > 0) return (rc.rateActual / ((rc.currentWidth) * pn.speed * .0016666666666 + 0.00001)).ToString("N1");
+                else return ("0.0");
+            } }
+        public string RateAppliedActualGPA { get {
+                if (rc.currentWidth > 0)
+                    return ((rc.rateActual / ((rc.currentWidth) * pn.speed * .0016666666666 + 0.00001)) * glm.LHa2galAc).ToString("N1");
+                else return ("0.0");
+            } }
 
         public Texture ParticleTexture { get; set; }
 

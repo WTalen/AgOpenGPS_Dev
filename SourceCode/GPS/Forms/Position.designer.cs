@@ -85,7 +85,7 @@ namespace AgOpenGPS
 
         //IMU 
         double rollCorrectionDistance = 0;
-        double gyroDelta, gyroCorrection, gyroRaw, gyroCorrected, turnDelta;
+        double gyroDelta, gyroCorrection, gyroRaw, gyroCorrected;
 
         //step position - slow speed spinner killer
         private int totalFixSteps = 10, currentStepFix = 0;
@@ -111,19 +111,6 @@ namespace AgOpenGPS
 
                 //reset the timer         
                 swFrame.Reset();
-
-                //now calculate NMEA rate
-                if (timerPn++ == 36)
-                {
-                    et = (1 / (hzTime * 0.000025));
-                    if (et > 4 && et < 8) fixUpdateHz = 5;
-                    if (et > 9 && et < 13) fixUpdateHz = 10;
-                    if (et > 1.6 && et < 3) fixUpdateHz = 2;
-                    if (et > 0.5 && et < 1.5) fixUpdateHz = 1;
-                    fixUpdateTime = 1 / (double)fixUpdateHz;
-                    timerPn = 0;
-                    hzTime = 0;
-                }
 
                 //start the watch and time till it gets back here
                 swFrame.Start();
@@ -454,7 +441,6 @@ namespace AgOpenGPS
         //end of UppdateFixPosition
         }
 
-
         //all the hitch, pivot, section, trailing hitch, headings and fixes
         private void CalculatePositionHeading()
         {
@@ -619,7 +605,7 @@ namespace AgOpenGPS
 
             //finally determine distance
             sectionTriggerStepDistance = sectionTriggerStepDistance * sectionTriggerStepDistance * 
-                metersPerSec * triangleResolution*2.0 + 1.0;
+                metersPerSec * camera.triangleResolution *2.0 + 1.0;
 
             //  ** Torriem Cam   *****
             //Default using fix Atan2 to calc cam, if unchecked in display settings use True Heading from NMEA

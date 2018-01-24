@@ -814,5 +814,17 @@ namespace AgOpenGPS.Properties {
                 this["setIMU_isRollFromGPS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int setPort_NMEAHz {
+            get {
+                return ((int)(this["setPort_NMEAHz"]));
+            }
+            set {
+                this["setPort_NMEAHz"] = value;
+            }
+        }
     }
 }
