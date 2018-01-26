@@ -133,6 +133,10 @@ namespace AgOpenGPS
             recvCounter++;
         }
 
+        public double eastingBeforeRoll;
+        public double eastingAfterRoll;
+        public double rollUsed;
+
         //call for position update after valid NMEA sentence
         private void UpdateFixPosition()
         {
@@ -142,11 +146,18 @@ namespace AgOpenGPS
 
             #region Roll
 
+            rollUsed = 0;
+
             if (mc.rollRaw != 9999)
             {
+                //for charting in GPS Data window
+                eastingBeforeRoll = pn.easting;
+                rollUsed = (double)mc.rollRaw/16;
+
                 //calculate how far the antenna moves based on sidehill roll
                 double roll = Math.Sin(glm.toRadians((mc.rollRaw - ahrs.rollZero) * 0.0625));
                 rollCorrectionDistance = Math.Abs(roll * vehicle.antennaHeight);
+
 
                 // roll to left is positive  **** important!!
                 if (roll > 0)
@@ -159,6 +170,9 @@ namespace AgOpenGPS
                     pn.easting = (Math.Cos(fixHeading) * -rollCorrectionDistance) + pn.easting;
                     pn.northing = (Math.Sin(fixHeading) * rollCorrectionDistance) + pn.northing;
                 }
+
+                //for charting the position after roll adjustment
+                eastingAfterRoll = pn.easting;
             }
 
             //pitchDistance = (pitch * vehicle.antennaHeight);

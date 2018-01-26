@@ -15,8 +15,6 @@ namespace AgOpenGPS
         /// The Tinker IMU object
         /// </summary>
         public readonly BrickIMUV2 imu;
-
-
         public static string HOST = "localhost";
         public static int PORT = 4223;
         public static readonly string UID = Properties.Settings.Default.setIMU_UID; // "68wESU"; // Change XXYYZZ to the UID of your IMU Brick 2.0
@@ -67,8 +65,6 @@ namespace AgOpenGPS
                 {
                 }
             }
-
-
         }
 
         //event for TinkerForge IMU
