@@ -56,7 +56,7 @@ namespace AgOpenGPS
         public double boundaryTriggerDistance = 4.0;
         public vec2 prevBoundaryPos = new vec2(0, 0);
 
-        //are we still getting valid data from GPS, resets to 0 in NMEA RMC block, watchdog 
+        //are we still getting valid data from GPS, resets to 0 in NMEA OGI block, watchdog 
         public int recvCounter = 20;
 
         //Everything is so wonky at the start
@@ -101,13 +101,13 @@ namespace AgOpenGPS
             pn.ParseNMEA();
 
             //time for a frame update with new valid nmea data
-            if (pn.updatedGGA | pn.updatedRMC)
+            if (pn.updatedGGA | pn.updatedOGI)
             {
                 //if saving a file ignore any movement
                 if (isSavingFile) return;
 
                 //accumulate time over multiple frames  
-                hzTime += swFrame.ElapsedMilliseconds;
+                hzTime = swFrame.ElapsedMilliseconds;
 
                 //reset the timer         
                 swFrame.Reset();
@@ -117,7 +117,7 @@ namespace AgOpenGPS
 
                 //reset both flags
                 pn.updatedGGA = false;
-                pn.updatedRMC = false;
+                pn.updatedOGI = false;
 
                 //update all data for new frame
                 UpdateFixPosition();
@@ -148,7 +148,7 @@ namespace AgOpenGPS
 
             rollUsed = 0;
 
-            if (mc.rollRaw != 9999)
+            if ((ahrs.isRollBrick | ahrs.isRollDogs) && mc.rollRaw != 9999)
             {
                 //for charting in GPS Data window
                 eastingBeforeRoll = pn.easting;
@@ -174,6 +174,12 @@ namespace AgOpenGPS
                 //for charting the position after roll adjustment
                 eastingAfterRoll = pn.easting;
             }
+            else
+            {
+                eastingAfterRoll = pn.easting;
+                eastingBeforeRoll = pn.easting;
+            }
+
 
             //pitchDistance = (pitch * vehicle.antennaHeight);
             ////pn.easting = (Math.Sin(fixHeading) * pitchDistance) + pn.easting;

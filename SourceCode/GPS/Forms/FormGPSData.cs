@@ -10,12 +10,11 @@ namespace AgOpenGPS
     public partial class FormGPSData : Form
     {
         private readonly FormGPS mf = null;
-
+        bool isBtnRollOn = true;
         //chart data
         private string eastValue = "0";
-
         private string eastAdjValue = "-1";
-        private string rollValue = "-1";
+        private string rollValue = "1";
 
         public FormGPSData(Form callingForm)
         {
@@ -75,27 +74,30 @@ namespace AgOpenGPS
 
             eastAdjValue = mf.eastingAfterRoll.ToString("N3");
             eastValue = mf.eastingBeforeRoll.ToString("N3");
-            rollValue = mf.rollUsed.ToString("N3");
+
+            rollValue = (mf.rollUsed/10 + yMin + 2).ToString("N3");
 
             lblEast.Text = eastValue;
             lblAdjEast.Text = eastAdjValue;
-            lblRoll.Text = rollValue;
+            lblRoll.Text = mf.rollUsed.ToString("N3");
 
             //chart data
             Series s = unoChart.Series["East"];
             Series w = unoChart.Series["AdjEast"];
-            //Series t = unoChart.Series["Roll"];
+            Series t = unoChart.Series["Roll"];
             double nextX = 1;
-            //double nextX1 = 1;
+            double nextX1 = 1;
             double nextX5 = 1;
+            if (isBtnRollOn)
+            {
+                if (s.Points.Count > 0) nextX = s.Points[s.Points.Count - 1].XValue + 1;
+                if (w.Points.Count > 0) nextX5 = w.Points[w.Points.Count - 1].XValue + 1;
+                if (t.Points.Count > 0) nextX1 = w.Points[t.Points.Count - 1].XValue + 1;
 
-            if (s.Points.Count > 0) nextX = s.Points[s.Points.Count - 1].XValue + 1;
-            if (w.Points.Count > 0) nextX5 = w.Points[w.Points.Count - 1].XValue + 1;
-            //if (t.Points.Count > 0) nextX1 = w.Points[t.Points.Count - 1].XValue + 1;
-
-            unoChart.Series["East"].Points.AddXY(nextX, eastValue);
-            unoChart.Series["AdjEast"].Points.AddXY(nextX5, eastAdjValue);
-            //unoChart.Series["Roll"].Points.AddXY(nextX1, rollValue);
+                unoChart.Series["East"].Points.AddXY(nextX, eastValue);
+                unoChart.Series["AdjEast"].Points.AddXY(nextX5, eastAdjValue);
+                unoChart.Series["Roll"].Points.AddXY(nextX1, rollValue);
+            }
 
             while (s.Points.Count > 100)
             {
@@ -105,15 +107,20 @@ namespace AgOpenGPS
             {
                 w.Points.RemoveAt(0);
             }
-            //while (t.Points.Count > 100)
-            //{
-            //    t.Points.RemoveAt(0);
-            //}
+            while (t.Points.Count > 100)
+            {
+                t.Points.RemoveAt(0);
+            }
 
             unoChart.ChartAreas[0].AxisY.Maximum = yMax;
             unoChart.ChartAreas[0].AxisY.Minimum = yMin;
 
             unoChart.ResetAutoValues();
+        }
+
+        private void btnRoll_Click(object sender, EventArgs e)
+        {
+            isBtnRollOn = !isBtnRollOn;
         }
     }
 }
