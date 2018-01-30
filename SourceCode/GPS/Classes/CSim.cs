@@ -184,7 +184,7 @@ namespace AgOpenGPS
         private void BuildOGI()
         {
             sbOGI.Clear();
-            sbOGI.Append("$GAOGI,");
+            sbOGI.Append("$PAOGI,");
 
             sbOGI.Append(DateTime.Now.ToString("HHmmss.00,", CultureInfo.InvariantCulture));
             sbOGI.Append(latNMEA.ToString(CultureInfo.InvariantCulture)).Append(',').Append(NS).Append(',');

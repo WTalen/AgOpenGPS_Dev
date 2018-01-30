@@ -183,7 +183,7 @@ FROM IMU:
 
                 if (words[0] == "$GPGGA" | words[0] == "$GNGGA") ParseGGA();
                 if (words[0] == "$GPVTG" | words[0] == "$GNVTG") ParseVTG();
-                if (words[0] == "$GAOGI" | words[0] == "$GNOGI") ParseOGI();
+                if (words[0] == "$PAOGI") ParseOGI();
             }// while still data
         }
 
@@ -278,7 +278,7 @@ FROM IMU:
 
         private void ParseOGI()
         {
-            //GAOGI parsing of the sentence 
+            //PAOGI parsing of the sentence 
             //make sure there aren't missing coords in sentence
             if (!String.IsNullOrEmpty(words[2]) & !String.IsNullOrEmpty(words[3])
                 & !String.IsNullOrEmpty(words[4]) & !String.IsNullOrEmpty(words[5]))
