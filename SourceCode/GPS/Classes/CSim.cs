@@ -199,7 +199,7 @@ namespace AgOpenGPS
                 .Append((degrees).ToString(CultureInfo.InvariantCulture));
 
 
-            sbOGI.Append(",0.11,0.12,359.9,T,*");
+            sbOGI.Append(",0.11,0.12,359.9,5.0,T*");
 
             CalculateChecksum(sbOGI.ToString());
             sbOGI.Append(sumStr);
