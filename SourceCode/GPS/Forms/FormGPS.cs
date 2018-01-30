@@ -1246,6 +1246,12 @@ namespace AgOpenGPS
         private const int GID_PAN = 4;
         private const int GID_ROTATE = 5;
         private const int GID_TWOFINGERTAP = 6;
+
+        private void DataPage_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private const int GID_PRESSANDTAP = 7;
 
         // Gesture flags - GESTUREINFO.dwFlags

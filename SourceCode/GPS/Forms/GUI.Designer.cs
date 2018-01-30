@@ -87,8 +87,6 @@ namespace AgOpenGPS
 
             isBigAltitudeOn = Settings.Default.setMenu_isBigAltitudeOn;
             bigAltitudeToolStripMenuItem.Checked = isBigAltitudeOn;
-            if (isBigAltitudeOn) lblBigElevation.Visible = true;
-            else lblBigElevation.Visible = false;
 
             simulatorOnToolStripMenuItem.Checked = Settings.Default.setMenu_isSimulatorOn;
             if (simulatorOnToolStripMenuItem.Checked)
@@ -1508,8 +1506,6 @@ namespace AgOpenGPS
         {
             isBigAltitudeOn = !isBigAltitudeOn;
             bigAltitudeToolStripMenuItem.Checked = isBigAltitudeOn;
-            if (isBigAltitudeOn) lblBigElevation.Visible = true;
-            else lblBigElevation.Visible = false;
             Settings.Default.setMenu_isBigAltitudeOn = isBigAltitudeOn;
             Settings.Default.Save();
         }
@@ -1992,54 +1988,54 @@ namespace AgOpenGPS
                     if (isMetric)
                     {
                         lblAltitude.Text = Altitude;
-                        if (isBigAltitudeOn) lblBigElevation.Text = Altitude;
-
                         ////boundary and headland
                         lblBoundaryArea.Text = boundz.areaHectare;
                         if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(distPivot)) + "m";
                         else lblHeadlandDistanceAway.Text = "***";
 
                         lblHeadlandDistanceFromTool.Text = ((int)(distTool)) + "m";
-
                     }
                     else //imperial
                     {
                         lblAltitude.Text = AltitudeFeet;
-                        if (isBigAltitudeOn) lblBigElevation.Text = AltitudeFeet;
                         ////Boundary
                         lblBoundaryArea.Text = boundz.areaAcre;
                         if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
                         else lblHeadlandDistanceAway.Text = "***";
 
                         lblHeadlandDistanceFromTool.Text = ((int)(glm.m2ft * distTool)) + "ft";
-
                     }
 
                     //both
-                lblLatitude.Text = Latitude;
-                lblLongitude.Text = Longitude;
-                lblFixQuality.Text = FixQuality;
-                lblSats.Text = SatsTracked;
+                    lblLatitude.Text = Latitude;
+                    lblLongitude.Text = Longitude;
+                    lblFixQuality.Text = FixQuality;
+                    lblSats.Text = SatsTracked;
 
-                lblRoll.Text = RollInDegrees;
-                lblGyroHeading.Text = GyroInDegrees;
-                lblGPSHeading.Text = GPSHeading;
-                //lblTurnProgressBar.Value = youTurnProgressBar;
+                    lblRoll.Text = RollInDegrees;
+                    lblGyroHeading.Text = GyroInDegrees;
+                    lblGPSHeading.Text = GPSHeading;
 
-                //up in the menu a few pieces of info
-                if (isJobStarted)
-                {
-                    lblEasting.Text = "E: " + Math.Round(pn.easting, 1).ToString();
-                    lblNorthing.Text = "N: " + Math.Round(pn.northing, 1).ToString();
-                }
-                else
-                {
-                    lblEasting.Text = "E: " + ((int)pn.actualEasting).ToString();
-                    lblNorthing.Text = "N: " + ((int)pn.actualNorthing).ToString();
-                }
+                    lblEmlidYaw.Text = pn.nYaw.ToString("N2");
+                    lblEmlidRoll.Text = pn.nRoll.ToString("N2");
+                    lblEmlidPitch.Text = pn.nPitch.ToString("N2");
 
-                lblZone.Text = pn.zone.ToString();
-                tboxSentence.Text = recvSentenceSettings;
+                    //lblTurnProgressBar.Value = youTurnProgressBar;
+
+                    //up in the menu a few pieces of info
+                    if (isJobStarted)
+                    {
+                        lblEasting.Text = "E: " + Math.Round(pn.easting, 1).ToString();
+                        lblNorthing.Text = "N: " + Math.Round(pn.northing, 1).ToString();
+                    }
+                    else
+                    {
+                        lblEasting.Text = "E: " + ((int)pn.actualEasting).ToString();
+                        lblNorthing.Text = "N: " + ((int)pn.actualNorthing).ToString();
+                    }
+
+                    lblZone.Text = pn.zone.ToString();
+                    tboxSentence.Text = recvSentenceSettings;
 
                 }
 
