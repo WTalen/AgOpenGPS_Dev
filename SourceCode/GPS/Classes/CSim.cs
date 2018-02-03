@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 namespace AgOpenGPS
@@ -11,8 +9,10 @@ namespace AgOpenGPS
         private readonly FormGPS mf;
 
         #region properties sim
+
         //Our two new nmea strings
         private readonly StringBuilder sbOGI = new StringBuilder();
+
         private readonly StringBuilder sbGGA = new StringBuilder();
         private readonly StringBuilder sbVTG = new StringBuilder();
 
@@ -21,6 +21,7 @@ namespace AgOpenGPS
 
         //GPS related properties
         private readonly int fixQuality = 3, sats = 7;
+
         private readonly double HDOP = 0.9;
         private readonly double altitude = 20.09876;
         private readonly char EW = 'W';
@@ -36,7 +37,7 @@ namespace AgOpenGPS
         //The checksum of an NMEA line
         private string sumStr = "";
 
-        #endregion
+        #endregion properties sim
 
         public CSim(FormGPS _f)
         {
@@ -63,19 +64,19 @@ namespace AgOpenGPS
             speed = Math.Round(1.944 * stepDistance * 5.0, 1);
             //lblSpeed.Text = (Math.Round(1.852 * speed, 1)).ToString();
 
-            BuildOGI();
-            //BuildGGA();
-            //BuildVTG();
+            //BuildOGI();
+            BuildGGA();
+            BuildVTG();
 
-            //send garbage for testing            
-            //sbSendText.Append("$\r\n,4,4,,,,,,*\\\\\\\\\\\\\\\\\\");  
+            //send garbage for testing
+            //sbSendText.Append("$\r\n,4,4,,,,,,*\\\\\\\\\\\\\\\\\\");
             //if (chkVTG.Checked) sbSendText.Append(sbVTG.ToString());
             //if (chkGGA.Checked) sbSendText.Append(sbGGA.ToString());
             //if (chkOGI.Checked) sbSendText.Append(sbOGI.ToString());
 
-            //sbSendText.Append(sbGGA.ToString());
-            //sbSendText.Append(sbVTG.ToString());
-            sbSendText.Append(sbOGI.ToString());
+            sbSendText.Append(sbGGA.ToString());
+            sbSendText.Append(sbVTG.ToString());
+            //sbSendText.Append(sbOGI.ToString());
             mf.pn.rawBuffer += sbSendText.ToString();
             mf.recvSentenceSettings = mf.pn.rawBuffer;
 
@@ -170,7 +171,7 @@ namespace AgOpenGPS
             sbVTG.Append(sumStr);
             sbVTG.Append("\r\n");
 
-            /*         $GPVTG,054.7,T,034.4,M,005.5,N,010.2,K*48   
+            /*         $GPVTG,054.7,T,034.4,M,005.5,N,010.2,K*48
                VTG          Track made good and ground speed
                054.7,T      True track made good (degrees)
                034.4,M      Magnetic track made good
@@ -178,7 +179,6 @@ namespace AgOpenGPS
                010.2,K      Ground speed, Kilometers per hour
                *48          Checksum
             */
-
         }
 
         private void BuildOGI()
@@ -197,7 +197,6 @@ namespace AgOpenGPS
                 .Append("1.2,")
                 .Append(speed.ToString(CultureInfo.InvariantCulture)).Append(',')
                 .Append((degrees).ToString(CultureInfo.InvariantCulture));
-
 
             sbOGI.Append(",0.11,0.12,359.9,5.0,T*");
 

@@ -98,6 +98,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.nudMinFixStepDistance = new System.Windows.Forms.NumericUpDown();
             this.tabGuidance = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnRollZero = new System.Windows.Forms.GroupBox();
             this.btnRemoveZeroOffset = new System.Windows.Forms.Button();
             this.lblRollZeroOffset = new System.Windows.Forms.Label();
@@ -106,6 +107,7 @@
             this.cboxHeadingBNO = new System.Windows.Forms.CheckBox();
             this.cboxHeadingBrick = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cboxRollBrick = new System.Windows.Forms.CheckBox();
             this.cboxRollDogs = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tboxTinkerUID = new System.Windows.Forms.TextBox();
@@ -122,8 +124,8 @@
             this.lblInchesCm = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.bntOK = new System.Windows.Forms.Button();
-            this.cboxRollBrick = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.cboxHeadingPAOGI = new System.Windows.Forms.CheckBox();
+            this.cboxRollPAOGI = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabVehicle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHitchLength)).BeginInit();
@@ -959,6 +961,11 @@
             this.tabGuidance.Name = "tabGuidance";
             this.tabGuidance.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
             // btnRollZero
             // 
             this.btnRollZero.Controls.Add(this.btnRemoveZeroOffset);
@@ -989,6 +996,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.cboxHeadingPAOGI);
             this.groupBox7.Controls.Add(this.cboxHeadingBNO);
             this.groupBox7.Controls.Add(this.cboxHeadingBrick);
             resources.ApplyResources(this.groupBox7, "groupBox7");
@@ -1011,11 +1019,19 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.cboxRollPAOGI);
             this.groupBox6.Controls.Add(this.cboxRollBrick);
             this.groupBox6.Controls.Add(this.cboxRollDogs);
             resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
+            // 
+            // cboxRollBrick
+            // 
+            resources.ApplyResources(this.cboxRollBrick, "cboxRollBrick");
+            this.cboxRollBrick.Name = "cboxRollBrick";
+            this.cboxRollBrick.UseVisualStyleBackColor = true;
+            this.cboxRollBrick.CheckedChanged += new System.EventHandler(this.cboxRollBrick_CheckedChanged);
             // 
             // cboxRollDogs
             // 
@@ -1118,17 +1134,19 @@
             this.bntOK.UseVisualStyleBackColor = true;
             this.bntOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // cboxRollBrick
+            // cboxHeadingPAOGI
             // 
-            resources.ApplyResources(this.cboxRollBrick, "cboxRollBrick");
-            this.cboxRollBrick.Name = "cboxRollBrick";
-            this.cboxRollBrick.UseVisualStyleBackColor = true;
-            this.cboxRollBrick.CheckedChanged += new System.EventHandler(this.cboxRollBrick_CheckedChanged);
+            resources.ApplyResources(this.cboxHeadingPAOGI, "cboxHeadingPAOGI");
+            this.cboxHeadingPAOGI.Name = "cboxHeadingPAOGI";
+            this.cboxHeadingPAOGI.UseVisualStyleBackColor = true;
+            this.cboxHeadingPAOGI.CheckedChanged += new System.EventHandler(this.cboxHeadingPAOGI_CheckedChanged);
             // 
-            // label10
+            // cboxRollPAOGI
             // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
+            resources.ApplyResources(this.cboxRollPAOGI, "cboxRollPAOGI");
+            this.cboxRollPAOGI.Name = "cboxRollPAOGI";
+            this.cboxRollPAOGI.UseVisualStyleBackColor = true;
+            this.cboxRollPAOGI.CheckedChanged += new System.EventHandler(this.cboxRollPAOGI_CheckedChanged);
             // 
             // FormSettings
             // 
@@ -1301,5 +1319,7 @@
         private System.Windows.Forms.Button btnRemoveZeroOffset;
         private System.Windows.Forms.CheckBox cboxRollBrick;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cboxHeadingPAOGI;
+        private System.Windows.Forms.CheckBox cboxRollPAOGI;
     }
 }

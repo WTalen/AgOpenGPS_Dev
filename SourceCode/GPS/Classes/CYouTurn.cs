@@ -77,7 +77,6 @@ namespace AgOpenGPS
         public double steerAngleYT;
         public double rEastYT, rNorthYT;
         public double ppRadiusYT;
-        private double minLookAheadDistance;
         private int numShapePoints;
 
         //list of points for scaled and rotated YouTurn line
@@ -219,8 +218,9 @@ namespace AgOpenGPS
                 mf.hl.FindClosestHeadlandPoint(mf.toolPos);
                 if ((int)mf.hl.closestHeadlandPt.easting != -1)
                 {
-                    mf.distTool = mf.pn.Distance(mf.toolPos.northing, mf.toolPos.easting,
-                        mf.hl.closestHeadlandPt.northing, mf.hl.closestHeadlandPt.easting);
+                    #pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
+                    mf.distTool = mf.pn.Distance(mf.toolPos.northing, mf.toolPos.easting, mf.hl.closestHeadlandPt.northing, mf.hl.closestHeadlandPt.easting);
+                    #pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
                 }
                 else //we've lost the headland
                 {
@@ -348,9 +348,6 @@ namespace AgOpenGPS
         public void BuildYouTurnListToRight(bool isTurnRight)
         {
             isYouTurnShapeDisplayed = true;
-
-            //grab the Lookahead that ABLine uses
-            minLookAheadDistance = mf.ABLine.minLookAheadDistance;
 
             //point on AB line closest to pivot axle point from ABLine PurePursuit
             rEastYT = mf.ABLine.rEastAB;
@@ -508,7 +505,7 @@ namespace AgOpenGPS
                 double goalPointDistance = mf.pn.speed * mf.vehicle.goalPointLookAhead * 0.27777777;
 
                 //minimum of Whatever AB Line is meters look ahead
-                if (goalPointDistance < minLookAheadDistance) goalPointDistance = minLookAheadDistance;
+                if (goalPointDistance < mf.vehicle.minLookAheadDistance) goalPointDistance = mf.vehicle.minLookAheadDistance;
 
                 // used for calculating the length squared of next segment.
                 double tempDist = 0.0;

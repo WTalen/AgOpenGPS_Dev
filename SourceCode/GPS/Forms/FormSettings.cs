@@ -25,7 +25,7 @@ namespace AgOpenGPS
 
         private bool isWorkSwEn, isWorkSwActiveLow;
 
-        private bool isHeadingBNO, isHeadingBrick, isRollDogs, isRollBrick;
+        private bool isHeadingBNO, isHeadingBrick, isHeadingPAOGI, isRollDogs, isRollBrick, isRollPAOGI;
 
         private readonly double metImp2m, m2MetImp, cutoffMetricImperial, maxWidth;
         private double cutoffSpeed;
@@ -215,11 +215,15 @@ namespace AgOpenGPS
             cboxHeadingBrick.Checked = Properties.Settings.Default.setIMU_isHeadingFromBrick;
             cboxRollDogs.Checked = Properties.Settings.Default.setIMU_isRollFromDogs;
             cboxRollBrick.Checked = Properties.Settings.Default.setIMU_isRollFromBrick;
+            cboxHeadingPAOGI.Checked = Properties.Settings.Default.setIMU_isHeadingFromPAOGI;
+            cboxRollPAOGI.Checked = Properties.Settings.Default.setIMU_isRollFromPAOGI;
 
             isHeadingBNO = Properties.Settings.Default.setIMU_isHeadingFromBNO;
             isHeadingBrick = Properties.Settings.Default.setIMU_isHeadingFromBrick;
             isRollDogs = Properties.Settings.Default.setIMU_isRollFromDogs;
             isRollBrick = Properties.Settings.Default.setIMU_isRollFromBrick;
+            isHeadingPAOGI = Properties.Settings.Default.setIMU_isHeadingFromPAOGI;
+            isRollPAOGI = Properties.Settings.Default.setIMU_isRollFromPAOGI;
 
             lblRollZeroOffset.Text = ((double)Properties.Settings.Default.setIMU_rollZero / 16).ToString("N2");
         }
@@ -340,6 +344,8 @@ namespace AgOpenGPS
             mf.ahrs.isRollDogs = isRollDogs;
             Properties.Settings.Default.setIMU_isRollFromBrick = isRollBrick;
             mf.ahrs.isRollBrick = isRollBrick;
+            Properties.Settings.Default.setIMU_isRollFromPAOGI = isRollPAOGI;
+            Properties.Settings.Default.setIMU_isHeadingFromPAOGI = isHeadingPAOGI;
 
             Properties.Settings.Default.Save();
             Properties.Vehicle.Default.Save();
@@ -923,6 +929,7 @@ namespace AgOpenGPS
 
         #endregion WorkSwitch //---------------------------------------------------------
 
+        
         #region Guidance
 
         private void cboxHeadingBNO_CheckedChanged(object sender, EventArgs e)
@@ -932,6 +939,8 @@ namespace AgOpenGPS
             {
                 cboxHeadingBrick.Checked = false;
                 isHeadingBrick = false;
+                cboxHeadingPAOGI.Checked = false;
+                isHeadingPAOGI = false;
             }
         }
 
@@ -942,6 +951,20 @@ namespace AgOpenGPS
             {
                 cboxHeadingBNO.Checked = false;
                 isHeadingBNO = false;
+                cboxHeadingPAOGI.Checked = false;
+                isHeadingPAOGI = false;
+            }
+        }
+
+        private void cboxHeadingPAOGI_CheckedChanged(object sender, EventArgs e)
+        {
+            isHeadingPAOGI = cboxHeadingPAOGI.Checked;
+            if (isHeadingPAOGI)
+            {
+                cboxHeadingBNO.Checked = false;
+                isHeadingBNO = false;
+                cboxHeadingBrick.Checked = false;
+                isHeadingBrick = false;
             }
         }
 
@@ -952,6 +975,8 @@ namespace AgOpenGPS
             {
                 cboxRollBrick.Checked = false;
                 isRollBrick = false;
+                cboxRollPAOGI.Checked = false;
+                isRollPAOGI = false;
             }
         }
 
@@ -962,6 +987,20 @@ namespace AgOpenGPS
             {
                 cboxRollDogs.Checked = false;
                 isRollDogs = false;
+                cboxRollPAOGI.Checked = false;
+                isRollPAOGI = false;
+            }
+        }
+
+        private void cboxRollPAOGI_CheckedChanged(object sender, EventArgs e)
+        {
+            isRollPAOGI = cboxRollPAOGI.Checked;
+            if (isRollPAOGI)
+            {
+                cboxRollDogs.Checked = false;
+                isRollDogs = false;
+                cboxRollBrick.Checked = false;
+                isRollBrick = false;
             }
         }
 

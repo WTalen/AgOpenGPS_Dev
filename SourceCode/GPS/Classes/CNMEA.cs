@@ -10,7 +10,7 @@ namespace AgOpenGPS
 
     //$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M ,  ,*47
     //   0     1      2      3    4      5 6  7  8   9    10 11  12 13  14
-    //        Time      Lat       Lon  
+    //        Time      Lat       Lon
 
     /*
     GGA - essential fix data which provide 3D location and accuracy data.
@@ -40,7 +40,7 @@ namespace AgOpenGPS
          (empty field) DGPS station ID number
          *47          the checksum data, always begins with *
      *
-     * 
+     *
    //$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A
    //  0      1    2   3      4    5      6   7     8     9     10   11
     //        Time      Lat        Lon       knots  Ang   Date  MagV
@@ -58,14 +58,14 @@ namespace AgOpenGPS
          *6A          The checksum data, always begins with *
      *
    $GPVTG,054.7,T,034.4,M,005.5,N,010.2,K*48
-     *   
+     *
         VTG          Track made good and ground speed
         054.7,T      True track made good (degrees)
         034.4,M      Magnetic track made good
         005.5,N      Ground speed, knots
         010.2,K      Ground speed, Kilometers per hour
         *48          Checksum
-        * 
+        *
         * From GGA:
 (1 , 2) 123519 Fix taken at 1219 UTC
 (3 , 4) 4807.038,N Latitude 48 deg 07.038' N
@@ -95,7 +95,7 @@ FROM IMU:
 (18) XXX.xx Yaw Rate in Degrees / second
 (19) T/F IMU status - Valid IMU Fusion
 
-*CHKSUM 
+*CHKSUM
     */
 
     #endregion NMEA_Sentence_Guide
@@ -113,15 +113,18 @@ FROM IMU:
 
         //UTM coordinates
         public double northing, easting;
+
         public double actualEasting, actualNorthing;
         public double zone;
 
         //other GIS Info
         public double altitude, speed;
+
         public double headingTrue, hdop, ageDiff;
 
-        //imu 
+        //imu
         public double nRoll, nPitch, nYaw, nAngularVelocity;
+
         public bool isValidIMU;
 
         public int fixQuality;
@@ -133,6 +136,7 @@ FROM IMU:
 
         //UTM numbers are huge, these cut them way down.
         public int utmNorth, utmEast;
+
         public StringBuilder logNMEASentence = new StringBuilder();
         private readonly FormGPS mf;
 
@@ -227,16 +231,15 @@ FROM IMU:
         {
             //$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M ,  ,*47
             //   0     1      2      3    4      5 6  7  8   9    10 11  12 13  14
-            //        Time      Lat       Lon  
+            //        Time      Lat       Lon
 
             //is the sentence GGA
             if (!String.IsNullOrEmpty(words[2]) & !String.IsNullOrEmpty(words[3])
                 & !String.IsNullOrEmpty(words[4]) & !String.IsNullOrEmpty(words[5]))
             {
-                double temp;
                 //get latitude and convert to decimal degrees
                 double.TryParse(words[2].Substring(0, 2), NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
-                double.TryParse(words[2].Substring(2), NumberStyles.Float, CultureInfo.InvariantCulture, out  temp);
+                double.TryParse(words[2].Substring(2), NumberStyles.Float, CultureInfo.InvariantCulture, out double temp);
                 temp *= 0.01666666666666666666666666666667;
                 latitude += temp;
                 if (words[3] == "S")
@@ -248,10 +251,10 @@ FROM IMU:
 
                 //get longitude and convert to decimal degrees
                 double.TryParse(words[4].Substring(0, 3), NumberStyles.Float, CultureInfo.InvariantCulture, out longitude);
-                    double.TryParse(words[4].Substring(3), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+                double.TryParse(words[4].Substring(3), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
                 longitude += temp * 0.01666666666666666666666666666667;
 
-                 { if (words[5] == "W") longitude *= -1; }
+                { if (words[5] == "W") longitude *= -1; }
 
                 //calculate zone and UTM coords
                 DecDeg2UTM();
@@ -278,15 +281,14 @@ FROM IMU:
 
         private void ParseOGI()
         {
-            //PAOGI parsing of the sentence 
+            //PAOGI parsing of the sentence
             //make sure there aren't missing coords in sentence
             if (!String.IsNullOrEmpty(words[2]) & !String.IsNullOrEmpty(words[3])
                 & !String.IsNullOrEmpty(words[4]) & !String.IsNullOrEmpty(words[5]))
             {
-                double temp;
                 //get latitude and convert to decimal degrees
                 double.TryParse(words[2].Substring(0, 2), NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
-                double.TryParse(words[2].Substring(2), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+                double.TryParse(words[2].Substring(2), NumberStyles.Float, CultureInfo.InvariantCulture, out double temp);
                 temp *= 0.01666666666666666666666666666667;
                 latitude += temp;
                 if (words[3] == "S")
@@ -330,19 +332,24 @@ FROM IMU:
 
                 //roll
                 double.TryParse(words[14], NumberStyles.Float, CultureInfo.InvariantCulture, out nRoll);
+                if (mf.ahrs.isRollPAOGI) mf.mc.rollRaw = (int)(nRoll * 16);
 
                 //pitch
                 double.TryParse(words[15], NumberStyles.Float, CultureInfo.InvariantCulture, out nPitch);
 
                 //yaw
                 double.TryParse(words[16], NumberStyles.Float, CultureInfo.InvariantCulture, out nYaw);
+                if (mf.ahrs.isHeadingPAOGI)
+                {
+                    mf.mc.prevGyroHeading = mf.mc.gyroHeading;
+                    mf.mc.gyroHeading = (int)(nYaw * 16);
+                }
 
                 //Angular velocity
                 double.TryParse(words[17], NumberStyles.Float, CultureInfo.InvariantCulture, out nAngularVelocity);
 
                 //is imu valid fusion
-                if (words[18] == "T") isValidIMU = true;
-                else isValidIMU = false;
+                isValidIMU = words[18] == "T";
 
                 //update the watchdog
                 mf.recvCounter = 0;
@@ -398,15 +405,15 @@ FROM IMU:
                 // Calculated checksum converted to a 2 digit hex string
                 string sumStr = String.Format("{0:X2}", sum);
 
-            // Compare to checksum in sentence
-            return sumStr.Equals(Sentence.Substring(inx + 1, 2));
+                // Compare to checksum in sentence
+                return sumStr.Equals(Sentence.Substring(inx + 1, 2));
             }
             catch (Exception e)
             {
                 mf.WriteErrorLog("Validate Checksum" + e);
                 return false;
             }
-         }
+        }
 
         public double Distance(double northing1, double easting1, double northing2, double easting2)
         {
@@ -418,13 +425,14 @@ FROM IMU:
         //not normalized distance, no square root
         public double DistanceSquared(double northing1, double easting1, double northing2, double easting2)
         {
-            return  Math.Pow(easting1 - easting2, 2) + Math.Pow(northing1 - northing2, 2);
+            return Math.Pow(easting1 - easting2, 2) + Math.Pow(northing1 - northing2, 2);
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //private double pi = 3.141592653589793238462643383279502884197169399375;
         private const double sm_a = 6378137.0;
+
         private const double sm_b = 6356752.314;
         private const double UTMScaleFactor = 0.9996;
         //private double UTMScaleFactor2 = 1.0004001600640256102440976390556;
@@ -504,11 +512,10 @@ FROM IMU:
 
 //                #region $GPRMC
 
-//                //GPRMC parsing of the sentence 
+//                //GPRMC parsing of the sentence
 //                //make sure there aren't missing coords in sentence
 //                if (words[0] == "$GPRMC" & words[3] != "" & words[4] != "" & words[5] != "" & words[6] != "")
 //                {
-
 //                    //Status
 //                    if (words[2] == String.Empty) status = "z";
 //                    else

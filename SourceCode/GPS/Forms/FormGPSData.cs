@@ -10,7 +10,7 @@ namespace AgOpenGPS
     public partial class FormGPSData : Form
     {
         private readonly FormGPS mf = null;
-        bool isBtnRollOn = true;
+        private bool isBtnRollOn = true;
         //chart data
         private string eastValue = "0";
         private string eastAdjValue = "-1";
@@ -72,14 +72,14 @@ namespace AgOpenGPS
             yMax = (int)(mf.eastingAfterRoll + 2);
             yMin = (int)(mf.eastingAfterRoll - 2);
 
-            eastAdjValue = mf.eastingAfterRoll.ToString("N3");
-            eastValue = mf.eastingBeforeRoll.ToString("N3");
-
-            rollValue = (mf.rollUsed/10 + yMin + 2).ToString("N3");
-
+            #pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
+            eastAdjValue = mf.eastingAfterRoll.ToString("N2");
+            eastValue = mf.eastingBeforeRoll.ToString("N2");
+            rollValue = ((mf.rollUsed/10) + yMin + 2).ToString("N2");
             lblEast.Text = eastValue;
             lblAdjEast.Text = eastAdjValue;
-            lblRoll.Text = mf.rollUsed.ToString("N3");
+            lblRoll.Text = mf.rollUsed.ToString("N2");
+            #pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
 
             //chart data
             Series s = unoChart.Series["East"];
@@ -99,18 +99,9 @@ namespace AgOpenGPS
                 unoChart.Series["Roll"].Points.AddXY(nextX1, rollValue);
             }
 
-            while (s.Points.Count > 100)
-            {
-                s.Points.RemoveAt(0);
-            }
-            while (w.Points.Count > 100)
-            {
-                w.Points.RemoveAt(0);
-            }
-            while (t.Points.Count > 100)
-            {
-                t.Points.RemoveAt(0);
-            }
+            while (s.Points.Count > 100) s.Points.RemoveAt(0);
+            while (w.Points.Count > 100) w.Points.RemoveAt(0);
+            while (t.Points.Count > 100) t.Points.RemoveAt(0);
 
             unoChart.ChartAreas[0].AxisY.Maximum = yMax;
             unoChart.ChartAreas[0].AxisY.Minimum = yMin;

@@ -444,8 +444,7 @@ namespace AgOpenGPS
         }
 
         // Buttons //-----------------------------------------------------------------------
-
-        //auto steer off and on
+        //Auto steer off and on
         private void btnAutoSteer_Click(object sender, EventArgs e)
         {
             if (isAutoSteerBtnOn)
@@ -467,6 +466,7 @@ namespace AgOpenGPS
                 }
             }
         }
+
         //ABLine
         private void btnABLine_Click(object sender, EventArgs e)
         {
@@ -569,7 +569,6 @@ namespace AgOpenGPS
                 }
             }
         }
-
         private void btnABCurve_Click(object sender, EventArgs e)
         {
             //if contour is on, turn it off
@@ -609,22 +608,6 @@ namespace AgOpenGPS
             form.Show();
         }
 
-        //zoom up close and far away
-        private void btnMinMax_Click(object sender, EventArgs e)
-        {
-            //keep a copy to go back to previous zoom
-            if (camera.zoomValue < 56)
-            {
-                camera.previousZoom = camera.zoomValue;
-                camera.zoomValue = 60;
-            }
-            else
-            {
-                camera.zoomValue = camera.previousZoom;
-            }
-            camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;
-            SetZoom();
-        }
         //button for Manual On Off of the sections
         private void btnManualOffOn_Click(object sender, EventArgs e)
         {
@@ -899,14 +882,22 @@ namespace AgOpenGPS
            ABLine.SnapABLine();
         }
 
-        //panel buttons
+        //tab config buttons
         private void btnGPSData_Click(object sender, EventArgs e)
         {
             Form form = new FormGPSData(this);
             form.Show();
         }
+        private void btnFileExplorer_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                FileSaveFlagsKML();
+            }
+            Process.Start(fieldsDirectory + currentFieldDirectory);
+        }
 
-        //YouTurn in the tab control
+        //YouTurn on off
         private void btnEnableAutoYouTurn_Click(object sender, EventArgs e)
         {
             if (!yt.isYouTurnBtnOn)
@@ -920,15 +911,9 @@ namespace AgOpenGPS
                 btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
             }
         }
-        private void btnFileExplorer_Click(object sender, EventArgs e)
-        {
-            if (isJobStarted)
-            {
-                FileSaveFlagsKML();
-            }
-            Process.Start(fieldsDirectory + currentFieldDirectory);
-        }
 
+        //Rate
+ 
         private void btnRateConfig_Click(object sender, EventArgs e)
         {
             var form = new FormRate(this);
@@ -944,7 +929,6 @@ namespace AgOpenGPS
                 btnRate2Select.Text = (rc.rate2 * glm.LHa2galAc).ToString("N1");
             }
         }
-
         private void btnRate_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1020,7 +1004,6 @@ namespace AgOpenGPS
             btnRate1Select.ForeColor = Color.SlateGray;
             btnRate2Select.ForeColor = Color.Black;
         }
-
         private void btnRateUp_Click(object sender, EventArgs e)
         {
             if (isMetric)
@@ -1050,7 +1033,6 @@ namespace AgOpenGPS
                 }
             }
         }
-
         private void btnRateDn_Click(object sender, EventArgs e)
         {
             if (isMetric)
@@ -1084,7 +1066,6 @@ namespace AgOpenGPS
                 }
             }
         }
-
         private void btnLeftYouTurn_Click(object sender, EventArgs e)
         {
             if (yt.isYouTurnTriggerPointSet)
@@ -1273,7 +1254,6 @@ namespace AgOpenGPS
             Close();
 
         }
-
         private void menuLanguageDeutsch_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1287,7 +1267,6 @@ namespace AgOpenGPS
             Close();
 
         }
-
         private void menuLanguageRussian_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1300,7 +1279,6 @@ namespace AgOpenGPS
             MessageBox.Show(gStr.gsProgramExitAndRestart);
             Close();
         }
-
         private void menuLanguageDutch_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1313,7 +1291,6 @@ namespace AgOpenGPS
             MessageBox.Show(gStr.gsProgramExitAndRestart);
             Close();
         }
-
         private void menuLanguageSpanish_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1326,7 +1303,6 @@ namespace AgOpenGPS
             MessageBox.Show(gStr.gsProgramExitAndRestart);
             Close();
         }
-
         private void menuLanguageFrench_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1339,7 +1315,6 @@ namespace AgOpenGPS
             MessageBox.Show(gStr.gsProgramExitAndRestart);
             Close();
         }
-
         private void menuLanguageItalian_Click(object sender, EventArgs e)
         {
             if (isJobStarted)
@@ -1352,7 +1327,6 @@ namespace AgOpenGPS
             MessageBox.Show(gStr.gsProgramExitAndRestart);
             Close();
         }
-
         private void SetLanguage(string lang)
         {
             //reset them all to false
@@ -1992,7 +1966,6 @@ namespace AgOpenGPS
                         lblBoundaryArea.Text = boundz.areaHectare;
                         if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(distPivot)) + "m";
                         else lblHeadlandDistanceAway.Text = "***";
-
                         lblHeadlandDistanceFromTool.Text = ((int)(distTool)) + "m";
                     }
                     else //imperial
@@ -2002,7 +1975,6 @@ namespace AgOpenGPS
                         lblBoundaryArea.Text = boundz.areaAcre;
                         if (distPivot > 0) lblHeadlandDistanceAway.Text = ((int)(glm.m2ft * distPivot)) + "ft";
                         else lblHeadlandDistanceAway.Text = "***";
-
                         lblHeadlandDistanceFromTool.Text = ((int)(glm.m2ft * distTool)) + "ft";
                     }
 
@@ -2013,12 +1985,9 @@ namespace AgOpenGPS
                     lblSats.Text = SatsTracked;
 
                     lblRoll.Text = RollInDegrees;
-                    lblGyroHeading.Text = GyroInDegrees;
+                    lblYawHeading.Text = GyroInDegrees;
                     lblGPSHeading.Text = GPSHeading;
-
-                    lblEmlidYaw.Text = pn.nYaw.ToString("N2");
-                    lblEmlidRoll.Text = pn.nRoll.ToString("N2");
-                    lblEmlidPitch.Text = pn.nPitch.ToString("N2");
+                    //lblEmlidPitch.Text = pn.nPitch.ToString("N2");
 
                     //lblTurnProgressBar.Value = youTurnProgressBar;
 

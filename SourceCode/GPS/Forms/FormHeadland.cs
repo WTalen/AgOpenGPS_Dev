@@ -11,7 +11,7 @@ namespace AgOpenGPS
 
         private double maxFieldX, maxFieldY, minFieldX, minFieldY, fieldCenterX, fieldCenterY, maxFieldDistance;
         private double heading, oneSide, distance;
-        private int headWidths;
+        private double headWidths;
 
         public FormHeadland(Form callingForm)
         {
@@ -23,7 +23,7 @@ namespace AgOpenGPS
         {
             nudWidths.ValueChanged -= nudWidths_ValueChanged;
             headWidths = Properties.Vehicle.Default.set_youToolWidths;
-            nudWidths.Value = headWidths;
+            nudWidths.Value = (decimal)headWidths;
             nudWidths.ValueChanged += nudWidths_ValueChanged;
 
             if (mf.hl.isSet)
@@ -128,8 +128,8 @@ namespace AgOpenGPS
 
         private void nudWidths_ValueChanged(object sender, EventArgs e)
         {
-            headWidths = (int)nudWidths.Value;
-            Properties.Vehicle.Default.set_youToolWidths = (int)nudWidths.Value;
+            headWidths = (double)nudWidths.Value;
+            Properties.Vehicle.Default.set_youToolWidths = (double)nudWidths.Value;
             Properties.Vehicle.Default.Save();
             BuildHeadland();
         }
@@ -158,7 +158,7 @@ namespace AgOpenGPS
             mf.hl.ptList.Clear();
 
             //determine how wide a headland space
-            double totalHeadWidth = mf.vehicle.toolWidth * (int)nudWidths.Value;
+            double totalHeadWidth = mf.vehicle.toolWidth * (double)nudWidths.Value;
             bnd[0].x = mf.boundz.ptList[0].easting;
             bnd[0].y = mf.boundz.ptList[0].northing;
 
@@ -363,7 +363,9 @@ namespace AgOpenGPS
             glh.Begin(OpenGL.GL_POINTS);
 
             glh.Color(0.05f, 0.90f, 0.60f);
+            #pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
             glh.Vertex(mf.pivotAxlePos.easting, mf.pivotAxlePos.northing, 0.0);
+            #pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
 
             glh.End();
 

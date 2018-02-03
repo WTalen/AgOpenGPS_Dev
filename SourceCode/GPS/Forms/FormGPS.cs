@@ -13,7 +13,6 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using Tinkerforge;
 
 namespace AgOpenGPS
 {
@@ -389,7 +388,6 @@ namespace AgOpenGPS
 
             fixUpdateHz = Properties.Settings.Default.setPort_NMEAHz;
             fixUpdateTime = 1 / (double)fixUpdateHz;
-
 
             //get the abLines directory, if not exist, create
             ablinesDirectory = baseDirectory + "ABLines\\";
@@ -1107,9 +1105,6 @@ namespace AgOpenGPS
                         mc.relayRateData[mc.rdYouTurnControlByte] |= 0b00100000;
                     }
                     break;
-
-                default:
-                    break;
             }
         }
 
@@ -1241,6 +1236,7 @@ namespace AgOpenGPS
 
         // Gesture IDs
         private const int GID_BEGIN = 1;
+
         private const int GID_END = 2;
         private const int GID_ZOOM = 3;
         private const int GID_PAN = 4;
@@ -1249,7 +1245,6 @@ namespace AgOpenGPS
 
         private void DataPage_Click(object sender, EventArgs e)
         {
-
         }
 
         private const int GID_PRESSANDTAP = 7;
@@ -1274,10 +1269,10 @@ namespace AgOpenGPS
             public int dwID;    // gesture ID
             public int dwWant;  // settings related to gesture ID that are to be
 
-                                // turned on
+            // turned on
             public int dwBlock; // settings related to gesture ID that are to be
 
-                                // turned off
+            // turned off
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1300,14 +1295,14 @@ namespace AgOpenGPS
         {
             public int cbSize;           // size, in bytes, of this structure
 
-                                         // (including variable length Args
-                                         // field)
+            // (including variable length Args
+            // field)
             public int dwFlags;          // see GF_* flags
 
             public int dwID;             // gesture ID, see GID_* defines
             public IntPtr hwndTarget;    // handle to window targeted by this
 
-                                         // gesture
+            // gesture
             [MarshalAs(UnmanagedType.Struct)]
             internal POINTS ptsLocation; // current location of this gesture
 
@@ -1315,10 +1310,10 @@ namespace AgOpenGPS
             public int dwSequenceID;     // internally used
             public Int64 ullArguments;   // arguments for gestures whose
 
-                                         // arguments fit in 8 BYTES
+            // arguments fit in 8 BYTES
             public int cbExtraArgs;      // size, in bytes, of extra arguments,
 
-                                         // if any, that accompany this gesture
+            // if any, that accompany this gesture
         }
 
         // Currently touch/multitouch access is done through unmanaged code

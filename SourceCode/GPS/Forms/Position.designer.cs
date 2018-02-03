@@ -69,8 +69,7 @@ namespace AgOpenGPS
         public double totalSquareMeters = 0, totalUserSquareMeters = 0, userSquareMetersAlarm = 0;
 
         //used to determine NMEA sentence frequency
-        private int timerPn = 1;        
-        private double et = 0, hzTime = 0;
+        private double hzTime = 0;
 
         public double[] avgSpeed = new double[10];//for average speed
         public int ringCounter = 0;
@@ -148,7 +147,7 @@ namespace AgOpenGPS
 
             rollUsed = 0;
 
-            if ((ahrs.isRollBrick | ahrs.isRollDogs) && mc.rollRaw != 9999)
+            if ((ahrs.isRollBrick | ahrs.isRollDogs | ahrs.isRollPAOGI) && mc.rollRaw != 9999)
             {
                 //for charting in GPS Data window
                 eastingBeforeRoll = pn.easting;
@@ -399,8 +398,8 @@ namespace AgOpenGPS
                 }
                 else distPivot = -2;
 
-                //trigger the "its ready to generate a youturn when 40m away" but don't make it just yet
-                if (distPivot < 45.0 && distPivot > 42 && !yt.isYouTurnTriggered && yt.isInWorkArea)
+                //trigger the "its ready to generate a youturn when 25m away" but don't make it just yet
+                if (distPivot < 25.0 && distPivot > 22 && !yt.isYouTurnTriggered && yt.isInWorkArea)
                 {
                     //begin the whole process, all conditions are met
                     yt.YouTurnTrigger();
@@ -428,9 +427,9 @@ namespace AgOpenGPS
                         //how far have we gone since youturn request was triggered
                         distanceToStartAutoTurn = pn.Distance(pivotAxlePos.northing, pivotAxlePos.easting, yt.youTurnTriggerPoint.northing, yt.youTurnTriggerPoint.easting);
                         
-                        youTurnProgressBar = (int)(distanceToStartAutoTurn / (45 + yt.youTurnStartOffset) * 100);                 
+                        //youTurnProgressBar = (int)(distanceToStartAutoTurn / (45 + yt.youTurnStartOffset) * 100);                 
 
-                        if (distanceToStartAutoTurn > (45 + yt.youTurnStartOffset))
+                        if (distanceToStartAutoTurn > (25 + yt.youTurnStartOffset))
                         {
                             //keep from running this again since youturn is plotted now
                             yt.isYouTurnTriggerPointSet = false;
@@ -477,7 +476,7 @@ namespace AgOpenGPS
             camHeading = glm.toDegrees(camHeading);
 
             //make sure there is a gyro otherwise 9999 are sent from autosteer
-            if (mc.gyroHeading != 9999)
+            if ((ahrs.isHeadingBrick | ahrs.isHeadingBNO | ahrs.isHeadingPAOGI) && mc.gyroHeading != 9999)
             {
                 //current gyro angle in radians
                 gyroRaw = (glm.toRadians((double)mc.prevGyroHeading * 0.0625));
@@ -508,7 +507,7 @@ namespace AgOpenGPS
                     gyroCorrection += (gyroDelta * (0.5 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
-                    gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
+                    //gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
                 }
                 else
                 {
@@ -516,8 +515,9 @@ namespace AgOpenGPS
                     gyroCorrection += (gyroDelta * (2.0 / fixUpdateHz));
                     if (gyroCorrection > glm.twoPI) gyroCorrection -= glm.twoPI;
                     if (gyroCorrection < -glm.twoPI) gyroCorrection += glm.twoPI;
-                    gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
+                    //gyroRaw = (glm.toRadians((double)mc.gyroHeading * 0.0625));
                 }
+
                 //determine the Corrected heading based on gyro and GPS
                 gyroCorrected = gyroRaw + gyroCorrection;
                 if (gyroCorrected > glm.twoPI) gyroCorrected -= glm.twoPI;

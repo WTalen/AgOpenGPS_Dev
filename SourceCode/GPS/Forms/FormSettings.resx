@@ -1247,24 +1247,6 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnRemoveZeroOffset.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 14.25pt</value>
-  </data>
-  <data name="btnRemoveZeroOffset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnRemoveZeroOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 46</value>
-  </data>
-  <data name="btnRemoveZeroOffset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 60</value>
-  </data>
-  <data name="btnRemoveZeroOffset.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
-  <data name="btnRemoveZeroOffset.Text" xml:space="preserve">
-    <value>Remove Offset</value>
-  </data>
   <data name="&gt;&gt;btnRemoveZeroOffset.Name" xml:space="preserve">
     <value>btnRemoveZeroOffset</value>
   </data>
@@ -1277,27 +1259,6 @@
   <data name="&gt;&gt;btnRemoveZeroOffset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblRollZeroOffset.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblRollZeroOffset.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 20.25pt</value>
-  </data>
-  <data name="lblRollZeroOffset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblRollZeroOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 58</value>
-  </data>
-  <data name="lblRollZeroOffset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 33</value>
-  </data>
-  <data name="lblRollZeroOffset.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="lblRollZeroOffset.Text" xml:space="preserve">
-    <value>label11</value>
-  </data>
   <data name="&gt;&gt;lblRollZeroOffset.Name" xml:space="preserve">
     <value>lblRollZeroOffset</value>
   </data>
@@ -1309,18 +1270,6 @@
   </data>
   <data name="&gt;&gt;lblRollZeroOffset.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="btnZeroRoll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 46</value>
-  </data>
-  <data name="btnZeroRoll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 60</value>
-  </data>
-  <data name="btnZeroRoll.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="btnZeroRoll.Text" xml:space="preserve">
-    <value>&gt; 0 &lt;</value>
   </data>
   <data name="&gt;&gt;btnZeroRoll.Name" xml:space="preserve">
     <value>btnZeroRoll</value>
@@ -1358,6 +1307,18 @@
   <data name="&gt;&gt;btnRollZero.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;cboxHeadingPAOGI.Name" xml:space="preserve">
+    <value>cboxHeadingPAOGI</value>
+  </data>
+  <data name="&gt;&gt;cboxHeadingPAOGI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboxHeadingPAOGI.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;cboxHeadingPAOGI.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;cboxHeadingBNO.Name" xml:space="preserve">
     <value>cboxHeadingBNO</value>
   </data>
@@ -1368,7 +1329,7 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cboxHeadingBNO.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;cboxHeadingBrick.Name" xml:space="preserve">
     <value>cboxHeadingBrick</value>
@@ -1380,13 +1341,13 @@
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cboxHeadingBrick.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 59</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 173</value>
+    <value>284, 228</value>
   </data>
   <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -1406,6 +1367,60 @@
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cboxRollPAOGI.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxRollPAOGI.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 18pt</value>
+  </data>
+  <data name="cboxRollPAOGI.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cboxRollPAOGI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 175</value>
+  </data>
+  <data name="cboxRollPAOGI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 33</value>
+  </data>
+  <data name="cboxRollPAOGI.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="cboxRollPAOGI.Text" xml:space="preserve">
+    <value>PAOGI</value>
+  </data>
+  <data name="&gt;&gt;cboxRollPAOGI.Name" xml:space="preserve">
+    <value>cboxRollPAOGI</value>
+  </data>
+  <data name="&gt;&gt;cboxRollPAOGI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboxRollPAOGI.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;cboxRollPAOGI.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cboxRollBrick.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxRollBrick.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 18pt</value>
+  </data>
+  <data name="cboxRollBrick.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cboxRollBrick.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 116</value>
+  </data>
+  <data name="cboxRollBrick.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 33</value>
+  </data>
+  <data name="cboxRollBrick.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="cboxRollBrick.Text" xml:space="preserve">
+    <value>Brick v2</value>
+  </data>
   <data name="&gt;&gt;cboxRollBrick.Name" xml:space="preserve">
     <value>cboxRollBrick</value>
   </data>
@@ -1416,7 +1431,28 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;cboxRollBrick.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="cboxRollDogs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxRollDogs.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 18pt</value>
+  </data>
+  <data name="cboxRollDogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cboxRollDogs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 59</value>
+  </data>
+  <data name="cboxRollDogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 33</value>
+  </data>
+  <data name="cboxRollDogs.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="cboxRollDogs.Text" xml:space="preserve">
+    <value>DOGS2 Inclinometer</value>
   </data>
   <data name="&gt;&gt;cboxRollDogs.Name" xml:space="preserve">
     <value>cboxRollDogs</value>
@@ -1428,13 +1464,13 @@
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;cboxRollDogs.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>631, 59</value>
   </data>
   <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 173</value>
+    <value>284, 228</value>
   </data>
   <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
@@ -7758,6 +7794,93 @@ or Overlap</value>
   <data name="&gt;&gt;nudMinFixStepDistance.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btnRemoveZeroOffset.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 14.25pt</value>
+  </data>
+  <data name="btnRemoveZeroOffset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnRemoveZeroOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 46</value>
+  </data>
+  <data name="btnRemoveZeroOffset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 60</value>
+  </data>
+  <data name="btnRemoveZeroOffset.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="btnRemoveZeroOffset.Text" xml:space="preserve">
+    <value>Remove Offset</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveZeroOffset.Name" xml:space="preserve">
+    <value>btnRemoveZeroOffset</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveZeroOffset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveZeroOffset.Parent" xml:space="preserve">
+    <value>btnRollZero</value>
+  </data>
+  <data name="&gt;&gt;btnRemoveZeroOffset.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblRollZeroOffset.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRollZeroOffset.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 20.25pt</value>
+  </data>
+  <data name="lblRollZeroOffset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRollZeroOffset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 58</value>
+  </data>
+  <data name="lblRollZeroOffset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 33</value>
+  </data>
+  <data name="lblRollZeroOffset.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="lblRollZeroOffset.Text" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;lblRollZeroOffset.Name" xml:space="preserve">
+    <value>lblRollZeroOffset</value>
+  </data>
+  <data name="&gt;&gt;lblRollZeroOffset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRollZeroOffset.Parent" xml:space="preserve">
+    <value>btnRollZero</value>
+  </data>
+  <data name="&gt;&gt;lblRollZeroOffset.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnZeroRoll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 46</value>
+  </data>
+  <data name="btnZeroRoll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 60</value>
+  </data>
+  <data name="btnZeroRoll.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="btnZeroRoll.Text" xml:space="preserve">
+    <value>&gt; 0 &lt;</value>
+  </data>
+  <data name="&gt;&gt;btnZeroRoll.Name" xml:space="preserve">
+    <value>btnZeroRoll</value>
+  </data>
+  <data name="&gt;&gt;btnZeroRoll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnZeroRoll.Parent" xml:space="preserve">
+    <value>btnRollZero</value>
+  </data>
+  <data name="&gt;&gt;btnZeroRoll.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="cboxHeadingBNO.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -7789,7 +7912,7 @@ or Overlap</value>
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cboxHeadingBNO.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cboxHeadingBrick.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7822,40 +7945,7 @@ or Overlap</value>
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;cboxHeadingBrick.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cboxRollDogs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cboxRollDogs.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 18pt</value>
-  </data>
-  <data name="cboxRollDogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cboxRollDogs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 59</value>
-  </data>
-  <data name="cboxRollDogs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 33</value>
-  </data>
-  <data name="cboxRollDogs.TabIndex" type="System.Int32, mscorlib">
-    <value>72</value>
-  </data>
-  <data name="cboxRollDogs.Text" xml:space="preserve">
-    <value>DOGS2 Inclinometer</value>
-  </data>
-  <data name="&gt;&gt;cboxRollDogs.Name" xml:space="preserve">
-    <value>cboxRollDogs</value>
-  </data>
-  <data name="&gt;&gt;cboxRollDogs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cboxRollDogs.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;cboxRollDogs.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;chkWorkSwActiveLow.Name" xml:space="preserve">
     <value>chkWorkSwActiveLow</value>
@@ -8211,37 +8301,37 @@ or Overlap</value>
   <data name="&gt;&gt;bntOK.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="cboxRollBrick.AutoSize" type="System.Boolean, mscorlib">
+  <data name="cboxHeadingPAOGI.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cboxRollBrick.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboxHeadingPAOGI.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 18pt</value>
   </data>
-  <data name="cboxRollBrick.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cboxHeadingPAOGI.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cboxRollBrick.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 116</value>
+  <data name="cboxHeadingPAOGI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 175</value>
   </data>
-  <data name="cboxRollBrick.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 33</value>
+  <data name="cboxHeadingPAOGI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 33</value>
   </data>
-  <data name="cboxRollBrick.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboxHeadingPAOGI.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
-  <data name="cboxRollBrick.Text" xml:space="preserve">
-    <value>Brick v2</value>
+  <data name="cboxHeadingPAOGI.Text" xml:space="preserve">
+    <value>PAOGI</value>
   </data>
-  <data name="&gt;&gt;cboxRollBrick.Name" xml:space="preserve">
-    <value>cboxRollBrick</value>
+  <data name="&gt;&gt;cboxHeadingPAOGI.Name" xml:space="preserve">
+    <value>cboxHeadingPAOGI</value>
   </data>
-  <data name="&gt;&gt;cboxRollBrick.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboxHeadingPAOGI.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cboxRollBrick.Parent" xml:space="preserve">
-    <value>groupBox6</value>
+  <data name="&gt;&gt;cboxHeadingPAOGI.Parent" xml:space="preserve">
+    <value>groupBox7</value>
   </data>
-  <data name="&gt;&gt;cboxRollBrick.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboxHeadingPAOGI.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

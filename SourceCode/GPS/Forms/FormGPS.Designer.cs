@@ -142,10 +142,6 @@
             this.DataPage = new System.Windows.Forms.TabPage();
             this.lblEmlidPitch = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.lblEmlidRoll = new System.Windows.Forms.Label();
-            this.lblEmlidYaw = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.lblSats = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.lblFixQuality = new System.Windows.Forms.Label();
@@ -163,7 +159,7 @@
             this.lblBoundaryArea = new System.Windows.Forms.Label();
             this.lblRoll = new System.Windows.Forms.Label();
             this.lblGPSHeading = new System.Windows.Forms.Label();
-            this.lblGyroHeading = new System.Windows.Forms.Label();
+            this.lblYawHeading = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -1080,11 +1076,9 @@
             // 
             this.DataPage.BackColor = System.Drawing.SystemColors.ControlLight;
             this.DataPage.Controls.Add(this.lblEmlidPitch);
+            this.DataPage.Controls.Add(this.btnResetSim);
+            this.DataPage.Controls.Add(this.btnResetSteerAngle);
             this.DataPage.Controls.Add(this.label20);
-            this.DataPage.Controls.Add(this.lblEmlidRoll);
-            this.DataPage.Controls.Add(this.lblEmlidYaw);
-            this.DataPage.Controls.Add(this.label21);
-            this.DataPage.Controls.Add(this.label22);
             this.DataPage.Controls.Add(this.lblSats);
             this.DataPage.Controls.Add(this.label17);
             this.DataPage.Controls.Add(this.lblFixQuality);
@@ -1102,7 +1096,7 @@
             this.DataPage.Controls.Add(this.lblBoundaryArea);
             this.DataPage.Controls.Add(this.lblRoll);
             this.DataPage.Controls.Add(this.lblGPSHeading);
-            this.DataPage.Controls.Add(this.lblGyroHeading);
+            this.DataPage.Controls.Add(this.lblYawHeading);
             this.DataPage.Controls.Add(this.tboxSentence);
             this.DataPage.Controls.Add(this.label10);
             this.DataPage.Controls.Add(this.label9);
@@ -1124,26 +1118,6 @@
             // 
             resources.ApplyResources(this.label20, "label20");
             this.label20.Name = "label20";
-            // 
-            // lblEmlidRoll
-            // 
-            resources.ApplyResources(this.lblEmlidRoll, "lblEmlidRoll");
-            this.lblEmlidRoll.Name = "lblEmlidRoll";
-            // 
-            // lblEmlidYaw
-            // 
-            resources.ApplyResources(this.lblEmlidYaw, "lblEmlidYaw");
-            this.lblEmlidYaw.Name = "lblEmlidYaw";
-            // 
-            // label21
-            // 
-            resources.ApplyResources(this.label21, "label21");
-            this.label21.Name = "label21";
-            // 
-            // label22
-            // 
-            resources.ApplyResources(this.label22, "label22");
-            this.label22.Name = "label22";
             // 
             // lblSats
             // 
@@ -1230,10 +1204,10 @@
             resources.ApplyResources(this.lblGPSHeading, "lblGPSHeading");
             this.lblGPSHeading.Name = "lblGPSHeading";
             // 
-            // lblGyroHeading
+            // lblYawHeading
             // 
-            resources.ApplyResources(this.lblGyroHeading, "lblGyroHeading");
-            this.lblGyroHeading.Name = "lblGyroHeading";
+            resources.ApplyResources(this.lblYawHeading, "lblYawHeading");
+            this.lblYawHeading.Name = "lblYawHeading";
             // 
             // label10
             // 
@@ -1461,8 +1435,6 @@
             // 
             resources.ApplyResources(this.panelSimControls, "panelSimControls");
             this.panelSimControls.Controls.Add(this.label3);
-            this.panelSimControls.Controls.Add(this.btnResetSteerAngle);
-            this.panelSimControls.Controls.Add(this.btnResetSim);
             this.panelSimControls.Controls.Add(this.lblSteerAngle);
             this.panelSimControls.Controls.Add(this.label11);
             this.panelSimControls.Controls.Add(this.label12);
@@ -1887,7 +1859,7 @@
         private System.Windows.Forms.Label lblRoll;
         private System.Windows.Forms.Label lblPureSteerAngle;
         private System.Windows.Forms.Label lblGPSHeading;
-        private System.Windows.Forms.Label lblGyroHeading;
+        private System.Windows.Forms.Label lblYawHeading;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem toolstripUSBPortsConfig;
         private System.Windows.Forms.ToolStripMenuItem toolstripVehicleConfig;
@@ -1939,10 +1911,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuLanguageFrench;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageItalian;
         private System.Windows.Forms.Button btnABCurve;
-        private System.Windows.Forms.Label lblEmlidRoll;
-        private System.Windows.Forms.Label lblEmlidYaw;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label lblEmlidPitch;
         private System.Windows.Forms.Label label20;
     }

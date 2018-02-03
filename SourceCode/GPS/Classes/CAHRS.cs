@@ -15,12 +15,13 @@ namespace AgOpenGPS
         /// The Tinker IMU object
         /// </summary>
         public readonly BrickIMUV2 imu;
+
         public static string HOST = "localhost";
         public static int PORT = 4223;
         public static readonly string UID = Properties.Settings.Default.setIMU_UID; // "68wESU"; // Change XXYYZZ to the UID of your IMU Brick 2.0
 
         //flags for desired sources
-        public bool isHeadingBNO, isHeadingBrick, isRollDogs, isRollBrick;
+        public bool isHeadingBNO, isHeadingBrick, isHeadingPAOGI, isRollDogs, isRollBrick, isRollPAOGI;
 
         //actual value in degrees* 16 to modify the imu*16 values
         public int rollZero, pitchZero;
@@ -33,8 +34,11 @@ namespace AgOpenGPS
             //non GPS AHRS sensors
             isHeadingBNO = Properties.Settings.Default.setIMU_isHeadingFromBNO;
             isHeadingBrick = Properties.Settings.Default.setIMU_isHeadingFromBrick;
+            isHeadingPAOGI = Properties.Settings.Default.setIMU_isHeadingFromPAOGI;
+
             isRollDogs = Properties.Settings.Default.setIMU_isRollFromDogs;
             isRollBrick = Properties.Settings.Default.setIMU_isRollFromBrick;
+            isRollPAOGI = Properties.Settings.Default.setIMU_isRollFromPAOGI;
 
             rollZero = Properties.Settings.Default.setIMU_rollZero;
             pitchZero = Properties.Settings.Default.setIMU_pitchZero;

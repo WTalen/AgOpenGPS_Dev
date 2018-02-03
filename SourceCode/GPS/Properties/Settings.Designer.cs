@@ -826,5 +826,29 @@ namespace AgOpenGPS.Properties {
                 this["setPort_NMEAHz"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_isHeadingFromPAOGI {
+            get {
+                return ((bool)(this["setIMU_isHeadingFromPAOGI"]));
+            }
+            set {
+                this["setIMU_isHeadingFromPAOGI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setIMU_isRollFromPAOGI {
+            get {
+                return ((bool)(this["setIMU_isRollFromPAOGI"]));
+            }
+            set {
+                this["setIMU_isRollFromPAOGI"] = value;
+            }
+        }
     }
 }
