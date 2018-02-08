@@ -1,7 +1,7 @@
 # AgOpenGPS_Dev
 Development nightly build, the latest most current and buggy software.
 
-AgOpenGPS
+AgOpenGPS = https://agopengps.jimdosite.com/
 
 *** Important ****
 
