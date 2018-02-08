@@ -493,6 +493,16 @@ namespace AgOpenGPS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap GoogleEarth1 {
+            get {
+                object obj = ResourceManager.GetObject("GoogleEarth1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gyro {
             get {
                 object obj = ResourceManager.GetObject("gyro", resourceCulture);
@@ -506,6 +516,16 @@ namespace AgOpenGPS.Properties {
         internal static System.Drawing.Bitmap Headland {
             get {
                 object obj = ResourceManager.GetObject("Headland", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Help {
+            get {
+                object obj = ResourceManager.GetObject("Help", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1146,6 +1166,16 @@ namespace AgOpenGPS.Properties {
         internal static System.Drawing.Bitmap VehRigid64 {
             get {
                 object obj = ResourceManager.GetObject("VehRigid64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Webcam {
+            get {
+                object obj = ResourceManager.GetObject("Webcam", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

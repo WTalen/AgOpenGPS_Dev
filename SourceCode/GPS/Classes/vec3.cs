@@ -20,12 +20,12 @@ namespace AgOpenGPS
             this.heading = heading;
         }
 
-       public vec3(vec3 v)
+        public vec3(vec3 v)
         {
             easting = v.easting;
             northing = v.northing;
             heading = v.heading;
-         }
+        }
 
         public double HeadingXZ()
         {
@@ -48,13 +48,13 @@ namespace AgOpenGPS
         //Returns the length of the vector
         public double GetLength()
         {
-            return Math.Sqrt(easting * easting + heading * heading + northing * northing);
+            return Math.Sqrt((easting * easting) + (heading * heading) + (northing * northing));
         }
 
         // Calculates the squared length of the vector.
         public double GetLengthSquared()
         {
-            return (easting * easting + heading * heading + northing * northing);
+            return (easting * easting) + (heading * heading) + (northing * northing);
         }
 
         public static vec3 operator -(vec3 lhs, vec3 rhs)
@@ -71,7 +71,6 @@ namespace AgOpenGPS
         //{
         //    return (lhs.x != rhs.x && lhs.z != rhs.z && lhs.h != rhs.h);
         //}
-
     }
 
     //
@@ -104,7 +103,7 @@ namespace AgOpenGPS
         {
             this.easting = easting;
             this.northing = northing;
-       }
+        }
 
         public static vec2 operator -(vec2 lhs, vec2 rhs)
         {
@@ -143,13 +142,13 @@ namespace AgOpenGPS
         //Returns the length of the vector
         public double GetLength()
         {
-            return Math.Sqrt(easting * easting + northing * northing);
+            return Math.Sqrt((easting * easting) + (northing * northing));
         }
 
         // Calculates the squared length of the vector.
         public double GetLengthSquared()
         {
-            return (easting * easting + northing * northing);
+            return (easting * easting) + (northing * northing);
         }
     }
 
@@ -163,7 +162,7 @@ namespace AgOpenGPS
         public int pt;
 
         //specialized contour vector
-         public cvec(double x, double z, double h, int s, int p)
+        public cvec(double x, double z, double h, int s, int p)
         {
             this.x = x;
             this.z = z;
@@ -172,14 +171,14 @@ namespace AgOpenGPS
             pt = p;
         }
 
-         public cvec(vec3 v)
-         {
-             x = v.easting;
-             z = v.northing;
-             h = v.heading;
-             strip = 99999;
-             pt = 99999;
-         }
+        public cvec(vec3 v)
+        {
+            x = v.easting;
+            z = v.northing;
+            h = v.heading;
+            strip = 99999;
+            pt = 99999;
+        }
     }
 }
 

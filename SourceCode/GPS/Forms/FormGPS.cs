@@ -425,7 +425,7 @@ namespace AgOpenGPS
             SetZoom();
 
             //which cam source is being used
-            isAtanCam = Settings.Default.setCam_isAtanCam;
+            isHeadingFromFix = Settings.Default.setHeading_isFromPosition;
 
             //triangle resolution is how far to next triangle point trigger distance
             camera.triangleResolution = Settings.Default.setDisplay_triangleResolution;
@@ -1243,10 +1243,7 @@ namespace AgOpenGPS
         private const int GID_ROTATE = 5;
         private const int GID_TWOFINGERTAP = 6;
 
-        private void DataPage_Click(object sender, EventArgs e)
-        {
-        }
-
+ 
         private const int GID_PRESSANDTAP = 7;
 
         // Gesture flags - GESTUREINFO.dwFlags
