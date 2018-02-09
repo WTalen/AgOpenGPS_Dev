@@ -17,5 +17,5 @@ Ag Precision Mapping and Section Control Software
 
 This software reads NMEA strings for the purpose of recording and mapping position information for Agricultural use. Also it has up to 8 Section Control to control implements application of product preventing over-application.
 
-Also ouputs angle delta and distance from reference line for AB line and Contour guidance.
+Also ouputs angle for PurePursuit guidance for AB line and Contour. 
 
