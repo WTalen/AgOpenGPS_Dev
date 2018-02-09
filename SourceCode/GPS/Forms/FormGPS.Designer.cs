@@ -87,8 +87,6 @@
             this.toolstripBoundary = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripHeadland = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripResetTrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripAreaUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.stripSequenceBinary = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripAreaRate = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolstripUDPConfig = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,6 +154,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.zoomPage2 = new System.Windows.Forms.TabPage();
+            this.btnDeleteAllData = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lblZooom = new System.Windows.Forms.Label();
             this.ratePage3 = new System.Windows.Forms.TabPage();
@@ -607,13 +606,11 @@
             this.statusStrip1.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripHz,
-            this.btnHideTabs,
+            this.toolStripDropDownButton2,
             this.stripDistance,
             this.toolStripDropDownBtnFuncs,
-            this.stripAreaUser,
-            this.stripSequenceBinary,
             this.stripAreaRate,
-            this.toolStripDropDownButton2,
+            this.btnHideTabs,
             this.stripEqWidth,
             this.stripPortGPS,
             this.stripOnlineGPS,
@@ -652,7 +649,6 @@
             this.toolstripBoundary,
             this.toolstripHeadland,
             this.toolstripResetTrip});
-            this.toolStripDropDownBtnFuncs.Image = global::AgOpenGPS.Properties.Resources.start;
             this.toolStripDropDownBtnFuncs.Name = "toolStripDropDownBtnFuncs";
             this.toolStripDropDownBtnFuncs.ShowDropDownArrow = false;
             // 
@@ -684,18 +680,6 @@
             this.toolstripResetTrip.Name = "toolstripResetTrip";
             this.toolstripResetTrip.Click += new System.EventHandler(this.toolstripResetTrip_Click_1);
             // 
-            // stripAreaUser
-            // 
-            resources.ApplyResources(this.stripAreaUser, "stripAreaUser");
-            this.stripAreaUser.Margin = new System.Windows.Forms.Padding(0);
-            this.stripAreaUser.Name = "stripAreaUser";
-            // 
-            // stripSequenceBinary
-            // 
-            resources.ApplyResources(this.stripSequenceBinary, "stripSequenceBinary");
-            this.stripSequenceBinary.Margin = new System.Windows.Forms.Padding(0);
-            this.stripSequenceBinary.Name = "stripSequenceBinary";
-            // 
             // stripAreaRate
             // 
             resources.ApplyResources(this.stripAreaRate, "stripAreaRate");
@@ -711,7 +695,6 @@
             this.toolstripVehicleConfig,
             this.toolstripAutoSteerConfig,
             this.toolstripYouTurnConfig});
-            this.toolStripDropDownButton2.Image = global::AgOpenGPS.Properties.Resources.SetupStatusStrip;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.ShowDropDownArrow = false;
             // 
@@ -1164,6 +1147,7 @@
             // zoomPage2
             // 
             this.zoomPage2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.zoomPage2.Controls.Add(this.btnDeleteAllData);
             this.zoomPage2.Controls.Add(this.openGLControlZoom);
             this.zoomPage2.Controls.Add(this.label6);
             this.zoomPage2.Controls.Add(this.lblZooom);
@@ -1173,6 +1157,15 @@
             this.zoomPage2.Controls.Add(this.lblFieldWidthNorthSouth);
             resources.ApplyResources(this.zoomPage2, "zoomPage2");
             this.zoomPage2.Name = "zoomPage2";
+            // 
+            // btnDeleteAllData
+            // 
+            this.btnDeleteAllData.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteAllData.ContextMenuStrip = this.contextMenuStripFlag;
+            resources.ApplyResources(this.btnDeleteAllData, "btnDeleteAllData");
+            this.btnDeleteAllData.Name = "btnDeleteAllData";
+            this.btnDeleteAllData.UseVisualStyleBackColor = false;
+            this.btnDeleteAllData.Click += new System.EventHandler(this.btnDeleteAllData_Click);
             // 
             // label6
             // 
@@ -1208,7 +1201,6 @@
             // 
             this.btnRateConfig.BackColor = System.Drawing.Color.AliceBlue;
             resources.ApplyResources(this.btnRateConfig, "btnRateConfig");
-            this.btnRateConfig.Image = global::AgOpenGPS.Properties.Resources.Settings48;
             this.btnRateConfig.Name = "btnRateConfig";
             this.btnRateConfig.UseVisualStyleBackColor = false;
             this.btnRateConfig.Click += new System.EventHandler(this.btnRateConfig_Click);
@@ -1270,7 +1262,6 @@
             this.btnFlagsGoogleEarth.BackColor = System.Drawing.Color.AliceBlue;
             this.btnFlagsGoogleEarth.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnFlagsGoogleEarth, "btnFlagsGoogleEarth");
-            this.btnFlagsGoogleEarth.Image = global::AgOpenGPS.Properties.Resources.GoogleEarth;
             this.btnFlagsGoogleEarth.Name = "btnFlagsGoogleEarth";
             this.btnFlagsGoogleEarth.UseVisualStyleBackColor = false;
             this.btnFlagsGoogleEarth.Click += new System.EventHandler(this.btnFlagsGoogleEarth_Click);
@@ -1280,7 +1271,6 @@
             this.btnWebCam.BackColor = System.Drawing.Color.AliceBlue;
             this.btnWebCam.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnWebCam, "btnWebCam");
-            this.btnWebCam.Image = global::AgOpenGPS.Properties.Resources.Webcam;
             this.btnWebCam.Name = "btnWebCam";
             this.btnWebCam.UseVisualStyleBackColor = false;
             this.btnWebCam.Click += new System.EventHandler(this.btnWebCam_Click);
@@ -1290,7 +1280,6 @@
             this.btnHelp.BackColor = System.Drawing.Color.AliceBlue;
             this.btnHelp.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnHelp, "btnHelp");
-            this.btnHelp.Image = global::AgOpenGPS.Properties.Resources.Help;
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.UseVisualStyleBackColor = false;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -1327,7 +1316,6 @@
             resources.ApplyResources(this.btnABCurve, "btnABCurve");
             this.btnABCurve.BackColor = System.Drawing.Color.Transparent;
             this.btnABCurve.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.btnABCurve.Image = global::AgOpenGPS.Properties.Resources.ZeroPitchRoll;
             this.btnABCurve.Name = "btnABCurve";
             this.btnABCurve.UseVisualStyleBackColor = false;
             this.btnABCurve.Click += new System.EventHandler(this.btnABCurve_Click);
@@ -1468,7 +1456,7 @@
             // 
             // btnSwapDirection
             // 
-            this.btnSwapDirection.BackColor = System.Drawing.Color.Lavender;
+            this.btnSwapDirection.BackColor = System.Drawing.Color.Transparent;
             this.btnSwapDirection.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnSwapDirection, "btnSwapDirection");
             this.btnSwapDirection.Name = "btnSwapDirection";
@@ -1477,7 +1465,7 @@
             // 
             // btnEnableAutoYouTurn
             // 
-            this.btnEnableAutoYouTurn.BackColor = System.Drawing.Color.Lavender;
+            this.btnEnableAutoYouTurn.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.btnEnableAutoYouTurn, "btnEnableAutoYouTurn");
             this.btnEnableAutoYouTurn.Name = "btnEnableAutoYouTurn";
             this.btnEnableAutoYouTurn.UseVisualStyleBackColor = false;
@@ -1493,7 +1481,7 @@
             // 
             // btnFlag
             // 
-            this.btnFlag.BackColor = System.Drawing.Color.Lavender;
+            this.btnFlag.BackColor = System.Drawing.Color.Transparent;
             this.btnFlag.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnFlag, "btnFlag");
             this.btnFlag.Name = "btnFlag";
@@ -1502,7 +1490,7 @@
             // 
             // btnSnap
             // 
-            this.btnSnap.BackColor = System.Drawing.Color.Lavender;
+            this.btnSnap.BackColor = System.Drawing.Color.Transparent;
             this.btnSnap.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnSnap, "btnSnap");
             this.btnSnap.Name = "btnSnap";
@@ -1511,7 +1499,7 @@
             // 
             // btnAutoSteer
             // 
-            this.btnAutoSteer.BackColor = System.Drawing.Color.Lavender;
+            this.btnAutoSteer.BackColor = System.Drawing.Color.Transparent;
             this.btnAutoSteer.ContextMenuStrip = this.contextMenuStripFlag;
             resources.ApplyResources(this.btnAutoSteer, "btnAutoSteer");
             this.btnAutoSteer.Name = "btnAutoSteer";
@@ -1531,7 +1519,6 @@
             // 
             resources.ApplyResources(this.btnContour, "btnContour");
             this.btnContour.BackColor = System.Drawing.Color.Lavender;
-            this.btnContour.Image = global::AgOpenGPS.Properties.Resources.ContourOff;
             this.btnContour.Name = "btnContour";
             this.btnContour.UseVisualStyleBackColor = false;
             this.btnContour.Click += new System.EventHandler(this.btnContour_Click);
@@ -1549,7 +1536,6 @@
             // 
             resources.ApplyResources(this.btnABLine, "btnABLine");
             this.btnABLine.BackColor = System.Drawing.Color.Lavender;
-            this.btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOff;
             this.btnABLine.Name = "btnABLine";
             this.btnABLine.UseVisualStyleBackColor = false;
             this.btnABLine.Click += new System.EventHandler(this.btnABLine_Click);
@@ -1859,10 +1845,8 @@
         private System.Windows.Forms.Panel panelSimControls;
         private System.Windows.Forms.ToolStripDropDownButton btnHideTabs;
         public System.Windows.Forms.Button btnSectionOffAutoOn;
-        private System.Windows.Forms.ToolStripStatusLabel stripAreaUser;
         private System.Windows.Forms.ToolStripStatusLabel stripEqWidth;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolStripStatusLabel stripSequenceBinary;
         private System.Windows.Forms.ToolStripMenuItem bigAltitudeToolStripMenuItem;
         private System.Windows.Forms.Button btnRateConfig;
         private System.Windows.Forms.ToolStripMenuItem menustripLanguage;
@@ -1887,6 +1871,7 @@
         private System.Windows.Forms.Button btnWebCam;
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button btnDeleteAllData;
     }
 }
 

@@ -133,7 +133,7 @@ namespace AgOpenGPS
                 btnLeftYouTurn.Left = (Width) / 2 - 140;
             }
 
-            const int top = 150;
+            const int top = 200;
 
             btnSection4Man.Top = Height - top;
             btnSection1Man.Top = Height - top;
@@ -1203,6 +1203,71 @@ namespace AgOpenGPS
         {
             Process.Start("http://agopengps.gh-ortner.com/doku.php");
         }
+        private void btnDeleteAllData_Click(object sender, EventArgs e)
+        {
+            if (isJobStarted)
+            {
+                DialogResult result3 = MessageBox.Show("Delete All Contours and Sections?",
+                    "Delete For sure?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+                if (result3 == DialogResult.Yes)
+                {
+                    FileCreateContour();
+                    FileCreateSections();
+
+                    if (rc.isRateControlOn)
+                        btnRate.PerformClick();
+
+                    rc.ShutdownRateControl();  //double dam sure its off
+
+                    //turn auto button off
+                    autoBtnState = btnStates.Off;
+                    btnSectionOffAutoOn.Image = Properties.Resources.SectionMasterOff;
+
+                    //turn section buttons all OFF and zero square meters
+                    for (int j = 0; j < MAXSECTIONS; j++)
+                    {
+                        section[j].isAllowedOn = false;
+                        section[j].manBtnState = manBtn.On;
+                    }
+
+                    //turn manual button off
+                    manualBtnState = btnStates.Off;
+                    btnManualOffOn.Image = Properties.Resources.ManualOff;
+
+                    //Update the button colors and text
+                    ManualAllBtnsUpdate();
+
+                    //enable disable manual buttons
+                    LineUpManualBtns();
+
+                    btnSection1Man.Enabled = false;
+                    btnSection2Man.Enabled = false;
+                    btnSection3Man.Enabled = false;
+                    btnSection4Man.Enabled = false;
+                    btnSection5Man.Enabled = false;
+                    btnSection6Man.Enabled = false;
+                    btnSection7Man.Enabled = false;
+                    btnSection8Man.Enabled = false;
+
+                    //clear the section lists
+                    for (int j = 0; j < MAXSECTIONS; j++)
+                    {
+                        //clean out the lists
+                        section[j].patchList?.Clear();
+                        section[j].triangleList?.Clear();
+                    }
+
+                    //clear out the contour Lists
+                    ct.StopContourLine();
+                    ct.ResetContour();
+                }
+                else TimedMessageBox(1500, "Nothing Deleted", "Action has been cancelled");
+            }
+        }
+
 
         // Menu Items ------------------------------------------------------------------
 
@@ -1792,8 +1857,8 @@ namespace AgOpenGPS
         }
         private void btnResetSim_Click(object sender, EventArgs e)
         {
-            sim.latitude = 53.43505723739636;
-            sim.longitude = -111.1612137204204;
+            sim.latitude = 53.0;
+            sim.longitude = -111.0;
         }
 
         #region Properties // ---------------------------------------------------------------------
@@ -1992,9 +2057,9 @@ namespace AgOpenGPS
                     lblSpeed.Text = SpeedKPH;
 
                     //status strip values
-                    stripDistance.Text = Convert.ToString((UInt16)(userDistance)) + " m";
-                    stripAreaUser.Text = HectaresUser;
-                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed * 0.1, 2)).ToString();
+                    stripDistance.Text = Convert.ToString((UInt16)(userDistance)) + " m\r\n"+HectaresUser;
+                    //stripAreaUser.Text = ;
+                    stripAreaRate.Text = (Math.Round(vehicle.toolWidth * pn.speed * 0.1, 2)).ToString()+ "\r\n  Ha/hr";
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth, 2)).ToString() + " m";
 
                     //rate
@@ -2013,9 +2078,9 @@ namespace AgOpenGPS
                     lblSpeed.Text = SpeedMPH;
 
                     //status strip values
-                    stripDistance.Text = Convert.ToString((UInt16)(userDistance * 3.28084)) + " ft";
-                    stripAreaUser.Text = AcresUser;
-                    stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed * 0.1) * 2.47)).ToString();
+                    stripDistance.Text = Convert.ToString((UInt16)(userDistance * 3.28084)) + " ft\r\n" + AcresUser;
+                    //stripAreaUser.Text = ;
+                    stripAreaRate.Text = ((int)((vehicle.toolWidth * pn.speed * 0.1) * 2.47)).ToString() + "\r\n  Ac/hr";
                     stripEqWidth.Text = vehiclefileName + (Math.Round(vehicle.toolWidth * glm.m2ft, 2)).ToString() + " ft";
 
                     //rate
@@ -2028,13 +2093,13 @@ namespace AgOpenGPS
                 }
 
                 //not Metric/Standard units sensitive
-                stripHz.Text = NMEAHz + "Hz " + (int)(frameTime);
+                stripHz.Text = NMEAHz + "Hz " + (int)(frameTime)+ "\r\n" + Convert.ToString(mc.relayRateData[mc.rdYouTurnControlByte], 2).PadLeft(6, '0');
                 lblHeading.Text = Heading;
                 btnABLine.Text = PassNumber;
                 lblPureSteerAngle.Text = PureSteerAngle;
 
                 //binary of sequences
-                stripSequenceBinary.Text = Convert.ToString(mc.relayRateData[mc.rdYouTurnControlByte], 2).PadLeft(6, '0'); ;
+                //stripSequenceBinary.Text = ; ;
                 
 
 

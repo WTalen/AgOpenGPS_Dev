@@ -753,6 +753,7 @@
     <None Include="btnImages\SetupStatusStrip.png" />
     <None Include="btnImages\Help.png" />
     <None Include="btnImages\Webcam.png" />
+    <None Include="btnImages\skull.png" />
     <Content Include="Dependencies\Floor.png" />
     <Content Include="Dependencies\Landscape.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
