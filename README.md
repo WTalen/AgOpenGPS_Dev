@@ -3,6 +3,8 @@ Development nightly build, the latest most current and buggy software.
 
 AgOpenGPS = https://agopengps.jimdosite.com/
 
+Discussed at length http://www.thecombineforum.com/forums/31-technology/278810-agopengps.html
+
 *** Important ****
 
 This software is for discussion and learning of Precision Ag algorithms and techniques. It is not in any way to be used on any physical equipment and is meant for use by a simulator only.
@@ -17,5 +19,5 @@ Ag Precision Mapping and Section Control Software
 
 This software reads NMEA strings for the purpose of recording and mapping position information for Agricultural use. Also it has up to 8 Section Control to control implements application of product preventing over-application.
 
-Also ouputs angle delta and distance from reference line for AB line and Contour guidance.
+Also ouputs angle for PurePursuit guidance for AB line and Contour. 
 
