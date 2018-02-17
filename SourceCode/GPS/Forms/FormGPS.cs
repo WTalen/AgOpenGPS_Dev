@@ -338,7 +338,7 @@ namespace AgOpenGPS
             SectionCalcWidths();
 
             //start udp server
-            StartUDPServer();
+            //StartUDPServer();
 
             //set the correct zoom and grid
             camera.camSetDistance = camera.zoomValue * camera.zoomValue * -1;

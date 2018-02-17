@@ -80,7 +80,13 @@
             this.tmrWatchdog = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stripHz = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnHideTabs = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolstripUDPConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripUSBPortsConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripVehicleConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripAutoSteerConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripYouTurnConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolstripDisplayConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.stripDistance = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripDropDownBtnFuncs = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolstripField = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,12 +94,7 @@
             this.toolstripHeadland = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstripResetTrip = new System.Windows.Forms.ToolStripMenuItem();
             this.stripAreaRate = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolstripUDPConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripUSBPortsConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripVehicleConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripAutoSteerConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolstripYouTurnConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnHideTabs = new System.Windows.Forms.ToolStripDropDownButton();
             this.stripEqWidth = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripPortGPS = new System.Windows.Forms.ToolStripStatusLabel();
             this.stripOnlineGPS = new System.Windows.Forms.ToolStripProgressBar();
@@ -627,74 +628,17 @@
             this.stripHz.Margin = new System.Windows.Forms.Padding(0);
             this.stripHz.Name = "stripHz";
             // 
-            // btnHideTabs
-            // 
-            resources.ApplyResources(this.btnHideTabs, "btnHideTabs");
-            this.btnHideTabs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnHideTabs.Name = "btnHideTabs";
-            this.btnHideTabs.ShowDropDownArrow = false;
-            this.btnHideTabs.Click += new System.EventHandler(this.btnHideTabs_Click);
-            // 
-            // stripDistance
-            // 
-            resources.ApplyResources(this.stripDistance, "stripDistance");
-            this.stripDistance.Margin = new System.Windows.Forms.Padding(-4, 0, 0, 0);
-            this.stripDistance.Name = "stripDistance";
-            // 
-            // toolStripDropDownBtnFuncs
-            // 
-            resources.ApplyResources(this.toolStripDropDownBtnFuncs, "toolStripDropDownBtnFuncs");
-            this.toolStripDropDownBtnFuncs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolstripField,
-            this.toolstripBoundary,
-            this.toolstripHeadland,
-            this.toolstripResetTrip});
-            this.toolStripDropDownBtnFuncs.Name = "toolStripDropDownBtnFuncs";
-            this.toolStripDropDownBtnFuncs.ShowDropDownArrow = false;
-            // 
-            // toolstripField
-            // 
-            this.toolstripField.BackColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.toolstripField, "toolstripField");
-            this.toolstripField.Name = "toolstripField";
-            this.toolstripField.Click += new System.EventHandler(this.toolstripField_Click);
-            // 
-            // toolstripBoundary
-            // 
-            this.toolstripBoundary.BackColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.toolstripBoundary, "toolstripBoundary");
-            this.toolstripBoundary.Name = "toolstripBoundary";
-            this.toolstripBoundary.Click += new System.EventHandler(this.toolstripBoundary_Click);
-            // 
-            // toolstripHeadland
-            // 
-            this.toolstripHeadland.BackColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.toolstripHeadland, "toolstripHeadland");
-            this.toolstripHeadland.Name = "toolstripHeadland";
-            this.toolstripHeadland.Click += new System.EventHandler(this.toolstripHeadland_Click);
-            // 
-            // toolstripResetTrip
-            // 
-            this.toolstripResetTrip.BackColor = System.Drawing.SystemColors.ButtonFace;
-            resources.ApplyResources(this.toolstripResetTrip, "toolstripResetTrip");
-            this.toolstripResetTrip.Name = "toolstripResetTrip";
-            this.toolstripResetTrip.Click += new System.EventHandler(this.toolstripResetTrip_Click_1);
-            // 
-            // stripAreaRate
-            // 
-            resources.ApplyResources(this.stripAreaRate, "stripAreaRate");
-            this.stripAreaRate.Margin = new System.Windows.Forms.Padding(0);
-            this.stripAreaRate.Name = "stripAreaRate";
-            // 
             // toolStripDropDownButton2
             // 
             resources.ApplyResources(this.toolStripDropDownButton2, "toolStripDropDownButton2");
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolstripUDPConfig,
             this.toolstripUSBPortsConfig,
+            this.toolstripDisplayConfig,
             this.toolstripVehicleConfig,
             this.toolstripAutoSteerConfig,
             this.toolstripYouTurnConfig});
+            this.toolStripDropDownButton2.Image = global::AgOpenGPS.Properties.Resources.SetupStatusStrip;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.ShowDropDownArrow = false;
             // 
@@ -732,6 +676,74 @@
             resources.ApplyResources(this.toolstripYouTurnConfig, "toolstripYouTurnConfig");
             this.toolstripYouTurnConfig.Name = "toolstripYouTurnConfig";
             this.toolstripYouTurnConfig.Click += new System.EventHandler(this.toolstripYouTurnConfig_Click);
+            // 
+            // toolstripDisplayConfig
+            // 
+            this.toolstripDisplayConfig.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.toolstripDisplayConfig, "toolstripDisplayConfig");
+            this.toolstripDisplayConfig.Image = global::AgOpenGPS.Properties.Resources.gyro;
+            this.toolstripDisplayConfig.Name = "toolstripDisplayConfig";
+            this.toolstripDisplayConfig.Click += new System.EventHandler(this.toolstripDisplayConfig_Click);
+            // 
+            // stripDistance
+            // 
+            resources.ApplyResources(this.stripDistance, "stripDistance");
+            this.stripDistance.Margin = new System.Windows.Forms.Padding(-4, 0, 0, 0);
+            this.stripDistance.Name = "stripDistance";
+            // 
+            // toolStripDropDownBtnFuncs
+            // 
+            resources.ApplyResources(this.toolStripDropDownBtnFuncs, "toolStripDropDownBtnFuncs");
+            this.toolStripDropDownBtnFuncs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolstripField,
+            this.toolstripBoundary,
+            this.toolstripHeadland,
+            this.toolstripResetTrip});
+            this.toolStripDropDownBtnFuncs.Image = global::AgOpenGPS.Properties.Resources.start;
+            this.toolStripDropDownBtnFuncs.Name = "toolStripDropDownBtnFuncs";
+            this.toolStripDropDownBtnFuncs.ShowDropDownArrow = false;
+            // 
+            // toolstripField
+            // 
+            this.toolstripField.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.toolstripField, "toolstripField");
+            this.toolstripField.Name = "toolstripField";
+            this.toolstripField.Click += new System.EventHandler(this.toolstripField_Click);
+            // 
+            // toolstripBoundary
+            // 
+            this.toolstripBoundary.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.toolstripBoundary, "toolstripBoundary");
+            this.toolstripBoundary.Name = "toolstripBoundary";
+            this.toolstripBoundary.Click += new System.EventHandler(this.toolstripBoundary_Click);
+            // 
+            // toolstripHeadland
+            // 
+            this.toolstripHeadland.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.toolstripHeadland, "toolstripHeadland");
+            this.toolstripHeadland.Name = "toolstripHeadland";
+            this.toolstripHeadland.Click += new System.EventHandler(this.toolstripHeadland_Click);
+            // 
+            // toolstripResetTrip
+            // 
+            this.toolstripResetTrip.BackColor = System.Drawing.SystemColors.ButtonFace;
+            resources.ApplyResources(this.toolstripResetTrip, "toolstripResetTrip");
+            this.toolstripResetTrip.Name = "toolstripResetTrip";
+            this.toolstripResetTrip.Click += new System.EventHandler(this.toolstripResetTrip_Click_1);
+            // 
+            // stripAreaRate
+            // 
+            resources.ApplyResources(this.stripAreaRate, "stripAreaRate");
+            this.stripAreaRate.Margin = new System.Windows.Forms.Padding(0);
+            this.stripAreaRate.Name = "stripAreaRate";
+            // 
+            // btnHideTabs
+            // 
+            resources.ApplyResources(this.btnHideTabs, "btnHideTabs");
+            this.btnHideTabs.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHideTabs.Name = "btnHideTabs";
+            this.btnHideTabs.ShowDropDownArrow = false;
+            this.btnHideTabs.Click += new System.EventHandler(this.btnHideTabs_Click);
             // 
             // stripEqWidth
             // 
@@ -1872,6 +1884,7 @@
         private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btnDeleteAllData;
+        private System.Windows.Forms.ToolStripMenuItem toolstripDisplayConfig;
     }
 }
 

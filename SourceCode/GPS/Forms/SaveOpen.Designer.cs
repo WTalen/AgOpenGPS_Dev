@@ -15,7 +15,7 @@ namespace AgOpenGPS
         public List<List<vec2>> patchSaveList = new List<List<vec2>>();
 
         //list of the list of patch data individual triangles for contour tracking
-        public List<List<vec4>> contourSaveList = new List<List<vec4>>();
+        public List<List<vec3>> contourSaveList = new List<List<vec3>>();
 
         //function that save vehicle and section settings
         public void FileSaveVehicle()
@@ -736,19 +736,18 @@ namespace AgOpenGPS
                             line = reader.ReadLine();
                             int verts = int.Parse(line);
 
-                            vec4 vecFix = new vec4(0, 0, 0, 0);
+                            vec3 vecFix = new vec3(0, 0, 0);
 
-                            ct.ptList = new List<vec4>();
+                            ct.ptList = new List<vec3>();
                             ct.stripList.Add(ct.ptList);
 
                             for (int v = 0; v < verts; v++)
                             {
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
-                                vecFix.x = double.Parse(words[0], CultureInfo.InvariantCulture);
-                                vecFix.y = double.Parse(words[1], CultureInfo.InvariantCulture);
-                                vecFix.z = double.Parse(words[2], CultureInfo.InvariantCulture);
-                                vecFix.k = double.Parse(words[3], CultureInfo.InvariantCulture);
+                                vecFix.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
+                                vecFix.northing = double.Parse(words[2], CultureInfo.InvariantCulture);
+                                vecFix.heading = double.Parse(words[1], CultureInfo.InvariantCulture);
 
                                 ct.ptList.Add(vecFix);
                             }
@@ -946,7 +945,6 @@ namespace AgOpenGPS
 
                         if (numPoints > 0)
                         {
-                            vec2 vecPt = new vec2(0, 0);
                             boundz.ptList.Clear();
 
                             //load the line
@@ -954,8 +952,9 @@ namespace AgOpenGPS
                             {
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
-                                vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
-                                vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                vec3 vecPt = new vec3(double.Parse(words[0], CultureInfo.InvariantCulture),
+                                double.Parse(words[1], CultureInfo.InvariantCulture),
+                                double.Parse(words[2], CultureInfo.InvariantCulture));
                                 boundz.ptList.Add(vecPt);
                             }
 
@@ -1000,7 +999,6 @@ namespace AgOpenGPS
 
                         if (numPoints > 0)
                         {
-                            vec2 vecPt = new vec2(0, 0);
                             hl.ptList.Clear();
 
                             //load the line
@@ -1008,8 +1006,10 @@ namespace AgOpenGPS
                             {
                                 line = reader.ReadLine();
                                 string[] words = line.Split(',');
-                                vecPt.easting = double.Parse(words[0], CultureInfo.InvariantCulture);
-                                vecPt.northing = double.Parse(words[1], CultureInfo.InvariantCulture);
+                                vec3 vecPt = new vec3(
+                                    double.Parse(words[0], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture));
                                 hl.ptList.Add(vecPt);
                             }
 
@@ -1168,10 +1168,9 @@ namespace AgOpenGPS
 
                         for (int i = 0; i < count2; i++)
                         {
-                            writer.WriteLine(Math.Round((triList[i].x), 4).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].y, 4).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].z, 4).ToString(CultureInfo.InvariantCulture) + "," +
-                                Math.Round(triList[i].k, 4).ToString(CultureInfo.InvariantCulture));
+                            writer.WriteLine(Math.Round((triList[i].easting), 4).ToString(CultureInfo.InvariantCulture) + "," +
+                                Math.Round(triList[i].northing, 4).ToString(CultureInfo.InvariantCulture)+ "," +
+                                Math.Round(triList[i].heading, 4).ToString(CultureInfo.InvariantCulture));
                         }
                     }
                 }
@@ -1202,8 +1201,9 @@ namespace AgOpenGPS
                 if (boundz.ptList.Count > 0)
                 {
                     for (int j = 0; j < boundz.ptList.Count; j++)
-                        writer.WriteLine(boundz.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," + 
-                                            boundz.ptList[j].northing.ToString(CultureInfo.InvariantCulture));
+                        writer.WriteLine(boundz.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," +
+                                            boundz.ptList[j].northing.ToString(CultureInfo.InvariantCulture) + "," +
+                                                boundz.ptList[j].heading.ToString(CultureInfo.InvariantCulture));
                 }
             }
         }
@@ -1235,7 +1235,8 @@ namespace AgOpenGPS
                 {
                     for (int j = 0; j < hl.ptList.Count; j++)
                         writer.WriteLine(hl.ptList[j].easting.ToString(CultureInfo.InvariantCulture) + "," +
-                                            hl.ptList[j].northing.ToString(CultureInfo.InvariantCulture));
+                                         hl.ptList[j].northing.ToString(CultureInfo.InvariantCulture) + "," +
+                                         hl.ptList[j].heading.ToString(CultureInfo.InvariantCulture));
                 }
             }
         }

@@ -22,7 +22,7 @@ namespace AgOpenGPS
         public vec2 boxC = new vec2(1, 1), boxD = new vec2(2, 3);
 
         //list of coordinates of headland line
-        public List<vec2> ptList = new List<vec2>();
+        public List<vec3> ptList = new List<vec3>();
 
         //the list of constants and multiples of the headland
         public List<vec2> calcList = new List<vec2>();

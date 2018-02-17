@@ -439,14 +439,14 @@ FROM IMU:
         public double Distance(vec4 first, vec4 second)
         {
             return Math.Sqrt(
-                Math.Pow(first.x - second.x, 2)
-                + Math.Pow(first.z - second.z, 2));
+                Math.Pow(first.easting - second.easting, 2)
+                + Math.Pow(first.northing - second.northing, 2));
         }
-        public double Distance(vec4 first, double east, double north)
+        public double Distance(vec3 first, double east, double north)
         {
             return Math.Sqrt(
-                Math.Pow(first.x - east, 2)
-                + Math.Pow(first.z - north, 2));
+                Math.Pow(first.easting - east, 2)
+                + Math.Pow(first.northing - north, 2));
         }
 
         //not normalized distance, no square root

@@ -82,17 +82,17 @@ namespace AgOpenGPS
     /// </summary>
     public struct vec4
     {
-        public double x; //easting
-        public double y; //heading etc
-        public double z; //northing
-        public double k;    //altitude
+        public double easting; //easting
+        public double heading; //heading etc
+        public double northing; //northing
+        public double altitude;    //altitude
 
-        public vec4(double x, double y, double z, double k)
+        public vec4(double _easting, double _heading, double _northing, double _altitude)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.k = k;
+            this.easting = _easting;
+            this.heading = _heading;
+            this.northing = _northing;
+            this.altitude = _altitude;
         }
     }
 
@@ -154,7 +154,7 @@ namespace AgOpenGPS
         }
     }
 
-    //strucutre for contour guidance
+    //structure for contour guidance
     public struct cvec
     {
         public double x;

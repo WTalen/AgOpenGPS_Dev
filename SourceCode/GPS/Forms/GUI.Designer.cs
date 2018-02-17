@@ -433,16 +433,6 @@ namespace AgOpenGPS
             }
         }
         
-        //Open the dialog of tabbed settings
-        private void SettingsPageOpen(int page)
-        {
-            using (var form = new FormSettings(this, page))
-            {
-                var result = form.ShowDialog();
-                if (result == DialogResult.OK) { }
-            }
-        }
-
         // Buttons //-----------------------------------------------------------------------
         //Auto steer off and on
         private void btnAutoSteer_Click(object sender, EventArgs e)
@@ -1770,8 +1760,23 @@ namespace AgOpenGPS
         }
         private void toolstripVehicleConfig_Click(object sender, EventArgs e)
         {
-            SettingsPageOpen(0);
+            using (var form = new FormSettings(this, 0))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK) { }
+            }
         }
+
+        private void toolstripDisplayConfig_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormDisplaySettings(this))
+            {
+                var result = form.ShowDialog();
+                if (result == DialogResult.OK) { }
+            }
+        }
+
+
         private void toolstripUSBPortsConfig_Click(object sender, EventArgs e)
         {
             SettingsCommunications();
@@ -1791,7 +1796,7 @@ namespace AgOpenGPS
             if (boundz.isSet)
             {
                 //field too small
-                if (boundz.ptList.Count < 30) { TimedMessageBox(3000, "!!!!", gStr.gsBoundaryTooSmall); return; }
+                if (boundz.ptList.Count < 4) { TimedMessageBox(3000, "!!!!", gStr.gsBoundaryTooSmall); return; }
                 using (var form = new FormHeadland(this))
                 {
                     var result = form.ShowDialog();

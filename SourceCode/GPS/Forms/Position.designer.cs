@@ -188,6 +188,8 @@ namespace AgOpenGPS
 
             #region Step Fix
 
+            //**** heading of the vec3 structure is used for distance in Step fix!!!!!
+
             //grab the most current fix and save the distance from the last fix
             distanceCurrentStepFix = pn.Distance(pn.fix, stepFixPts[0]);
             fixStepDist = distanceCurrentStepFix;
@@ -246,15 +248,8 @@ namespace AgOpenGPS
                 //don't add the total distance again
                 stepFixPts[(totalFixSteps - 1)].heading = 0;
 
-
                 //grab sentences for logging
-                if (isLogNMEA)
-                {
-                    if (ct.isContourOn)
-                    {
-                        pn.logNMEASentence.Append(recvSentenceSettings);
-                    }
-                }
+                if (isLogNMEA)  { if (ct.isContourOn)  { pn.logNMEASentence.Append(recvSentenceSettings); } }
 
                 //To prevent drawing high numbers of triangles, determine and test before drawing vertex
                 sectionTriggerDistance = pn.Distance(pn.fix, prevSectionPos);
@@ -334,6 +329,7 @@ namespace AgOpenGPS
                 //out serial to autosteer module  //indivdual classes load the distance and heading deltas 
                 AutoSteerDataOutToPort();
                 
+                //autosteer data out the UDP Steer port
                 SendUDPMessage(guidanceLineSteerAngle + "," + guidanceLineDistanceOff);
             }
 
@@ -379,8 +375,8 @@ namespace AgOpenGPS
 
             #region Youturn
 
-            //do the auto youturn logic every half second
-            if (hl.isSet && yt.isYouTurnBtnOn && isAutoSteerBtnOn)// && (youTurnCounter++ > (fixUpdateHz>>3)))
+            //do the auto youturn logic if everything is on.
+            if (hl.isSet && yt.isYouTurnBtnOn && isAutoSteerBtnOn)
             {
                 //figure out where we are
                 yt.isInBoundz = boundz.IsPointInsideBoundary(toolPos);
@@ -667,8 +663,8 @@ namespace AgOpenGPS
                 if (boundz.isDrawRightSide)
                 {
                     //Right side
-                    vec2 point = new vec2(cosSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.easting,
-                        sinSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.northing);
+                    vec3 point = new vec3(cosSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.easting,
+                        sinSectionHeading * (section[vehicle.numOfSections - 1].positionRight) + toolPos.northing, fixHeadingSection);
                     boundz.ptList.Add(point);
                 }
 
@@ -676,8 +672,8 @@ namespace AgOpenGPS
                 else
                 {
                     //Right side
-                    vec2 point = new vec2(cosSectionHeading * (section[0].positionLeft) + toolPos.easting,
-                        sinSectionHeading * (section[0].positionLeft) + toolPos.northing);
+                    vec3 point = new vec3(cosSectionHeading * (section[0].positionLeft) + toolPos.easting,
+                        sinSectionHeading * (section[0].positionLeft) + toolPos.northing, fixHeadingSection);
                     boundz.ptList.Add(point);
                 }
 

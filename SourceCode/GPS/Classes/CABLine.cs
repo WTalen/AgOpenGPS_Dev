@@ -460,7 +460,7 @@ namespace AgOpenGPS
                         gl.Begin(OpenGL.GL_LINE_STRIP);
                         for (int i = 0; i < ptCount; i++)
                         {
-                            gl.Vertex(mf.yt.ytList[i].x, mf.yt.ytList[i].z, 0);
+                            gl.Vertex(mf.yt.ytList[i].easting, mf.yt.ytList[i].northing, 0);
                         }
                         gl.End();
                     }

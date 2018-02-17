@@ -65,3 +65,6 @@ Load Headland LoopSystem.FormatException: Input string was not in a correct form
    at System.Int32.Parse(String s)
    at AgOpenGPS.FormGPS.FileOpenField(String _openType) in C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SaveOpen.Designer.cs:line 990 - 2/9/2018 7:59:35 AM
 
+Load Boundary LineSystem.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at AgOpenGPS.FormGPS.FileOpenField(String _openType) in C:\Users\Grizs\Desktop\AgOpenGPS_Dev\SourceCode\GPS\Forms\SaveOpen.Designer.cs:line 955 - 2/11/2018 3:49:31 PM
+
