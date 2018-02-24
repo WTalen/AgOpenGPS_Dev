@@ -45,7 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.nudMinFixStepDistance = new System.Windows.Forms.NumericUpDown();
-            this.tabGuidance = new System.Windows.Forms.TabPage();
             this.tabIMU = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cboxIsHeadingFromGPSTrue = new System.Windows.Forms.CheckBox();
@@ -68,6 +67,7 @@
             this.cboxRollDogs = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tboxTinkerUID = new System.Windows.Forms.TextBox();
+            this.tabGuidance = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabDisplay.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -360,15 +360,6 @@
             65536});
             this.nudMinFixStepDistance.ValueChanged += new System.EventHandler(this.nudMinFixStepDistance_ValueChanged);
             // 
-            // tabGuidance
-            // 
-            this.tabGuidance.Location = new System.Drawing.Point(4, 54);
-            this.tabGuidance.Name = "tabGuidance";
-            this.tabGuidance.Size = new System.Drawing.Size(948, 470);
-            this.tabGuidance.TabIndex = 11;
-            this.tabGuidance.Text = "Guidance";
-            this.tabGuidance.UseVisualStyleBackColor = true;
-            // 
             // tabIMU
             // 
             this.tabIMU.Controls.Add(this.groupBox1);
@@ -403,9 +394,9 @@
             this.cboxIsHeadingFromGPSTrue.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cboxIsHeadingFromGPSTrue.Location = new System.Drawing.Point(34, 46);
             this.cboxIsHeadingFromGPSTrue.Name = "cboxIsHeadingFromGPSTrue";
-            this.cboxIsHeadingFromGPSTrue.Size = new System.Drawing.Size(351, 29);
+            this.cboxIsHeadingFromGPSTrue.Size = new System.Drawing.Size(300, 29);
             this.cboxIsHeadingFromGPSTrue.TabIndex = 62;
-            this.cboxIsHeadingFromGPSTrue.Text = "Use VTG Heading True Instead";
+            this.cboxIsHeadingFromGPSTrue.Text = "Use HDT Heading Instead";
             this.cboxIsHeadingFromGPSTrue.UseVisualStyleBackColor = true;
             this.cboxIsHeadingFromGPSTrue.CheckedChanged += new System.EventHandler(this.cboxIsHeadingFromGPSTrue_CheckedChanged);
             // 
@@ -640,6 +631,15 @@
             this.tboxTinkerUID.Name = "tboxTinkerUID";
             this.tboxTinkerUID.Size = new System.Drawing.Size(169, 33);
             this.tboxTinkerUID.TabIndex = 78;
+            // 
+            // tabGuidance
+            // 
+            this.tabGuidance.Location = new System.Drawing.Point(4, 54);
+            this.tabGuidance.Name = "tabGuidance";
+            this.tabGuidance.Size = new System.Drawing.Size(948, 470);
+            this.tabGuidance.TabIndex = 11;
+            this.tabGuidance.Text = "Guidance";
+            this.tabGuidance.UseVisualStyleBackColor = true;
             // 
             // FormDisplaySettings
             // 

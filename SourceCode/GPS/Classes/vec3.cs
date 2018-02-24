@@ -7,7 +7,7 @@ namespace AgOpenGPS
     /// <summary>
     /// Represents a three dimensional vector.
     /// </summary>
-    /// 
+    ///
 
     public struct vec3
     {
@@ -129,7 +129,7 @@ namespace AgOpenGPS
         }
 
         //normalize to 1
-        public void Normalize()
+        public vec2 Normalize()
         {
             double length = GetLength();
             if (Math.Abs(length) < 0.000000000001)
@@ -137,8 +137,7 @@ namespace AgOpenGPS
                 throw new DivideByZeroException("Trying to normalize a vector with length of zero.");
             }
 
-            easting /= length;
-            northing /= length;
+            return new vec2(easting /= length, northing /= length);
         }
 
         //Returns the length of the vector
@@ -151,6 +150,18 @@ namespace AgOpenGPS
         public double GetLengthSquared()
         {
             return (easting * easting) + (northing * northing);
+        }
+
+        //scalar double
+        public static vec2 operator *(vec2 self, double s)
+        {
+            return new vec2(self.easting * s, self.northing * s);
+        }
+
+        //add 2 vectors
+        public static vec2 operator +(vec2 lhs, vec2 rhs)
+        {
+            return new vec2(lhs.easting + rhs.easting, lhs.northing + rhs.northing);
         }
     }
 

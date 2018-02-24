@@ -11,7 +11,7 @@ namespace AgOpenGPS
         private readonly FormGPS mf = null;
 
         private double toolOverlap, toolTrailingHitchLength, tankTrailingHitchLength, toolOffset, toolTurnOffDelay, toolLookAhead;
-        private double antennaHeight, antennaPivot, wheelbase, hitchLength;
+        private double antennaHeight, antennaPivot, wheelbase, hitchLength, minTurningRadius;
 
         private bool isToolTrailing, isToolBehindPivot, isPivotBehindAntenna, isSteerAxleAhead;
         private int numberOfSections;
@@ -72,6 +72,7 @@ namespace AgOpenGPS
             antennaPivot = Math.Abs(Properties.Vehicle.Default.setVehicle_antennaPivot);
             hitchLength = Math.Abs(Properties.Vehicle.Default.setVehicle_hitchLength);
             wheelbase = Math.Abs(Properties.Vehicle.Default.setVehicle_wheelbase);
+            minTurningRadius = Properties.Vehicle.Default.setVehicle_minTurningRadius;
 
             nudAntennaHeight.ValueChanged -= nudAntennaHeight_ValueChanged;
             nudAntennaHeight.Value = (decimal)(antennaHeight * m2MetImp);
@@ -88,6 +89,10 @@ namespace AgOpenGPS
             nudWheelbase.ValueChanged -= nudWheelbase_ValueChanged;
             nudWheelbase.Value = (decimal)(wheelbase * m2MetImp);
             nudWheelbase.ValueChanged += nudWheelbase_ValueChanged;
+
+            nudMinTurnRadius.ValueChanged -= nudMinTurnRadius_ValueChanged;
+            nudMinTurnRadius.Value = (decimal)(minTurningRadius * m2MetImp);
+            nudMinTurnRadius.ValueChanged += nudMinTurnRadius_ValueChanged;
 
             //Tool    hitched, pivot behind antenna, and tool behind pivot are the default as true------------------------------------------------------
             isToolBehindPivot = Properties.Vehicle.Default.setVehicle_isToolBehindPivot;
@@ -208,6 +213,9 @@ namespace AgOpenGPS
             mf.vehicle.wheelbase = wheelbase;
             Properties.Vehicle.Default.setVehicle_wheelbase = wheelbase;
 
+            mf.vehicle.minTurningRadius = minTurningRadius;
+            Properties.Vehicle.Default.setVehicle_minTurningRadius = minTurningRadius;
+
             mf.vehicle.isSteerAxleAhead = isSteerAxleAhead;
             Properties.Vehicle.Default.setVehicle_isSteerAxleAhead = mf.vehicle.isSteerAxleAhead;
 
@@ -315,6 +323,11 @@ namespace AgOpenGPS
         private void nudHitchLength_ValueChanged(object sender, EventArgs e)
         {
             hitchLength = (double)nudHitchLength.Value * metImp2m;
+        }
+
+        private void nudMinTurnRadius_ValueChanged(object sender, EventArgs e)
+        {
+            minTurningRadius = (double)nudMinTurnRadius.Value * metImp2m;
         }
 
         private void nudWheelbase_ValueChanged(object sender, EventArgs e)

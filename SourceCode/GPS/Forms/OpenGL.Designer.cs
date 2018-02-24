@@ -46,12 +46,12 @@ namespace AgOpenGPS
                 gl.Disable(OpenGL.GL_TEXTURE_2D);
 
 
-                gl.Enable(OpenGL.GL_LINE_SMOOTH);
+                //gl.Enable(OpenGL.GL_LINE_SMOOTH);
                 gl.Enable(OpenGL.GL_BLEND);
 
-                gl.Hint(OpenGL.GL_LINE_SMOOTH_HINT, OpenGL.GL_FASTEST);
-                gl.Hint(OpenGL.GL_POINT_SMOOTH_HINT, OpenGL.GL_FASTEST);
-                gl.Hint(OpenGL.GL_POLYGON_SMOOTH_HINT, OpenGL.GL_FASTEST);
+                //gl.Hint(OpenGL.GL_LINE_SMOOTH_HINT, OpenGL.GL_FASTEST);
+                //gl.Hint(OpenGL.GL_POINT_SMOOTH_HINT, OpenGL.GL_FASTEST);
+                //gl.Hint(OpenGL.GL_POLYGON_SMOOTH_HINT, OpenGL.GL_FASTEST);
 
                 ////if grid is on draw it
                 if (isGridOn) worldGrid.DrawWorldGrid(camera.gridZoom);
@@ -144,7 +144,8 @@ namespace AgOpenGPS
                 // draw the current and reference AB Lines
                 else { if (ABLine.isABLineSet | ABLine.isABLineBeingSet) ABLine.DrawABLines(); }
 
-                //recPath.DrawLine();
+                //recPath.DrawRecordedLine();
+                //recPath.DrawDubins();
 
                 //draw the flags if there are some
                 int flagCnt = flagPts.Count;
@@ -435,10 +436,10 @@ namespace AgOpenGPS
             gl.Translate(0, 0, -390);
 
             //rotate camera so heading matched fix heading in the world
-            gl.Rotate(glm.toDegrees(fixHeadingSection), 0, 0, 1);
+            gl.Rotate(glm.toDegrees(toolPos.heading), 0, 0, 1);
 
             //translate to that spot in the world 
-            gl.Translate(-toolPos.easting, -toolPos.northing, -fixZ);
+            gl.Translate(-toolPos.easting, -toolPos.northing, 0);
 
             //patch color
             gl.Color(0.0f, 0.5f, 0.0f);
@@ -1079,10 +1080,10 @@ namespace AgOpenGPS
             gl.Translate(0, 0, -maxFieldDistance);
 
             //rotate camera so heading matched fix heading in the world
-            //gl.Rotate(glm.toDegrees(fixHeadingSection), 0, 0, 1);
+            //gl.Rotate(glm.toDegrees(toolPos.heading), 0, 0, 1);
 
             //translate to that spot in the world 
-            gl.Translate(-fieldCenterX, -fieldCenterY, -fixZ);
+            gl.Translate(-fieldCenterX, -fieldCenterY, 0);
 
             //calculate the frustum for the section control window
             CalcFrustum(gl);

@@ -42,7 +42,7 @@ namespace AgOpenGPS
         public bool isOnRightSideCurrentLine = true;
 
         //pure pursuit values
-        public vec2 pivotAxlePosCT = new vec2(0, 0);
+        public vec3 pivotAxlePosCT = new vec3(0, 0, 0);
         public vec2 goalPointCT = new vec2(0, 0);
         public vec2 radiusPointCT = new vec2(0, 0);
         public double steerAngleCT;
@@ -380,7 +380,7 @@ namespace AgOpenGPS
                 {
                     //counting down
                     isABSameAsFixHeading = false;
-                    distSoFar = mf.pn.Distance(ctList[A], rEastCT, rNorthCT);
+                    distSoFar = glm.Distance(ctList[A], rEastCT, rNorthCT);
                     //Is this segment long enough to contain the full lookahead distance?
                     if (distSoFar > goalPointDistance)
                     {
@@ -396,7 +396,7 @@ namespace AgOpenGPS
                         while (A > 0)
                         {
                             B--; A--;
-                            tempDist = mf.pn.Distance(ctList[B], ctList[A]);
+                            tempDist = glm.Distance(ctList[B], ctList[A]);
 
                             //will we go too far?
                             if ((tempDist + distSoFar) > goalPointDistance)
@@ -421,7 +421,7 @@ namespace AgOpenGPS
                 {
                     //counting up
                     isABSameAsFixHeading = true;
-                    distSoFar = mf.pn.Distance(ctList[B], rEastCT, rNorthCT);
+                    distSoFar = glm.Distance(ctList[B], rEastCT, rNorthCT);
 
                     //Is this segment long enough to contain the full lookahead distance?
                     if (distSoFar > goalPointDistance)
@@ -439,7 +439,7 @@ namespace AgOpenGPS
                         while (B < ptCount - 1)
                         {
                             B++; A++;
-                            tempDist = mf.pn.Distance(ctList[B], ctList[A]);
+                            tempDist = glm.Distance(ctList[B], ctList[A]);
 
                             //will we go too far?
                             if ((tempDist + distSoFar) > goalPointDistance)
@@ -463,7 +463,7 @@ namespace AgOpenGPS
                 }
 
                 //calc "D" the distance from pivot axle to lookahead point
-                double goalPointDistanceSquared = mf.pn.DistanceSquared(goalPointCT.northing, goalPointCT.easting, pivotAxlePosCT.northing, pivotAxlePosCT.easting);
+                double goalPointDistanceSquared = glm.DistanceSquared(goalPointCT.northing, goalPointCT.easting, pivotAxlePosCT.northing, pivotAxlePosCT.easting);
 
                 //calculate the the delta x in local coordinates and steering angle degrees based on wheelbase
                 double localHeading = glm.twoPI - mf.fixHeading;

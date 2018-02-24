@@ -173,7 +173,7 @@ namespace AgOpenGPS
                 for (int j = 0; j < headCount; j++)
                 {
                     //make sure distance between headland and boundary is not less then width
-                    distance = mf.pn.Distance(mf.boundz.ptList[i], mf.hl.ptList[j]);
+                    distance = glm.Distance(mf.boundz.ptList[i], mf.hl.ptList[j]);
                     if (distance < (totalHeadWidth * 0.98))
                     {
                         mf.hl.ptList.RemoveAt(j);
@@ -204,7 +204,7 @@ namespace AgOpenGPS
             double spacing = mf.vehicle.toolWidth * 0.33;
             for (int i = 0; i < headCount - 1; i++)
             {
-                distance = mf.pn.Distance(mf.hl.ptList[i], mf.hl.ptList[i + 1]);
+                distance = glm.Distance(mf.hl.ptList[i], mf.hl.ptList[i + 1]);
                 if (distance < spacing)
                 {
                     mf.hl.ptList.RemoveAt(i + 1);
@@ -219,7 +219,7 @@ namespace AgOpenGPS
             {
                 int j = i + 1;
                 if (j == headCount) j = 0;
-                distance = mf.pn.Distance(mf.hl.ptList[i], mf.hl.ptList[j]);
+                distance = glm.Distance(mf.hl.ptList[i], mf.hl.ptList[j]);
                 if (distance > (spacing))
                 {
                     point.easting = (mf.hl.ptList[i].easting + mf.hl.ptList[j].easting) / 2.0;
@@ -276,7 +276,7 @@ namespace AgOpenGPS
             glh.Translate(0, 0, -maxFieldDistance);
 
             //rotate camera so heading matched fix heading in the world
-            //glh.Rotate(glm.toDegrees(fixHeadingSection), 0, 0, 1);
+            //glh.Rotate(glm.toDegrees(toolPos.heading), 0, 0, 1);
 
             //translate to that spot in the world
             glh.Translate(-fieldCenterX, -fieldCenterY, 0);

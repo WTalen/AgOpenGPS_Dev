@@ -56,6 +56,7 @@ namespace AgOpenGPS
             //turn off the turn signals lol
             btnRightYouTurn.Visible = false;
             btnLeftYouTurn.Visible = false;
+            btnSwapDirection.Visible = false;
 
             //rate control button
 
@@ -490,6 +491,7 @@ namespace AgOpenGPS
                     btnLeftYouTurn.Enabled = false;
                     btnRightYouTurn.Visible = false;
                     btnLeftYouTurn.Visible = false;
+                    btnSwapDirection.Visible = false;
 
                     btnEnableAutoYouTurn.Enabled = false;
                     yt.isYouTurnBtnOn = false;
@@ -507,6 +509,8 @@ namespace AgOpenGPS
                     btnLeftYouTurn.Enabled = true;
                     btnRightYouTurn.Visible = true;
                     btnLeftYouTurn.Visible = true;
+                    btnSwapDirection.Visible = true;
+
 
                     //auto YouTurn disabled
                     yt.isYouTurnBtnOn = false;
@@ -533,6 +537,8 @@ namespace AgOpenGPS
                 btnLeftYouTurn.Enabled = false;
                 btnRightYouTurn.Visible = false;
                 btnLeftYouTurn.Visible = false;
+                btnSwapDirection.Visible = false;
+
 
                 btnEnableAutoYouTurn.Enabled = false;
                 yt.isYouTurnBtnOn = false;
@@ -547,6 +553,7 @@ namespace AgOpenGPS
                     btnLeftYouTurn.Enabled = true;
                     btnRightYouTurn.Visible = true;
                     btnLeftYouTurn.Visible = true;
+                    btnSwapDirection.Visible = true;
 
                     //auto YouTurn shutdown
                     yt.isYouTurnBtnOn = false;
@@ -573,6 +580,8 @@ namespace AgOpenGPS
             btnLeftYouTurn.Enabled = false;
             btnRightYouTurn.Visible = false;
             btnLeftYouTurn.Visible = false;
+            btnSwapDirection.Visible = false;
+
             btnEnableAutoYouTurn.Enabled = false;
             yt.isYouTurnBtnOn = false;
             btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
@@ -1206,6 +1215,7 @@ namespace AgOpenGPS
                 {
                     FileCreateContour();
                     FileCreateSections();
+                    FileCreateRecPath();
 
                     if (rc.isRateControlOn)
                         btnRate.PerformClick();
@@ -1842,6 +1852,7 @@ namespace AgOpenGPS
             if (!sp.IsOpen)
             {
                 if (isAutoSteerBtnOn) sim.DoSimTick(guidanceLineSteerAngle / 100.0);
+                //if (recPath.isBtnFollowOn)sim.DoSimTick(guidanceLineSteerAngle / 100.0);
                 else sim.DoSimTick(sim.steerAngleScrollBar);
             }
         }
@@ -1919,7 +1930,6 @@ namespace AgOpenGPS
         public string PureSteerAngle { get { return ((double)(guidanceLineSteerAngle) * 0.01) + "\u00B0"; } }
 
         public string FixHeading { get { return Math.Round(fixHeading, 4).ToString(); } }
-        public string FixHeadingSection { get { return Math.Round(fixHeadingSection, 4).ToString(); } }
 
         public string LookAhead { get { return ((int)(section[0].sectionLookAhead)).ToString(); } }
         public string StepFixNum { get { return (currentStepFix).ToString(); } }

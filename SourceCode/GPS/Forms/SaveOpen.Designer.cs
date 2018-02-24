@@ -104,8 +104,8 @@ namespace AgOpenGPS
                     writer.WriteLine("SlowSpeedCutoff," + Properties.Vehicle.Default.setVehicle_slowSpeedCutoff.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("ToolMinUnappliedPixels," + Properties.Vehicle.Default.setVehicle_minApplied.ToString(CultureInfo.InvariantCulture));
 
-                    writer.WriteLine("Empty," + "10");
-                    writer.WriteLine("Empty," + "10");
+                    writer.WriteLine("MinTurningRadius," + Properties.Vehicle.Default.setVehicle_minTurningRadius.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine("YouTurnUseDubins," + Properties.Vehicle.Default.set_youUseDubins.ToString(CultureInfo.InvariantCulture));
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
                     writer.WriteLine("Empty," + "10");
@@ -314,9 +314,11 @@ namespace AgOpenGPS
                         Properties.Vehicle.Default.setVehicle_slowSpeedCutoff = double.Parse(words[1], CultureInfo.InvariantCulture);
                         line = reader.ReadLine(); words = line.Split(',');
                         Properties.Vehicle.Default.setVehicle_minApplied = int.Parse(words[1], CultureInfo.InvariantCulture);
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.setVehicle_minTurningRadius= double.Parse(words[1], CultureInfo.InvariantCulture);
+                        line = reader.ReadLine(); words = line.Split(',');
+                        Properties.Vehicle.Default.set_youUseDubins = bool.Parse(words[1]);
 
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
                         line = reader.ReadLine();
@@ -417,6 +419,8 @@ namespace AgOpenGPS
                         vehicle.toolOffset = Properties.Vehicle.Default.setVehicle_toolOffset;
                         vehicle.toolTurnOffDelay = Properties.Vehicle.Default.setVehicle_turnOffDelay;
                         vehicle.wheelbase = Properties.Vehicle.Default.setVehicle_wheelbase;
+                        vehicle.minTurningRadius = Properties.Vehicle.Default.setVehicle_minTurningRadius;
+                        yt.isUsingDubinsTurn = Properties.Vehicle.Default.set_youUseDubins;
 
                         vehicle.isToolTrailing = Properties.Vehicle.Default.setVehicle_isToolTrailing;
                         vehicle.isPivotBehindAntenna = Properties.Vehicle.Default.setVehicle_isPivotBehindAntenna;
@@ -600,9 +604,6 @@ namespace AgOpenGPS
             //Bob_Feb11
             //$Offsets
             //533172,5927719,12 - offset easting, northing, zone
-            //$Sections
-            //10 - points in this patch
-            //10.1728031317344,0.723157039771303 -easting, northing
 
             //start to read the file
             string line;
@@ -852,6 +853,8 @@ namespace AgOpenGPS
                             btnABLine.Image = global::AgOpenGPS.Properties.Resources.ABLineOn;
                             btnRightYouTurn.Visible = true;
                             btnLeftYouTurn.Visible = true;
+                            btnSwapDirection.Visible = true;
+
 
                             //Heading  , ,refPoint2x,z                    
                             line = reader.ReadLine();
@@ -887,6 +890,7 @@ namespace AgOpenGPS
                             btnLeftYouTurn.Enabled = true;
                             btnRightYouTurn.Visible = true;
                             btnLeftYouTurn.Visible = true;
+                            btnSwapDirection.Visible = true;
 
                             //auto YouTurn shutdown
                             yt.isYouTurnBtnOn = false;
@@ -905,6 +909,7 @@ namespace AgOpenGPS
                             btnLeftYouTurn.Enabled = false;
                             btnRightYouTurn.Visible = false;
                             btnLeftYouTurn.Visible = false;
+                            btnSwapDirection.Visible = false;
                             btnEnableAutoYouTurn.Enabled = false;
                             yt.isYouTurnBtnOn = false;
                         }
@@ -974,7 +979,7 @@ namespace AgOpenGPS
                     }
                 }
             }
-            
+
 
             // Headland  -------------------------------------------------------------------------------------------------
 
@@ -1030,6 +1035,58 @@ namespace AgOpenGPS
                     }
                 }
             }
+
+
+            //Either exit or update running save
+            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
+            if (!File.Exists(fileAndDirectory))
+            {
+                var form = new FormTimedMessage(4000, "Missing Recorded Path File", "But Field is Loaded");
+                form.Show();
+            }
+
+            else
+            {
+                using (StreamReader reader = new StreamReader(fileAndDirectory))
+                {
+                    try
+                    {
+                        //read header
+                        line = reader.ReadLine();
+                        line = reader.ReadLine();
+                        int numPoints = int.Parse(line);
+                        recPath.recList.Clear();
+
+                        while (!reader.EndOfStream)
+                        {
+                            for (int v = 0; v < numPoints; v++)
+                            {
+                                line = reader.ReadLine();
+                                string[] words = line.Split(',');
+                                CRecPathPt point = new CRecPathPt(
+                                    double.Parse(words[0], CultureInfo.InvariantCulture),
+                                    double.Parse(words[1], CultureInfo.InvariantCulture),
+                                    double.Parse(words[2], CultureInfo.InvariantCulture),
+                                    double.Parse(words[3], CultureInfo.InvariantCulture));
+                                recPath.recList.Add(point);
+                            }
+                        }
+                    }
+
+                    catch (Exception e)
+                    {
+                        var form = new FormTimedMessage(4000, "Recorded Path File is Corrupt", "But Field is Loaded");
+                        form.Show();
+                        WriteErrorLog("Load Recorded Path" + e.ToString());
+                    }
+                }
+            }
+
+
+
+
+
+
         }//end of open file
 
         //creates the field file when starting new field
@@ -1125,6 +1182,30 @@ namespace AgOpenGPS
         }
 
         //Create contour file
+        public void FileCreateRecPath()
+        {
+            //$Sections
+            //10 - points in this patch
+            //10.1728031317344,0.723157039771303 -easting, northing
+
+            //get the directory and make sure it exists, create if not
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            string myFileName = "RecPath.txt";
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter(dirField + myFileName))
+            {
+                //write paths # of sections
+                writer.WriteLine("$RecPath");
+            }
+        }
+
+        //Create contour file
         public void FileCreateContour()
         {
             //12  - points in patch
@@ -1196,7 +1277,7 @@ namespace AgOpenGPS
             //write out the file
             using (StreamWriter writer = new StreamWriter(dirField + "boundary.Txt"))
             {
-                writer.WriteLine("$Boundary");                
+                writer.WriteLine("$Boundary");
                 writer.WriteLine(boundz.ptList.Count.ToString(CultureInfo.InvariantCulture));
                 if (boundz.ptList.Count > 0)
                 {
@@ -1208,17 +1289,36 @@ namespace AgOpenGPS
             }
         }
 
+        //save the boundary
+        public void FileSaveRecPath()
+        {
+            //get the directory and make sure it exists, create if not
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter(dirField + "RecPath.Txt"))
+            {
+                writer.WriteLine("$RecPath");
+                writer.WriteLine(recPath.recList.Count.ToString(CultureInfo.InvariantCulture));
+                if (recPath.recList.Count > 0)
+                {
+                    for (int j = 0; j < recPath.recList.Count; j++)
+                        writer.WriteLine(
+                            Math.Round(recPath.recList[j].easting, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].heading, 3).ToString(CultureInfo.InvariantCulture) + "," +
+                            Math.Round(recPath.recList[j].speed, 1).ToString(CultureInfo.InvariantCulture));
+                }
+            }
+        }
+
         //save the headland
         public void FileSaveHeadlandYouTurn()
         {
-            //Saturday, February 11, 2017  -->  7:26:52 AM
-            //12  - points in patch
-            //64.697,0.168,-21.654,0 - east, heading, north, altitude
-            //$ContourDir
-            //Bob_Feb11
-            //$Offsets
-            //533172,5927719,12
-
             //get the directory and make sure it exists, create if not
             string dirField = fieldsDirectory + currentFieldDirectory + "\\";
 

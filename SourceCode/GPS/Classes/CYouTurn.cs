@@ -27,7 +27,7 @@ namespace AgOpenGPS
         public string pos8 = "";
 
         /// <summary>  /// turning right or left?/// </summary>
-        public bool isYouTurnRight;
+        public bool isYouTurnRight, isLastToggle;
 
         /// <summary> /// What was the last successful you turn direction? /// </summary>
         public bool isLastYouTurnRight;
@@ -39,7 +39,7 @@ namespace AgOpenGPS
         public bool isYouTurnTriggerPointSet;
 
         /// <summary>  /// The point 45 m from headland that starts everything  /// </summary>
-        public vec2 youTurnTriggerPoint = new vec2(0, 0);
+        public vec3 youTurnTriggerPoint = new vec3(0, 0, 0);
 
         //if not in workArea but in bounds, then we are on headland
         public bool isInWorkArea, isInBoundz, isInHeadland;
@@ -51,9 +51,9 @@ namespace AgOpenGPS
         public bool isRecordingCustomYouTurn;
 
         /// <summary> /// Is the youturn button enabled? /// </summary>
-        public bool isYouTurnBtnOn;
+        public bool isYouTurnBtnOn, isUsingDubinsTurn;
 
-        public int rowSkipsWidth = 1, rowSkipsHeight = 1;
+        public int rowSkipsWidth = 1, rowSkipsHeight = 1, lastTime = 3;
 
         /// <summary>  /// distance from headland as offset where to start turn shape /// </summary>
         public int youTurnStartOffset;
@@ -71,7 +71,7 @@ namespace AgOpenGPS
         public bool isOnRightSideCurrentLine = true;
 
         //pure pursuit values
-        public vec2 pivotAxlePosYT = new vec2(0, 0);
+        public vec3 pivotAxlePosYT = new vec3(0, 0, 0);
 
         public vec2 goalPointYT = new vec2(0, 0);
         public vec2 radiusPointYT = new vec2(0, 0);
@@ -100,6 +100,8 @@ namespace AgOpenGPS
             //the youturn shape scaling.
             rowSkipsHeight = Properties.Vehicle.Default.set_youSkipHeight;
             rowSkipsWidth = Properties.Vehicle.Default.set_youSkipWidth;
+
+            isUsingDubinsTurn = Properties.Vehicle.Default.set_youUseDubins;
 
             //Fill in the strings for comboboxes - editable
             string line = Properties.Vehicle.Default.seq_FunctionList;
@@ -213,7 +215,8 @@ namespace AgOpenGPS
                 bool isToolHeadingSameAsABHeading;
 
                 //Subtract the two headings, if > 1.57 its going the opposite heading as refAB
-                double abFixHeadingDelta = (Math.Abs(mf.fixHeadingSection - mf.ABLine.abHeading));
+#pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
+                double abFixHeadingDelta = (Math.Abs(mf.toolPos.heading - mf.ABLine.abHeading));
                 if (abFixHeadingDelta >= Math.PI) abFixHeadingDelta = Math.Abs(abFixHeadingDelta - glm.twoPI);
 
                 isToolHeadingSameAsABHeading = (abFixHeadingDelta <= glm.PIBy2);
@@ -221,8 +224,7 @@ namespace AgOpenGPS
                 mf.hl.FindClosestHeadlandPoint(mf.toolPos);
                 if ((int)mf.hl.closestHeadlandPt.easting != -1)
                 {
-#pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
-                    mf.distTool = mf.pn.Distance(mf.toolPos, mf.hl.closestHeadlandPt);
+                    mf.distTool = glm.Distance(mf.toolPos, mf.hl.closestHeadlandPt);
 #pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
                 }
                 else //we've lost the headland
@@ -352,11 +354,14 @@ namespace AgOpenGPS
         {
             isYouTurnShapeDisplayed = true;
 
+            CDubins dubYouTurnPath = new CDubins();
+            CDubins.turningRadius = mf.vehicle.minTurningRadius;
+
             //point on AB line closest to pivot axle point from ABLine PurePursuit
             rEastYT = mf.ABLine.rEastAB;
             rNorthYT = mf.ABLine.rNorthAB;
             isABSameAsFixHeading = mf.ABLine.isABSameAsFixHeading;
-            pivotAxlePosYT = mf.pivotAxlePos;
+            //pivotAxlePosYT = mf.pivotAxlePos;
 
             //grab the vehicle widths and offsets
             double widthMinusOverlap = mf.vehicle.toolWidth - mf.vehicle.toolOverlap;
@@ -364,73 +369,99 @@ namespace AgOpenGPS
             double turnOffset = 0;
             abHeading = mf.ABLine.abHeading;
 
-            //turning right same as AB line
-            if ((isTurnRight && isABSameAsFixHeading) || (isTurnRight && !isABSameAsFixHeading))
+            //turning right
+            if (isTurnRight) turnOffset = (widthMinusOverlap + toolOffset);
+            else  turnOffset = (widthMinusOverlap - toolOffset);
+
+            //if using dubins to calculate youturn
+            if (isUsingDubinsTurn)
             {
-                turnOffset = (widthMinusOverlap + toolOffset);
-            }
+                //if (lastTime == 3)
+                //{
+                //    lastTime = 5;
+                //    rowSkipsWidth = 5;
+                //}
 
-            //turning left same way as AB line
-            if ((!isTurnRight && isABSameAsFixHeading) || (!isTurnRight && !isABSameAsFixHeading))
-            {
-                turnOffset = (widthMinusOverlap - toolOffset);
-            }
+                //else
+                //{
+                //    lastTime = 3;
+                //    rowSkipsWidth = 3;
+                //}
 
-            numShapePoints = youFileList.Count;
-            vec3[] pt = new vec3[numShapePoints];
+                double head = mf.ABLine.abHeading;
+                //if its straight across it makes 2 loops instead so goal is a little lower then start
+                if (!isABSameAsFixHeading) head += 3.14;
+                else head -= 0.01;
 
-            //Now put the shape into an array since lists are immutable
-            for (int i = 0; i < numShapePoints; i++)
-            {
-                pt[i].easting = youFileList[i].easting;
-                pt[i].northing = youFileList[i].northing;
-            }
+                var start = new vec3(rEastYT, rNorthYT, head);
+                var goal = new vec3();
 
-            //for (int i = 0; i < pt.Length; i++)
-            //{
-            //    bool started = false;
-            //    if (pt[i].x >= 5.0)
-            //    {
-            //        if (!started) started = true;
-
-            //        //create a line of 10 points
-            //        pt[i].x += ((rowSkipsWidth - 1) * 10);
-            //    }
-            //}
-
-            //start of path on the origin. Mirror the shape if left turn
-            if (!isTurnRight)
-            {
-                for (int i = 0; i < pt.Length; i++) pt[i].easting *= -1;
-            }
-
-            //scaling - Drawing is 10m wide so find ratio of tool width
-            double scale = turnOffset * 0.1;
-            for (int i = 0; i < pt.Length; i++)
-            {
-                pt[i].easting *= scale * rowSkipsWidth;
-                pt[i].northing *= scale * rowSkipsHeight;
-            }
-
-            //rotate pattern to match AB Line heading
-            for (int i = 0; i < pt.Length; i++)
-            {
-                double xr, yr;
-                if (isABSameAsFixHeading)
+                //also adjust for rowskips
+                head -= Math.PI;
+                if (isTurnRight)
                 {
-                    xr = (Math.Cos(-abHeading) * pt[i].easting) - (Math.Sin(-abHeading) * pt[i].northing);
-                    yr = (Math.Sin(-abHeading) * pt[i].easting) + (Math.Cos(-abHeading) * pt[i].northing);
+                    goal.easting = rEastYT - Math.Cos(head) * turnOffset * rowSkipsWidth;
+                    goal.northing = rNorthYT - Math.Sin(head) * turnOffset * rowSkipsWidth;
+                    goal.heading = head;
                 }
                 else
                 {
-                    xr = (Math.Cos(-abHeading + Math.PI) * pt[i].easting) - (Math.Sin(-abHeading + Math.PI) * pt[i].northing);
-                    yr = (Math.Sin(-abHeading + Math.PI) * pt[i].easting) + (Math.Cos(-abHeading + Math.PI) * pt[i].northing);
+                    goal.easting = rEastYT + Math.Cos(head) * turnOffset * rowSkipsWidth;
+                    goal.northing = rNorthYT + Math.Sin(head) * turnOffset * rowSkipsWidth;
+                    goal.heading = head;
                 }
 
-                pt[i].easting = xr + rEastYT;
-                pt[i].northing = yr + rNorthYT;
-                pt[i].heading = Math.Atan2(pt[i].northing, pt[i].easting);
-                ytList.Add(pt[i]);
+                ytList = dubYouTurnPath.GenerateDubins(start, goal);
+            }
+
+            //or the patterns
+            else
+            {
+
+                numShapePoints = youFileList.Count;
+                vec3[] pt = new vec3[numShapePoints];
+
+                //Now put the shape into an array since lists are immutable
+                for (int i = 0; i < numShapePoints; i++)
+                {
+                    pt[i].easting = youFileList[i].easting;
+                    pt[i].northing = youFileList[i].northing;
+                }
+
+                //start of path on the origin. Mirror the shape if left turn
+                if (!isTurnRight)
+                {
+                    for (int i = 0; i < pt.Length; i++) pt[i].easting *= -1;
+                }
+
+                //scaling - Drawing is 10m wide so find ratio of tool width
+                double scale = turnOffset * 0.1;
+                for (int i = 0; i < pt.Length; i++)
+                {
+                    pt[i].easting *= scale * rowSkipsWidth;
+                    pt[i].northing *= scale * rowSkipsWidth;
+                }
+
+                //rotate pattern to match AB Line heading
+                for (int i = 0; i < pt.Length; i++)
+                {
+                    double xr, yr;
+                    if (isABSameAsFixHeading)
+                    {
+                        xr = (Math.Cos(-abHeading) * pt[i].easting) - (Math.Sin(-abHeading) * pt[i].northing);
+                        yr = (Math.Sin(-abHeading) * pt[i].easting) + (Math.Cos(-abHeading) * pt[i].northing);
+                    }
+                    else
+                    {
+                        xr = (Math.Cos(-abHeading + Math.PI) * pt[i].easting) - (Math.Sin(-abHeading + Math.PI) * pt[i].northing);
+                        yr = (Math.Sin(-abHeading + Math.PI) * pt[i].easting) + (Math.Cos(-abHeading + Math.PI) * pt[i].northing);
+                    }
+
+                    pt[i].easting = xr + rEastYT;
+                    pt[i].northing = yr + rNorthYT;
+                    pt[i].heading = Math.Atan2(pt[i].northing, pt[i].easting);
+                    ytList.Add(pt[i]);
+                }
             }
         }
 
@@ -513,7 +544,7 @@ namespace AgOpenGPS
                 double tempDist = 0.0;
 
                 isABSameAsFixHeading = true;
-                distSoFar = mf.pn.Distance(ytList[B], rEastYT, rNorthYT);
+                distSoFar = glm.Distance(ytList[B], rEastYT, rNorthYT);
 
                 //Is this segment long enough to contain the full lookahead distance?
                 if (distSoFar > goalPointDistance)
@@ -531,7 +562,7 @@ namespace AgOpenGPS
                     while (B < ptCount - 1)
                     {
                         B++; A++;
-                        tempDist = mf.pn.Distance(ytList[B], ytList[A]);
+                        tempDist = glm.Distance(ytList[B], ytList[A]);
                         if ((tempDist + distSoFar) > goalPointDistance) break; //will we go too far?
                         distSoFar += tempDist;
                     }
@@ -543,7 +574,7 @@ namespace AgOpenGPS
                 }
 
                 //calc "D" the distance from pivot axle to lookahead point
-                double goalPointDistanceSquared = mf.pn.DistanceSquared(goalPointYT.northing, goalPointYT.easting, pivotAxlePosYT.northing, pivotAxlePosYT.easting);
+                double goalPointDistanceSquared = glm.DistanceSquared(goalPointYT.northing, goalPointYT.easting, pivotAxlePosYT.northing, pivotAxlePosYT.easting);
 
                 //calculate the the delta x in local coordinates and steering angle degrees based on wheelbase
                 double localHeading = glm.twoPI - mf.fixHeading;

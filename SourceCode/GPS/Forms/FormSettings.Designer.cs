@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabVehicle = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudMinTurnRadius = new System.Windows.Forms.NumericUpDown();
             this.label29 = new System.Windows.Forms.Label();
             this.chkIsSteerAxleAhead = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -98,6 +100,7 @@
             this.bntOK = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabVehicle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHitchLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).BeginInit();
@@ -140,6 +143,8 @@
             // 
             this.tabVehicle.BackgroundImage = global::AgOpenGPS.Properties.Resources.VehicleSettings;
             resources.ApplyResources(this.tabVehicle, "tabVehicle");
+            this.tabVehicle.Controls.Add(this.label6);
+            this.tabVehicle.Controls.Add(this.nudMinTurnRadius);
             this.tabVehicle.Controls.Add(this.label29);
             this.tabVehicle.Controls.Add(this.chkIsSteerAxleAhead);
             this.tabVehicle.Controls.Add(this.label15);
@@ -161,6 +166,32 @@
             this.tabVehicle.Controls.Add(this.nudAntennaHeight);
             this.tabVehicle.Name = "tabVehicle";
             this.tabVehicle.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // nudMinTurnRadius
+            // 
+            resources.ApplyResources(this.nudMinTurnRadius, "nudMinTurnRadius");
+            this.nudMinTurnRadius.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.Name = "nudMinTurnRadius";
+            this.nudMinTurnRadius.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.nudMinTurnRadius.ValueChanged += new System.EventHandler(this.nudMinTurnRadius_ValueChanged);
             // 
             // label29
             // 
@@ -853,6 +884,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabVehicle.ResumeLayout(false);
             this.tabVehicle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMinTurnRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudHitchLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAntennaPivot)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWheelbase)).EndInit();
@@ -954,5 +986,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown nudTankHitch;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nudMinTurnRadius;
     }
 }
