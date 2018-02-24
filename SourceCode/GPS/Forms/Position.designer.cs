@@ -692,15 +692,14 @@ namespace AgOpenGPS
         //add the points for section, contour line points, Area Calc feature
         private void AddSectionContourPathPoints()
         {
-            //if (recPath.isBtnOn & recPath.isRecordOn)
-            //{
-            //    //keep minimum speed of 1.0
-            //    double speed = pn.speed;
-            //    if (pn.speed < 1.0) speed = 1.0;
+            {
+                //keep minimum speed of 1.0
+                double speed = pn.speed;
+                if (pn.speed < 1.0) speed = 1.0;
 
-            //    CRecPathPt pt = new CRecPathPt(pn.fix.easting, pn.fix.northing, fixHeading, pn.speed);
-            //    recPath.recList.Add(pt);
-            //}
+                CRecPathPt pt = new CRecPathPt(pn.fix.easting, pn.fix.northing, fixHeading, pn.speed);
+                recPath.recList.Add(pt);
+            }
 
             //save the north & east as previous
             prevSectionPos.northing = pn.fix.northing;

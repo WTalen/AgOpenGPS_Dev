@@ -980,7 +980,6 @@ namespace AgOpenGPS
                 }
             }
 
-
             // Headland  -------------------------------------------------------------------------------------------------
 
             //Either exit or update running save
@@ -1037,56 +1036,50 @@ namespace AgOpenGPS
             }
 
 
-            //Either exit or update running save
-            fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
-            if (!File.Exists(fileAndDirectory))
-            {
-                var form = new FormTimedMessage(4000, "Missing Recorded Path File", "But Field is Loaded");
-                form.Show();
-            }
+            ////Either exit or update running save
+            //fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
+            //if (!File.Exists(fileAndDirectory))
+            //{
+            //    var form = new FormTimedMessage(4000, "Missing Recorded Path File", "But Field is Loaded");
+            //    form.Show();
+            //}
 
-            else
-            {
-                using (StreamReader reader = new StreamReader(fileAndDirectory))
-                {
-                    try
-                    {
-                        //read header
-                        line = reader.ReadLine();
-                        line = reader.ReadLine();
-                        int numPoints = int.Parse(line);
-                        recPath.recList.Clear();
+            //else
+            //{
+            //    using (StreamReader reader = new StreamReader(fileAndDirectory))
+            //    {
+            //        try
+            //        {
+            //            //read header
+            //            line = reader.ReadLine();
+            //            line = reader.ReadLine();
+            //            int numPoints = int.Parse(line);
+            //            recPath.recList.Clear();
 
-                        while (!reader.EndOfStream)
-                        {
-                            for (int v = 0; v < numPoints; v++)
-                            {
-                                line = reader.ReadLine();
-                                string[] words = line.Split(',');
-                                CRecPathPt point = new CRecPathPt(
-                                    double.Parse(words[0], CultureInfo.InvariantCulture),
-                                    double.Parse(words[1], CultureInfo.InvariantCulture),
-                                    double.Parse(words[2], CultureInfo.InvariantCulture),
-                                    double.Parse(words[3], CultureInfo.InvariantCulture));
-                                recPath.recList.Add(point);
-                            }
-                        }
-                    }
+            //            while (!reader.EndOfStream)
+            //            {
+            //                for (int v = 0; v < numPoints; v++)
+            //                {
+            //                    line = reader.ReadLine();
+            //                    string[] words = line.Split(',');
+            //                    CRecPathPt point = new CRecPathPt(
+            //                        double.Parse(words[0], CultureInfo.InvariantCulture),
+            //                        double.Parse(words[1], CultureInfo.InvariantCulture),
+            //                        double.Parse(words[2], CultureInfo.InvariantCulture),
+            //                        double.Parse(words[3], CultureInfo.InvariantCulture));
+            //                    recPath.recList.Add(point);
+            //                }
+            //            }
+            //        }
 
-                    catch (Exception e)
-                    {
-                        var form = new FormTimedMessage(4000, "Recorded Path File is Corrupt", "But Field is Loaded");
-                        form.Show();
-                        WriteErrorLog("Load Recorded Path" + e.ToString());
-                    }
-                }
-            }
-
-
-
-
-
-
+            //        catch (Exception e)
+            //        {
+            //            var form = new FormTimedMessage(4000, "Recorded Path File is Corrupt", "But Field is Loaded");
+            //            form.Show();
+            //            WriteErrorLog("Load Recorded Path" + e.ToString());
+            //        }
+            //    }
+            //}
         }//end of open file
 
         //creates the field file when starting new field
@@ -1181,29 +1174,6 @@ namespace AgOpenGPS
             }
         }
 
-        //Create contour file
-        public void FileCreateRecPath()
-        {
-            //$Sections
-            //10 - points in this patch
-            //10.1728031317344,0.723157039771303 -easting, northing
-
-            //get the directory and make sure it exists, create if not
-            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
-
-            string directoryName = Path.GetDirectoryName(dirField);
-            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
-            { Directory.CreateDirectory(directoryName); }
-
-            string myFileName = "RecPath.txt";
-
-            //write out the file
-            using (StreamWriter writer = new StreamWriter(dirField + myFileName))
-            {
-                //write paths # of sections
-                writer.WriteLine("$RecPath");
-            }
-        }
 
         //Create contour file
         public void FileCreateContour()
@@ -1289,7 +1259,31 @@ namespace AgOpenGPS
             }
         }
 
-        //save the boundary
+        //Create contour file
+        public void FileCreateRecPath()
+        {
+            //$Sections
+            //10 - points in this patch
+            //10.1728031317344,0.723157039771303 -easting, northing
+
+            //get the directory and make sure it exists, create if not
+            string dirField = fieldsDirectory + currentFieldDirectory + "\\";
+
+            string directoryName = Path.GetDirectoryName(dirField);
+            if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
+            { Directory.CreateDirectory(directoryName); }
+
+            string myFileName = "RecPath.txt";
+
+            //write out the file
+            using (StreamWriter writer = new StreamWriter(dirField + myFileName))
+            {
+                //write paths # of sections
+                writer.WriteLine("$RecPath");
+            }
+        }
+
+        //save the recorded path
         public void FileSaveRecPath()
         {
             //get the directory and make sure it exists, create if not
@@ -1299,11 +1293,14 @@ namespace AgOpenGPS
             if ((directoryName.Length > 0) && (!Directory.Exists(directoryName)))
             { Directory.CreateDirectory(directoryName); }
 
+            //string fileAndDirectory = fieldsDirectory + currentFieldDirectory + "\\RecPath.txt";
+            //if (!File.Exists(fileAndDirectory)) FileCreateRecPath();
+
             //write out the file
-            using (StreamWriter writer = new StreamWriter(dirField + "RecPath.Txt"))
+            using (StreamWriter writer = new StreamWriter((dirField + "RecPath.Txt"),true))
             {
-                writer.WriteLine("$RecPath");
-                writer.WriteLine(recPath.recList.Count.ToString(CultureInfo.InvariantCulture));
+                //writer.WriteLine("$RecPath");
+                //writer.WriteLine(recPath.recList.Count.ToString(CultureInfo.InvariantCulture));
                 if (recPath.recList.Count > 0)
                 {
                     for (int j = 0; j < recPath.recList.Count; j++)
@@ -1312,6 +1309,9 @@ namespace AgOpenGPS
                             Math.Round(recPath.recList[j].northing, 3).ToString(CultureInfo.InvariantCulture) + "," +
                             Math.Round(recPath.recList[j].heading, 3).ToString(CultureInfo.InvariantCulture) + "," +
                             Math.Round(recPath.recList[j].speed, 1).ToString(CultureInfo.InvariantCulture));
+
+                    //Clear list
+                    recPath.recList.Clear();
                 }
             }
         }

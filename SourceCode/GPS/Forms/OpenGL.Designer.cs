@@ -798,6 +798,7 @@ namespace AgOpenGPS
                     //auto save the field patches, contours accumulated so far
                     FileSaveSections();
                     FileSaveContour();
+                    FileSaveRecPath();
 
                     //NMEA log file
                     if (isLogNMEA) FileSaveNMEA();
@@ -879,13 +880,13 @@ namespace AgOpenGPS
                 {
                     int dots = (dotDistance * -1 / lightbarCmPerPixel);
 
-                    gl.PointSize(32.0f);
+                    gl.PointSize(24.0f);
                     gl.Color(0.0f, 0.0f, 0.0f);
                     gl.Begin(OpenGL.GL_POINTS);
                     for (int i = 1; i < dots + 1; i++) gl.Vertex((i * 40), down);
                     gl.End();
 
-                    gl.PointSize(24.0f);
+                    gl.PointSize(16.0f);
                     gl.Color(0.0f, 0.980f, 0.0f);
                     gl.Begin(OpenGL.GL_POINTS);
                     for (int i = 0; i < dots; i++) gl.Vertex((i * 40 + 40), down);
@@ -897,13 +898,13 @@ namespace AgOpenGPS
                 {
                     int dots = (int)(dotDistance / lightbarCmPerPixel);
 
-                    gl.PointSize(32.0f);
+                    gl.PointSize(24.0f);
                     gl.Color(0.0f, 0.0f, 0.0f);
                     gl.Begin(OpenGL.GL_POINTS);
                     for (int i = 1; i < dots + 1; i++) gl.Vertex((i * -40), down);
                     gl.End();
 
-                    gl.PointSize(24.0f);
+                    gl.PointSize(16.0f);
                     gl.Color(0.980f, 0.30f, 0.0f);
                     gl.Begin(OpenGL.GL_POINTS);
                     for (int i = 0; i < dots; i++) gl.Vertex((i * -40 - 40), down);

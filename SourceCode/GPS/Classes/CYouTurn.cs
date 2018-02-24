@@ -398,16 +398,18 @@ namespace AgOpenGPS
 
                 //also adjust for rowskips
                 head -= Math.PI;
+                if (head < 0) head += glm.twoPI;
+
                 if (isTurnRight)
                 {
-                    goal.easting = rEastYT - Math.Cos(head) * turnOffset * rowSkipsWidth;
-                    goal.northing = rNorthYT - Math.Sin(head) * turnOffset * rowSkipsWidth;
+                    goal.easting = rEastYT - Math.Cos(-head) * turnOffset * rowSkipsWidth;
+                    goal.northing = rNorthYT - Math.Sin(-head) * turnOffset * rowSkipsWidth;
                     goal.heading = head;
                 }
                 else
                 {
-                    goal.easting = rEastYT + Math.Cos(head) * turnOffset * rowSkipsWidth;
-                    goal.northing = rNorthYT + Math.Sin(head) * turnOffset * rowSkipsWidth;
+                    goal.easting = rEastYT + Math.Cos(-head) * turnOffset * rowSkipsWidth;
+                    goal.northing = rNorthYT + Math.Sin(-head) * turnOffset * rowSkipsWidth;
                     goal.heading = head;
                 }
 
