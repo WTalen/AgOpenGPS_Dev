@@ -144,8 +144,8 @@ namespace AgOpenGPS
                 // draw the current and reference AB Lines
                 else { if (ABLine.isABLineSet | ABLine.isABLineBeingSet) ABLine.DrawABLines(); }
 
-                //recPath.DrawRecordedLine();
-                //recPath.DrawDubins();
+                //if (recPath.isRecordOn)
+                recPath.DrawRecordedLine();
 
                 //draw the flags if there are some
                 int flagCnt = flagPts.Count;
@@ -798,7 +798,7 @@ namespace AgOpenGPS
                     //auto save the field patches, contours accumulated so far
                     FileSaveSections();
                     FileSaveContour();
-                    FileSaveRecPath();
+                    //FileSaveRecPath();
 
                     //NMEA log file
                     if (isLogNMEA) FileSaveNMEA();

@@ -166,14 +166,15 @@
             this.btnRate2Select = new System.Windows.Forms.Button();
             this.btnRate1Select = new System.Windows.Forms.Button();
             this.configPage1 = new System.Windows.Forms.TabPage();
+            this.btnMakeContourFromBoundary = new System.Windows.Forms.Button();
             this.btnFlagsGoogleEarth = new System.Windows.Forms.Button();
             this.btnWebCam = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnFileExplorer = new System.Windows.Forms.Button();
             this.btnGPSData = new System.Windows.Forms.Button();
             this.btnPerimeter = new System.Windows.Forms.Button();
-            this.btnABCurve = new System.Windows.Forms.Button();
             this.autoPage4 = new System.Windows.Forms.TabPage();
+            this.btnRecPathPauseRecord = new System.Windows.Forms.Button();
             this.btnResetSim = new System.Windows.Forms.Button();
             this.btnResetSteerAngle = new System.Windows.Forms.Button();
             this.lblPureSteerAngle = new System.Windows.Forms.Label();
@@ -222,6 +223,7 @@
             this.zoomPage2.SuspendLayout();
             this.ratePage3.SuspendLayout();
             this.configPage1.SuspendLayout();
+            this.autoPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbarSteerAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbarStepDistance)).BeginInit();
             this.panelSimControls.SuspendLayout();
@@ -1261,15 +1263,24 @@
             // configPage1
             // 
             this.configPage1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.configPage1.Controls.Add(this.btnMakeContourFromBoundary);
             this.configPage1.Controls.Add(this.btnFlagsGoogleEarth);
             this.configPage1.Controls.Add(this.btnWebCam);
             this.configPage1.Controls.Add(this.btnHelp);
             this.configPage1.Controls.Add(this.btnFileExplorer);
             this.configPage1.Controls.Add(this.btnGPSData);
             this.configPage1.Controls.Add(this.btnPerimeter);
-            this.configPage1.Controls.Add(this.btnABCurve);
             resources.ApplyResources(this.configPage1, "configPage1");
             this.configPage1.Name = "configPage1";
+            // 
+            // btnMakeContourFromBoundary
+            // 
+            this.btnMakeContourFromBoundary.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnMakeContourFromBoundary.ContextMenuStrip = this.contextMenuStripFlag;
+            resources.ApplyResources(this.btnMakeContourFromBoundary, "btnMakeContourFromBoundary");
+            this.btnMakeContourFromBoundary.Name = "btnMakeContourFromBoundary";
+            this.btnMakeContourFromBoundary.UseVisualStyleBackColor = false;
+            this.btnMakeContourFromBoundary.Click += new System.EventHandler(this.btnMakeContourFromBoundary_Click);
             // 
             // btnFlagsGoogleEarth
             // 
@@ -1325,20 +1336,21 @@
             this.btnPerimeter.UseVisualStyleBackColor = false;
             this.btnPerimeter.Click += new System.EventHandler(this.btnPerimeter_Click);
             // 
-            // btnABCurve
-            // 
-            resources.ApplyResources(this.btnABCurve, "btnABCurve");
-            this.btnABCurve.BackColor = System.Drawing.Color.Transparent;
-            this.btnABCurve.FlatAppearance.BorderColor = System.Drawing.Color.Yellow;
-            this.btnABCurve.Name = "btnABCurve";
-            this.btnABCurve.UseVisualStyleBackColor = false;
-            this.btnABCurve.Click += new System.EventHandler(this.btnABCurve_Click);
-            // 
             // autoPage4
             // 
+            this.autoPage4.Controls.Add(this.btnRecPathPauseRecord);
             resources.ApplyResources(this.autoPage4, "autoPage4");
             this.autoPage4.Name = "autoPage4";
             this.autoPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnRecPathPauseRecord
+            // 
+            this.btnRecPathPauseRecord.BackColor = System.Drawing.Color.AliceBlue;
+            resources.ApplyResources(this.btnRecPathPauseRecord, "btnRecPathPauseRecord");
+            this.btnRecPathPauseRecord.Image = global::AgOpenGPS.Properties.Resources.boundaryPause;
+            this.btnRecPathPauseRecord.Name = "btnRecPathPauseRecord";
+            this.btnRecPathPauseRecord.UseVisualStyleBackColor = false;
+            this.btnRecPathPauseRecord.Click += new System.EventHandler(this.btnRecPathPauseRecord_Click);
             // 
             // btnResetSim
             // 
@@ -1697,6 +1709,7 @@
             this.ratePage3.ResumeLayout(false);
             this.ratePage3.PerformLayout();
             this.configPage1.ResumeLayout(false);
+            this.autoPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tbarSteerAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbarStepDistance)).EndInit();
             this.panelSimControls.ResumeLayout(false);
@@ -1876,7 +1889,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuLanguageSpanish;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageFrench;
         private System.Windows.Forms.ToolStripMenuItem menuLanguageItalian;
-        private System.Windows.Forms.Button btnABCurve;
         private System.Windows.Forms.Label lblEmlidPitch;
         private System.Windows.Forms.Label label20;
         public System.Windows.Forms.TextBox txtDistanceOffABLine;
@@ -1887,6 +1899,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btnDeleteAllData;
         private System.Windows.Forms.ToolStripMenuItem toolstripDisplayConfig;
+        private System.Windows.Forms.Button btnMakeContourFromBoundary;
+        private System.Windows.Forms.Button btnRecPathPauseRecord;
     }
 }
 

@@ -693,12 +693,16 @@ namespace AgOpenGPS
         private void AddSectionContourPathPoints()
         {
             {
-                //keep minimum speed of 1.0
-                double speed = pn.speed;
-                if (pn.speed < 1.0) speed = 1.0;
+                if (recPath.isRecordOn)
+                {
+                    //keep minimum speed of 1.0
+                    double speed = pn.speed;
+                    if (pn.speed < 1.0) speed = 1.0;
+                    bool autoBtn = (autoBtnState == btnStates.Auto);
 
-                CRecPathPt pt = new CRecPathPt(pn.fix.easting, pn.fix.northing, fixHeading, pn.speed);
-                recPath.recList.Add(pt);
+                    CRecPathPt pt = new CRecPathPt(pivotAxlePos.easting, pivotAxlePos.northing, pivotAxlePos.heading, pn.speed, autoBtn);
+                    recPath.recList.Add(pt);
+                }
             }
 
             //save the north & east as previous

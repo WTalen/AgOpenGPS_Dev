@@ -3,6 +3,7 @@
 using AgOpenGPS.Properties;
 using SharpGL;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -566,6 +567,58 @@ namespace AgOpenGPS
             }
         }
 
+        private void btnMakeContourFromBoundary_Click(object sender, EventArgs e)
+        {
+            if (!boundz.isSet) return;
+
+            vec3 point = new vec3() ;
+
+            //count the points from the boundary
+            int ptCount = boundz.ptList.Count;
+
+            //first find out which side is inside the boundary
+            double oneSide = glm.PIBy2;
+            point.easting = boundz.ptList[3].easting - (Math.Sin(oneSide + boundz.ptList[3].heading) * 2.0);
+            point.northing = boundz.ptList[3].northing - (Math.Cos(oneSide + boundz.ptList[3].heading) * 2.0);
+
+            if (boundz.IsPointInsideBoundary(point)) oneSide *= -1.0;
+
+            //determine how wide a headland space
+            double totalHeadWidth = vehicle.toolWidth * 0.46;
+
+            ct.ptList = new List<vec3>();
+            ct.stripList.Add(ct.ptList);
+
+            for (int i = ptCount-1; i >=0; i--)
+            {
+                //calculate the point inside the boundary
+                point.easting = boundz.ptList[i].easting - (Math.Sin(oneSide + boundz.ptList[i].heading) * totalHeadWidth);
+                point.northing = boundz.ptList[i].northing - (Math.Cos(oneSide + boundz.ptList[i].heading) * totalHeadWidth);
+                point.heading = boundz.ptList[i].heading - Math.PI;
+                if (point.heading < -glm.twoPI) point.heading += glm.twoPI;
+
+                //only add if inside actual field boundary
+                ct.ptList.Add(point);
+            }
+        }
+
+        private void btnRecPathPauseRecord_Click(object sender, EventArgs e)
+        {
+            if (recPath.isRecordOn)
+            {
+                recPath.isRecordOn = false;
+                btnRecPathPauseRecord.Image = Properties.Resources.boundaryPause;
+            }
+            else
+            {
+                if (isJobStarted)
+                {
+                    recPath.isRecordOn = true;
+                    btnRecPathPauseRecord.Image = Properties.Resources.BoundaryRecord;
+                }
+            }
+        }
+
         //dialog for requesting user to save or cancel
         public int SaveOrNot()
         {
@@ -682,7 +735,6 @@ namespace AgOpenGPS
             btnSectionOffAutoOn.Image = Properties.Resources.SectionMasterOff;
 
             btnABLine.Enabled = true;
-            btnABCurve.Enabled = true;
             btnContour.Enabled = true;
             btnAutoSteer.Enabled = true;
             ABLine.abHeading = 0.00;
@@ -690,6 +742,12 @@ namespace AgOpenGPS
             btnRightYouTurn.Enabled = false;
             btnLeftYouTurn.Enabled = false;
             btnFlag.Enabled = true;
+
+            if (recPath.isRecordOn)
+            {
+                recPath.isRecordOn = false;
+                btnRecPathPauseRecord.Image = Properties.Resources.boundaryPause;
+            }
 
             LineUpManualBtns();
 
@@ -756,7 +814,6 @@ namespace AgOpenGPS
 
             //reset the buttons
             btnABLine.Enabled = false;
-            btnABCurve.Enabled = true;
             btnContour.Enabled = false;
             btnAutoSteer.Enabled = false;
             isAutoSteerBtnOn = false;
@@ -813,9 +870,13 @@ namespace AgOpenGPS
             btnEnableAutoYouTurn.Image = Properties.Resources.YouTurnNo;
 
             ////turn off path record
-            //recPath.isBtnOn = false;
-            //btnRecPathOnOff.Text = "Off";
-            //recPath.recList.Clear();
+            recPath.recList.Clear();
+            if (recPath.isRecordOn)
+            {
+                recPath.isRecordOn = false;
+                btnRecPathPauseRecord.Image = Properties.Resources.boundaryPause;
+            }
+
 
             //reset all Port Module values
             mc.ResetAllModuleCommValues();
